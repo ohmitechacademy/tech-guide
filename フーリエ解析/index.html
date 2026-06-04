@@ -214,7 +214,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../%E6%96%87%E7%AB%A0%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-tabs__link">
+        <a href="../%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80/" class="md-tabs__link">
           
   
   基礎・ツール
@@ -492,6 +492,33 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  プログラミング入門
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1092,6 +1119,45 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        フーリエ係数の導出（直交性の利用）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DFT と連続フーリエ変換の関係
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1100,7 +1166,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4700,6 +4766,45 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        フーリエ係数の導出（直交性の利用）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DFT と連続フーリエ変換の関係
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4708,7 +4813,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4945,14 +5050,87 @@ X[k] = \sum_{n=0}^{N-1} x[n]\, e^{-2\pi i k n / N}, \quad k = 0, 1, \ldots, N-1
 </span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="c1"># → 12.0 ヶ月（最強）が検出される</span>
 </span></code></pre></div>
 <hr />
-<h2 id="_9">確認問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_9">数学的導出<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">フーリエ係数の導出（直交性の利用）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>周期 <span class="arithmatex">\(T\)</span> の関数 <span class="arithmatex">\(f(t)\)</span> がフーリエ級数</p>
+<div class="arithmatex">\[
+f(t) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n \cos\!\left(\frac{2\pi n}{T} t\right) + b_n \sin\!\left(\frac{2\pi n}{T} t\right) \right]
+\]</div>
+<p>で表されるとして、係数 <span class="arithmatex">\(a_n\)</span>、<span class="arithmatex">\(b_n\)</span> を求めます。</p>
+<h4 id="_11">鍵となる直交性<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>三角関数は互いに直交します。すなわち、<span class="arithmatex">\(m \neq n\)</span> のとき：</p>
+<div class="arithmatex">\[
+\int_0^T \cos\!\left(\frac{2\pi m}{T}t\right) \cos\!\left(\frac{2\pi n}{T}t\right) dt = 0
+\]</div>
+<div class="arithmatex">\[
+\int_0^T \sin\!\left(\frac{2\pi m}{T}t\right) \sin\!\left(\frac{2\pi n}{T}t\right) dt = 0
+\]</div>
+<div class="arithmatex">\[
+\int_0^T \cos\!\left(\frac{2\pi m}{T}t\right) \sin\!\left(\frac{2\pi n}{T}t\right) dt = 0 \quad (\text{任意の } m, n)
+\]</div>
+<p><span class="arithmatex">\(m = n\)</span> のとき：</p>
+<div class="arithmatex">\[
+\int_0^T \cos^2\!\left(\frac{2\pi n}{T}t\right) dt = \int_0^T \sin^2\!\left(\frac{2\pi n}{T}t\right) dt = \frac{T}{2}
+\]</div>
+<h4 id="a_n-n-geq-1">係数 <span class="arithmatex">\(a_n\)</span> の導出（<span class="arithmatex">\(n \geq 1\)</span>）<a class="headerlink" href="#a_n-n-geq-1" title="Permanent link">&para;</a></h4>
+<p>フーリエ級数の両辺に <span class="arithmatex">\(\cos\!\left(\frac{2\pi m}{T}t\right)\)</span> を掛けて <span class="arithmatex">\([0, T]\)</span> で積分します：</p>
+<div class="arithmatex">\[
+\int_0^T f(t) \cos\!\left(\frac{2\pi m}{T}t\right) dt = \int_0^T \sum_n \left[ a_n \cos\!\left(\frac{2\pi n}{T}t\right) + b_n \sin\!\left(\frac{2\pi n}{T}t\right) \right] \cos\!\left(\frac{2\pi m}{T}t\right) dt
+\]</div>
+<p>直交性により <span class="arithmatex">\(n \neq m\)</span> の項はすべてゼロになり、<span class="arithmatex">\(n = m\)</span> の項だけが残ります：</p>
+<div class="arithmatex">\[
+= a_m \cdot \frac{T}{2}
+\]</div>
+<p>したがって：</p>
+<div class="arithmatex">\[
+\boxed{a_n = \frac{2}{T} \int_0^T f(t) \cos\!\left(\frac{2\pi n}{T} t\right) dt}
+\]</div>
+<p>同様にして：</p>
+<div class="arithmatex">\[
+\boxed{b_n = \frac{2}{T} \int_0^T f(t) \sin\!\left(\frac{2\pi n}{T} t\right) dt}
+\]</div>
+<p><span class="arithmatex">\(a_0 = \frac{2}{T}\int_0^T f(t)\,dt\)</span> は <span class="arithmatex">\(f(t)\)</span> の平均値の 2 倍です。</p>
+<p><strong>直感：</strong> フーリエ係数は「<span class="arithmatex">\(f(t)\)</span> と各周波数成分の内積」です。<span class="arithmatex">\(f(t)\)</span> が <span class="arithmatex">\(n\)</span> 周波数の正弦波に似ているほど、その係数が大きくなります。これは線形代数の「成分を求めるには基底ベクトルとの内積を取る」操作と全く同じ構造です。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">fourier_coeff</span><span class="p">(</span><span class="n">f_vals</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;数値積分でフーリエ係数を計算&quot;&quot;&quot;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">a_n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">f_vals</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="n">T</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">b_n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">f_vals</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="n">T</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">return</span> <span class="n">a_n</span><span class="p">,</span> <span class="n">b_n</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">T</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># 方形波の係数</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">fourier_coeff</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: a_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, b_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="c1"># 奇数 n でのみ b_n が非ゼロ（4/(nπ)）になることを確認</span>
+</span></code></pre></div>
+<hr />
+<h3 id="dft_1">DFT と連続フーリエ変換の関係<a class="headerlink" href="#dft_1" title="Permanent link">&para;</a></h3>
+<p>連続フーリエ変換：</p>
+<div class="arithmatex">\[
+\hat{f}(\xi) = \int_{-\infty}^{\infty} f(t) e^{-2\pi i \xi t} dt
+\]</div>
+<p><span class="arithmatex">\(N\)</span> 点の離散サンプル <span class="arithmatex">\(f_k = f(k/N)\)</span> に対して、和で近似すると DFT：</p>
+<div class="arithmatex">\[
+F_n = \sum_{k=0}^{N-1} f_k \cdot e^{-2\pi i kn/N}
+\]</div>
+<p>オイラーの公式 <span class="arithmatex">\(e^{i\theta} = \cos\theta + i\sin\theta\)</span> を代入すれば、フーリエ級数の cos・sin 係数を複素数 1 本で表したものが DFT であることが分かります。</p>
+<hr />
+<h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>
-<li>フーリエ変換の「時間領域 → 周波数領域」とはどういう変換ですか？音楽の例を使って説明してください。</li>
+<li>フーリエ係数 <span class="arithmatex">\(a_n = \frac{2}{T}\int_0^T f(t)\cos(\frac{2\pi n}{T}t)\,dt\)</span> が「内積」として解釈できる理由を、直交性の条件を使って説明してください。</li>
 <li>DFT の計算量は <span class="arithmatex">\(O(N^2)\)</span>、FFT は <span class="arithmatex">\(O(N \log N)\)</span> です。<span class="arithmatex">\(N = 1024\)</span> のとき、何倍速くなりますか？</li>
 <li>スペクトログラムが音声認識の特徴量として使われる理由を説明してください。</li>
 </ol>
 <hr />
-<h2 id="_10">関連ページ<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_13">関連ページ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../微分・最適化基礎/">微分・最適化基礎</a> — 三角関数・積分の基礎</li>
 <li><a href="../ラプラス変換/">ラプラス変換</a> — フーリエ変換を複素数に拡張した変換</li>

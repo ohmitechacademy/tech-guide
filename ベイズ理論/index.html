@@ -214,7 +214,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../%E6%96%87%E7%AB%A0%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-tabs__link">
+        <a href="../%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80/" class="md-tabs__link">
           
   
   基礎・ツール
@@ -492,6 +492,33 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  プログラミング入門
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1339,6 +1366,45 @@
   <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ベータ-二項共役の導出
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MAP 推定 = L2 正則化付き最尤推定
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1347,7 +1413,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4978,6 +5044,45 @@
   <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ベータ-二項共役の導出
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MAP 推定 = L2 正則化付き最尤推定
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4986,7 +5091,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5698,16 +5803,84 @@ P(\text{クラス } k \mid x_1, x_2, \ldots, x_n) \propto P(\text{クラス } k)
     D --&gt; D2["PyMC・Stan（確率的プログラミング）"]
     E --&gt; E2["ベイズ A/B テスト（P(B &gt; A) を計算）"]</code></pre>
 <hr />
-<h2 id="_15">確認問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h2 id="_15">数学的導出<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="-_1">ベータ-二項共役の導出<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h3>
+<p>コインを <span class="arithmatex">\(n\)</span> 回投げて <span class="arithmatex">\(k\)</span> 回表が出たとき（二項尤度）、事前分布がベータ分布なら事後分布も同じくベータ分布になることを示します。</p>
+<p><strong>事前分布：</strong> <span class="arithmatex">\(\theta \sim \text{Beta}(\alpha, \beta)\)</span></p>
+<div class="arithmatex">\[
+p(\theta) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \theta^{\alpha-1}(1-\theta)^{\beta-1} \propto \theta^{\alpha-1}(1-\theta)^{\beta-1}
+\]</div>
+<p><strong>尤度：</strong> <span class="arithmatex">\(k \mid \theta \sim \text{Binomial}(n, \theta)\)</span></p>
+<div class="arithmatex">\[
+p(k \mid \theta) = \binom{n}{k} \theta^k (1-\theta)^{n-k} \propto \theta^k (1-\theta)^{n-k}
+\]</div>
+<p><strong>事後分布（ベイズの定理）：</strong></p>
+<div class="arithmatex">\[
+p(\theta \mid k) \propto p(k \mid \theta) \cdot p(\theta) \propto \theta^k(1-\theta)^{n-k} \cdot \theta^{\alpha-1}(1-\theta)^{\beta-1}
+\]</div>
+<div class="arithmatex">\[
+= \theta^{(\alpha + k) - 1}(1-\theta)^{(\beta + n - k) - 1}
+\]</div>
+<p>これはベータ分布 <span class="arithmatex">\(\text{Beta}(\alpha + k, \beta + n - k)\)</span> の核です。</p>
+<div class="arithmatex">\[
+\boxed{p(\theta \mid k) = \text{Beta}(\alpha + k,\; \beta + n - k)}
+\]</div>
+<p><strong>解釈：</strong> 事前の「成功 <span class="arithmatex">\(\alpha\)</span> 回、失敗 <span class="arithmatex">\(\beta\)</span> 回」という仮想経験に、実際の「成功 <span class="arithmatex">\(k\)</span> 回、失敗 <span class="arithmatex">\(n-k\)</span> 回」を足すだけで事後分布が更新されます。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">beta</span> <span class="k">as</span> <span class="n">beta_dist</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1"># 事前分布：Beta(2, 2)（少し情報あり、中立的）</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">alpha_prior</span><span class="p">,</span> <span class="n">beta_prior</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="c1"># データ：10 回投げて 7 回表</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="c1"># 事後分布：Beta(2+7, 2+3) = Beta(9, 5)</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="n">alpha_post</span> <span class="o">=</span> <span class="n">alpha_prior</span> <span class="o">+</span> <span class="n">k</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="n">beta_post</span>  <span class="o">=</span> <span class="n">beta_prior</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">beta_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">alpha_prior</span><span class="p">,</span> <span class="n">beta_prior</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;事前 Beta(</span><span class="si">{</span><span class="n">alpha_prior</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">beta_prior</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">beta_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">alpha_post</span><span class="p">,</span>  <span class="n">beta_post</span><span class="p">),</span>  <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;事後 Beta(</span><span class="si">{</span><span class="n">alpha_post</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">beta_post</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;最尤推定 </span><span class="si">{</span><span class="n">k</span><span class="o">/</span><span class="n">n</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;θ（表の確率）&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ベータ-二項共役の更新&quot;</span><span class="p">)</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<hr />
+<h3 id="map-l2">MAP 推定 = L2 正則化付き最尤推定<a class="headerlink" href="#map-l2" title="Permanent link">&para;</a></h3>
+<p><strong>MAP（最大事後確率）推定</strong> は事後分布を最大化するパラメータを求めます：</p>
+<div class="arithmatex">\[
+\hat{\theta}_{\text{MAP}} = \arg\max_\theta p(\theta \mid X) = \arg\max_\theta \left[ \log p(X \mid \theta) + \log p(\theta) \right]
+\]</div>
+<p><strong>ガウス事前分布を使うと L2 正則化と同値：</strong></p>
+<p><span class="arithmatex">\(\theta \sim \mathcal{N}(0, \sigma_0^2)\)</span> とすると：</p>
+<div class="arithmatex">\[
+\log p(\theta) = -\frac{\|\theta\|^2}{2\sigma_0^2} + \text{const}
+\]</div>
+<p>これを目的関数に足すと：</p>
+<div class="arithmatex">\[
+\hat{\theta}_{\text{MAP}} = \arg\max_\theta \left[ \log p(X \mid \theta) - \frac{\|\theta\|^2}{2\sigma_0^2} \right]
+\]</div>
+<p>最大化を最小化に変換すると（符号反転）：</p>
+<div class="arithmatex">\[
+= \arg\min_\theta \left[ -\log p(X \mid \theta) + \frac{1}{2\sigma_0^2}\|\theta\|^2 \right]
+\]</div>
+<p><span class="arithmatex">\(\lambda = 1/(2\sigma_0^2)\)</span> とおくと、これはまさに <strong>L2 正則化付き最尤推定</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\hat{\theta}_{\text{MAP}} = \arg\min_\theta \left[ -\log p(X \mid \theta) + \lambda \|\theta\|^2 \right]}
+\]</div>
+<p><strong>含意：</strong> Ridge 回帰（L2 正則化線形回帰）は、パラメータにガウス事前分布を仮定した MAP 推定と数学的に等価です。</p>
+<hr />
+<h2 id="_16">確認問題<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ol>
 <li>ベイズの定理 <span class="arithmatex">\(P(\theta \mid X) \propto P(X \mid \theta) \times P(\theta)\)</span> の各項の名前と意味を説明してください。</li>
-<li>共役事前分布を使うことの利点を、ポアソン-ガンマの例で説明してください。</li>
-<li>ナイーブベイズが「ナイーブ（単純）」と呼ばれる理由を、仮定の観点から説明してください。</li>
+<li>ベータ分布 <span class="arithmatex">\(\text{Beta}(\alpha, \beta)\)</span> を事前分布として使い、<span class="arithmatex">\(n\)</span> 回中 <span class="arithmatex">\(k\)</span> 回成功したとき、事後分布の式を導いてください。</li>
+<li>MAP 推定でガウス事前分布を仮定すると L2 正則化と同値になることを、対数尤度の式から説明してください。</li>
 <li>頻度論の信頼区間とベイズの信用区間の違いを、解釈の観点から説明してください。</li>
-<li>MCMC のバーンイン（burn-in）が必要な理由を説明してください。</li>
 </ol>
 <hr />
-<h2 id="_16">関連ページ<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h2 id="_17">関連ページ<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../確率・統計基礎/">確率・統計基礎</a> — 確率分布・p 値・信頼区間の基礎</li>
 <li><a href="../回帰分析/">回帰分析</a> — 最尤推定による線形・ロジスティック回帰</li>
