@@ -1730,6 +1730,45 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        はじめて読む人へ
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="はじめて読む人へ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        読む前に押さえること
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        読み終えたら説明できること
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         実装
       </span>
     </span>
@@ -1749,7 +1788,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         確認問題
@@ -1760,7 +1799,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4289,6 +4328,45 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        はじめて読む人へ
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="はじめて読む人へ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        読む前に押さえること
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        読み終えたら説明できること
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         実装
       </span>
     </span>
@@ -4308,7 +4386,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         確認問題
@@ -4319,7 +4397,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4346,9 +4424,22 @@
 
 <h1 id="lda">線形判別分析（LDA）<a class="headerlink" href="#lda" title="Permanent link">&para;</a></h1>
 <p>クラスを最もよく分離できる低次元空間を見つける手法です。<strong>クラス間分散を最大化し、クラス内分散を最小化</strong> する方向を探します。分類器としても、次元削減ツールとしても使えます。</p>
-<p>PCA との違い：PCA はデータ全体の分散を最大化しますが、LDA は <strong>ラベル情報を使って</strong> クラス分離を最大化します。</p>
 <hr />
-<h2 id="_1">実装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1">はじめて読む人へ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>PCA が「データ全体のばらつきが最大の方向を探す」のに対し、LDA は「クラス同士が最もよく分かれる方向を探す」手法です。クラスラベルを知っているので、PCA より目的に沿った圧縮ができます。「猫と犬を最もよく区別できる 1 本の軸を引く」イメージです。</p>
+<h3 id="_2">読む前に押さえること<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../主成分分析/">主成分分析（PCA）</a> — LDA との比較のために読んでおくと理解が深まります</li>
+<li><a href="../教師あり学習/">教師あり学習</a> — クラスラベルを使った学習の概念</li>
+</ul>
+<h3 id="_3">読み終えたら説明できること<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>PCA と LDA の「最大化する量」の違いを説明できる</li>
+<li>LDA が分類器としても次元削減ツールとしても使える理由を説明できる</li>
+<li>LDA の次元削減上限（クラス数 - 1）を説明できる</li>
+</ul>
+<hr />
+<h2 id="_4">実装<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.discriminant_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearDiscriminantAnalysis</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
@@ -4403,14 +4494,14 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_2">確認問題<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_5">確認問題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
 <li>LDA と PCA の「最大化する量」の違いを説明してください。</li>
 <li>LDA が削減できる次元の上限は何ですか？（ヒント：クラス数に依存します）</li>
 <li>LDA が分類器としても使える理由を説明してください。</li>
 </ol>
 <hr />
-<h2 id="_3">関連ページ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_6">関連ページ<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../主成分分析/">主成分分析（PCA）</a> — 教師なし次元削減</li>
 <li><a href="../教師あり学習/">教師あり学習</a> — 分類モデル全般</li>
