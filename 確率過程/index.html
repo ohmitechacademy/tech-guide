@@ -1223,6 +1223,56 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqrtn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ランダムウォークの標準偏差が <span class="arithmatex">\(\sqrt{n}\)</span> になる理由
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        定常分布の存在条件（詳細つり合い条件）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ガウス過程の予測分布の導出（スケッチ）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1231,7 +1281,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4773,6 +4823,56 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqrtn" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ランダムウォークの標準偏差が <span class="arithmatex">\(\sqrt{n}\)</span> になる理由
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        定常分布の存在条件（詳細つり合い条件）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ガウス過程の予測分布の導出（スケッチ）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4781,7 +4881,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5052,14 +5152,79 @@ W(t+dt) - W(t) \sim \mathcal{N}(0, dt)
 </span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;brownian.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_12">数学的導出<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="sqrtn">ランダムウォークの標準偏差が <span class="arithmatex">\(\sqrt{n}\)</span> になる理由<a class="headerlink" href="#sqrtn" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(n\)</span> ステップのランダムウォーク <span class="arithmatex">\(X_n = \sum_{k=1}^n Z_k\)</span>（<span class="arithmatex">\(Z_k \in \{-1, +1\}\)</span> 等確率）の分散を求めます。</p>
+<p>各ステップが独立なので分散は加算できます：</p>
+<div class="arithmatex">\[
+\text{Var}(X_n) = \sum_{k=1}^n \text{Var}(Z_k) = n \cdot \text{Var}(Z_1)
+\]</div>
+<p><span class="arithmatex">\(\text{Var}(Z_1) = E[Z_1^2] - (E[Z_1])^2 = 1 - 0 = 1\)</span> なので：</p>
+<div class="arithmatex">\[
+\text{Var}(X_n) = n \quad \Rightarrow \quad \text{SD}(X_n) = \sqrt{n}
+\]</div>
+<p>これが「拡散係数 <span class="arithmatex">\(\sqrt{n}\)</span>」の正体です。金融の「ボラティリティが保有期間の平方根に比例する」という経験則の数学的根拠です。</p>
+<hr />
+<h3 id="_13">定常分布の存在条件（詳細つり合い条件）<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>マルコフ連鎖が <strong>詳細つり合い（detailed balance）条件</strong> を満たすとき、定常分布 <span class="arithmatex">\(\pi\)</span> が存在します：</p>
+<div class="arithmatex">\[
+\pi_i P_{ij} = \pi_j P_{ji} \quad \forall i, j
+\]</div>
+<p><strong>詳細つり合いが定常分布を保証することの証明：</strong></p>
+<div class="arithmatex">\[
+\sum_i \pi_i P_{ij} = \sum_i \pi_j P_{ji} = \pi_j \sum_i P_{ji} = \pi_j \cdot 1 = \pi_j
+\]</div>
+<p>（各行の和 <span class="arithmatex">\(\sum_i P_{ji} = 1\)</span> を使った）</p>
+<p>これは <span class="arithmatex">\(\pi P = \pi\)</span>、つまり <span class="arithmatex">\(\pi\)</span> が定常分布の定義を満たすことを示します。</p>
+<p><strong>MCMC との接続：</strong><br />
+メトロポリス・ヘイスティングス法の受理確率 <span class="arithmatex">\(\min\!\left(1, \frac{\pi(\theta')}{\pi(\theta)}\right)\)</span> は、詳細つり合い条件を満たすように設計されています。これによって、定常分布が目標分布 <span class="arithmatex">\(\pi\)</span> になることが保証されます。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># 詳細つり合いを確認するコード</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">])</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># 定常分布を固有値で求める</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">pi</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="mi">1</span><span class="p">))]</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="n">pi</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;定常分布 π:&quot;</span><span class="p">,</span> <span class="n">pi</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="c1"># 詳細つり合い検証: π_i * P_ij vs π_j * P_ji</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;π[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">] * P[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;π[</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] * P[</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">pi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="c1"># 詳細つり合いが成立していない場合は値が異なる（この例は一般的な Markov 連鎖）</span>
+</span></code></pre></div>
+<hr />
+<h3 id="_14">ガウス過程の予測分布の導出（スケッチ）<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>観測 <span class="arithmatex">\(\mathbf{y} = f(X) + \varepsilon\)</span>（<span class="arithmatex">\(\varepsilon \sim \mathcal{N}(0, \sigma_n^2 I)\)</span>）に対し、新しい点 <span class="arithmatex">\(x_*\)</span> での予測分布は多変量正規分布の条件付き分布の公式から：</p>
+<div class="arithmatex">\[
+p(f_* \mid X, \mathbf{y}, x_*) = \mathcal{N}(\bar{f}_*, \mathbb{V}[f_*])
+\]</div>
+<div class="arithmatex">\[
+\bar{f}_* = K(x_*, X)[K(X,X) + \sigma_n^2 I]^{-1}\mathbf{y}
+\]</div>
+<div class="arithmatex">\[
+\mathbb{V}[f_*] = K(x_*,x_*) - K(x_*,X)[K(X,X)+\sigma_n^2 I]^{-1}K(X,x_*)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(K(x_*, X)\)</span>：新点と観測点の間のカーネル値（類似度）</li>
+<li><span class="arithmatex">\(\mathbb{V}[f_*]\)</span> は観測が増えると小さくなる → <strong>観測データ周辺で不確かさが減少</strong></li>
+</ul>
+<hr />
+<h2 id="_15">確認問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ol>
 <li>マルコフ性とは何ですか？「天気の明日の予測に 1 週間前の天気は関係ない」はマルコフ性の例ですか？</li>
-<li>MCMC で生成したサンプルを使う前に「バーンイン期間」を捨てる理由を説明してください。</li>
-<li>ガウス過程回帰は観測データが増えるほど予測の不確かさ（信頼区間）がどう変化しますか？</li>
+<li>ランダムウォークの標準偏差が <span class="arithmatex">\(\sqrt{n}\)</span> になることを、独立な確率変数の分散の加算性から導いてください。</li>
+<li>詳細つり合い条件 <span class="arithmatex">\(\pi_i P_{ij} = \pi_j P_{ji}\)</span> が成り立つとき、<span class="arithmatex">\(\pi\)</span> が定常分布であることを証明してください。</li>
 </ol>
 <hr />
-<h2 id="_13">関連ページ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_16">関連ページ<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../確率・統計基礎/">確率・統計基礎</a> — 確率変数・期待値の基礎</li>
 <li><a href="../ベイズ理論/">ベイズ理論</a> — MCMC によるベイズ推論の実装</li>

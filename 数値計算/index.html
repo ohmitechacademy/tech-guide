@@ -1277,6 +1277,45 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oh2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        中心差分公式の誤差がテイラー展開で <span class="arithmatex">\(O(h^2)\)</span> になる理由
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        浮動小数点表現の丸め誤差の構造
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1285,7 +1324,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4773,6 +4812,45 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oh2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        中心差分公式の誤差がテイラー展開で <span class="arithmatex">\(O(h^2)\)</span> になる理由
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        浮動小数点表現の丸め誤差の構造
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4781,7 +4859,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5093,14 +5171,90 @@ x = (-1)^s \times 1.m \times 2^{e-1023}
 </span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;ode.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="_10">確認問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_10">数学的導出<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="oh2">中心差分公式の誤差がテイラー展開で <span class="arithmatex">\(O(h^2)\)</span> になる理由<a class="headerlink" href="#oh2" title="Permanent link">&para;</a></h3>
+<p>前進差分 <span class="arithmatex">\((f(x+h) - f(x))/h\)</span> は <span class="arithmatex">\(O(h)\)</span> の誤差を持ちますが、中心差分はより精度が高い理由を示します。</p>
+<p>テイラー展開から：</p>
+<div class="arithmatex">\[
+f(x+h) = f(x) + h f'(x) + \frac{h^2}{2}f''(x) + \frac{h^3}{6}f'''(x) + O(h^4)
+\]</div>
+<div class="arithmatex">\[
+f(x-h) = f(x) - h f'(x) + \frac{h^2}{2}f''(x) - \frac{h^3}{6}f'''(x) + O(h^4)
+\]</div>
+<p>2 式の差を取ると：</p>
+<div class="arithmatex">\[
+f(x+h) - f(x-h) = 2h f'(x) + \frac{h^3}{3}f'''(x) + O(h^5)
+\]</div>
+<p>両辺を <span class="arithmatex">\(2h\)</span> で割ると：</p>
+<div class="arithmatex">\[
+\frac{f(x+h) - f(x-h)}{2h} = f'(x) + \frac{h^2}{6}f'''(x) + O(h^4)
+\]</div>
+<div class="arithmatex">\[
+\boxed{\text{誤差} = \frac{h^2}{6}f'''(x) + O(h^4) = O(h^2)}
+\]</div>
+<p>前進差分の誤差 <span class="arithmatex">\(O(h)\)</span> に対して <strong>1 桁精度が良い</strong>理由はここにあります。<span class="arithmatex">\(h\)</span> を 10 分の 1 にすると、前進差分の誤差は <span class="arithmatex">\(1/10\)</span> になりますが、中心差分の誤差は <span class="arithmatex">\(1/100\)</span> になります。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">df_true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">]:</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">forward</span>  <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">central</span>  <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">true_val</span> <span class="o">=</span> <span class="n">df_true</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;h=</span><span class="si">{</span><span class="n">h</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">: 前進差分誤差=</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">forward</span><span class="o">-</span><span class="n">true_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">, 中心差分誤差=</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">central</span><span class="o">-</span><span class="n">true_val</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c1"># h が 1/10 になると:</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="c1"># 前進差分誤差: 1/10 倍 → O(h)</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="c1"># 中心差分誤差: 1/100 倍 → O(h²)</span>
+</span></code></pre></div>
+<hr />
+<h3 id="_11">浮動小数点表現の丸め誤差の構造<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>IEEE 754 float64 の表現：</p>
+<div class="arithmatex">\[
+x = (-1)^s \times (1 + \text{仮数部}) \times 2^{\text{指数部}}
+\]</div>
+<p><strong>機械イプシロン：</strong> 1 より大きい最小の float64 と 1 との差：</p>
+<div class="arithmatex">\[
+\epsilon_{\text{mach}} = 2^{-52} \approx 2.22 \times 10^{-16}
+\]</div>
+<p>各演算で <strong>相対誤差は最大</strong> <span class="arithmatex">\(\epsilon_{\text{mach}}/2\)</span> 生じます。<code>0.1 + 0.2 ≠ 0.3</code> の理由は 0.1, 0.2, 0.3 がいずれも 2 進数で有限小数にならず、それぞれ丸め誤差を持つためです。</p>
+<p><strong>数値安定性の指針：</strong></p>
+<table>
+<thead>
+<tr>
+<th>危険なコード</th>
+<th>安全なコード</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log(1 + x)</code> (<span class="arithmatex">\(x \approx 0\)</span>)</td>
+<td><code>np.log1p(x)</code></td>
+</tr>
+<tr>
+<td><code>exp(x) - 1</code> (<span class="arithmatex">\(x \approx 0\)</span>)</td>
+<td><code>np.expm1(x)</code></td>
+</tr>
+<tr>
+<td><code>sqrt(x^2 + y^2)</code></td>
+<td><code>np.hypot(x, y)</code></td>
+</tr>
+<tr>
+<td>softmax をそのまま実装</td>
+<td><code>x -= x.max()</code> して計算</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>
+<li>中心差分 <span class="arithmatex">\((f(x+h)-f(x-h))/(2h)\)</span> の誤差が <span class="arithmatex">\(O(h^2)\)</span> になることをテイラー展開で示してください。</li>
 <li><code>0.1 + 0.2 != 0.3</code> がなぜ起きるかを浮動小数点表現の観点から説明してください。</li>
-<li>数値微分で「刻み幅 h が小さすぎても大きすぎても誤差が大きくなる」理由をそれぞれ説明してください。</li>
 <li>機械学習で float16 を使うと学習が不安定になることがある理由と、AMP（自動混合精度）がどう対処するかを説明してください。</li>
 </ol>
 <hr />
-<h2 id="_11">関連ページ<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h2 id="_13">関連ページ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../微分・最適化基礎/">微分・最適化基礎</a> — 微分・積分の解析的アプローチ</li>
 <li><a href="../フーリエ解析/">フーリエ解析</a> — FFT の数値実装</li>

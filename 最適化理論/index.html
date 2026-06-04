@@ -1179,6 +1179,56 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ラグランジュ乗数法の直感的な証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        SVM 主問題から双対問題への完全導出
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        凸関数の一次条件（勾配不等式）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1187,7 +1237,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4739,6 +4789,56 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ラグランジュ乗数法の直感的な証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        SVM 主問題から双対問題への完全導出
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        凸関数の一次条件（勾配不等式）
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4747,7 +4847,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4954,14 +5054,69 @@ w = \sum_i \alpha_i y_i x_i
 \]</div>
 <p>この形では <span class="arithmatex">\(x_i^\top x_j\)</span>（内積）しか登場しないため、<strong>カーネルトリック</strong>が使えます。</p>
 <hr />
-<h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_12">数学的導出<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="_13">ラグランジュ乗数法の直感的な証明<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>等式制約 <span class="arithmatex">\(h(x) = 0\)</span> のもとで <span class="arithmatex">\(f(x)\)</span> を最小化するとします。</p>
+<p>最適点 <span class="arithmatex">\(x^*\)</span> において、<span class="arithmatex">\(f\)</span> の勾配 <span class="arithmatex">\(\nabla f(x^*)\)</span> は制約面 <span class="arithmatex">\(h(x) = 0\)</span> の接線空間に対して <strong>垂直でなければならない</strong> ことを示します。</p>
+<p>もし <span class="arithmatex">\(\nabla f(x^*)\)</span> が接線空間に成分を持つなら、制約面に沿って <span class="arithmatex">\(f\)</span> を減らせる方向に動けることになり、<span class="arithmatex">\(x^*\)</span> が最適点であることに矛盾します。</p>
+<p>制約面の法線方向は <span class="arithmatex">\(\nabla h(x^*)\)</span> ですから：</p>
+<div class="arithmatex">\[
+\nabla f(x^*) = -\lambda^* \nabla h(x^*) \quad \Leftrightarrow \quad \nabla f(x^*) + \lambda^* \nabla h(x^*) = 0
+\]</div>
+<p>この条件を一つの関数 <span class="arithmatex">\(\mathcal{L}(x, \lambda) = f(x) + \lambda h(x)\)</span> の停留条件として書いたものがラグランジュ乗数法です。</p>
+<hr />
+<h3 id="svm_1">SVM 主問題から双対問題への完全導出<a class="headerlink" href="#svm_1" title="Permanent link">&para;</a></h3>
+<p><strong>主問題：</strong></p>
+<div class="arithmatex">\[
+\min_{w,b} \frac{1}{2}\|w\|^2 \quad \text{s.t.} \quad y_i(w^\top x_i + b) \geq 1, \; i=1,\ldots,n
+\]</div>
+<p>制約 <span class="arithmatex">\(1 - y_i(w^\top x_i + b) \leq 0\)</span> に対してラグランジュ乗数 <span class="arithmatex">\(\alpha_i \geq 0\)</span> を導入します：</p>
+<div class="arithmatex">\[
+\mathcal{L}(w, b, \alpha) = \frac{1}{2}\|w\|^2 - \sum_i \alpha_i [y_i(w^\top x_i + b) - 1]
+\]</div>
+<p><strong>KKT 停留条件：</strong></p>
+<div class="arithmatex">\[
+\frac{\partial \mathcal{L}}{\partial w} = w - \sum_i \alpha_i y_i x_i = 0 \quad \Rightarrow \quad w^* = \sum_i \alpha_i y_i x_i \quad \cdots (1)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial \mathcal{L}}{\partial b} = -\sum_i \alpha_i y_i = 0 \quad \Rightarrow \quad \sum_i \alpha_i y_i = 0 \quad \cdots (2)
+\]</div>
+<p><strong>(1)(2) をラグランジュ関数に代入して双対関数を導出：</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = \frac{1}{2}\|w^*\|^2 - \sum_i \alpha_i y_i (w^*)^\top x_i - b \underbrace{\sum_i \alpha_i y_i}_{=0} + \sum_i \alpha_i
+\]</div>
+<div class="arithmatex">\[
+= \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j x_i^\top x_j - \sum_{i,j}\alpha_i\alpha_j y_i y_j x_i^\top x_j + \sum_i \alpha_i
+\]</div>
+<div class="arithmatex">\[
+\boxed{g(\alpha) = \sum_i \alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j x_i^\top x_j}
+\]</div>
+<p><strong>双対問題：</strong></p>
+<div class="arithmatex">\[
+\max_\alpha \; g(\alpha) \quad \text{s.t.} \quad \alpha_i \geq 0, \quad \sum_i \alpha_i y_i = 0
+\]</div>
+<p>この形では <span class="arithmatex">\(x_i^\top x_j\)</span>（内積）しか現れないため、<span class="arithmatex">\(k(x_i, x_j) = \phi(x_i)^\top \phi(x_j)\)</span> に置き換えるだけでカーネルトリックが適用できます。</p>
+<hr />
+<h3 id="_14">凸関数の一次条件（勾配不等式）<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>微分可能な凸関数 <span class="arithmatex">\(f\)</span> は次を満たします：</p>
+<div class="arithmatex">\[
+f(y) \geq f(x) + \nabla f(x)^\top (y - x) \quad \forall x, y
+\]</div>
+<p><strong>証明：</strong> 凸性の定義から <span class="arithmatex">\(f(\lambda y + (1-\lambda)x) \leq \lambda f(y) + (1-\lambda)f(x)\)</span> 。整理すると：</p>
+<div class="arithmatex">\[
+\frac{f(x + \lambda(y-x)) - f(x)}{\lambda} \leq f(y) - f(x)
+\]</div>
+<p><span class="arithmatex">\(\lambda \to 0\)</span> の極限をとると左辺 → <span class="arithmatex">\(\nabla f(x)^\top (y-x)\)</span> となり、証明完了。</p>
+<p><strong>重要な帰結：</strong> 凸関数では <span class="arithmatex">\(\nabla f(x^*) = 0\)</span> が大域最小値の必要十分条件です。</p>
+<hr />
+<h2 id="_15">確認問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ol>
-<li>「凸問題では局所最適 = 大域最適」という性質がなぜ重要か、非凸問題との比較で説明してください。</li>
-<li>KKT 相補性条件 <span class="arithmatex">\(\mu_i g_i(x^*) = 0\)</span> は SVM の「サポートベクター」とどう対応しますか？</li>
-<li>Ridge 正則化（<span class="arithmatex">\(\|w\|^2\)</span> のペナルティ）を加えた最小二乗問題はなぜ凸問題になるか説明してください。</li>
+<li>「凸問題では局所最適 = 大域最適」という性質を、凸関数の一次条件 <span class="arithmatex">\(f(y) \geq f(x) + \nabla f(x)^\top(y-x)\)</span> を使って証明してください。</li>
+<li>SVM の主問題からラグランジュ関数を書き、KKT 停留条件を偏微分で導いてください。</li>
+<li>KKT 相補性条件 <span class="arithmatex">\(\alpha_i [y_i(w^\top x_i + b) - 1] = 0\)</span> は「サポートベクター以外の <span class="arithmatex">\(\alpha_i = 0\)</span>」をどう意味しますか？</li>
 </ol>
 <hr />
-<h2 id="_13">関連ページ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_16">関連ページ<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../微分・最適化基礎/">微分・最適化基礎</a> — 勾配降下法（制約なし最適化の実装）</li>
 <li><a href="../サポートベクターマシン/">サポートベクターマシン</a> — KKT 条件の直接応用</li>

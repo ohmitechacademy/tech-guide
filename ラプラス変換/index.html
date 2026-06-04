@@ -1152,6 +1152,56 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mathcallft-sfs-f0" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        微分の変換 <span class="arithmatex">\(\mathcal{L}\{f'(t)\} = sF(s) - f(0)\)</span> の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1 階 ODE の完全な解法例
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        伝達関数とフーリエ変換の接続
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1160,7 +1210,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -4739,6 +4789,56 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mathcallft-sfs-f0" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        微分の変換 <span class="arithmatex">\(\mathcal{L}\{f'(t)\} = sF(s) - f(0)\)</span> の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1 階 ODE の完全な解法例
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        伝達関数とフーリエ変換の接続
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -4747,7 +4847,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5030,14 +5130,68 @@ X(z) = \sum_{n=-\infty}^{\infty} x[n]\, z^{-n}
 </tbody>
 </table>
 <hr />
-<h2 id="_10">確認問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_10">数学的導出<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="mathcallft-sfs-f0">微分の変換 <span class="arithmatex">\(\mathcal{L}\{f'(t)\} = sF(s) - f(0)\)</span> の証明<a class="headerlink" href="#mathcallft-sfs-f0" title="Permanent link">&para;</a></h3>
+<p>ラプラス変換の定義：<span class="arithmatex">\(F(s) = \int_0^\infty f(t) e^{-st} dt\)</span> に対して、<span class="arithmatex">\(f'(t)\)</span> の変換を部分積分で求めます。</p>
+<div class="arithmatex">\[
+\mathcal{L}\{f'(t)\} = \int_0^\infty f'(t) e^{-st} dt
+\]</div>
+<p>部分積分 <span class="arithmatex">\(\int u\,dv = [uv] - \int v\,du\)</span>（<span class="arithmatex">\(u = e^{-st}\)</span>、<span class="arithmatex">\(dv = f'(t)dt\)</span> とおく）：</p>
+<div class="arithmatex">\[
+= \left[f(t) e^{-st}\right]_0^\infty - \int_0^\infty f(t)(-s)e^{-st} dt
+\]</div>
+<p><span class="arithmatex">\(\text{Re}(s) &gt; 0\)</span> なら <span class="arithmatex">\(f(t)e^{-st} \to 0\)</span>（<span class="arithmatex">\(t \to \infty\)</span>）として：</p>
+<div class="arithmatex">\[
+= 0 - f(0) + s \int_0^\infty f(t) e^{-st} dt
+\]</div>
+<div class="arithmatex">\[
+\boxed{\mathcal{L}\{f'(t)\} = sF(s) - f(0)}
+\]</div>
+<p><strong>高階微分への拡張：</strong><br />
+<span class="arithmatex">\(f''(t)\)</span> には繰り返し適用して <span class="arithmatex">\(s^2 F(s) - sf(0) - f'(0)\)</span>。初期条件が自然に組み込まれます。</p>
+<hr />
+<h3 id="1-ode">1 階 ODE の完全な解法例<a class="headerlink" href="#1-ode" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\tau \frac{dy}{dt} + y = u(t), \quad y(0) = 0
+\]</div>
+<p>両辺をラプラス変換：</p>
+<div class="arithmatex">\[
+\tau [sY(s) - y(0)] + Y(s) = U(s)
+\]</div>
+<p><span class="arithmatex">\(y(0) = 0\)</span> を代入して <span class="arithmatex">\(Y(s)\)</span> について解くと：</p>
+<div class="arithmatex">\[
+(\tau s + 1)Y(s) = U(s) \quad \Rightarrow \quad Y(s) = \underbrace{\frac{1}{\tau s + 1}}_{H(s)} U(s)
+\]</div>
+<p>この <span class="arithmatex">\(H(s) = \frac{1}{\tau s + 1}\)</span> が <strong>伝達関数</strong>（入力と出力の比）です。</p>
+<p><strong>ステップ応答（<span class="arithmatex">\(u(t) = 1\)</span>, <span class="arithmatex">\(U(s) = 1/s\)</span>）：</strong></p>
+<div class="arithmatex">\[
+Y(s) = \frac{1}{s(\tau s + 1)} = \frac{1}{s} - \frac{\tau}{\tau s + 1}
+\]</div>
+<p>逆変換して：</p>
+<div class="arithmatex">\[
+y(t) = 1 - e^{-t/\tau}
+\]</div>
+<p>時定数 <span class="arithmatex">\(\tau\)</span> が「入力に対して出力が <span class="arithmatex">\(e^{-1} \approx 63\%\)</span> 追従するまでの時間」であることが式から直接読み取れます。</p>
+<hr />
+<h3 id="_11">伝達関数とフーリエ変換の接続<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(s = i\omega\)</span>（<span class="arithmatex">\(\sigma = 0\)</span>、純虚数）と置くとラプラス変換はフーリエ変換に一致します：</p>
+<div class="arithmatex">\[
+H(i\omega) = \frac{1}{\tau (i\omega) + 1} = \frac{1}{1 + i\omega\tau}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(|H(i\omega)| = \frac{1}{\sqrt{1 + (\omega\tau)^2}}\)</span>：<strong>振幅特性</strong>（ボード線図の縦軸）</li>
+<li><span class="arithmatex">\(\angle H(i\omega) = -\arctan(\omega\tau)\)</span>：<strong>位相特性</strong></li>
+</ul>
+<p><span class="arithmatex">\(\omega \gg 1/\tau\)</span>（高周波）では <span class="arithmatex">\(|H| \to 0\)</span> → <strong>ローパスフィルタ</strong> として動作することが読み取れます。</p>
+<hr />
+<h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>
-<li>ラプラス変換で「微分が <span class="arithmatex">\(s\)</span> の掛け算になる」ことが有用な理由を説明してください。</li>
-<li>RC 回路の伝達関数 <span class="arithmatex">\(H(s) = \frac{1}{\tau s + 1}\)</span> において、<span class="arithmatex">\(s = i\omega\)</span> と置くと何が得られますか？</li>
+<li>部分積分を使って <span class="arithmatex">\(\mathcal{L}\{f'(t)\} = sF(s) - f(0)\)</span> を導いてください。</li>
+<li>RC 回路の伝達関数 <span class="arithmatex">\(H(s) = \frac{1}{\tau s + 1}\)</span> において、<span class="arithmatex">\(s = i\omega\)</span> と置くと何が得られますか？高周波（<span class="arithmatex">\(\omega \to \infty\)</span>）での挙動も説明してください。</li>
 <li>Z 変換とラプラス変換の関係（<span class="arithmatex">\(z = e^{sT}\)</span>）を踏まえ、Z 変換が「離散ラプラス変換」と呼ばれる理由を説明してください。</li>
 </ol>
 <hr />
-<h2 id="_11">関連ページ<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h2 id="_13">関連ページ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../フーリエ解析/">フーリエ解析</a> — 周波数領域変換の基礎</li>
 <li><a href="../微分・最適化基礎/">微分・最適化基礎</a> — 微分方程式と積分の基礎</li>

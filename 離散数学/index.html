@@ -1498,6 +1498,56 @@
   <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ド・モルガン則の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handshaking-lemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        握手補題（Handshaking Lemma）の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        数学的帰納法の正しい使い方
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -1506,7 +1556,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5161,6 +5211,56 @@
   <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
+        数学的導出
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="数学的導出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ド・モルガン則の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handshaking-lemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        握手補題（Handshaking Lemma）の証明
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        数学的帰納法の正しい使い方
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
         確認問題
       </span>
     </span>
@@ -5169,7 +5269,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         関連ページ
@@ -5794,15 +5894,75 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_22">確認問題<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<h2 id="_22">数学的導出<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<h3 id="_23">ド・モルガン則の証明<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p><strong>定理：</strong> <span class="arithmatex">\(\overline{A \cup B} = \bar{A} \cap \bar{B}\)</span></p>
+<p><strong>証明（要素の属性による）：</strong></p>
+<p>任意の要素 <span class="arithmatex">\(x\)</span> について：</p>
+<div class="arithmatex">\[
+x \in \overline{A \cup B}
+\Leftrightarrow x \notin (A \cup B)
+\Leftrightarrow x \notin A \text{ かつ } x \notin B
+\Leftrightarrow x \in \bar{A} \text{ かつ } x \in \bar{B}
+\Leftrightarrow x \in \bar{A} \cap \bar{B}
+\]</div>
+<p>各ステップは定義から直接従うため、証明完了。</p>
+<p><strong>論理的対応（ブール代数）：</strong></p>
+<div class="arithmatex">\[
+\overline{p \lor q} \equiv \bar{p} \land \bar{q}
+\]</div>
+<p>これは Python の <code>not (A or B) == (not A) and (not B)</code> と同じです。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># ド・モルガン則の確認</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">U</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>  <span class="c1"># 全体集合</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="n">not_A_union_B</span> <span class="o">=</span> <span class="n">U</span> <span class="o">-</span> <span class="p">(</span><span class="n">A</span> <span class="o">|</span> <span class="n">B</span><span class="p">)</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">not_A_and_not_B</span> <span class="o">=</span> <span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">not_A_union_B</span> <span class="o">==</span> <span class="n">not_A_and_not_B</span><span class="p">)</span>  <span class="c1"># True</span>
+</span></code></pre></div>
+<hr />
+<h3 id="handshaking-lemma">握手補題（Handshaking Lemma）の証明<a class="headerlink" href="#handshaking-lemma" title="Permanent link">&para;</a></h3>
+<p><strong>定理：</strong> 無向グラフ <span class="arithmatex">\(G = (V, E)\)</span> において、全頂点の次数の和は辺数の 2 倍に等しい：</p>
+<div class="arithmatex">\[
+\sum_{v \in V} \deg(v) = 2|E|
+\]</div>
+<p><strong>系：</strong> 次数が奇数の頂点の数は偶数個。</p>
+<p><strong>証明：</strong> 各辺 <span class="arithmatex">\((u, v)\)</span> は <span class="arithmatex">\(u\)</span> の次数にも <span class="arithmatex">\(v\)</span> の次数にも 1 ずつ寄与します。つまり各辺は次数の総和に <strong>ちょうど 2</strong> 寄与します。辺が <span class="arithmatex">\(|E|\)</span> 本あるので合計は <span class="arithmatex">\(2|E|\)</span>。</p>
+<p><strong>応用：</strong> 「奇数人が握手する会がありました。各人が握手した回数の合計が奇数になることはありません」——これは握手補題の直接の帰結です。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)])</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">degrees</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">total_degree</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">degrees</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;次数の総和: </span><span class="si">{</span><span class="n">total_degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># 6</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;辺数の 2 倍: </span><span class="si">{</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 6</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;一致:&quot;</span><span class="p">,</span> <span class="n">total_degree</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">())</span>  <span class="c1"># True</span>
+</span></code></pre></div>
+<hr />
+<h3 id="_24">数学的帰納法の正しい使い方<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p><strong>命題：</strong> <span class="arithmatex">\(1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2}\)</span></p>
+<p><strong>証明（強い帰納法）：</strong></p>
+<p><strong>基底：</strong> <span class="arithmatex">\(n=1\)</span> のとき、左辺 <span class="arithmatex">\(= 1\)</span>、右辺 <span class="arithmatex">\(= \frac{1 \cdot 2}{2} = 1\)</span> ✓</p>
+<p><strong>帰納步：</strong> <span class="arithmatex">\(n=k\)</span> で成立すると仮定する（<span class="arithmatex">\(\sum_{i=1}^k i = \frac{k(k+1)}{2}\)</span>）。</p>
+<p><span class="arithmatex">\(n = k+1\)</span> のとき：</p>
+<div class="arithmatex">\[
+\sum_{i=1}^{k+1} i = \sum_{i=1}^k i + (k+1) = \frac{k(k+1)}{2} + (k+1) = (k+1)\frac{k+2}{2} = \frac{(k+1)(k+2)}{2}
+\]</div>
+<p>これは <span class="arithmatex">\(n = k+1\)</span> での命題と一致する。■</p>
+<p><strong>プログラミングとの接続：</strong> 数学的帰納法は「ループ不変条件（loop invariant）」の証明と同じ構造です。ループが始まる前（基底）と各反復後（帰納步）でループ不変条件が成立することを示せば、ループ終了時に正しさが保証されます。</p>
+<hr />
+<h2 id="_25">確認問題<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h2>
 <ol>
-<li>離散数学 は、何の問題を解決するための考え方・道具ですか。</li>
-<li>このページで出てきた重要語を 3 つ選び、それぞれ 1 文で説明してください。</li>
-<li>コード例やコマンド例がある場合、入力・処理・出力を分けて説明してください。</li>
-<li>このページの内容が、前後の STEP や自分の作りたいものにどうつながるか説明してください。</li>
+<li>ド・モルガン則 <span class="arithmatex">\(\overline{A \cup B} = \bar{A} \cap \bar{B}\)</span> を、要素の属性による証明で示してください。</li>
+<li>グラフに 5 本の辺があるとき、全頂点の次数の総和はいくつですか？握手補題を使って答えてください。</li>
+<li>数学的帰納法で <span class="arithmatex">\(\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}\)</span> を証明してください。</li>
 </ol>
 <hr />
-<h2 id="_23">関連ページ<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<h2 id="_26">関連ページ<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../アルゴリズム-データ構造/">アルゴリズム・データ構造</a> — グラフ探索・木の実装</li>
 <li><a href="../データベース詳解/">データベース詳解</a> — 集合演算・B-tree インデックス</li>
