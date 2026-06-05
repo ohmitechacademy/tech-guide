@@ -7816,14 +7816,12 @@
 <p><code>ohmitechacademy.com</code> のような、人間が読めるサイトの住所です。コンピューターは IP アドレスで通信しますが、数字の羅列は覚えにくいため、ドメインが使われます。</p>
 <h3 id="dnsdomain-name-system">DNS（Domain Name System）とは<a class="headerlink" href="#dnsdomain-name-system" title="Permanent link">&para;</a></h3>
 <p>ドメインを IP アドレスに変換する仕組みです。インターネット上の「電話帳」と例えられます。</p>
-<div class="admonition info">
 <p>ブラウザ → DNS に問い合わせ「ohmitechacademy.com の IP は？」
 ↓
 DNS が回答「203.0.113.45 です」
 ↓
-ブラウザ → 203.0.113.45 のサーバーにアクセスします</p>
-</div>
-<p>Cloudflare はこの DNS の管理もしてくれるサービスです。</p>
+ブラウザ → 203.0.113.45 のサーバーにアクセスします
+Cloudflare はこの DNS の管理もしてくれるサービスです。</p>
 <p>ブラウザにURLを入力すると、いきなりWebサーバーへ行くのではなく、まずDNSで「このドメインはどのIPアドレスか」を調べます。DNSの結果は一定時間キャッシュされるため、設定変更がすぐ反映されないことがあります。</p>
 <hr />
 <h2 id="http-https">HTTP と HTTPS<a class="headerlink" href="#http-https" title="Permanent link">&para;</a></h2>
@@ -7971,7 +7969,6 @@ HTTPS は <strong>TLS</strong> （旧称 SSL）という仕組みで通信を暗
 <hr />
 <h2 id="_10">リクエストとレスポンスの流れ<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>ブラウザが Web ページを表示するまでの流れを順番に見てみましょう。</p>
-<div class="admonition info">
 <p>① ブラウザに URL を入力します
 ↓
 ② DNS でドメインを IP アドレスに変換します
@@ -7980,9 +7977,8 @@ HTTPS は <strong>TLS</strong> （旧称 SSL）という仕組みで通信を暗
 ↓
 ④ サーバーが HTML・CSS・画像などを返します（HTTP レスポンス）
 ↓
-⑤ ブラウザが受け取ったデータを解析・表示します</p>
-</div>
-<p>この流れでは、DNS、HTTP、HTML/CSS/画像の取得、ブラウザでの描画が連続して起きています。ページが遅いときは、DNSが遅いのか、サーバーの応答が遅いのか、画像が大きいのか、JavaScriptの実行が重いのかを分けて考えます。</p>
+⑤ ブラウザが受け取ったデータを解析・表示します
+この流れでは、DNS、HTTP、HTML/CSS/画像の取得、ブラウザでの描画が連続して起きています。ページが遅いときは、DNSが遅いのか、サーバーの応答が遅いのか、画像が大きいのか、JavaScriptの実行が重いのかを分けて考えます。</p>
 <h3 id="_11">開発者ツールで確認する<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>ブラウザの開発者ツール（F12 キーで開きます）の <strong>Network タブ</strong> を見ると、どのファイルが何ミリ秒で読み込まれたか確認できます。</p>
 <hr />
@@ -7990,18 +7986,14 @@ HTTPS は <strong>TLS</strong> （旧称 SSL）という仕組みで通信を暗
 <h3 id="cdncontent-delivery-network">CDN（Content Delivery Network）とは<a class="headerlink" href="#cdncontent-delivery-network" title="Permanent link">&para;</a></h3>
 <p><strong>世界中にサーバーを分散配置して、ユーザーに近いサーバーからコンテンツを届ける仕組み</strong> です。</p>
 <p>日本のユーザーが、アメリカにあるサーバーのサイトにアクセスする場合：</p>
-<div class="admonition info">
 <p>CDN なし：日本 → アメリカのサーバー（遅い）
-CDN あり：日本 → 日本国内の CDN サーバー（速い）</p>
-</div>
-<p>Cloudflare は世界最大級の CDN サービスです。</p>
+CDN あり：日本 → 日本国内の CDN サーバー（速い）
+Cloudflare は世界最大級の CDN サービスです。</p>
 <p>CDN は、HTML、CSS、画像、JavaScriptのような静的ファイルをユーザーに近いサーバーから配ります。物理的な距離が短くなると通信の往復時間が短くなり、ページ表示が速くなります。</p>
 <h3 id="_12">キャッシュとは<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>一度取得したデータを一時的に保存しておき、次回以降は再取得せずに使い回す仕組みです。</p>
-<div class="admonition info">
 <p>初回アクセス：サーバーからデータを取得します（時間がかかります）
 2 回目以降 ：キャッシュから取得します（速い）</p>
-</div>
 <blockquote>
 <p><strong>キャッシュが原因でサイトの更新が反映されない場合</strong><br />
 ブラウザでハードリフレッシュ（Win: <code>Ctrl + Shift + R</code>、Mac: <code>Command + Shift + R</code>）を試してください。</p>
@@ -8009,7 +8001,6 @@ CDN あり：日本 → 日本国内の CDN サーバー（速い）</p>
 <p>キャッシュは高速化に有効ですが、古いファイルが残る原因にもなります。開発中にCSSを直したのに画面が変わらない場合、コードではなくブラウザやCDNのキャッシュを見ている可能性があります。</p>
 <hr />
 <h2 id="ota_hp">ota_hp に関係するネットワークの流れ<a class="headerlink" href="#ota_hp" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
 <p>あなたが ota_hp を更新するとき</p>
 <p>① git push → GitHub にコードが届きます
 ↓
@@ -8025,9 +8016,8 @@ CDN あり：日本 → 日本国内の CDN サーバー（速い）</p>
 ↓
 ⑦ 最寄りの CDN サーバーから HTML・CSS を受け取ります
 ↓
-⑧ ブラウザが表示します</p>
-</div>
-<p>この流れを見ると、サイト公開は「GitHubに置いたファイルをユーザーが直接見る」わけではないことが分かります。GitHubはソースコードの置き場、Cloudflare Pagesはビルドと配信の担当、DNSはドメイン名を配信先へ向ける担当です。</p>
+⑧ ブラウザが表示します
+この流れを見ると、サイト公開は「GitHubに置いたファイルをユーザーが直接見る」わけではないことが分かります。GitHubはソースコードの置き場、Cloudflare Pagesはビルドと配信の担当、DNSはドメイン名を配信先へ向ける担当です。</p>
 <hr />
 <h2 id="_13">よくある疑問<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p><strong>Q. <code>http://</code> と <code>https://</code> は何が違う？</strong><br />

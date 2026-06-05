@@ -2283,17 +2283,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        2. 多重比較問題
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#3-sutva" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -7434,17 +7423,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        2. 多重比較問題
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#3-sutva" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -7658,16 +7636,32 @@
 <hr />
 <h2 id="_9">よくある落とし穴<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="1">1. ピーキング（覗き見問題）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p><strong>❌ よくやってしまうこと</strong></p>
-<p>実験中に毎日 p 値を確認して、有意になったら止める</p>
-<p>「月曜: p=0.08（続行）」「火曜: p=0.04（有意！止めよう）」
-→ これは誤り。複数回チェックすることで偽陽性率が上がる（多重比較）</p>
-<p><strong>✅ 正しいやり方</strong></p>
-<p>事前に決めたサンプルサイズに達するまで待つ
-またはシーケンシャルテスト（逐次検定）を使う</p>
-</div>
-<h3 id="2">2. 多重比較問題<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>❌ よくやってしまうこと</th>
+<th>✅ 正しいやり方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>実験中に毎日 p 値を確認して、有意になったら止める</td>
+<td>事前に決めたサンプルサイズに達するまで待つ</td>
+</tr>
+<tr>
+<td>「月曜: p=0.08（続行）」「火曜: p=0.04（有意！止めよう）」</td>
+<td>またはシーケンシャルテスト（逐次検定）を使う</td>
+</tr>
+<tr>
+<td>→ これは誤り。複数回チェックすることで偽陽性率が上がる（多重比較）</td>
+<td></td>
+</tr>
+<tr>
+<td>### 2. 多重比較問題</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 複数の指標を同時に検定するとき</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;クリック率&quot;</span><span class="p">,</span> <span class="s2">&quot;購入率&quot;</span><span class="p">,</span> <span class="s2">&quot;滞在時間&quot;</span><span class="p">,</span> <span class="s2">&quot;直帰率&quot;</span><span class="p">,</span> <span class="s2">&quot;再訪率&quot;</span><span class="p">]</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># → 5つ全部で α=0.05 の検定をすると、</span>
@@ -7686,15 +7680,32 @@
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">: p=</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> → 補正後p=</span><span class="si">{</span><span class="n">p_c</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;✗&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="3-sutva">3. ネットワーク効果（SUTVA 違反）<a class="headerlink" href="#3-sutva" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p><strong>SNS・マーケットプレイス・紹介プログラムなどで起きる問題</strong></p>
-<p>A群のユーザーが B群のユーザーに影響を与えてしまう</p>
-<p>例: 「友達紹介機能」の A/B テスト
-A群のユーザーがB群のユーザーを招待 → 効果が汚染される</p>
-<p><strong>対処</strong></p>
-<p>クラスター単位でランダム化（個人でなく地域・グループで割り当て）</p>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>SNS・マーケットプレイス・紹介プログラムなどで起きる問題</th>
+<th>対処</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A群のユーザーが B群のユーザーに影響を与えてしまう</td>
+<td>クラスター単位でランダム化（個人でなく地域・グループで割り当て）</td>
+</tr>
+<tr>
+<td>例: 「友達紹介機能」の A/B テスト</td>
+<td></td>
+</tr>
+<tr>
+<td>A群のユーザーがB群のユーザーを招待 → 効果が汚染される</td>
+<td></td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="ab_2">ベイズ A/Bテスト<a class="headerlink" href="#ab_2" title="Permanent link">&para;</a></h2>
 <p>頻度論的検定の代わりに、<strong>「B が A より良い確率」を直接計算</strong>できます。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>

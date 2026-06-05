@@ -7424,79 +7424,32 @@
 </ul>
 <hr />
 <h2 id="rest-vs-graphql">REST vs GraphQL<a class="headerlink" href="#rest-vs-graphql" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>REST の問題例:
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  画面に「ユーザー名」「プロフィール画像」だけ表示したい
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → GET /users/1 → { id, name, email, bio, avatar, created_at, ... } (20フィールド)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     要らないデータも全部来る（Over-fetching）
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  画面に「ユーザー情報 + その投稿一覧」を表示したい
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  → GET /users/1  (1回目)
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  → GET /users/1/posts  (2回目)
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     2回リクエストが必要（Under-fetching）
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>GraphQL の解決:
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  query {
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    user(id: 1) {
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      name        ← 欲しいものだけ指定
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>      avatar
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>      posts {
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        title
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        publishedAt
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>      }
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    }
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  }
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  → 1回のリクエストで欲しいデータだけ返ってくる
+<p><strong>REST の問題例：</strong></p>
+<ol>
+<li><strong>Over-fetching</strong>：画面に「ユーザー名」「プロフィール画像」だけ表示したい場合でも、<code>GET /users/1</code> で <code>{ id, name, email, bio, avatar, created_at, ... }</code> の 20 フィールドが全部返ってくる。</li>
+<li><strong>Under-fetching</strong>：画面に「ユーザー情報 + その投稿一覧」を表示したい場合、<code>GET /users/1</code>（1 回目）と <code>GET /users/1/posts</code>（2 回目）の 2 回リクエストが必要になる。</li>
+</ol>
+<p><strong>GraphQL の解決：</strong> 以下のように欲しいフィールドだけを宣言すると、1 回のリクエストで必要なデータだけが返ってくる。</p>
+<p><div class="language-graphql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">query</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="n">user</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">name</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">avatar</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">posts</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="n">title</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="n">publishedAt</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
 </span></code></pre></div>
-</div>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>REST</th>
-<th>GraphQL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>エンドポイント</td>
-<td>リソースごとに <code>/users</code>, <code>/posts</code></td>
-<td><code>/graphql</code> の 1 つ</td>
-</tr>
-<tr>
-<td>レスポンス</td>
-<td>サーバーが決めた形</td>
-<td>クライアントが宣言した形</td>
-</tr>
-<tr>
-<td>Over-fetching</td>
-<td>起きやすい</td>
-<td>起きない</td>
-</tr>
-<tr>
-<td>Under-fetching</td>
-<td>複数リクエストが必要</td>
-<td>1 リクエストで解決</td>
-</tr>
-<tr>
-<td>学習コスト</td>
-<td>低い</td>
-<td>高め</td>
-</tr>
-<tr>
-<td>キャッシュ</td>
-<td>HTTP レベルで自然にできる</td>
-<td>工夫が必要（Apollo Client 等）</td>
-</tr>
-<tr>
-<td>向いているケース</td>
-<td>シンプルな API・公開 API</td>
-<td>複雑な UI・モバイル・BFF</td>
-</tr>
-</tbody>
-</table>
+| | REST | GraphQL |
+|--|------|---------|
+| エンドポイント | リソースごとに <code>/users</code>, <code>/posts</code> | <code>/graphql</code> の 1 つ |
+| レスポンス | サーバーが決めた形 | クライアントが宣言した形 |
+| Over-fetching | 起きやすい | 起きない |
+| Under-fetching | 複数リクエストが必要 | 1 リクエストで解決 |
+| 学習コスト | 低い | 高め |
+| キャッシュ | HTTP レベルで自然にできる | 工夫が必要（Apollo Client 等）|
+| 向いているケース | シンプルな API・公開 API | 複雑な UI・モバイル・BFF |</p>
 <hr />
 <h2 id="_4">基本概念<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="sdlschema-definition-language">スキーマ（SDL：Schema Definition Language）<a class="headerlink" href="#sdlschema-definition-language" title="Permanent link">&para;</a></h3>
@@ -7662,13 +7615,7 @@
 <hr />
 <h2 id="n1-dataloader">N+1 問題と DataLoader<a class="headerlink" href="#n1-dataloader" title="Permanent link">&para;</a></h2>
 <p>GraphQL でよく起きるパフォーマンス問題です。</p>
-<div class="admonition info">
-<p>ユーザー一覧 (10件) を取得すると…
-→ ユーザー 1 の投稿を取得
-→ ユーザー 2 の投稿を取得
-… (10回のDB クエリ)
-= 合計 11 回のクエリ（N+1 問題）</p>
-</div>
+<p>ユーザー一覧（10 件）を取得すると、ユーザー 1 の投稿を取得、ユーザー 2 の投稿を取得……と 10 回の DB クエリが走り、合計 11 回のクエリになります（N+1 問題）。
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">strawberry.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">load_posts_by_user_ids</span><span class="p">(</span><span class="n">user_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Post</span><span class="p">]]:</span>
@@ -7689,7 +7636,7 @@
 </span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="nd">@strawberry</span><span class="o">.</span><span class="n">field</span>
 </span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">posts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">strawberry</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Post</span><span class="p">]:</span>
 </span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="k">return</span> <span class="k">await</span> <span class="n">info</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;posts_loader&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="_5">確認問題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>

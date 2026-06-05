@@ -1427,6 +1427,23 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        → 約 1% は珍しすぎる → コインは公平でなさそう
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="→ 約 1% は珍しすぎる → コインは公平でなさそう">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#step-2-4" class="md-nav__link">
     <span class="md-ellipsis">
@@ -7540,6 +7557,23 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        → 約 1% は珍しすぎる → コインは公平でなさそう
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="→ 約 1% は珍しすぎる → コインは公平でなさそう">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#step-2-4" class="md-nav__link">
     <span class="md-ellipsis">
@@ -7849,7 +7883,6 @@
 <hr />
 <h3 id="step-1-p">STEP 1：コインで p 値の直感をつかむ<a class="headerlink" href="#step-1-p" title="Permanent link">&para;</a></h3>
 <p>まず最もシンプルな例で流れを掴みます。</p>
-<div class="admonition info">
 <p>問い：「このコインは公平（表と裏が 50:50）か？」</p>
 <p>実験：コインを 10 回投げたら、表が 9 回出た。</p>
 <p>どう考える？
@@ -7857,9 +7890,7 @@
 ・ただし、それはどれくらい珍しいことか？</p>
 <p>計算：公平なコインで 10 回中 9 回以上表が出る確率
 P(X=9) + P(X=10) = C(10,9)×0.5¹⁰ + C(10,10)×0.5¹⁰ ≈ 1.07%</p>
-<p>→ 約 1% は珍しすぎる → コインは公平でなさそう</p>
-</div>
-<hr />
+<h2 id="1">→ 約 1% は珍しすぎる → コインは公平でなさそう<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="step-2-4">STEP 2：仮説検定の 4 ステップ<a class="headerlink" href="#step-2-4" title="Permanent link">&para;</a></h3>
 <p>STEP 1 のコインの例でやったことを整理すると、仮説検定の流れが見えてきます。「公平なコイン（H₀）を仮定して、そのもとで今回の結果が偶然起きる確率（p 値）を計算し、それが小さければ H₀ は疑わしいと判断した」——この流れはどんな検定でも同じです。</p>
 <pre class="mermaid"><code>flowchart TD
@@ -7870,17 +7901,13 @@ P(X=9) + P(X=10) = C(10,9)×0.5¹⁰ + C(10,10)×0.5¹⁰ ≈ 1.07%</p>
     S4 --&gt;|Yes| R1["H₀ を棄却 → H₁ を採択"]
     S4 --&gt;|No| R2["H₀ を棄却できなかった\n（差があるとは言えない）"]</code></pre>
 <p><strong>p 値の本当の意味（よく誤解される）</strong>：</p>
-<div class="admonition info">
 <p>✗ 誤解：p = 0.03 → 「差がある確率が 97%」
 ✓ 正解：p = 0.03 → 「帰無仮説が正しい世界で、偶然こんな結果が出る確率が 3%」
-→ 3% は珍しすぎる → 帰無仮説を疑う → 差があると判断する</p>
-</div>
-<p>p 値は「効果の大きさ」を表しません。サンプル数が多ければ小さな差でも p &lt; 0.05 になります。「効果量」（Cohen's d など）を合わせて確認することが重要です。</p>
+→ 3% は珍しすぎる → 帰無仮説を疑う → 差があると判断する
+p 値は「効果の大きさ」を表しません。サンプル数が多ければ小さな差でも p &lt; 0.05 になります。「効果量」（Cohen's d など）を合わせて確認することが重要です。</p>
 <hr />
 <h3 id="step-3t-2">STEP 3：t 検定を使う（2 グループの平均比較）<a class="headerlink" href="#step-3t-2" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p>問い：新しい UI（B 案）は旧 UI（A 案）より本当にクリック率が高いか？</p>
-</div>
+<p>問い：新しい UI（B 案）は旧 UI（A 案）より本当にクリック率が高いか？
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -7889,11 +7916,10 @@ P(X=9) + P(X=10) = C(10,9)×0.5¹⁰ + C(10,10)×0.5¹⁰ ≈ 1.07%</p>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">group_a</span><span class="p">,</span> <span class="n">group_b</span><span class="p">)</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t 統計量：</span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  p 値：</span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <p><code>t_stat</code>（t 統計量）は「差の大きさ」をグループ内のばらつきで割ったものです。t が大きくなるのは「差が大きい」か「ばらつきが小さい」かのどちらかです——どちらの場合も「偶然にしては差が大きすぎる」という証拠が強まるので、p 値は小さくなります。</p>
 <hr />
 <h3 id="step-4">STEP 4：よくある落とし穴<a class="headerlink" href="#step-4" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>落とし穴 1：サンプル数が少ない
 → 10 件のデータでは、p &gt; 0.05 でも本当に差があるかもしれない
 → 効果検出に必要なサンプル数を事前に計算（検出力分析）することが理想</p>
@@ -7903,7 +7929,6 @@ P(X=9) + P(X=10) = C(10,9)×0.5¹⁰ + C(10,10)×0.5¹⁰ ≈ 1.07%</p>
 <p>落とし穴 3：p &lt; 0.05 ≠ 重要な発見
 → 100 万件データなら 0.01% の差でも有意になる
 → 「効果量」（どれくらい大きな差か）を必ず確認する</p>
-</div>
 <h3 id="_10">信頼区間<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>信頼区間は、標本から推定した平均などにどの程度の不確実性があるかを区間で表します。点推定だけでなく幅を見ることで、データ数やばらつきの影響を理解できます。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>

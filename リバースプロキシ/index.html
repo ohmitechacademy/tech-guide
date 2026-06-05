@@ -7522,18 +7522,36 @@
 </ul>
 <hr />
 <h2 id="vs">フォワードプロキシ vs リバースプロキシ<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p><strong>フォワードプロキシ（クライアント側）</strong></p>
-<p>クライアント → [プロキシ] → インターネット
-・クライアントが「どこを見ているか」を隠す
-・企業内のインターネットアクセス制限
-・VPN の一形態</p>
-<p><strong>リバースプロキシ（サーバー側）</strong></p>
-<p>インターネット → [リバースプロキシ] → バックエンドサーバー群
-・サーバーの実態（IP・ポート・台数）を隠す
-・負荷分散・SSL 終端・キャッシュ</p>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>フォワードプロキシ（クライアント側）</th>
+<th>リバースプロキシ（サーバー側）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クライアント → [プロキシ] → インターネット</td>
+<td>インターネット → [リバースプロキシ] → バックエンドサーバー群</td>
+</tr>
+<tr>
+<td>・クライアントが「どこを見ているか」を隠す</td>
+<td>・サーバーの実態（IP・ポート・台数）を隠す</td>
+</tr>
+<tr>
+<td>・企業内のインターネットアクセス制限</td>
+<td>・負荷分散・SSL 終端・キャッシュ</td>
+</tr>
+<tr>
+<td>・VPN の一形態</td>
+<td></td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="_5">リバースプロキシの主な役割<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart LR
     C["クライアント\n(ブラウザ)"] --&gt;|"HTTPS :443"| RP

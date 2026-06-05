@@ -3830,17 +3830,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#maml" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        MAML の更新式
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#first-order-mamlfomaml" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -3947,7 +3936,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#maml_1" class="md-nav__link">
+  <a href="#maml" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         MAML の収束条件
@@ -7563,17 +7552,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#maml" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        MAML の更新式
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#first-order-mamlfomaml" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -7680,7 +7658,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#maml_1" class="md-nav__link">
+  <a href="#maml" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
         MAML の収束条件
@@ -7752,21 +7730,48 @@
 <hr />
 <h2 id="few-shot-learning_1">Few-shot Learning の問題設定<a class="headerlink" href="#few-shot-learning_1" title="Permanent link">&para;</a></h2>
 <h3 id="n-way-k-shot">N-way K-shot 分類<a class="headerlink" href="#n-way-k-shot" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p><strong>Support set（少量の学習サンプル）</strong></p>
-<p>クラス A: [画像1, 画像2]   ← K=2 サンプル
-クラス B: [画像3, 画像4]
-クラス C: [画像5, 画像6]
-N=3 クラス、K=2 サンプル → 3-way 2-shot 問題</p>
-<p><strong>Query set（分類したいサンプル）</strong></p>
-<p>? → クラス A か B か C か？</p>
-</div>
-<ul>
-<li><strong>N-way：</strong> 分類先のクラス数</li>
-<li><strong>K-shot：</strong> クラスあたりの学習サンプル数</li>
-<li><strong>1-shot：</strong> 1 枚だけで学習（最も難しい）</li>
-<li><strong>Zero-shot：</strong> サンプルなしで分類</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Support set（少量の学習サンプル）</th>
+<th>Query set（分類したいサンプル）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラス A: [画像1, 画像2]   ← K=2 サンプル</td>
+<td>? → クラス A か B か C か？</td>
+</tr>
+<tr>
+<td>クラス B: [画像3, 画像4]</td>
+<td></td>
+</tr>
+<tr>
+<td>クラス C: [画像5, 画像6]</td>
+<td></td>
+</tr>
+<tr>
+<td>N=3 クラス、K=2 サンプル → 3-way 2-shot 問題</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>N-way：</strong> 分類先のクラス数</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>K-shot：</strong> クラスあたりの学習サンプル数</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>1-shot：</strong> 1 枚だけで学習（最も難しい）</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Zero-shot：</strong> サンプルなしで分類</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="_4">メタ学習の枠組み<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="episode-training">エピソード学習（Episode Training）<a class="headerlink" href="#episode-training" title="Permanent link">&para;</a></h3>
@@ -7779,17 +7784,32 @@ N=3 クラス、K=2 サンプル → 3-way 2-shot 問題</p>
 <h2 id="prototypical-networks">Prototypical Networks<a class="headerlink" href="#prototypical-networks" title="Permanent link">&para;</a></h2>
 <h3 id="_5">基本アイデア<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>「各クラスのサンプルの平均埋め込みをプロトタイプとし、クエリとの距離で分類する」</p>
-<div class="admonition info">
-<p><strong>Support set のサンプルを埋め込み</strong></p>
-<p>クラス A: [embed(a₁), embed(a₂)] → 平均 → プロトタイプ cA
-クラス B: [embed(b₁), embed(b₂)] → 平均 → プロトタイプ cB
-クラス C: [embed(c₁), embed(c₂)] → 平均 → プロトタイプ cC</p>
-<p><strong>クエリ q の分類</strong></p>
-<p>d(embed(q), cA) = 0.3  ← 最小 → クラス A に分類
-d(embed(q), cB) = 1.2
-d(embed(q), cC) = 0.9</p>
-</div>
-<p><strong>分類確率：</strong></p>
+<table>
+<thead>
+<tr>
+<th>Support set のサンプルを埋め込み</th>
+<th>クエリ q の分類</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラス A: [embed(a₁), embed(a₂)] → 平均 → プロトタイプ cA</td>
+<td>d(embed(q), cA) = 0.3  ← 最小 → クラス A に分類</td>
+</tr>
+<tr>
+<td>クラス B: [embed(b₁), embed(b₂)] → 平均 → プロトタイプ cB</td>
+<td>d(embed(q), cB) = 1.2</td>
+</tr>
+<tr>
+<td>クラス C: [embed(c₁), embed(c₂)] → 平均 → プロトタイプ cC</td>
+<td>d(embed(q), cC) = 0.9</td>
+</tr>
+<tr>
+<td><strong>分類確率：</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <div class="arithmatex">\[
 P(y = k \mid x) = \frac{\exp(-d(f_\phi(x), c_k))}{\sum_j \exp(-d(f_\phi(x), c_j))}
 \]</div>
@@ -7801,18 +7821,42 @@ P(y = k \mid x) = \frac{\exp(-d(f_\phi(x), c_k))}{\sum_j \exp(-d(f_\phi(x), c_j)
 <h2 id="mamlmodel-agnostic-meta-learning">MAML（Model-Agnostic Meta-Learning）<a class="headerlink" href="#mamlmodel-agnostic-meta-learning" title="Permanent link">&para;</a></h2>
 <h3 id="_7">アイデア<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>「どのタスクでも、数ステップの勾配更新で良い性能を出せる初期値 <span class="arithmatex">\(\theta\)</span> を学習する」</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>通常の学習: θ → タスク A に最適化 → θ_A
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>           θ → タスク B に最適化 → θ_B
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>MAML:      θ を探す（メタ学習）
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            ↓数ステップの更新でどのタスクでも良くなる初期値
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>           θ + αΔθ_A ≈ タスク A で良い性能
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>           θ + αΔθ_B ≈ タスク B で良い性能
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>           ...全タスクで良い性能
-</span></code></pre></div>
-</div>
-<h3 id="maml">MAML の更新式<a class="headerlink" href="#maml" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>通常の学習</th>
+<th>MAML（メタ学習）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的</td>
+<td><span class="arithmatex">\(\theta\)</span> を特定タスクに最適化</td>
+<td>「どのタスクでも少数ステップで適応できる初期値 <span class="arithmatex">\(\theta\)</span>」を学習</td>
+</tr>
+<tr>
+<td>タスク A</td>
+<td><span class="arithmatex">\(\theta \to \theta_A\)</span></td>
+<td><span class="arithmatex">\(\theta + \alpha\Delta\theta_A \approx\)</span> タスク A で良い性能</td>
+</tr>
+<tr>
+<td>タスク B</td>
+<td><span class="arithmatex">\(\theta \to \theta_B\)</span></td>
+<td><span class="arithmatex">\(\theta + \alpha\Delta\theta_B \approx\)</span> タスク B で良い性能</td>
+</tr>
+<tr>
+<td>汎化性</td>
+<td>特定タスク専用</td>
+<td>未知タスクにも数ステップで適応</td>
+</tr>
+<tr>
+<td>### MAML の更新式</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p><strong>内側ループ（タスク適応）：</strong></p>
 <div class="arithmatex">\[
 \theta_i' = \theta - \alpha \nabla_\theta \mathcal{L}_{\mathcal{T}_i}(f_\theta)
@@ -7844,16 +7888,14 @@ P(y = k \mid x) = \frac{\exp(-d(f_\phi(x), c_k))}{\sum_j \exp(-d(f_\phi(x), c_j)
 <hr />
 <h2 id="in-context-learningllm">In-Context Learning（LLM とメタ学習）<a class="headerlink" href="#in-context-learningllm" title="Permanent link">&para;</a></h2>
 <h3 id="few-shot">大規模言語モデルのゼロ・Few-shot<a class="headerlink" href="#few-shot" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p><strong>Few-shot プロンプト（GPT への入力）</strong></p>
 <p>Q: 「映画が面白かった」の感情は？
 A: ポジティブ</p>
 <p>Q: 「料理がまずかった」の感情は？
 A: ネガティブ</p>
 <p>Q: 「サービスが丁寧でした」の感情は？  ← クエリ
-A: ← LLM が答える</p>
-</div>
-<p>これは「プロンプトに含まれた例（Support set）から学習する」という Few-shot Learning に他なりません。ただし LLM の重みは更新されない——<strong>推論時の文脈から「動的に」適応</strong>します。</p>
+A: ← LLM が答える
+これは「プロンプトに含まれた例（Support set）から学習する」という Few-shot Learning に他なりません。ただし LLM の重みは更新されない——<strong>推論時の文脈から「動的に」適応</strong>します。</p>
 <p><strong>MAML との接続：</strong> Transformer の Self-Attention は、文脈内の例を「内部メモリ」として使うメタ学習器であるという理論的解釈があります（"Transformers as Meta-Learners"）。</p>
 <hr />
 <h2 id="_8">数学的導出<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -7863,7 +7905,7 @@ A: ← LLM が答える</p>
 P(y = k \mid x) \propto \exp\!\left(-\frac{\|f(x) - c_k\|^2}{2\sigma^2}\right)
 \]</div>
 <p>これは Prototypical Networks のユークリッド距離版と一致します。対角共分散を学習可能にすると Mahalanobis 距離になり、より一般的な特徴空間の歪みを扱えます。</p>
-<h3 id="maml_1">MAML の収束条件<a class="headerlink" href="#maml_1" title="Permanent link">&para;</a></h3>
+<h3 id="maml">MAML の収束条件<a class="headerlink" href="#maml" title="Permanent link">&para;</a></h3>
 <p>MAML の外側ループの勾配は：</p>
 <div class="arithmatex">\[
 \nabla_\theta \mathcal{L}(\theta_i') = \nabla_{\theta_i'} \mathcal{L}(\theta_i') \cdot \left(I - \alpha \nabla^2_\theta \mathcal{L}_{\text{train}}\right)

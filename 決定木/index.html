@@ -7868,7 +7868,6 @@
 <hr />
 <h2 id="_6">分割基準：どこで木を分けるか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>決定木はデータを「質問」で二分していきます。問題は「どの質問が最も有益か？」です。</p>
-<div class="admonition info">
 <p>例：動物を「犬 or 猫」に分類したい
 質問 A：「体重が 5kg 以上か？」
 → 5kg 以上: [犬5, 猫3]  5kg未満: [犬1, 猫6]
@@ -7876,9 +7875,8 @@
 <p>質問 B：「鳴き声が "ワン" か？」
 → ワン: [犬9, 猫0]  ワン以外: [犬0, 猫9]
 → 完全に純粋なグループに分かれた！</p>
-<p>→ 質問 B の方が「良い分割」＝ 不純度（混在度）が下がる</p>
-</div>
-<p><strong>分割基準 = 分割後にノードが「より純粋に」なる質問を選ぶ</strong></p>
+<p>→ 質問 B の方が「良い分割」＝ 不純度（混在度）が下がる
+<strong>分割基準 = 分割後にノードが「より純粋に」なる質問を選ぶ</strong></p>
 <h3 id="gini-impurity">ジニ不純度（Gini impurity）<a class="headerlink" href="#gini-impurity" title="Permanent link">&para;</a></h3>
 <p>あるノードのデータが <strong>どれだけ混在しているか</strong> を表す指標です。sklearn のデフォルトです。</p>
 <p>ジニ不純度の式を導く前に、「純粋さ」を数値化するとはどういうことかを考えましょう。ノードに犬と猫が半々いる場合、ランダムに 2 匹を選ぶと「違うクラス」になる確率が高い——つまり「予測が難しい（不純粋）」状態です。逆に全員が犬なら、2 匹選んでも必ず同じクラス——「予測が簡単（純粋）」です。この「ランダムに 2 回選んだとき同じクラスになる確率」の補数がジニ不純度の直感です。</p>
@@ -7887,16 +7885,12 @@
 \text{Gini}(t) = 1 - \sum_k p(k \mid t)^2
 \]</div>
 <p>ここで <span class="arithmatex">\(p(k \mid t)\)</span> はノード <span class="arithmatex">\(t\)</span> に属するクラス <span class="arithmatex">\(k\)</span> の割合です。</p>
-<div class="admonition info">
 <p>例：
 [犬5, 猫5] → p(犬)=0.5, p(猫)=0.5 → Gini = 1 - (0.5² + 0.5²) = 0.5（最大 = 最も混在）
 [犬9, 猫1] → p(犬)=0.9, p(猫)=0.1 → Gini = 1 - (0.9² + 0.1²) = 0.18（割と純粋）
-[犬10, 猫0] → p(犬)=1.0, p(猫)=0.0 → Gini = 1 - (1.0² + 0.0²) = 0.0（完全に純粋）</p>
-</div>
-<ul>
-<li>純粋なノード（1 クラスのみ）：Gini = 0</li>
-<li>最大の混在（2 クラスが等分）：Gini = 0.5</li>
-</ul>
+[犬10, 猫0] → p(犬)=1.0, p(猫)=0.0 → Gini = 1 - (1.0² + 0.0²) = 0.0（完全に純粋）
+- 純粋なノード（1 クラスのみ）：Gini = 0
+- 最大の混在（2 クラスが等分）：Gini = 0.5</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">gini_impurity</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>

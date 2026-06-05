@@ -7427,13 +7427,24 @@
 </ul>
 <hr />
 <h2 id="vs">識別 vs 生成<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p><strong>識別モデル（これまで）</strong></p>
-<p>入力: 猫の画像 → モデル → 出力: 「猫」</p>
-<p><strong>生成モデル（このページ）</strong></p>
-<p>入力: ランダムなノイズ (z) → モデル → 出力: 猫の画像（本物らしい）</p>
-</div>
-<p>生成モデルの目標は「本物のデータの分布 p_data(x)」を学習し、そこからサンプリングすることです。3 つの代表的アプローチは「どうやってその分布を学ぶか」が異なります。</p>
+<table>
+<thead>
+<tr>
+<th>識別モデル（これまで）</th>
+<th>生成モデル（このページ）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入力: 猫の画像 → モデル → 出力: 「猫」</td>
+<td>入力: ランダムなノイズ (z) → モデル → 出力: 猫の画像（本物らしい）</td>
+</tr>
+<tr>
+<td>生成モデルの目標は「本物のデータの分布 p_data(x)」を学習し、そこからサンプリングすることです。3 つの代表的アプローチは「どうやってその分布を学ぶか」が異なります。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="gangenerative-adversarial-network">GAN（Generative Adversarial Network）<a class="headerlink" href="#gangenerative-adversarial-network" title="Permanent link">&para;</a></h2>
 <p>2 つのネットワークを<strong>互いに競わせて</strong>学習します。</p>
@@ -7544,11 +7555,9 @@
 <hr />
 <h2 id="vaevariational-autoencoder">VAE（Variational Autoencoder）<a class="headerlink" href="#vaevariational-autoencoder" title="Permanent link">&para;</a></h2>
 <p>データを<strong>潜在空間の確率分布</strong>として表現します。GAN と違い、「どんな潜在変数がどんな画像を生成するか」を解釈しやすい構造です。</p>
-<div class="admonition info">
 <p>Encoder: 画像 → 平均μ と 分散σ（潜在空間の分布パラメータ）
 ↓ μ と σ からサンプリング（再パラメータ化トリック）
-Decoder: 潜在変数 z → 再構成画像</p>
-</div>
+Decoder: 潜在変数 z → 再構成画像
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">VAE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -7580,30 +7589,42 @@ Decoder: 潜在変数 z → 再構成画像</p>
 </span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">recon_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p">(</span><span class="n">recon_x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">),</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
 </span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">kl_loss</span>    <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">log_var</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_var</span><span class="o">.</span><span class="n">exp</span><span class="p">())</span>
 </span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="k">return</span> <span class="n">recon_loss</span> <span class="o">+</span> <span class="n">kl_loss</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="diffusion-model">Diffusion Model（拡散モデル）<a class="headerlink" href="#diffusion-model" title="Permanent link">&para;</a></h2>
 <p>現在の画像生成 AI（Stable Diffusion・DALL-E）の主流技術です。</p>
 <p><strong>核心アイデア：「ノイズを少しずつ足していく（拡散）」の逆を学ぶ</strong></p>
-<div class="admonition info">
-<p><strong>Forward process（データ → ノイズ）</strong></p>
-<p>猫の画像 → 少しノイズを加える → もっとノイズを加える → ... → 完全なランダムノイズ</p>
-<p><strong>Reverse process（モデルが学習）</strong></p>
-<p>ランダムノイズ → 少しノイズを取り除く → ... → 猫の画像
-↑ ここを U-Net（ニューラルネット）が予測する</p>
-</div>
-<pre class="mermaid"><code>flowchart LR
+<table>
+<thead>
+<tr>
+<th>Forward process（データ → ノイズ）</th>
+<th>Reverse process（モデルが学習）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>猫の画像 → 少しノイズを加える → もっとノイズを加える → ... → 完全なランダムノイズ</td>
+<td>ランダムノイズ → 少しノイズを取り除く → ... → 猫の画像</td>
+</tr>
+<tr>
+<td></td>
+<td>↑ ここを U-Net（ニューラルネット）が予測する</td>
+</tr>
+<tr>
+<td><pre class="mermaid"><code>flowchart LR
     IMG[元画像] --&gt;|ノイズを少しずつ追加| NOISE[完全ノイズ]
-    NOISE --&gt;|U-Netがノイズを予測して除去| RECON[再構成画像]</code></pre>
+    NOISE --&gt;|U-Netがノイズを予測して除去| RECON[再構成画像]</code></pre></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>学習時は「T ステップ後のノイズ画像」と「追加されたノイズ」を使って、「どれだけノイズが乗っているか」を U-Net に予測させます。</p>
 <h3 id="stable-diffusion">Stable Diffusion の仕組み<a class="headerlink" href="#stable-diffusion" title="Permanent link">&para;</a></h3>
 <p>Stable Diffusion はここに <strong>テキスト条件付け</strong> を加えます。</p>
-<div class="admonition info">
 <p>「宇宙を旅する猫」 → CLIP テキストエンコーダ → テキスト埋め込みベクトル
 ↓
-ランダムノイズ → U-Net（テキストを参照しながらノイズ除去） → 猫の画像</p>
-</div>
-<p><strong>主要コンポーネント：</strong></p>
+ランダムノイズ → U-Net（テキストを参照しながらノイズ除去） → 猫の画像
+<strong>主要コンポーネント：</strong></p>
 <table>
 <thead>
 <tr>

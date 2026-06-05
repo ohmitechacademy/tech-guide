@@ -7398,8 +7398,7 @@
 <hr />
 <h2 id="_5">ファイルベースルーティング<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><code>app/</code> ディレクトリのファイル構造が URL に直接対応します。</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>app/
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>app/
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── page.tsx          → /
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── about/
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   └── page.tsx      → /about
@@ -7409,7 +7408,6 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│       └── page.tsx  → /blog/any-article-name  ← 動的ルート
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>└── layout.tsx        → 全ページ共通のレイアウト
 </span></code></pre></div>
-</div>
 <div class="language-tsx highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// app/page.tsx → http://localhost:3000/</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">HomePage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">トップページ</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
@@ -7419,7 +7417,7 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">BlogPost</span><span class="p">({</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">slug</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">記事</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">slug</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="server-components-client-components">Server Components と Client Components<a class="headerlink" href="#server-components-client-components" title="Permanent link">&para;</a></h2>
 <p>App Router の最大の特徴です。<strong>デフォルトですべてのコンポーネントは Server Components</strong>（サーバーで実行）です。</p>
@@ -7595,23 +7593,36 @@
 <p><code>children</code> に各ページのコンテンツが入ります。ヘッダー・フッターはここに書くと全ページに適用されます。</p>
 <hr />
 <h2 id="react-vs-nextjs">React 単体 vs Next.js<a class="headerlink" href="#react-vs-nextjs" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p><strong>React だけ</strong></p>
-<ul>
-<li>ルーティング → react-router-dom を別途インストール</li>
-<li>データ取得 → useEffect + fetch（常に CSR）</li>
-<li>SEO → 弱い（JS が実行されないと内容が見えない）</li>
-<li>API → 別サーバーが必要（FastAPI 等）</li>
-</ul>
-<p><strong>Next.js</strong></p>
-<ul>
-<li>ルーティング → ファイル構造で自動</li>
-<li>データ取得 → SSG/SSR/ISR を選べる</li>
-<li>SEO → サーバーで HTML を作るので検索エンジンに届く</li>
-<li>API → 同じリポジトリで作れる</li>
-</ul>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>React だけ</th>
+<th>Next.js</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ルーティング → react-router-dom を別途インストール</td>
+<td>ルーティング → ファイル構造で自動</td>
+</tr>
+<tr>
+<td>データ取得 → useEffect + fetch（常に CSR）</td>
+<td>データ取得 → SSG/SSR/ISR を選べる</td>
+</tr>
+<tr>
+<td>SEO → 弱い（JS が実行されないと内容が見えない）</td>
+<td>SEO → サーバーで HTML を作るので検索エンジンに届く</td>
+</tr>
+<tr>
+<td>API → 別サーバーが必要（FastAPI 等）</td>
+<td>API → 同じリポジトリで作れる</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="_6">確認問題<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Server Components でできて Client Components でできないことは何ですか？逆は？</li>

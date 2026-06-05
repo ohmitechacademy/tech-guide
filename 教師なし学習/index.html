@@ -7391,102 +7391,63 @@
 </ul>
 <hr />
 <h2 id="vs">教師あり vs 教師なし学習<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p><strong>教師あり学習</strong></p>
-<p>入力: [メールの文章]  → 正解ラベル: [スパム/通常]
-目的: 正解を当てるパターンを学ぶ</p>
-<p><strong>教師なし学習</strong></p>
-<p>入力: [1000人の購買データ]  → 正解ラベル: なし
-目的: 自然なグループ・構造を発見する</p>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>教師あり学習</th>
+<th>教師なし学習</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>入力: [メールの文章]  → 正解ラベル: [スパム/通常]</td>
+<td>入力: [1000人の購買データ]  → 正解ラベル: なし</td>
+</tr>
+<tr>
+<td>目的: 正解を当てるパターンを学ぶ</td>
+<td>目的: 自然なグループ・構造を発見する</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="3">3 つの種類<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <h3 id="_5">クラスタリング（グループ分け）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>似たデータを自動でまとめます。何グループあるかを事前に決める手法と、データの密度から自動で決まる手法があります。</p>
-<div class="admonition info">
 <p>例: 1000 人の顧客を購買パターンで分ける</p>
 <p>クラスタ 1: 「週 1 回・少額購入」 → ライトユーザー
 クラスタ 2: 「月 1 回・高額購入」 → 高単価ユーザー
-クラスタ 3: 「頻繁・幅広い品目」 → ヘビーユーザー</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>手法</th>
-<th>特徴</th>
-<th>詳細</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>k-means</td>
-<td>k を指定して球形のグループに分割</td>
-<td><a href="../クラスター分析/">クラスター分析</a></td>
-</tr>
-<tr>
-<td>DBSCAN</td>
-<td>密度で自動にグループ数を決定・外れ値検出</td>
-<td><a href="../クラスター分析/">クラスター分析</a></td>
-</tr>
-<tr>
-<td>階層的クラスタリング</td>
-<td>k を決めずにデンドログラムで可視化</td>
-<td><a href="../クラスター分析/">クラスター分析</a></td>
-</tr>
-</tbody>
-</table>
+クラスタ 3: 「頻繁・幅広い品目」 → ヘビーユーザー
+| 手法 | 特徴 | 詳細 |
+|------|------|------|
+| k-means | k を指定して球形のグループに分割 | <a href="../クラスター分析/">クラスター分析</a> |
+| DBSCAN | 密度で自動にグループ数を決定・外れ値検出 | <a href="../クラスター分析/">クラスター分析</a> |
+| 階層的クラスタリング | k を決めずにデンドログラムで可視化 | <a href="../クラスター分析/">クラスター分析</a> |</p>
 <h3 id="_6">次元削減（圧縮・可視化）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>たくさんの特徴量（列）を持つデータを、情報を保ちながら少ない次元に圧縮します。100 個の特徴量を 2 個に圧縮して散布図で見ると、データの構造が見えてきます。</p>
-<div class="admonition info">
 <p>例: 50 種類の成分を測った食品データ
 → PCA で 2 次元に圧縮
-→ 散布図で「肉類のグループ」「野菜類のグループ」が見える</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>手法</th>
-<th>特徴</th>
-<th>詳細</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PCA（主成分分析）</td>
-<td>分散が最大の方向に圧縮（線形）</td>
-<td><a href="../主成分分析/">主成分分析（PCA）</a></td>
-</tr>
-<tr>
-<td>t-SNE</td>
-<td>近くにある点を近くに配置（非線形・可視化向き）</td>
-<td><a href="../主成分分析/">主成分分析（PCA）</a></td>
-</tr>
-<tr>
-<td>UMAP</td>
-<td>t-SNE より高速・大規模データ向き</td>
-<td><a href="../主成分分析/">主成分分析（PCA）</a></td>
-</tr>
-<tr>
-<td>因子分析</td>
-<td>潜在的な共通因子を抽出</td>
-<td><a href="../因子分析/">因子分析</a></td>
-</tr>
-</tbody>
-</table>
+→ 散布図で「肉類のグループ」「野菜類のグループ」が見える
+| 手法 | 特徴 | 詳細 |
+|------|------|------|
+| PCA（主成分分析） | 分散が最大の方向に圧縮（線形）| <a href="../主成分分析/">主成分分析（PCA）</a> |
+| t-SNE | 近くにある点を近くに配置（非線形・可視化向き）| <a href="../主成分分析/">主成分分析（PCA）</a> |
+| UMAP | t-SNE より高速・大規模データ向き | <a href="../主成分分析/">主成分分析（PCA）</a> |
+| 因子分析 | 潜在的な共通因子を抽出 | <a href="../因子分析/">因子分析</a> |</p>
 <h3 id="_7">異常検知（外れ値の発見）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>「正常なデータ」で学習し、それと大きく違うデータを異常として検出します。不正検知・機械の故障予測・医療データの異常などに使います。</p>
-<div class="admonition info">
 <p>例: 工場センサーのデータ
 → 通常時のパターンを学習
-→ 異常な動きをしたとき「異常値スコア」が高くなる → アラート</p>
-</div>
+→ 異常な動きをしたとき「異常値スコア」が高くなる → アラート
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsolationForest</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 正常データで学習して異常スコアを計算</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">iso</span> <span class="o">=</span> <span class="n">IsolationForest</span><span class="p">(</span><span class="n">contamination</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">iso</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># labels == -1 → 異常、labels == 1 → 正常</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="_8">どのときに使うか<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>

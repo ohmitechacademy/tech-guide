@@ -7796,17 +7796,8 @@
 <h3 id="rnn-tcn">なぜ RNN より TCN か<a class="headerlink" href="#rnn-tcn" title="Permanent link">&para;</a></h3>
 <p>RNN（LSTM・GRU）は時系列の標準手法でしたが、逐次処理のため GPU の並列化が難しく学習が遅い問題がありました。TCN は 1D 畳み込みで時系列を処理します。</p>
 <h3 id="dilated-causal-convolution">拡張因果畳み込み（Dilated Causal Convolution）<a class="headerlink" href="#dilated-causal-convolution" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>通常の畳み込み（dilation=1）:
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  時刻  1  2  3  4  5  6  7  8
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>             ←─ 3 tap ─→
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>拡張畳み込み（dilation=2）:
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  時刻  1  2  3  4  5  6  7  8
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>          ←─────── 実効的な 3 tap ─────→
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  （1 つ飛ばしで参照 → 同じパラメータ数でより長い系列をカバー）
-</span></code></pre></div>
-</div>
+<p>通常の畳み込み（dilation=1）では隣接する 3 つの時刻（例：時刻 3〜5）を参照します。</p>
+<p>拡張畳み込み（dilation=2）では 1 つ飛ばしで参照するため、例えば時刻 2・4・6 の 3 点を参照し、同じパラメータ数でより長い系列をカバーできます（実効受容野が 2 倍に広がる）。</p>
 <p>dilation を指数的に増やす（1, 2, 4, 8, ...）ことで、層数を増やすごとに受容野が指数的に広がります。<span class="arithmatex">\(L\)</span> 層・dilation <span class="arithmatex">\(2^0, 2^1, \ldots, 2^{L-1}\)</span> の場合の受容野：</p>
 <div class="arithmatex">\[
 \text{受容野} = 1 + k \cdot (2^L - 1)
@@ -7878,14 +7869,12 @@
 <h2 id="patchtst">PatchTST<a class="headerlink" href="#patchtst" title="Permanent link">&para;</a></h2>
 <h3 id="vision-transformer">Vision Transformer を時系列に適用する発想<a class="headerlink" href="#vision-transformer" title="Permanent link">&para;</a></h3>
 <p>画像をパッチに分割して ViT に入力するように、時系列を <strong>サブシーケンス（パッチ）</strong> に分割して Transformer に入力します（Nie et al., 2023）。</p>
-<div class="admonition info">
 <p>時系列: [x₁, x₂, ..., x₅₁₂]
 ↓ パッチサイズ 16・ストライド 8 で分割
 パッチ列: [x₁₋₁₆, x₉₋₂₄, x₁₇₋₃₂, ..., x₄₉₇₋₅₁₂]
 ↓ Transformer
-各パッチの関係を学習 → 予測</p>
-</div>
-<p><strong>メリット：</strong>
+各パッチの関係を学習 → 予測
+<strong>メリット：</strong>
 - 各トークンが<strong>局所的な時系列パターン</strong>を担う（1 点より意味のある単位）
 - 系列長が <span class="arithmatex">\(L\)</span> → <span class="arithmatex">\(L/s\)</span>（<span class="arithmatex">\(s\)</span>：ストライド）に圧縮 → Self-Attention の <span class="arithmatex">\(O(L^2)\)</span> コストを削減
 - チャンネル独立（CI）設定：各変数を独立に処理することで多変量にも対応</p>

@@ -7696,15 +7696,28 @@
 <hr />
 <h2 id="_5">相関と因果の違い<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="confounding-variable">交絡因子（Confounding Variable）<a class="headerlink" href="#confounding-variable" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p><strong>疑似相関の例</strong></p>
-<p>アイスクリームの売上 ↑ → 溺死者数 ↑</p>
-<p><strong>真の構造</strong></p>
-<p>気温 ↑ → アイスクリームの売上 ↑
-気温 ↑ → 海水浴者増加 → 溺死者数 ↑</p>
-<p>「気温」が交絡因子</p>
-</div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<table>
+<thead>
+<tr>
+<th>疑似相関の例</th>
+<th>真の構造</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アイスクリームの売上 ↑ → 溺死者数 ↑</td>
+<td>気温 ↑ → アイスクリームの売上 ↑</td>
+</tr>
+<tr>
+<td></td>
+<td>気温 ↑ → 海水浴者増加 → 溺死者数 ↑</td>
+</tr>
+<tr>
+<td></td>
+<td>「気温」が交絡因子</td>
+</tr>
+<tr>
+<td><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -7729,10 +7742,13 @@
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;drowning ~ ice_cream + temperature&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="c1"># ice_cream の係数が非有意になる → 因果関係なし</span>
-</span></code></pre></div>
+</span></code></pre></div></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="dag">因果ダイアグラム（DAG）<a class="headerlink" href="#dag" title="Permanent link">&para;</a></h3>
 <p><strong>有向非巡回グラフ（DAG）</strong>で因果の方向を表します。</p>
-<div class="admonition info">
 <p>【交絡がある場合】
 温度 → アイスの売上
 温度 → 溺死者数
@@ -7743,7 +7759,6 @@
 <p>【逆因果の例】
 病院に行く → 病気？
 実際は: 病気 → 病院に行く</p>
-</div>
 <hr />
 <h2 id="rct">ランダム化比較試験（RCT）<a class="headerlink" href="#rct" title="Permanent link">&para;</a></h2>
 <h3 id="rct_1">なぜ RCT が最強か<a class="headerlink" href="#rct_1" title="Permanent link">&para;</a></h3>
@@ -7777,12 +7792,10 @@
 <h2 id="did-difference-in-differences">差分の差分法（DID: Difference-in-Differences）<a class="headerlink" href="#did-difference-in-differences" title="Permanent link">&para;</a></h2>
 <h3 id="_6">いつ使うか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>RCT が不可能なとき（過去のデータしかない・介入対象を制御できない）に使います。</p>
-<div class="admonition info">
 <p>例: 最低賃金引き上げの雇用への影響
 → ある州だけ最低賃金が上がった
 → 「介入群（上がった州）」vs「対照群（上がっていない州）」
 → 介入前後の差を比較</p>
-</div>
 <h3 id="did">DID の直感<a class="headerlink" href="#did" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 \text{DID 推定量} = \underbrace{(\bar{Y}_{\text{介入後,介入群}} - \bar{Y}_{\text{介入前,介入群}})}_{\text{介入群の変化}} - \underbrace{(\bar{Y}_{\text{介入後,対照群}} - \bar{Y}_{\text{介入前,対照群}})}_{\text{対照群の変化}}
@@ -7870,14 +7883,12 @@
 <hr />
 <h2 id="iv">操作変数法（IV）<a class="headerlink" href="#iv" title="Permanent link">&para;</a></h2>
 <p>交絡因子を観測できない場合でも、<strong>「処置に影響するが結果には直接影響しない変数（操作変数）」</strong>があれば因果効果を推定できます。</p>
-<div class="admonition info">
 <p>例: 教育年数が賃金に与える影響
 問題: 「もともと能力が高い人」は教育年数も賃金も高い → 交絡
 操作変数: 「近くに大学があるか」
 → 大学の近さ → 進学率（教育年数）に影響する
 → 大学の近さ → 賃金には（教育を通じてしか）影響しない
-→ 近さを操作変数として使うことで能力の交絡を除去できる</p>
-</div>
+→ 近さを操作変数として使うことで能力の交絡を除去できる
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">linearmodels.iv</span><span class="w"> </span><span class="kn">import</span> <span class="n">IV2SLS</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7913,7 +7924,7 @@
 </span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OLS 推定（交絡あり）: </span><span class="si">{</span><span class="n">ols</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># &gt; 2.0（過大推定）</span>
 </span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IV 推定（交絡除去）:  </span><span class="si">{</span><span class="n">iv</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   <span class="c1"># ≈ 2.0</span>
 </span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;真の効果: 2.000&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="_8">手法の選び方<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart TD
@@ -7928,10 +7939,8 @@
 <hr />
 <h2 id="causal-discovery">因果探索（Causal Discovery）<a class="headerlink" href="#causal-discovery" title="Permanent link">&para;</a></h2>
 <p>ここまでは「因果構造が既知のとき、効果を推定する」方法を学びました。<strong>因果探索</strong>はその前段階——<strong>観察データから因果構造（どの変数がどの変数を引き起こすか）そのものを発見する</strong>手法です。</p>
-<div class="admonition info">
 <p>因果推論: 「喫煙 → 肺がん」という構造が既知 → その効果量を推定
 因果探索: データだけ見て「どの変数がどの変数を引き起こすか」を推定</p>
-</div>
 <h3 id="dag_1">因果グラフ（DAG）の表現<a class="headerlink" href="#dag_1" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -7952,16 +7961,13 @@
 </span></code></pre></div>
 <h3 id="pc">PC アルゴリズム<a class="headerlink" href="#pc" title="Permanent link">&para;</a></h3>
 <p><strong>条件付き独立性テスト</strong>を繰り返してグラフの骨格を決め、その後に矢印の方向を決定します。</p>
-<div class="admonition info">
 <p><strong>アルゴリズムの流れ</strong></p>
 <ol>
 <li>全変数間に無向辺を引く（完全グラフ）</li>
 <li>条件付き独立: X ⊥ Y | Z なら辺 X-Y を削除</li>
 <li>残った辺でスケルトン（骨格）を決定</li>
 <li>v-structure（合流点）を探して矢印を付ける</li>
-<li>残りの矢印を伝播ルールで決定</li>
-</ol>
-</div>
+<li>残りの矢印を伝播ルールで決定
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># pip install causal-learn</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">causallearn.search.ConstraintBased.PC</span><span class="w"> </span><span class="kn">import</span> <span class="n">pc</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">causallearn.utils.cit</span><span class="w"> </span><span class="kn">import</span> <span class="n">fisherz</span>
@@ -7980,7 +7986,8 @@
 </span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="n">cg</span> <span class="o">=</span> <span class="n">pc</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">indep_test</span><span class="o">=</span><span class="n">fisherz</span><span class="p">)</span>
 </span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;推定された因果グラフ:&quot;</span><span class="p">)</span>
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="nb">print</span><span class="p">(</span><span class="n">cg</span><span class="o">.</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># 隣接行列で因果方向を確認</span>
-</span></code></pre></div>
+</span></code></pre></div></li>
+</ol>
 <h3 id="lingam">LiNGAM（非ガウス性を利用した因果方向の特定）<a class="headerlink" href="#lingam" title="Permanent link">&para;</a></h3>
 <p>PC アルゴリズムは多くの場合、矢印の方向を一意に決定できません（マルコフ等価クラスの問題）。<strong>LiNGAM</strong> は「誤差項が非ガウス分布に従う」という仮定を加えることで、因果方向を完全に特定できます。</p>
 <div class="arithmatex">\[

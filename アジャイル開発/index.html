@@ -7711,7 +7711,6 @@
 </table>
 <h3 id="sprint">スプリント（Sprint）<a class="headerlink" href="#sprint" title="Permanent link">&para;</a></h3>
 <p>スプリントは <strong>1〜4 週間（多くは 2 週間）の固定した開発サイクル</strong> です。スプリント中に計画・実装・テスト・レビューをすべて行います。</p>
-<div class="admonition info">
 <p>スプリントの流れ</p>
 <p>Day 1：スプリント計画
 - バックログからタスクを選ぶ
@@ -7724,21 +7723,40 @@
 <p>Day 10：スプリントレビュー + ふりかえり
 - ステークホルダーにデモ
 - KPT でふりかえり（Keep / Problem / Try）</p>
-</div>
 <h3 id="_6">バックログとストーリーポイント<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>プロダクトバックログ（優先度順のタスクリスト）
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>┌─────────────────────────────────────────────────────────┐
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│ [P1] ユーザーログイン機能                 … 5 pt        │
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│ [P2] パスワードリセットメール送信          … 3 pt        │
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ [P3] ダッシュボードの棒グラフ実装         … 8 pt        │
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│ [P4] CSVエクスポート                    … 2 pt        │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>└─────────────────────────────────────────────────────────┘
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>ストーリーポイント：タスクの複雑さ・不確実性を相対評価する単位（時間ではない）
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>ベロシティ：1 スプリントで完了できるポイントの平均。将来の計画に使う。
-</span></code></pre></div>
-</div>
+<p>プロダクトバックログは優先度順のタスクリストです。</p>
+<table>
+<thead>
+<tr>
+<th>優先度</th>
+<th>タスク</th>
+<th>ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>ユーザーログイン機能</td>
+<td>5 pt</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>パスワードリセットメール送信</td>
+<td>3 pt</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>ダッシュボードの棒グラフ実装</td>
+<td>8 pt</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>CSVエクスポート</td>
+<td>2 pt</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ストーリーポイント</strong>はタスクの複雑さ・不確実性を相対評価する単位（時間ではない）です。<strong>ベロシティ</strong>は 1 スプリントで完了できるポイントの平均で、将来の計画に使います。</p>
 <h3 id="kanban">カンバン（Kanban）<a class="headerlink" href="#kanban" title="Permanent link">&para;</a></h3>
 <p>スプリント区切りを設けず、タスクを視覚的に管理する方式です。運用・サポートチームや研究開発に向きます。</p>
 <pre class="mermaid"><code>flowchart LR
@@ -7763,21 +7781,21 @@
 <h2 id="pr">コードレビューと PR 文化<a class="headerlink" href="#pr" title="Permanent link">&para;</a></h2>
 <h3 id="pull-request">Pull Request の書き方<a class="headerlink" href="#pull-request" title="Permanent link">&para;</a></h3>
 <p>良い PR は「レビュアーの時間を尊重する」ことが基本です。</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gu">## 概要</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ユーザー一覧ページの絞り込み機能を追加
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="gu">## 変更内容</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">-</span><span class="w"> </span><span class="sb">`UserList`</span> コンポーネントに検索フォームを追加
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">-</span><span class="w"> </span><span class="sb">`/api/users?query=`</span> のクエリパラメータに対応
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">-</span><span class="w"> </span>検索結果 0 件のときの空状態 UI を実装
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="gu">## テスト方法</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">1.</span> <span class="sb">`/users`</span> ページを開く
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">2.</span> 検索ボックスに「田中」と入力する
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">3.</span> 「田中」を含む名前のみ表示されることを確認
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="gu">## 関連 Issue</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>Closes <span class="ni">#42</span>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gu">## 概要</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ユーザー一覧ページの絞り込み機能を追加
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gu">## 変更内容</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">-</span><span class="w"> </span><span class="sb">`UserList`</span> コンポーネントに検索フォームを追加
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">-</span><span class="w"> </span><span class="sb">`/api/users?query=`</span> のクエリパラメータに対応
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">-</span><span class="w"> </span>検索結果 0 件のときの空状態 UI を実装
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gu">## テスト方法</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">1.</span> <span class="sb">`/users`</span> ページを開く
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">2.</span> 検索ボックスに「田中」と入力する
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">3.</span> 「田中」を含む名前のみ表示されることを確認
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gu">## 関連 Issue</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>Closes <span class="ni">#42</span>
 </span></code></pre></div>
 <h3 id="_7">レビューコメントのトーン<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
@@ -7804,7 +7822,6 @@
 </table>
 <p>コメントの先頭に <code>[必須]</code> / <code>[提案]</code> / <code>[質問]</code> をつけると、修正が必要かどうかが明確になります。</p>
 <h3 id="_8">レビューの観点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>優先度 高
 1. 正しく動くか（バグ・エッジケース）
 2. セキュリティ（入力検証・認証・秘密情報の扱い）
@@ -7814,7 +7831,6 @@
 5. テストが書かれているか</p>
 <p>優先度 低
 6. スタイル（Linter / Formatter に任せる）</p>
-</div>
 <hr />
 <h2 id="_9">ブランチ戦略<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="git-flow">Git Flow<a class="headerlink" href="#git-flow" title="Permanent link">&para;</a></h3>
@@ -7861,7 +7877,6 @@
 <hr />
 <h2 id="technical-debt">技術的負債（Technical Debt）<a class="headerlink" href="#technical-debt" title="Permanent link">&para;</a></h2>
 <p>「今は動くが後で問題になるコード」のことです。急いで実装したコード、テストのない機能、古いライブラリがこれにあたります。</p>
-<div class="admonition info">
 <p>技術的負債の分類：</p>
 <p>意図的・意識的な負債
 - 「今はこの実装で動かす。後でリファクタリングする」と判断した場合
@@ -7869,7 +7884,6 @@
 <p>意図せず積まれた負債
 - 知識不足・時間不足で生まれる
 - レビューで発見・指摘することで予防できる</p>
-</div>
 <h3 id="_10">負債との付き合い方<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ul>
 <li>スプリントに「技術的負債の返済」タスクを定期的に入れる。</li>
@@ -7880,25 +7894,25 @@
 <h2 id="_11">ドキュメントと意思決定の記録<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="adrarchitecture-decision-record">ADR（Architecture Decision Record）<a class="headerlink" href="#adrarchitecture-decision-record" title="Permanent link">&para;</a></h3>
 <p>「なぜこの設計にしたのか」を残す軽量なドキュメントです。</p>
-<div class="language-markdown highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gh"># ADR-005: データベースに PostgreSQL を採用する</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="gu">## 状況</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ユーザーデータと注文データを永続化する DB を選定する必要がある。
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="gu">## 決定</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>PostgreSQL を採用する。
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="gu">## 理由</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">-</span><span class="w"> </span>JSON 型のサポートが強力で、半構造化データを扱いやすい
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">-</span><span class="w"> </span>本番環境で実績があり、チームに経験者がいる
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">-</span><span class="w"> </span>Cloud SQL（GCP）でマネージド運用できる
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="gu">## 検討した代替案</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="k">-</span><span class="w"> </span>MySQL：JSON サポートが PostgreSQL より弱い
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">-</span><span class="w"> </span>MongoDB：スキーマレスは柔軟だが、トランザクション管理が複雑になる
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="gu">## 結果</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>2024-03-01 に採用。問題なく動作中。
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gh"># ADR-005: データベースに PostgreSQL を採用する</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="gu">## 状況</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>ユーザーデータと注文データを永続化する DB を選定する必要がある。
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="gu">## 決定</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>PostgreSQL を採用する。
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="gu">## 理由</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">-</span><span class="w"> </span>JSON 型のサポートが強力で、半構造化データを扱いやすい
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">-</span><span class="w"> </span>本番環境で実績があり、チームに経験者がいる
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">-</span><span class="w"> </span>Cloud SQL（GCP）でマネージド運用できる
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="gu">## 検討した代替案</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">-</span><span class="w"> </span>MySQL：JSON サポートが PostgreSQL より弱い
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">-</span><span class="w"> </span>MongoDB：スキーマレスは柔軟だが、トランザクション管理が複雑になる
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="gu">## 結果</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>2024-03-01 に採用。問題なく動作中。
 </span></code></pre></div>
 <hr />
 <h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>

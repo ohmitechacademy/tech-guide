@@ -7493,30 +7493,43 @@
 </table>
 <hr />
 <h2 id="_6">いつマイクロサービスを選ぶか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
-<p><strong>モノリスを選ぶべき場合</strong></p>
-<p>✓ チームが小さい（&lt; 10 人）
-✓ 要件がまだ変化しやすい
-✓ リリース頻度が低い
-✓ まずプロダクトを動かすことが優先</p>
-<p><strong>マイクロサービスを検討する場合</strong></p>
-<p>✓ チームが大きく、サービス間で独立して動きたい
-✓ 一部機能だけ高トラフィックでスケールしたい
-✓ 機能ごとに異なる技術（Python / Go / Node.js）を使いたい
-✓ 機能ごとに異なるリリーススピードがある</p>
-</div>
-<blockquote>
-<p><strong>「最初はモノリスで作り、必要になったらマイクロサービスに分割する」</strong> が現実的なアプローチです。</p>
-</blockquote>
+<table>
+<thead>
+<tr>
+<th>モノリスを選ぶべき場合</th>
+<th>マイクロサービスを検討する場合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✓ チームが小さい（&lt; 10 人）</td>
+<td>✓ チームが大きく、サービス間で独立して動きたい</td>
+</tr>
+<tr>
+<td>✓ 要件がまだ変化しやすい</td>
+<td>✓ 一部機能だけ高トラフィックでスケールしたい</td>
+</tr>
+<tr>
+<td>✓ リリース頻度が低い</td>
+<td>✓ 機能ごとに異なる技術（Python / Go / Node.js）を使いたい</td>
+</tr>
+<tr>
+<td>✓ まずプロダクトを動かすことが優先</td>
+<td>✓ 機能ごとに異なるリリーススピードがある</td>
+</tr>
+<tr>
+<td>&gt; <strong>「最初はモノリスで作り、必要になったらマイクロサービスに分割する」</strong> が現実的なアプローチです。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="api">API ゲートウェイ<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>クライアントは複数のサービスに直接アクセスする代わりに、<strong>1 つの入口（API Gateway）</strong> にリクエストを送ります。</p>
-<div class="admonition info">
 <p>クライアント → API Gateway → ユーザーサービス  (:8001)
 → 注文サービス    (:8002)
-→ 決済サービス    (:8003)</p>
-</div>
-<p>API ゲートウェイが担う機能：</p>
+→ 決済サービス    (:8003)
+API ゲートウェイが担う機能：</p>
 <table>
 <thead>
 <tr>
@@ -7598,15 +7611,13 @@
 <p><strong>問題点：</strong> ユーザーサービスが落ちると注文サービスも失敗します（カスケード障害）。</p>
 <h3 id="_8">非同期通信（メッセージキュー）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>メッセージキュー（RabbitMQ / Kafka）を経由して疎結合にします。</p>
-<div class="admonition info">
 <p>注文サービス → [order.created イベント] → メッセージキュー
 ↓
 決済サービスが受信
 ↓
 [payment.processed イベント] → メッセージキュー
 ↓
-通知サービスが受信 → メール送信</p>
-</div>
+通知サービスが受信 → メール送信
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># RabbitMQ を使う例（aio-pika）</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># pip install aio-pika</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -7634,22 +7645,40 @@
 </span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>            <span class="k">async</span> <span class="k">with</span> <span class="n">message</span><span class="o">.</span><span class="n">process</span><span class="p">():</span>
 </span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                <span class="n">order</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
 </span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>                <span class="k">await</span> <span class="n">process_payment</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <hr />
 <h2 id="_9">データの分割<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>マイクロサービスの原則：<strong>各サービスは独自のデータベースを持つ</strong>。</p>
-<div class="admonition info">
-<p><strong>❌ 共有DB（アンチパターン）</strong></p>
-<p>サービス A ─┐
-├─ 共通DB
-サービス B ─┘
-→ スキーマ変更が全サービスに影響</p>
-<p><strong>✅ サービスごとにDB</strong></p>
-<p>サービス A → UserDB（PostgreSQL）
-サービス B → OrderDB（PostgreSQL）
-サービス C → CacheDB（Redis）</p>
-</div>
-<p>サービスをまたぐデータの整合性は <strong>Saga パターン</strong>（分散トランザクション）や<strong>結果整合性</strong>で対処します。</p>
+<table>
+<thead>
+<tr>
+<th>❌ 共有DB（アンチパターン）</th>
+<th>✅ サービスごとにDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>サービス A ─┐</td>
+<td>サービス A → UserDB（PostgreSQL）</td>
+</tr>
+<tr>
+<td>├─ 共通DB</td>
+<td>サービス B → OrderDB（PostgreSQL）</td>
+</tr>
+<tr>
+<td>サービス B ─┘</td>
+<td>サービス C → CacheDB（Redis）</td>
+</tr>
+<tr>
+<td>→ スキーマ変更が全サービスに影響</td>
+<td></td>
+</tr>
+<tr>
+<td>サービスをまたぐデータの整合性は <strong>Saga パターン</strong>（分散トランザクション）や<strong>結果整合性</strong>で対処します。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="docker-compose">docker-compose での構成例<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># docker-compose.yml</span>

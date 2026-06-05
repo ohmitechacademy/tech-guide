@@ -7515,17 +7515,15 @@
 <p>コーディングテストでは、最初に問題文を実装へ翻訳します。入力は何か、出力は何か、制約はどれくらいか、愚直解では間に合うかを確認します。</p>
 <p>制約を見ると、必要な計算量の目安が分かります。n が <span class="arithmatex">\(10^5\)</span> なら <span class="arithmatex">\(O(n^2)\)</span> は厳しい、n が 20 程度なら全探索やビットDPが使える、というように解法を絞れます。</p>
 <p>どんな問題でも、コードを書く前に以下を必ず行ってください。</p>
-<div class="admonition info">
 <ol>
 <li>入出力を確認する（何を受け取り、何を返すか）</li>
 <li>制約を確認する（n の最大値 → 計算量の上限が決まる）</li>
 <li>例を手で解いてみる（2〜3 個のサンプルで確認）</li>
 <li>アルゴリズムを決める（脳内でどう解くか）</li>
 <li>実装する</li>
-<li>エッジケースを確認する（n=0、全要素同じ、最大値など）</li>
+<li>エッジケースを確認する（n=0、全要素同じ、最大値など）
+<strong>制約から計算量を逆算する目安：</strong></li>
 </ol>
-</div>
-<p><strong>制約から計算量を逆算する目安：</strong></p>
 <table>
 <thead>
 <tr>
@@ -7660,15 +7658,13 @@
 <h2 id="55-dpn-20">頻出パターン 5.5：ビット DP（n ≤ 20 の全探索）<a class="headerlink" href="#55-dpn-20" title="Permanent link">&para;</a></h2>
 <p>計算量表の「n ≤ 20 → O(2^n)」のところで登場する手法です。</p>
 <p><strong>考え方：</strong> n 個の要素の「選ぶ・選ばない」を 2 進数で表すと、0〜2ⁿ−1 の整数がすべての組み合わせに対応します。例えば n=3 なら：</p>
-<div class="admonition info">
 <p>000 → 何も選ばない
 001 → 要素 0 だけ選ぶ
 010 → 要素 1 だけ選ぶ
 011 → 要素 0 と 1 を選ぶ
 100 → 要素 2 だけ選ぶ
-111 → 全部選ぶ</p>
-</div>
-<p>n=20 なら 2²⁰ ≈ 100 万通りです。全状態をループで回しても現実的な時間で終わります。</p>
+111 → 全部選ぶ
+n=20 なら 2²⁰ ≈ 100 万通りです。全状態をループで回しても現実的な時間で終わります。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 問題例：n 個の商品から選んで重さの合計が W 以下になる最大価値を求める</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">knapsack_bitmask</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">W</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
@@ -7766,15 +7762,13 @@
 <p>部分点（WA でも提出する姿勢）が評価されることも多いです。</p>
 <hr />
 <h2 id="atcoder">AtCoder の始め方<a class="headerlink" href="#atcoder" title="Permanent link">&para;</a></h2>
-<div class="admonition info">
 <ol>
 <li>https://atcoder.jp でアカウントを作成します</li>
 <li>AtCoder Problems（非公式）で過去問練習をします</li>
 <li>まず ABC（AtCoder Beginner Contest）の A〜C 問題を解きます</li>
-<li>Python で解くなら PyPy3 を選ぶと速いです</li>
+<li>Python で解くなら PyPy3 を選ぶと速いです
+<strong>レーティングの目安（新卒就活）：</strong></li>
 </ol>
-</div>
-<p><strong>レーティングの目安（新卒就活）：</strong></p>
 <table>
 <thead>
 <tr>

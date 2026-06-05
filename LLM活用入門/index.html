@@ -7673,7 +7673,6 @@
 <p>Tool Use（OpenAI では Function Calling と呼ぶ）は、<strong>LLM が自分でツールを選択し、必要な引数を生成して関数を呼び出せる</strong>仕組みです。</p>
 <p>通常の API 呼び出しでは、LLM はテキストを返すだけです。Tool Use を使うと、LLM は「このタスクにはこの関数が必要だ」と判断し、その関数の引数を JSON で返します。アプリ側はその引数で実際の関数を実行し、結果を LLM に戻すことで、LLM は最終的な回答を生成します。</p>
 <p>Tool Use の本質は、LLM に実行権限を直接渡すのではなく、「どの関数をどんな引数で呼びたいか」を提案させることです。実際に関数を実行するのはアプリ側であり、ここで安全性の確認や権限制御を行います。</p>
-<div class="admonition info">
 <p>ユーザーの質問
 ↓
 LLM が「ツールが必要」と判断
@@ -7684,9 +7683,8 @@ LLM が「ツールが必要」と判断
 ↓
 実行結果を LLM に渡す
 ↓
-LLM が結果をもとに最終回答を生成</p>
-</div>
-<p>この流れにより、LLM は天気 API、計算関数、データベース検索、社内ツールなどを組み合わせた回答ができるようになります。ただし、ツールの設計が曖昧だと、誤った引数や危険な操作につながるため、入力スキーマを明確に書くことが重要です。</p>
+LLM が結果をもとに最終回答を生成
+この流れにより、LLM は天気 API、計算関数、データベース検索、社内ツールなどを組み合わせた回答ができるようになります。ただし、ツールの設計が曖昧だと、誤った引数や危険な操作につながるため、入力スキーマを明確に書くことが重要です。</p>
 <h3 id="anthropic-api-tool-use">Anthropic API での Tool Use<a class="headerlink" href="#anthropic-api-tool-use" title="Permanent link">&para;</a></h3>
 <p>次のコードは、天気取得と計算という 2 つのツールを LLM に提示する例です。<code>tools</code> には、ツール名、説明、入力の JSON Schema を定義します。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">anthropic</span>

@@ -7863,29 +7863,23 @@ Nginx はリクエストをイベントループで処理します（シング�
 <p>複数のプロセスを 1 つの CPU で動かすために、OS は <strong>どのプロセスを次に実行するか</strong> を決めます。</p>
 <h3 id="_8">主なスケジューリングアルゴリズム<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p><strong>FCFS（First Come, First Served）：先着順</strong></p>
-<div class="admonition info">
 <p>到着順：P1(24ms) → P2(3ms) → P3(3ms)</p>
 <p>P1 が終わるまで P2, P3 は待つ
-平均待ち時間 = (0 + 24 + 27) / 3 = 17ms</p>
-</div>
-<p>単純だが、長いプロセスが先にくると後のプロセスが長時間待たされる（護送船団問題）。</p>
+平均待ち時間 = (0 + 24 + 27) / 3 = 17ms
+単純だが、長いプロセスが先にくると後のプロセスが長時間待たされる（護送船団問題）。</p>
 <p>FCFS は行列に並んだ順に処理する方式です。公平に見えますが、最初に長い処理が来ると、短い処理まで巻き込まれて待たされます。OS のスケジューリングでは、「公平さ」と「待ち時間の短さ」が必ずしも同じではないことが分かります。</p>
 <p><strong>SJF（Shortest Job First）：最短ジョブ優先</strong></p>
-<div class="admonition info">
 <p>P1(6ms) P2(8ms) P3(7ms) P4(3ms)</p>
 <p>実行順：P4(3) → P1(6) → P3(7) → P2(8)
-平均待ち時間 = (0 + 3 + 9 + 16) / 4 = 7ms</p>
-</div>
-<p>平均待ち時間が最小になる最適戦略。ただし各プロセスの実行時間を事前に知る必要がある（現実では困難）。</p>
+平均待ち時間 = (0 + 3 + 9 + 16) / 4 = 7ms
+平均待ち時間が最小になる最適戦略。ただし各プロセスの実行時間を事前に知る必要がある（現実では困難）。</p>
 <p>SJF は短い処理から先に片づけるので平均待ち時間を短くできます。ただし、実行前に「この処理は何ミリ秒で終わる」と正確に知ることは普通できません。そのため、実際のOSでは過去の実行状況から推定したり、優先度と組み合わせたりします。</p>
 <p><strong>ラウンドロビン（RR）：タイムスライスで交代</strong></p>
 <p>各プロセスに一定時間（タイムクォンタム、例：10ms）を割り当て、時間が来たら次のプロセスに交代する。</p>
-<div class="admonition info">
 <p>タイムクォンタム = 4ms</p>
 <p>P1(24ms) P2(3ms) P3(3ms)</p>
-<p>P1[4] → P2[3] → P3[3] → P1[4] → P1[4] → P1[4] → P1[4] → P1[4]</p>
-</div>
-<p>全プロセスが均等に CPU を使える。対話的なシステム（GUI・Web サーバー）に適している。</p>
+<p>P1[4] → P2[3] → P3[3] → P1[4] → P1[4] → P1[4] → P1[4] → P1[4]
+全プロセスが均等に CPU を使える。対話的なシステム（GUI・Web サーバー）に適している。</p>
 <p>ラウンドロビンでは、処理が終わっていなくても一定時間ごとに交代します。これにより、1つの重い処理がCPUを独占しにくくなります。GUIやWebサーバーでは、利用者が「固まった」と感じないよう、短い間隔で応答を返せることが重要です。</p>
 <p><strong>コンテキストスイッチ：</strong></p>
 <p>プロセスを切り替えるとき、OS は現在のプロセスの PCB（レジスタ・プログラムカウンタ等）を保存し、次のプロセスの PCB を復元します。この操作を <strong>コンテキストスイッチ</strong> と言い、無駄な処理時間がかかります（オーバーヘッド）。</p>
@@ -8054,22 +8048,70 @@ Nginx はリクエストをイベントループで処理します（シング�
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>-rw-r--r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>user<span class="w"> </span>group<span class="w"> </span><span class="m">1234</span><span class="w"> </span>Jan<span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">00</span>:00<span class="w"> </span>file.txt
 </span></code></pre></div>
 <p><code>ls -la</code> は、隠しファイルを含めて詳細情報を表示します。先頭の <code>-rw-r--r--</code> は、ファイル種別と権限を表しています。権限の読み方が分かると、「なぜこのスクリプトを実行できないのか」「なぜこのファイルに書き込めないのか」を切り分けられます。</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>-  rw-  r--  r--
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>↑  ↑    ↑    ↑
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│  │    │    └─ その他のユーザー
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│  │    └───── グループ
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│  └────────── 所有者
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>└───────────── ファイル種別（-:ファイル, d:ディレクトリ）
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>r = 読み取り (4)
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>w = 書き込み (2)
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>x = 実行    (1)
-</span></code></pre></div>
-</div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># rw-r--r--</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>script.sh<span class="w">   </span><span class="c1"># rwxr-xr-x</span>
-</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>値</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1文字目</td>
+<td><code>-</code> または <code>d</code></td>
+<td>ファイル種別（- = ファイル、d = ディレクトリ）</td>
+</tr>
+<tr>
+<td>2〜4文字目</td>
+<td><code>rw-</code></td>
+<td>所有者の権限</td>
+</tr>
+<tr>
+<td>5〜7文字目</td>
+<td><code>r--</code></td>
+<td>グループの権限</td>
+</tr>
+<tr>
+<td>8〜10文字目</td>
+<td><code>r--</code></td>
+<td>その他のユーザーの権限</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+<th>数値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>読み取り</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>書き込み</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>実行</td>
+<td>1</td>
+</tr>
+<tr>
+<td><div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># rw-r--r--</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>script.sh<span class="w">   </span><span class="c1"># rwxr-xr-x</span>
+</span></code></pre></div></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p><code>chmod 644</code> は、所有者だけが書き込めて、他の人は読める設定です。通常のテキストファイルによく使われます。<code>chmod 755</code> は、所有者が読み書き実行でき、他の人も読み取りと実行ができる設定です。シェルスクリプトをコマンドとして実行したいときに使います。</p>
 <hr />
 <h2 id="_17">割り込み<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>

@@ -7590,8 +7590,7 @@
 <h2 id="_4">プロジェクト構造<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><code>ota_hp</code> を開くと、以下のようなフォルダ構成になっています。</p>
 <p>Astro では、ファイルの置き場所が役割を表します。最初にフォルダ構造を読めるようになると、「ページを直すのか」「部品を直すのか」「記事を追加するのか」を迷いにくくなります。</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ota_hp/
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ota_hp/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── public/          # 画像・フォント・favicon など「そのまま使うファイル」
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── src/
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   ├── components/  # ヘッダー・フッターなど、繰り返し使うパーツ
@@ -7601,8 +7600,7 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── astro.config.mjs # Astroの設定ファイル（基本的に触らない）
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── package.json     # 使用しているパッケージの一覧（基本的に触らない）
 </span></code></pre></div>
-</div>
-<p><code>src/pages</code> は URL と対応するページ、<code>src/components</code> は再利用部品、<code>src/layouts</code> はページ全体の枠、<code>src/content</code> は記事データを置く場所です。</p>
+<code>src/pages</code> は URL と対応するページ、<code>src/components</code> は再利用部品、<code>src/layouts</code> はページ全体の枠、<code>src/content</code> は記事データを置く場所です。</p>
 <h3 id="_5">どこを主に触るか<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -7765,13 +7763,11 @@
 <blockquote>
 <p><strong>slug とは：</strong> URL に使われる記事の識別子です。<code>/news/2024-spring-camp</code> の <code>2024-spring-camp</code> の部分がスラッグです。スペースや日本語を含まず、ハイフン区切りの短い文字列で表現します。</p>
 </blockquote>
-<div class="admonition info">
 <p>src/pages/news/[slug].astro
 → /news/2024-spring-camp
 → /news/2024-open-campus
-など、すべての記事に対応</p>
-</div>
-<p><code>[slug].astro</code> は、1 つのファイルで複数の URL を担当するための書き方です。記事が増えても、記事ごとにページファイルを手で作る必要がありません。</p>
+など、すべての記事に対応
+<code>[slug].astro</code> は、1 つのファイルで複数の URL を担当するための書き方です。記事が増えても、記事ごとにページファイルを手で作る必要がありません。</p>
 <h3 id="getstaticpaths">getStaticPaths でページを生成する<a class="headerlink" href="#getstaticpaths" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong>静的サイト生成（SSG：Static Site Generation）とは：</strong> サーバーにアクセスするたびにページを作るのではなく、<strong>ビルド時に全ページの HTML をあらかじめ生成しておく</strong>方式です。生成済みの HTML をそのまま返すだけなので表示が速く、サーバーの負荷も小さいのが特徴です。Astro はデフォルトで SSG を採用しています。</p>
@@ -7813,14 +7809,12 @@
 <code>#</code> で見出し、<code>**</code> で太字など、シンプルな記号で文章を装飾できる書き方のルールです。<br />
 このテックガイドサイトも Markdown で書かれています。</p>
 </blockquote>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>src/content/
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>src/content/
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>└── news/
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    ├── 2024-01-15.md   ← お知らせ記事
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    └── 2024-02-01.md   ← お知らせ記事
 </span></code></pre></div>
-</div>
-<p><code>src/content/news</code> に Markdown ファイルを追加すると、お知らせ記事として扱えます。ファイルごとに 1 件の記事を表す、と考えると管理しやすくなります。</p>
+<code>src/content/news</code> に Markdown ファイルを追加すると、お知らせ記事として扱えます。ファイルごとに 1 件の記事を表す、と考えると管理しやすくなります。</p>
 <p>各ファイルの先頭に、タイトルや日付などの情報を書きます。</p>
 <p>Markdown ファイルの先頭にある <code>---</code> で囲まれた部分はフロントマターです。記事のタイトルや日付など、本文ではなくメタデータとして使う情報を書きます。</p>
 <div class="language-md highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>---

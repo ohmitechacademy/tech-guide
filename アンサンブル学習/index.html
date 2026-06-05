@@ -7459,26 +7459,22 @@
 <hr />
 <h2 id="_5">なぜ組み合わせると強くなるか<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>1 つの木が「正しく分類できないデータ」も、多数の木の多数決を取ると正しくなりやすくなります。</p>
-<div class="admonition info">
 <p>木1: ○ × ○ ○ ×  → 3/5 正解
 木2: × ○ ○ ○ ×  → 3/5 正解
 木3: ○ ○ ○ × ×  → 3/5 正解</p>
-<p>多数決:  ○ ○ ○ ○ ×  → 4/5 正解（精度が上がる）</p>
-</div>
-<p>ただしこれが成り立つのは、各モデルの <strong>エラーが独立している</strong>（互いに相関していない）ときです。全員が同じ間違いをするなら多数決に意味はありません。アンサンブル学習の設計は「いかにモデルに多様性を持たせるか」と言い換えられます。</p>
+<p>多数決:  ○ ○ ○ ○ ×  → 4/5 正解（精度が上がる）
+ただしこれが成り立つのは、各モデルの <strong>エラーが独立している</strong>（互いに相関していない）ときです。全員が同じ間違いをするなら多数決に意味はありません。アンサンブル学習の設計は「いかにモデルに多様性を持たせるか」と言い換えられます。</p>
 <hr />
 <h2 id="bootstrap-aggregating">バギング（Bootstrap Aggregating）<a class="headerlink" href="#bootstrap-aggregating" title="Permanent link">&para;</a></h2>
 <p><strong>訓練データからランダムにサンプルを引いて複数のモデルを作り、予測を平均・多数決する</strong>方法です。</p>
-<div class="admonition info">
 <p>訓練データ（100件）
 ↓ ランダムサンプリング（重複あり）
 木1: 100件（別のサンプル）
 木2: 100件（別のサンプル）
 木3: 100件（別のサンプル）
 ↓
-予測を多数決（分類）または平均（回帰）</p>
-</div>
-<p>重複ありのサンプリング（ブートストラップ）により、各木が少しずつ異なるデータを見るため多様性が生まれます。</p>
+予測を多数決（分類）または平均（回帰）
+重複ありのサンプリング（ブートストラップ）により、各木が少しずつ異なるデータを見るため多様性が生まれます。</p>
 <hr />
 <h2 id="random-forest">Random Forest<a class="headerlink" href="#random-forest" title="Permanent link">&para;</a></h2>
 <p>バギングに「各分岐でランダムに特徴量を選ぶ」制約を加えた手法です。特徴量レベルの多様性も加わり、バギング単体より精度が高くなります。</p>
@@ -7509,16 +7505,14 @@
 <hr />
 <h2 id="_7">ブースティング<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>バギングが「並列に木を作る」のに対し、ブースティングは<strong>前の木の誤りを次の木が補う</strong>という逐次的な学習です。</p>
-<div class="admonition info">
 <p>木1 を学習 → 誤った予測に重みを増やす
 ↓
 木2 を学習（誤りの多い箇所を重点的に）→ 誤った予測に重みを増やす
 ↓
 木3 を学習 → …
 ↓
-全木の予測を加重平均</p>
-</div>
-<p>1 本 1 本は精度が低い「弱学習器」ですが、逐次的に積み上げることで精度が上がります。バギングよりバイアスを減らすのが得意です。</p>
+全木の予測を加重平均
+1 本 1 本は精度が低い「弱学習器」ですが、逐次的に積み上げることで精度が上がります。バギングよりバイアスを減らすのが得意です。</p>
 <hr />
 <h2 id="gradient-boosting">Gradient Boosting<a class="headerlink" href="#gradient-boosting" title="Permanent link">&para;</a></h2>
 <p>ブースティングの中で最も広く使われる手法です。「前のモデルの残差（誤差）を次のモデルが学習する」という形で、損失関数を勾配降下法で最小化します。</p>
@@ -7561,24 +7555,23 @@
 <hr />
 <h2 id="_8">スタッキング（概要）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>複数の異なるモデルの予測を「特徴量」として、別のメタ学習器に学習させる手法です。</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>RandomForest の予測  ┐
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>GradientBoosting の予測 ├→ メタ学習器（LogisticRegression など）→ 最終予測
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>XGBoost の予測       ┘
-</span></code></pre></div>
-</div>
-<p>精度は最も高くなりますが、実装・計算コスト・過学習リスクも増えるため、本番より競技MLで使われることが多いです。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">StackingClassifier</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">stack</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="p">(</span><span class="s2">&quot;rf&quot;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="p">(</span><span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="p">],</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">final_estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">()</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">)</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">stack</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<p><pre class="mermaid"><code>flowchart LR
+    rf[RandomForest の予測] --&gt; meta
+    gb[GradientBoosting の予測] --&gt; meta
+    xgb[XGBoost の予測] --&gt; meta
+    meta["メタ学習器（LogisticRegression など）"] --&gt; out[最終予測]</code></pre>
+精度は最も高くなりますが、実装・計算コスト・過学習リスクも増えるため、本番より競技MLで使われることが多いです。</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">StackingClassifier</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">stack</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="p">(</span><span class="s2">&quot;rf&quot;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="p">(</span><span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="p">],</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">final_estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">()</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">stack</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
 <h2 id="_9">使い分け<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

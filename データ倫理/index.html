@@ -7703,7 +7703,6 @@
 <hr />
 <h2 id="_4">なぜデータ倫理が必要か<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">実際に起きた事例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>【採用 AI の性差別（Amazon, 2018年）】
 過去の採用データ（男性優位）で学習した AI が、
 履歴書に「女性」を含む表現に低スコアをつけた。
@@ -7714,9 +7713,8 @@
 → 誤認逮捕事例が複数発生</p>
 <p>【COVID-19 感染予測（UK, 2020年）】
 訓練データの欠如から、有色人種・高齢者の
-リスクを過小評価したモデルが医療資源配分に使用された</p>
-</div>
-<p>これらはすべて「技術的には動作していた」システムです。問題は技術ではなく、<strong>どんなデータで・何を目的に・誰のために作ったか</strong> にありました。</p>
+リスクを過小評価したモデルが医療資源配分に使用された
+これらはすべて「技術的には動作していた」システムです。問題は技術ではなく、<strong>どんなデータで・何を目的に・誰のために作ったか</strong> にありました。</p>
 <hr />
 <h2 id="_6">個人情報とプライバシー<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">個人情報保護法（日本）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -7770,16 +7768,32 @@
 </ul>
 <h3 id="informed-consent">同意（Informed Consent）<a class="headerlink" href="#informed-consent" title="Permanent link">&para;</a></h3>
 <p>研究・分析でデータを収集する際は、<strong>何のために・どのように使うかを明示した上での同意</strong>が必要です。</p>
-<div class="admonition info">
-<p><strong>不十分な同意の例</strong></p>
-<p>「このサービスを使用することで利用規約に同意します」
-（利用規約の中に「データを研究に使う」と書いてある）</p>
-<p><strong>十分な同意の例</strong></p>
-<p>「このアンケートへの回答は、○○研究に使用します。
-参加は任意で、いつでも撤回できます。
-個人情報は匿名化して管理します。」</p>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>不十分な同意の例</th>
+<th>十分な同意の例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「このサービスを使用することで利用規約に同意します」</td>
+<td>「このアンケートへの回答は、○○研究に使用します。</td>
+</tr>
+<tr>
+<td>（利用規約の中に「データを研究に使う」と書いてある）</td>
+<td>参加は任意で、いつでも撤回できます。</td>
+</tr>
+<tr>
+<td></td>
+<td>個人情報は匿名化して管理します。」</td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="_8">アルゴリズムのバイアスと公平性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="_9">バイアスの発生源<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
@@ -7797,11 +7811,9 @@
 </span></code></pre></div>
 <p><strong>2. プロキシ変数</strong></p>
 <p>直接使わなくても、別の変数が差別的な属性の代理になることがあります。</p>
-<div class="admonition info">
 <p>郵便番号 → 実質的に人種・所得水準の代理変数になることがある
 スマホの機種 → 経済状況の代理変数
 残業時間 → 育児負担のある人を間接的に不利にする</p>
-</div>
 <h3 id="_10">公平性の指標<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>「公平」には複数の定義があり、すべてを同時に満たすことは数学的に不可能（公平性のトリレンマ）なため、<strong>何を優先するかを明示すること</strong>が重要です。</p>
 <table>
@@ -7872,26 +7884,20 @@
 <hr />
 <h2 id="_11">データ収集・分析・公開の各段階での注意点<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="_12">収集段階<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>□ 収集の目的を明示しているか
 □ 本人の同意を得ているか
 □ 必要最小限のデータだけ収集しているか
 □ 要配慮情報（病歴・人種など）を含む場合、特別な同意があるか</p>
-</div>
 <h3 id="_13">分析段階<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>□ 訓練データにバイアスがないか確認したか
 □ グループ別の精度差を評価したか
 □ モデルの予測根拠を説明できるか
 □ 外れ値・少数派への影響を確認したか</p>
-</div>
 <h3 id="_14">公開・運用段階<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>□ モデルの限界・不確実性を明示しているか
 □ 誤った予測をした場合の救済手段があるか
 □ 定期的に性能とバイアスを再評価する仕組みがあるか
 □ ログを記録して監査できるようにしているか</p>
-</div>
 <hr />
 <h2 id="ds">DS 学生として意識すること<a class="headerlink" href="#ds" title="Permanent link">&para;</a></h2>
 <h3 id="_15">卒業研究・授業での注意<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>

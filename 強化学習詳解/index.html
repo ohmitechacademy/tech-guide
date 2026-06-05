@@ -7864,15 +7864,28 @@ A(s, a) = Q(s, a) - V(s)
 \mathcal{L}^{\text{CLIP}}(\theta) = \hat{\mathbb{E}}_t\!\left[\min\!\left(r_t(\theta)\hat{A}_t,\; \text{clip}(r_t(\theta), 1-\varepsilon, 1+\varepsilon)\hat{A}_t\right)\right]
 \]</div>
 <p><strong>クリッピングの意味：</strong></p>
-<div class="admonition info">
-<p><strong>Advantage &gt; 0 の場合（良い行動）</strong></p>
-<p>r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ
-→ 良い行動への確率を増やしすぎない</p>
-<p><strong>Advantage &lt; 0 の場合（悪い行動）</strong></p>
-<p>r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ
-→ 悪い行動への確率を減らしすぎない</p>
-</div>
-<p><span class="arithmatex">\(\varepsilon = 0.2\)</span> が一般的。更新前後の方策が大きく離れることを防ぎ、学習を安定させます。</p>
+<table>
+<thead>
+<tr>
+<th>Advantage &gt; 0 の場合（良い行動）</th>
+<th>Advantage &lt; 0 の場合（悪い行動）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ</td>
+<td>r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ</td>
+</tr>
+<tr>
+<td>→ 良い行動への確率を増やしすぎない</td>
+<td>→ 悪い行動への確率を減らしすぎない</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\varepsilon = 0.2\)</span> が一般的。更新前後の方策が大きく離れることを防ぎ、学習を安定させます。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="ppo">PPO の学習ループ<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_iterations</span><span class="p">):</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># 1. 現在の方策でデータ収集（On-policy）</span>
@@ -7940,34 +7953,44 @@ V(s_t) = \mathbb{E}_{a_t \sim \pi}\!\left[Q(s_t, a_t) - \alpha \log \pi(a_t|s_t)
 <h2 id="model-based-rl">Model-Based RL<a class="headerlink" href="#model-based-rl" title="Permanent link">&para;</a></h2>
 <p>環境の<strong>遷移モデル</strong> <span class="arithmatex">\(\hat{P}(s_{t+1} | s_t, a_t)\)</span> を学習して、仮想的な経験（rollout）を生成します。</p>
 <h3 id="dyna">Dyna アーキテクチャ<a class="headerlink" href="#dyna" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>実環境   → 少量のデータを収集 → モデルを更新
 ↓
-学習済みモデル → 仮想 rollout を大量生成 → 価値関数/方策を更新</p>
-</div>
-<p>実環境のサンプルを増幅できるため<strong>サンプル効率が大幅に向上</strong>します。</p>
+学習済みモデル → 仮想 rollout を大量生成 → 価値関数/方策を更新
+実環境のサンプルを増幅できるため<strong>サンプル効率が大幅に向上</strong>します。</p>
 <h3 id="mbpomodel-based-policy-optimization">MBPO（Model-Based Policy Optimization）<a class="headerlink" href="#mbpomodel-based-policy-optimization" title="Permanent link">&para;</a></h3>
 <p>モデルのエラーが蓄積する問題（Compounding Error）に対処するため、<strong>短い rollout</strong>（<span class="arithmatex">\(k=1〜5\)</span> ステップ）だけ使って実データと混合します。</p>
 <h3 id="world-modelsdreamer">World Models・Dreamer<a class="headerlink" href="#world-modelsdreamer" title="Permanent link">&para;</a></h3>
 <p>Latent Dynamics Model（潜在空間での遷移モデル）を使って、<strong>夢の中で学習</strong>します。</p>
-<div class="admonition info">
 <p>実環境 → エンコーダ → 潜在状態 z
 ↓ 遷移モデル（RSSM）
 潜在状態 z' → デコーダ → 仮想画像
 ↓
 方策の更新（潜在空間内で完結）</p>
-</div>
 <hr />
 <h2 id="rlhfreinforcement-learning-from-human-feedback">RLHF（Reinforcement Learning from Human Feedback）<a class="headerlink" href="#rlhfreinforcement-learning-from-human-feedback" title="Permanent link">&para;</a></h2>
 <p><a href="../ファインチューニング詳解/">ファインチューニング詳解</a> で学んだ RLHF の RL 部分（PPO）をここで接続します。</p>
-<div class="admonition info">
-<p><strong>報酬モデル rm(x, y)</strong></p>
-<p>プロンプト x, 応答 y のペアに報酬を付与</p>
-<p><strong>PPO による最適化</strong></p>
-<p>J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ || π_ref)</p>
-<p>KL ペナルティで元の言語モデルから離れすぎないよう制約</p>
-</div>
-<p><span class="arithmatex">\(\beta\)</span>：KL ペナルティ係数。大きいほど元のモデルに近い応答を保つ。</p>
+<table>
+<thead>
+<tr>
+<th>報酬モデル rm(x, y)</th>
+<th>PPO による最適化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>プロンプト x, 応答 y のペアに報酬を付与</td>
+<td>J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ</td>
+</tr>
+<tr>
+<td></td>
+<td>KL ペナルティで元の言語モデルから離れすぎないよう制約</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta\)</span>：KL ペナルティ係数。大きいほど元のモデルに近い応答を保つ。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="_7">数学的導出<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">方策勾配定理の証明<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>

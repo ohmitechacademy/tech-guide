@@ -7561,7 +7561,6 @@
 <h3 id="_5">全文検索の課題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>SQL の <code>LIKE '%error%'</code> は全件スキャンで <span class="arithmatex">\(O(N \cdot L)\)</span>（<span class="arithmatex">\(N\)</span>：ドキュメント数、<span class="arithmatex">\(L\)</span>：ドキュメント長）かかります。</p>
 <h3 id="_6">転置インデックスの仕組み<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p><strong>ドキュメント</strong></p>
 <p>doc1: "The quick brown fox"
 doc2: "The fox jumps high"
@@ -7577,9 +7576,8 @@ doc3: "Brown bears are quick"</p>
 <p><strong>検索 "quick fox"</strong></p>
 <p>"quick" → {doc1, doc3}
 "fox"   → {doc1, doc2}
-共通 → {doc1}（両方含むドキュメント）</p>
-</div>
-<p>インデックス構築に時間がかかりますが、検索は <span class="arithmatex">\(O(\log N)\)</span> 程度に高速化されます。</p>
+共通 → {doc1}（両方含むドキュメント）
+インデックス構築に時間がかかりますが、検索は <span class="arithmatex">\(O(\log N)\)</span> 程度に高速化されます。</p>
 <h3 id="_7">テキスト解析パイプライン<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
     A["生テキスト\n'The Quick Brown Fox!'"] --&gt; B["Character Filter\n特殊文字除去"]

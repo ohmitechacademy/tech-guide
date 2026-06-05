@@ -7503,17 +7503,13 @@
 <p>プログラムを実行する方法は大きく 2 つに分かれます。</p>
 <p><strong>コンパイラ（Compiler）</strong></p>
 <p>ソースコード全体を先に機械語（実行ファイル）に翻訳し、その後実行します。</p>
-<div class="admonition info">
-<p>ソースコード → [コンパイラ] → 実行ファイル → [CPU] → 実行</p>
-</div>
-<p>例：C, C++, Go, Rust</p>
+<p>ソースコード → [コンパイラ] → 実行ファイル → [CPU] → 実行
+例：C, C++, Go, Rust</p>
 <p>コンパイラ方式では、実行前に時間をかけて変換する代わりに、実行時にはCPUが直接読める形式に近いコードを動かせます。C言語で <code>gcc main.c -o main</code> のように実行ファイルを作るのは、この方式です。</p>
 <p><strong>インタープリタ（Interpreter）</strong></p>
 <p>ソースコードを 1 行ずつ読みながら即座に実行します。</p>
-<div class="admonition info">
-<p>ソースコード → [インタープリタ] → 実行（同時進行）</p>
-</div>
-<p>例：Python（CPython）, Ruby, Bash</p>
+<p>ソースコード → [インタープリタ] → 実行（同時進行）
+例：Python（CPython）, Ruby, Bash</p>
 <p>インタープリタ方式では、プログラムを書いてすぐ実行しやすい反面、実行中に読み取りや解釈のコストがかかります。Python が学習やデータ分析で使いやすいのは、コンパイル手順を強く意識せずに試せるからです。</p>
 <p><strong>JIT コンパイラ（Just-In-Time）</strong></p>
 <p>最初はインタープリタとして動き、よく使われるコードを実行中に機械語に変換して高速化します。</p>
@@ -7553,7 +7549,6 @@
 <p>コンパイルは、ソースコードをいきなり機械語へ変換する単純な作業ではありません。字句解析、構文解析、意味解析、最適化、コード生成という複数の段階に分かれています。</p>
 <p>この段階を知ると、エラーの種類を切り分けやすくなります。文字の並びが文法として読めないのか、型や名前の意味が合わないのか、実行時に問題が起きているのかで、調べる場所が変わります。</p>
 <p>C 言語をコンパイルするときの流れです。</p>
-<div class="admonition info">
 <p>ソースコード (.c)
 ↓ 1. 字句解析（Lexing）
 トークン列
@@ -7568,9 +7563,8 @@ AST（抽象構文木）
 ↓ 6. アセンブル
 オブジェクトファイル (.o)
 ↓ 7. リンク（Link）
-実行ファイル (a.out)</p>
-</div>
-<p>この流れでは、ソースコードは「文字列」から「構造」へ、さらに「機械が実行できる表現」へと段階的に変換されます。各段階で役割が違うため、エラーの出方も変わります。<code>SyntaxError</code> は構文解析付近、型エラーは意味解析付近、リンクエラーは最後の結合段階で起きる、というように見分けられます。</p>
+実行ファイル (a.out)
+この流れでは、ソースコードは「文字列」から「構造」へ、さらに「機械が実行できる表現」へと段階的に変換されます。各段階で役割が違うため、エラーの出方も変わります。<code>SyntaxError</code> は構文解析付近、型エラーは意味解析付近、リンクエラーは最後の結合段階で起きる、というように見分けられます。</p>
 <hr />
 <h2 id="1-lexing-tokenization">1. 字句解析（Lexing / Tokenization）<a class="headerlink" href="#1-lexing-tokenization" title="Permanent link">&para;</a></h2>
 <p>ソースコードの文字列を <strong>トークン（意味のある最小単位）</strong> に分割します。</p>
@@ -7581,52 +7575,71 @@ AST（抽象構文木）
 </span></code></pre></div>
 <p>字句解析では、まだ「足し算の左右が何か」までは深く考えません。<code>int</code> はキーワード、<code>x</code> は識別子、<code>10</code> と <code>20</code> は数値、<code>+</code> は演算子、<code>;</code> は文の終わり、というように文字列を部品へ分けます。</p>
 <p>字句解析器（レキサー）は <strong>正規表現</strong> で書かれたルールで各トークンを識別します（正規表現の重要な応用例です）。</p>
-<div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>整数リテラル: [0-9]+
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>識別子:      [a-zA-Z_][a-zA-Z0-9_]*
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>演算子:      +, -, *, /, =, ==, != ...
-</span></code></pre></div>
-</div>
-<p>たとえば <code>[0-9]+</code> は1文字以上の数字列を表します。<code>[a-zA-Z_][a-zA-Z0-9_]*</code> は、最初は英字または <code>_</code>、2文字目以降は英数字または <code>_</code> を許す識別子のルールです。プログラミング言語の「変数名として使える文字」の規則は、この段階で扱われます。</p>
+<table>
+<thead>
+<tr>
+<th>トークン種別</th>
+<th>正規表現パターン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整数リテラル</td>
+<td><code>[0-9]+</code></td>
+</tr>
+<tr>
+<td>識別子</td>
+<td><code>[a-zA-Z_][a-zA-Z0-9_]*</code></td>
+</tr>
+<tr>
+<td>演算子</td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>=</code>, <code>==</code>, <code>!=</code> など</td>
+</tr>
+<tr>
+<td>たとえば <code>[0-9]+</code> は1文字以上の数字列を表します。<code>[a-zA-Z_][a-zA-Z0-9_]*</code> は、最初は英字または <code>_</code>、2文字目以降は英数字または <code>_</code> を許す識別子のルールです。プログラミング言語の「変数名として使える文字」の規則は、この段階で扱われます。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="2-parsing">2. 構文解析（Parsing）<a class="headerlink" href="#2-parsing" title="Permanent link">&para;</a></h2>
 <p>トークン列を <strong>AST（Abstract Syntax Tree：抽象構文木）</strong> に変換します。文の構造を木として表したものです。</p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
 </span></code></pre></div>
 <p>↓ 構文解析後（AST）</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>VarDeclaration
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├─ type: int
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├─ name: x
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>└─ initializer:
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    BinaryExpression(+)
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    ├─ left:  NumberLiteral(10)
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    └─ right: NumberLiteral(20)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>VarDeclaration
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├─ type: int
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├─ name: x
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>└─ initializer:
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    BinaryExpression(+)
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    ├─ left:  NumberLiteral(10)
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    └─ right: NumberLiteral(20)
 </span></code></pre></div>
 <p>AST は、括弧やセミコロンのような表面的な記号を取り除き、プログラムの意味の骨格を木で表したものです。<code>10 + 20</code> は、<code>+</code> という演算の左に <code>10</code>、右に <code>20</code> がある構造として表されます。</p>
 <p>構文規則（文法）は <strong>文脈自由文法（BNF 記法）</strong> で定義されます。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>expression := expression &#39;+&#39; term
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>            | term
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>term       := NUMBER
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>            | IDENTIFIER
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            | &#39;(&#39; expression &#39;)&#39;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>expression := expression &#39;+&#39; term
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>            | term
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>term       := NUMBER
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>            | IDENTIFIER
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            | &#39;(&#39; expression &#39;)&#39;
 </span></code></pre></div>
 <p><strong>構文エラーはここで検出されます：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">   </span><span class="c1">// 意味はおかしいが構文的にはエラーになる場合も</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">;</span><span class="w">    </span><span class="c1">// → SyntaxError: 閉じ括弧がない</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">   </span><span class="c1">// 意味はおかしいが構文的にはエラーになる場合も</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">;</span><span class="w">    </span><span class="c1">// → SyntaxError: 閉じ括弧がない</span>
 </span></code></pre></div>
 <p>構文解析は「文法として並び方が正しいか」を見ます。変数が宣言済みか、型が合っているかまでは次の意味解析で扱います。自然言語でいうと、まず文の形が文法として成立しているかを確認し、その後で意味が通るかを見るイメージです。</p>
 <hr />
 <h2 id="3-semantic-analysis">3. 意味解析（Semantic Analysis）<a class="headerlink" href="#3-semantic-analysis" title="Permanent link">&para;</a></h2>
 <p>AST が <strong>意味的に正しいか</strong> をチェックします。構文的に正しくても意味がおかしいケースを検出します。</p>
 <p><strong>型チェック：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// int に文字列を代入 → 型エラー</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// int に文字列を代入 → 型エラー</span>
 </span></code></pre></div>
 <p><strong>未定義変数のチェック：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">   </span><span class="c1">// x が宣言されていない → エラー</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">   </span><span class="c1">// x が宣言されていない → エラー</span>
 </span></code></pre></div>
 <p><strong>型推論（TypeScript・Rust など）：</strong></p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w">     </span><span class="c1">// x の型を number と推論</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;!&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">// number + string → TypeScript はエラーを出す</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span><span class="w">     </span><span class="c1">// x の型を number と推論</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;!&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">// number + string → TypeScript はエラーを出す</span>
 </span></code></pre></div>
 <p>TypeScript のコンパイラ（tsc）はここで多くのバグを事前に発見します（<a href="../TypeScript/">TypeScript</a> 参照）。</p>
 <p>意味解析では、ASTに対して「この名前は定義されているか」「この演算はこの型に対して許されるか」「戻り値の型は合っているか」を確認します。構文的には正しいコードでも、<code>int x = "hello";</code> のように意味的におかしいコードはここで止められます。</p>
@@ -7634,49 +7647,49 @@ AST（抽象構文木）
 <h2 id="4-optimization">4. 最適化（Optimization）<a class="headerlink" href="#4-optimization" title="Permanent link">&para;</a></h2>
 <p>プログラムの意味を変えずに、より速く・小さくなるよう変換します。</p>
 <p><strong>定数畳み込み（Constant Folding）：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">  </span><span class="c1">// コンパイル時に計算</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// ↓ 最適化後</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">       </span><span class="c1">// 実行時の計算が不要になる</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">  </span><span class="c1">// コンパイル時に計算</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">// ↓ 最適化後</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">       </span><span class="c1">// 実行時の計算が不要になる</span>
 </span></code></pre></div>
 <p>定数畳み込みでは、実行しなくても結果が分かる計算をコンパイル時に済ませます。<code>10 + 20</code> は入力や外部状態に依存しないため、実行時に毎回計算する必要がありません。</p>
 <p><strong>デッドコード除去：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="n">doSomething</span><span class="p">();</span><span class="w">  </span><span class="c1">// 絶対に実行されない → コンパイラが除去</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">doSomething</span><span class="p">();</span><span class="w">  </span><span class="c1">// 絶対に実行されない → コンパイラが除去</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>デッドコード除去は、結果に影響しない処理を取り除く最適化です。到達不能なコードや、計算しても使われない値が対象になります。プログラムの意味を変えない範囲で、実行する命令数を減らします。</p>
 <p><strong>インライン展開：</strong></p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// ↓ インライン展開後（関数呼び出しのオーバーヘッドを除去）</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1">// ↓ インライン展開後（関数呼び出しのオーバーヘッドを除去）</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </span></code></pre></div>
 <p>インライン展開では、短い関数の呼び出しを関数本体で置き換えます。関数呼び出しの準備や戻り処理が減るため速くなることがあります。一方で、展開しすぎるとコードサイズが大きくなるため、コンパイラは状況を見て判断します。</p>
 <hr />
 <h2 id="5-code-generation">5. コード生成（Code Generation）<a class="headerlink" href="#5-code-generation" title="Permanent link">&para;</a></h2>
 <p>最適化後の中間表現を <strong>アセンブリ言語</strong> に変換します。</p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>↓ x86-64 アセンブリ（の一例）</p>
-<div class="language-asm highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nl">add:</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nf">push</span><span class="w"> </span><span class="no">rbp</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nf">mov</span><span class="w">  </span><span class="no">rbp</span><span class="p">,</span><span class="w"> </span><span class="no">rsp</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nf">mov</span><span class="w">  </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="no">edi</span><span class="w">      </span><span class="c1">; 引数 a を eax に</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nf">add</span><span class="w">  </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="no">esi</span><span class="w">      </span><span class="c1">; eax += b</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="nf">pop</span><span class="w">  </span><span class="no">rbp</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; 結果 eax を返す</span>
+<div class="language-asm highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nl">add:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nf">push</span><span class="w"> </span><span class="no">rbp</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nf">mov</span><span class="w">  </span><span class="no">rbp</span><span class="p">,</span><span class="w"> </span><span class="no">rsp</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nf">mov</span><span class="w">  </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="no">edi</span><span class="w">      </span><span class="c1">; 引数 a を eax に</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nf">add</span><span class="w">  </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="no">esi</span><span class="w">      </span><span class="c1">; eax += b</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="nf">pop</span><span class="w">  </span><span class="no">rbp</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; 結果 eax を返す</span>
 </span></code></pre></div>
 <p>アセンブリはCPU命令に近い低水準の表現です。この例では、引数 <code>a</code> が <code>edi</code>、引数 <code>b</code> が <code>esi</code> に入り、<code>eax</code> に結果を置いて返しています。C言語の <code>return a + b;</code> という1行も、CPUから見るとレジスタへ値を移し、加算し、戻るという命令列になります。</p>
 <hr />
 <h2 id="6">6. アセンブルとリンク<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <p><strong>アセンブル：</strong> アセンブリをバイナリのオブジェクトファイル（<code>.o</code>）に変換します。</p>
 <p><strong>リンク：</strong> 複数のオブジェクトファイルとライブラリを結合して実行ファイルを作ります。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># gcc は内部でこれらを全部やってくれる</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>gcc<span class="w"> </span>-c<span class="w"> </span>main.c<span class="w">    </span><span class="c1"># → main.o（コンパイル+アセンブル）</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>gcc<span class="w"> </span>main.o<span class="w"> </span>-o<span class="w"> </span>main<span class="w">  </span><span class="c1"># → main（リンク）</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># gcc は内部でこれらを全部やってくれる</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>gcc<span class="w"> </span>-c<span class="w"> </span>main.c<span class="w">    </span><span class="c1"># → main.o（コンパイル+アセンブル）</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>gcc<span class="w"> </span>main.o<span class="w"> </span>-o<span class="w"> </span>main<span class="w">  </span><span class="c1"># → main（リンク）</span>
 </span></code></pre></div>
 <p><code>gcc -c main.c</code> は実行ファイルまでは作らず、オブジェクトファイル <code>main.o</code> を作ります。<code>gcc main.o -o main</code> は、オブジェクトファイルと必要なライブラリを結合して、実行可能な <code>main</code> を作ります。複数ファイルのCプログラムでは、この分割が重要になります。</p>
 <p><strong>動的リンクと静的リンク：</strong></p>
@@ -7714,29 +7727,27 @@ AST（抽象構文木）
 <hr />
 <h2 id="python">Python の実行モデル<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
 <p>Python（CPython）は以下の手順で実行されます。</p>
-<div class="admonition info">
 <p>hello.py
 ↓ 字句解析・構文解析
 AST
 ↓ バイトコードコンパイル
 hello.pyc（<strong>pycache</strong>/）
-↓ CPython 仮想マシン（PVM）が解釈・実行</p>
-</div>
-<p><strong>バイトコード：</strong><br />
+↓ CPython 仮想マシン（PVM）が解釈・実行
+<strong>バイトコード：</strong><br />
 機械語ではなく、Python 仮想マシンが理解できる中間言語です。直接 CPU では実行できません。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">dis</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">dis</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
 </span></code></pre></div>
 <p><code>dis</code> は、Python関数がどのようなバイトコードに変換されているかを見るための標準ライブラリです。普段は意識しませんが、Pythonも実行前に一度バイトコードへ変換されています。</p>
 <p>出力例：
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  2           0 LOAD_FAST      0 (a)
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>              2 LOAD_FAST      1 (b)
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>              4 BINARY_ADD
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>              6 RETURN_VALUE
+<div class="language-console highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">  2           0 LOAD_FAST      0 (a)</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="go">              2 LOAD_FAST      1 (b)</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">              4 BINARY_ADD</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="go">              6 RETURN_VALUE</span>
 </span></code></pre></div></p>
 <p><code>LOAD_FAST</code> はローカル変数を読み、<code>BINARY_ADD</code> は加算し、<code>RETURN_VALUE</code> は結果を返します。CPUの機械語ではなく、CPython仮想マシンが解釈する命令列です。このため、PythonはCのようなネイティブ実行ファイルとは違う実行モデルになります。</p>
 <p><strong><code>.pyc</code> ファイルとは？</strong><br />
@@ -7744,35 +7755,33 @@ hello.pyc（<strong>pycache</strong>/）
 <hr />
 <h2 id="javascript-v8">JavaScript の V8 エンジン<a class="headerlink" href="#javascript-v8" title="Permanent link">&para;</a></h2>
 <p>Chrome と Node.js が使う JavaScript エンジンです。JIT コンパイルによって高速実行を実現します。</p>
-<div class="admonition info">
 <p>JS ソース
 ↓ パース → AST 生成
 ↓ Ignition（インタープリタ）がバイトコードとして実行
 ↓ ホットスポット（よく実行されるコード）を検出
 ↓ TurboFan（JIT コンパイラ）が機械語に変換
-↓ 次回以降は機械語で高速実行</p>
-</div>
-<p><strong>型情報の最適化：</strong></p>
-<div class="language-js highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nx">add</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">      </span><span class="c1">// 整数の加算と判断して最適化</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nx">add</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">);</span><span class="w">  </span><span class="c1">// float に変更 → 最適化をやり直し（Deoptimize）</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 文字列の結合に変更 → また Deoptimize</span>
+↓ 次回以降は機械語で高速実行
+<strong>型情報の最適化：</strong></p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nx">add</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w">      </span><span class="c1">// 整数の加算と判断して最適化</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nx">add</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">);</span><span class="w">  </span><span class="c1">// float に変更 → 最適化をやり直し（Deoptimize）</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 文字列の結合に変更 → また Deoptimize</span>
 </span></code></pre></div>
 <p>TypeScript を使うと型が固定されるため JIT の最適化が効きやすくなります。</p>
 <p>JITは、実行中の値の傾向を見て最適化します。最初に数値だけが渡されていれば、数値加算として高速化できます。しかし途中で文字列が来ると、同じ <code>+</code> でも文字列結合の意味になり、前提が崩れます。このように最適化を取り消すことを Deoptimize と呼びます。</p>
 <hr />
 <h2 id="gcc">実際にやってみる：GCC のオプション<a class="headerlink" href="#gcc" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">       </span><span class="c1"># 通常コンパイル</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-O2<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">   </span><span class="c1"># 最適化レベル 2（本番用）</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-S<span class="w">             </span><span class="c1"># アセンブリを出力（hello.s）</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-E<span class="w">             </span><span class="c1"># プリプロセッサの出力のみ</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-g<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">    </span><span class="c1"># デバッグ情報を含める</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">       </span><span class="c1"># 通常コンパイル</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-O2<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">   </span><span class="c1"># 最適化レベル 2（本番用）</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-S<span class="w">             </span><span class="c1"># アセンブリを出力（hello.s）</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-E<span class="w">             </span><span class="c1"># プリプロセッサの出力のみ</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>gcc<span class="w"> </span>hello.c<span class="w"> </span>-g<span class="w"> </span>-o<span class="w"> </span>hello<span class="w">    </span><span class="c1"># デバッグ情報を含める</span>
 </span></code></pre></div>
 <p><code>-O2</code> はよく使われる最適化レベルです。<code>-S</code> はアセンブリを出力するので、Cコードがどのような低水準命令に変換されるかを観察できます。<code>-E</code> はプリプロセッサ後の結果だけを出し、<code>#include</code> や <code>#define</code> が展開された姿を確認できます。<code>-g</code> はデバッガで行番号や変数名を見られるようにするオプションです。</p>
 <p>アセンブリを見るとコンパイラが何をしているかが直接確認できます：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>gcc<span class="w"> </span>-O0<span class="w"> </span>-S<span class="w"> </span>hello.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>hello.s<span class="w">   </span><span class="c1"># 最適化なし</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>gcc<span class="w"> </span>-O2<span class="w"> </span>-S<span class="w"> </span>hello.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>hello.s<span class="w">   </span><span class="c1"># 最適化あり（コードが短くなる）</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>gcc<span class="w"> </span>-O0<span class="w"> </span>-S<span class="w"> </span>hello.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>hello.s<span class="w">   </span><span class="c1"># 最適化なし</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>gcc<span class="w"> </span>-O2<span class="w"> </span>-S<span class="w"> </span>hello.c<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>hello.s<span class="w">   </span><span class="c1"># 最適化あり（コードが短くなる）</span>
 </span></code></pre></div>
 <p><code>-O0</code> は最適化なしなので、元のCコードに近い形のアセンブリになりやすいです。<code>-O2</code> では不要な処理が消えたり、関数が展開されたりします。同じプログラムでも、コンパイルオプションによって生成されるコードが変わることを確認できます。</p>
 <hr />

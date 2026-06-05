@@ -7784,7 +7784,6 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 - 変更の記録が残ります</p>
 <h3 id="pull-request_1">Pull Request の流れ<a class="headerlink" href="#pull-request_1" title="Permanent link">&para;</a></h3>
 <p>次の図は、作業ブランチで変更した内容が、本番サイトへ反映されるまでの流れです。PR は、変更を <code>main</code> へ入れる前に確認するための中間地点です。</p>
-<div class="admonition info">
 <p>① feature ブランチで作業・コミット・プッシュします
 ↓
 ② GitHub で Pull Request を作成します
@@ -7795,9 +7794,8 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 ↓
 ⑤ Cloudflare Pages が変更を検知して自動ビルド・デプロイします
 ↓
-⑥ 本番サイト（ohmitechacademy.com）に反映が完了します</p>
-</div>
-<p>PR の本文には、何を変更したか、なぜ変更したか、どこを確認してほしいかを書きます。レビュアーは差分を見て、動作や設計に問題がないか確認します。</p>
+⑥ 本番サイト（ohmitechacademy.com）に反映が完了します
+PR の本文には、何を変更したか、なぜ変更したか、どこを確認してほしいかを書きます。レビュアーは差分を見て、動作や設計に問題がないか確認します。</p>
 <blockquote>
 <p><strong>「デプロイ」とは：</strong> コードをインターネット上のサーバーに置き、誰でもアクセスできる状態にすることです。このプロジェクトでは <strong>main ブランチへのマージが自動的にデプロイをトリガーします</strong>。手動でサーバーにファイルをアップロードする作業は不要です。詳しくは <a href="../Cloudflare/">Cloudflare</a> ページで解説しています。</p>
 </blockquote>
@@ -7836,7 +7834,6 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 </tbody>
 </table>
 <h3 id="request-changes">「Request changes」を受けたとき<a class="headerlink" href="#request-changes" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
 <p>① レビュアーが修正コメントを付けて「Request changes」します
 ↓
 ② 自分のブランチでコードを修正してコミット・プッシュします
@@ -7846,9 +7843,8 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 ↓
 ④ レビュアーに再レビューを依頼します
 ↓
-⑤ 「Approve」をもらえたらマージします</p>
-</div>
-<p>Request changes は怒られているという意味ではなく、「main に入れる前にここを直そう」という合図です。同じブランチへ追加コミットを push すれば、PR は自動で更新されます。</p>
+⑤ 「Approve」をもらえたらマージします
+Request changes は怒られているという意味ではなく、「main に入れる前にここを直そう」という合図です。同じブランチへ追加コミットを push すれば、PR は自動で更新されます。</p>
 <h3 id="_7">レビューコメントへの返信マナー<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>修正した場合：「修正しました。ご確認ください。」</li>
@@ -7860,11 +7856,10 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 <h3 id="_9">コンフリクトとは<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>同じファイルの同じ行を、複数の人が別々に編集したときに発生する「衝突」です。Git が自動でマージできず、手動での解決が必要になります。</p>
 <p>次の記号は、Git が「どちらの変更を採用すべきか分からない」と示している部分です。<code>HEAD</code> 側と <code>main</code> 側の変更を見比べ、最終的に残したい内容へ手で直します。</p>
-<div class="admonition info">
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD（自分のブランチの変更）
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD（自分のブランチの変更）</p>
 <h1>近江テック・アカデミー</h1>
-=======
-<h1>近江テックアカデミー（公式）</h1></p>
+<p>=======</p>
+<h1>近江テックアカデミー（公式）</h1>
 <blockquote>
 <blockquote>
 <blockquote>
@@ -7880,7 +7875,6 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 </blockquote>
 </blockquote>
 </blockquote>
-</div>
 <h3 id="_10">コンフリクトの解決手順<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>コンフリクト解決では、まず <code>main</code> の最新を取り込み、衝突したファイルを編集し、解決済みとしてコミットします。</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 1. main ブランチの最新を取り込みます</span>
