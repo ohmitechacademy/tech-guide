@@ -7470,14 +7470,18 @@
 <hr />
 <h2 id="webassembly_1">なぜ WebAssembly が必要か<a class="headerlink" href="#webassembly_1" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p>JavaScript の問題:
-  - 動的型付け → 実行時に型推論のオーバーヘッド
-  - JIT コンパイル → 初回実行が遅い・最適化に時間がかかる
-  - GC がある → 予測不能な停止が起きる</p>
-<p>WebAssembly の解決:
-  - 静的型付きバイナリ → 型推論不要・ほぼ機械語と同速
-  - AOT コンパイル済み → ブラウザが即デコードして実行
-  - 手動メモリ管理（線形メモリ）→ GC ポーズなし</p>
+<p><strong>JavaScript の問題</strong></p>
+<ul>
+<li>動的型付け → 実行時に型推論のオーバーヘッド</li>
+<li>JIT コンパイル → 初回実行が遅い・最適化に時間がかかる</li>
+<li>GC がある → 予測不能な停止が起きる</li>
+</ul>
+<p><strong>WebAssembly の解決</strong></p>
+<ul>
+<li>静的型付きバイナリ → 型推論不要・ほぼ機械語と同速</li>
+<li>AOT コンパイル済み → ブラウザが即デコードして実行</li>
+<li>手動メモリ管理（線形メモリ）→ GC ポーズなし</li>
+</ul>
 </div>
 <table>
 <thead>
@@ -7626,13 +7630,15 @@
 <h2 id="_5">線形メモリモデル<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>Wasm は<strong>連続したバイト配列</strong>（線形メモリ）を持ち、JS と Wasm がこのメモリを共有します。</p>
 <div class="admonition warning">
-<p>Wasm 線形メモリ（ArrayBuffer として JS からも見える）:
-  [0x00][0x01][0x02][0x03]...[0xFF]...
-        ↑                    ↑
-    Wasm が書いた          JS が読む
-    画像データ             （SharedArrayBuffer）</p>
-<p>注意: JS オブジェクト・DOM へのアクセスは Wasm から直接不可
-     wasm-bindgen がブリッジコードを自動生成してくれる</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Wasm 線形メモリ（ArrayBuffer として JS からも見える）:
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  [0x00][0x01][0x02][0x03]...[0xFF]...
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        ↑                    ↑
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    Wasm が書いた          JS が読む
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    画像データ             （SharedArrayBuffer）
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>注意: JS オブジェクト・DOM へのアクセスは Wasm から直接不可
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>     wasm-bindgen がブリッジコードを自動生成してくれる
+</span></code></pre></div>
 </div>
 <p>大量のデータを JS → Wasm に渡す際は、コピーのオーバーヘッドを避けるために <strong>ポインタ渡し</strong>（メモリ上のアドレスを渡す）を使います。</p>
 <hr />
@@ -7641,12 +7647,12 @@
 <div class="admonition info">
 <p>従来:  コード → OS 依存のバイナリ（Windows/Linux/macOS で別々）
 WASI:  コード → .wasm（OS に関係なく 1 つのバイナリ）
-                ↓
-       WASI ランタイム（Wasmtime・WasmEdge）が OS 呼び出しをラップ</p>
+↓
+WASI ランタイム（Wasmtime・WasmEdge）が OS 呼び出しをラップ</p>
 </div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># WASI ランタイムで Wasm を実行（ブラウザなし）</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>cargo<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>wasm32-wasi
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>wasmtime<span class="w"> </span>target/wasm32-wasi/debug/my_program.wasm
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># WASI ランタイムで Wasm を実行（ブラウザなし）</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cargo<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>wasm32-wasi
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>wasmtime<span class="w"> </span>target/wasm32-wasi/debug/my_program.wasm
 </span></code></pre></div>
 <p>Cloudflare Workers・Fastly Compute@Edge などのエッジ環境でも Wasm を利用できます。</p>
 <hr />
@@ -7690,11 +7696,13 @@ WASI:  コード → .wasm（OS に関係なく 1 つのバイナリ）
 <h3 id="_8">スタックマシンの動作原理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>Wasm はレジスタではなく<strong>スタック</strong>ベースの VM です。命令が値をスタックに積んだり取り出したりします。</p>
 <div class="admonition info">
-<p>add(3, 5) の実行ステップ:</p>
-<p>命令            スタック（右が頂上）
-i32.const 3  → [3]
-i32.const 5  → [3, 5]
-i32.add      → [8]        ← 2値を取り出して加算し結果を積む</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>add(3, 5) の実行ステップ:
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>命令            スタック（右が頂上）
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>i32.const 3  → [3]
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>i32.const 5  → [3, 5]
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>i32.add      → [8]        ← 2値を取り出して加算し結果を積む
+</span></code></pre></div>
 </div>
 <p>この設計により、検証（型チェック）がシンプルになります。各命令の実行前後のスタックの型を静的に追跡できるためです。</p>
 <hr />

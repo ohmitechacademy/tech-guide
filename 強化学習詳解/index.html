@@ -7865,12 +7865,12 @@ A(s, a) = Q(s, a) - V(s)
 \]</div>
 <p><strong>クリッピングの意味：</strong></p>
 <div class="admonition info">
-<p>Advantage &gt; 0 の場合（良い行動）:
-  r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ
-  → 良い行動への確率を増やしすぎない</p>
-<p>Advantage &lt; 0 の場合（悪い行動）:
-  r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ
-  → 悪い行動への確率を減らしすぎない</p>
+<p><strong>Advantage &gt; 0 の場合（良い行動）</strong></p>
+<p>r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ
+→ 良い行動への確率を増やしすぎない</p>
+<p><strong>Advantage &lt; 0 の場合（悪い行動）</strong></p>
+<p>r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ
+→ 悪い行動への確率を減らしすぎない</p>
 </div>
 <p><span class="arithmatex">\(\varepsilon = 0.2\)</span> が一般的。更新前後の方策が大きく離れることを防ぎ、学習を安定させます。</p>
 <h3 id="ppo">PPO の学習ループ<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h3>
@@ -7942,7 +7942,7 @@ V(s_t) = \mathbb{E}_{a_t \sim \pi}\!\left[Q(s_t, a_t) - \alpha \log \pi(a_t|s_t)
 <h3 id="dyna">Dyna アーキテクチャ<a class="headerlink" href="#dyna" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p>実環境   → 少量のデータを収集 → モデルを更新
-           ↓
+↓
 学習済みモデル → 仮想 rollout を大量生成 → 価値関数/方策を更新</p>
 </div>
 <p>実環境のサンプルを増幅できるため<strong>サンプル効率が大幅に向上</strong>します。</p>
@@ -7952,19 +7952,19 @@ V(s_t) = \mathbb{E}_{a_t \sim \pi}\!\left[Q(s_t, a_t) - \alpha \log \pi(a_t|s_t)
 <p>Latent Dynamics Model（潜在空間での遷移モデル）を使って、<strong>夢の中で学習</strong>します。</p>
 <div class="admonition info">
 <p>実環境 → エンコーダ → 潜在状態 z
-                              ↓ 遷移モデル（RSSM）
-                    潜在状態 z' → デコーダ → 仮想画像
-                              ↓
-                    方策の更新（潜在空間内で完結）</p>
+↓ 遷移モデル（RSSM）
+潜在状態 z' → デコーダ → 仮想画像
+↓
+方策の更新（潜在空間内で完結）</p>
 </div>
 <hr />
 <h2 id="rlhfreinforcement-learning-from-human-feedback">RLHF（Reinforcement Learning from Human Feedback）<a class="headerlink" href="#rlhfreinforcement-learning-from-human-feedback" title="Permanent link">&para;</a></h2>
 <p><a href="../ファインチューニング詳解/">ファインチューニング詳解</a> で学んだ RLHF の RL 部分（PPO）をここで接続します。</p>
 <div class="admonition info">
-<p>報酬モデル rm(x, y):
-  プロンプト x, 応答 y のペアに報酬を付与</p>
-<p>PPO による最適化:
-  J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ || π_ref)</p>
+<p><strong>報酬モデル rm(x, y)</strong></p>
+<p>プロンプト x, 応答 y のペアに報酬を付与</p>
+<p><strong>PPO による最適化</strong></p>
+<p>J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ || π_ref)</p>
 <p>KL ペナルティで元の言語モデルから離れすぎないよう制約</p>
 </div>
 <p><span class="arithmatex">\(\beta\)</span>：KL ペナルティ係数。大きいほど元のモデルに近い応答を保つ。</p>

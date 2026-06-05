@@ -7818,9 +7818,9 @@
 <p>ドメインを IP アドレスに変換する仕組みです。インターネット上の「電話帳」と例えられます。</p>
 <div class="admonition info">
 <p>ブラウザ → DNS に問い合わせ「ohmitechacademy.com の IP は？」
-              ↓
-          DNS が回答「203.0.113.45 です」
-              ↓
+↓
+DNS が回答「203.0.113.45 です」
+↓
 ブラウザ → 203.0.113.45 のサーバーにアクセスします</p>
 </div>
 <p>Cloudflare はこの DNS の管理もしてくれるサービスです。</p>
@@ -7973,13 +7973,13 @@ HTTPS は <strong>TLS</strong> （旧称 SSL）という仕組みで通信を暗
 <p>ブラウザが Web ページを表示するまでの流れを順番に見てみましょう。</p>
 <div class="admonition info">
 <p>① ブラウザに URL を入力します
-      ↓
+↓
 ② DNS でドメインを IP アドレスに変換します
-      ↓
+↓
 ③ サーバーに「このページをください」（HTTP リクエスト）
-      ↓
+↓
 ④ サーバーが HTML・CSS・画像などを返します（HTTP レスポンス）
-      ↓
+↓
 ⑤ ブラウザが受け取ったデータを解析・表示します</p>
 </div>
 <p>この流れでは、DNS、HTTP、HTML/CSS/画像の取得、ブラウザでの描画が連続して起きています。ページが遅いときは、DNSが遅いのか、サーバーの応答が遅いのか、画像が大きいのか、JavaScriptの実行が重いのかを分けて考えます。</p>
@@ -8012,19 +8012,19 @@ CDN あり：日本 → 日本国内の CDN サーバー（速い）</p>
 <div class="admonition info">
 <p>あなたが ota_hp を更新するとき</p>
 <p>① git push → GitHub にコードが届きます
-      ↓
+↓
 ② Cloudflare Pages が変更を検知します
-      ↓
+↓
 ③ Cloudflare がビルドして HTML を生成します
-      ↓
+↓
 ④ Cloudflare の CDN サーバー（世界各地）に配信します
-      ↓
+↓
 ⑤ ユーザーが ohmitechacademy.com にアクセスします
-      ↓
+↓
 ⑥ DNS が IP アドレスを返します → Cloudflare サーバーに接続します
-      ↓
+↓
 ⑦ 最寄りの CDN サーバーから HTML・CSS を受け取ります
-      ↓
+↓
 ⑧ ブラウザが表示します</p>
 </div>
 <p>この流れを見ると、サイト公開は「GitHubに置いたファイルをユーザーが直接見る」わけではないことが分かります。GitHubはソースコードの置き場、Cloudflare Pagesはビルドと配信の担当、DNSはドメイン名を配信先へ向ける担当です。</p>

@@ -7697,11 +7697,11 @@
 <h2 id="_5">相関と因果の違い<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="confounding-variable">交絡因子（Confounding Variable）<a class="headerlink" href="#confounding-variable" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>疑似相関の例:
-  アイスクリームの売上 ↑ → 溺死者数 ↑</p>
-<p>真の構造:
-  気温 ↑ → アイスクリームの売上 ↑
-  気温 ↑ → 海水浴者増加 → 溺死者数 ↑</p>
+<p><strong>疑似相関の例</strong></p>
+<p>アイスクリームの売上 ↑ → 溺死者数 ↑</p>
+<p><strong>真の構造</strong></p>
+<p>気温 ↑ → アイスクリームの売上 ↑
+気温 ↑ → 海水浴者増加 → 溺死者数 ↑</p>
 <p>「気温」が交絡因子</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -7734,15 +7734,15 @@
 <p><strong>有向非巡回グラフ（DAG）</strong>で因果の方向を表します。</p>
 <div class="admonition info">
 <p>【交絡がある場合】
-  温度 → アイスの売上
-  温度 → 溺死者数
-  （アイスと溺死に直接の矢印はない）</p>
+温度 → アイスの売上
+温度 → 溺死者数
+（アイスと溺死に直接の矢印はない）</p>
 <p>【真の因果がある場合】
-  喫煙 → 肺がん
-  （直接の矢印がある）</p>
+喫煙 → 肺がん
+（直接の矢印がある）</p>
 <p>【逆因果の例】
-  病院に行く → 病気？
-  実際は: 病気 → 病院に行く</p>
+病院に行く → 病気？
+実際は: 病気 → 病院に行く</p>
 </div>
 <hr />
 <h2 id="rct">ランダム化比較試験（RCT）<a class="headerlink" href="#rct" title="Permanent link">&para;</a></h2>
@@ -7779,9 +7779,9 @@
 <p>RCT が不可能なとき（過去のデータしかない・介入対象を制御できない）に使います。</p>
 <div class="admonition info">
 <p>例: 最低賃金引き上げの雇用への影響
-  → ある州だけ最低賃金が上がった
-  → 「介入群（上がった州）」vs「対照群（上がっていない州）」
-  → 介入前後の差を比較</p>
+→ ある州だけ最低賃金が上がった
+→ 「介入群（上がった州）」vs「対照群（上がっていない州）」
+→ 介入前後の差を比較</p>
 </div>
 <h3 id="did">DID の直感<a class="headerlink" href="#did" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
@@ -7872,11 +7872,11 @@
 <p>交絡因子を観測できない場合でも、<strong>「処置に影響するが結果には直接影響しない変数（操作変数）」</strong>があれば因果効果を推定できます。</p>
 <div class="admonition info">
 <p>例: 教育年数が賃金に与える影響
-  問題: 「もともと能力が高い人」は教育年数も賃金も高い → 交絡
-  操作変数: 「近くに大学があるか」
-    → 大学の近さ → 進学率（教育年数）に影響する
-    → 大学の近さ → 賃金には（教育を通じてしか）影響しない
-    → 近さを操作変数として使うことで能力の交絡を除去できる</p>
+問題: 「もともと能力が高い人」は教育年数も賃金も高い → 交絡
+操作変数: 「近くに大学があるか」
+→ 大学の近さ → 進学率（教育年数）に影響する
+→ 大学の近さ → 賃金には（教育を通じてしか）影響しない
+→ 近さを操作変数として使うことで能力の交絡を除去できる</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">linearmodels.iv</span><span class="w"> </span><span class="kn">import</span> <span class="n">IV2SLS</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -7953,12 +7953,14 @@
 <h3 id="pc">PC アルゴリズム<a class="headerlink" href="#pc" title="Permanent link">&para;</a></h3>
 <p><strong>条件付き独立性テスト</strong>を繰り返してグラフの骨格を決め、その後に矢印の方向を決定します。</p>
 <div class="admonition info">
-<p>アルゴリズムの流れ:
-  1. 全変数間に無向辺を引く（完全グラフ）
-  2. 条件付き独立: X ⊥ Y | Z なら辺 X-Y を削除
-  3. 残った辺でスケルトン（骨格）を決定
-  4. v-structure（合流点）を探して矢印を付ける
-  5. 残りの矢印を伝播ルールで決定</p>
+<p><strong>アルゴリズムの流れ</strong></p>
+<ol>
+<li>全変数間に無向辺を引く（完全グラフ）</li>
+<li>条件付き独立: X ⊥ Y | Z なら辺 X-Y を削除</li>
+<li>残った辺でスケルトン（骨格）を決定</li>
+<li>v-structure（合流点）を探して矢印を付ける</li>
+<li>残りの矢印を伝播ルールで決定</li>
+</ol>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># pip install causal-learn</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">causallearn.search.ConstraintBased.PC</span><span class="w"> </span><span class="kn">import</span> <span class="n">pc</span>
@@ -8023,19 +8025,19 @@
 </span></code></pre></div>
 <h3 id="_9">因果探索の限界<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
-<p>PC アルゴリズム:
-  ✓ 仮定が少ない（線形・非線形どちらでも使える）
-  ✗ 矢印方向を完全に決定できないことがある（等価クラス）</p>
-<p>LiNGAM:
-  ✓ 方向を完全に決定できる
-  ✗ 線形性・非ガウス性の仮定が必要</p>
-<p>NOTEARS:
-  ✓ スケーラブル（変数が多くても使える）
-  ✗ 局所最適に陥ることがある</p>
-<p>共通の注意:
-  → 因果探索の結果は仮説（ドメイン知識で必ず確認）
-  → サンプルサイズが小さいと不安定
-  → 測定できない交絡因子は検出できない</p>
+<p><strong>PC アルゴリズム</strong></p>
+<p>✓ 仮定が少ない（線形・非線形どちらでも使える）
+✗ 矢印方向を完全に決定できないことがある（等価クラス）</p>
+<p><strong>LiNGAM</strong></p>
+<p>✓ 方向を完全に決定できる
+✗ 線形性・非ガウス性の仮定が必要</p>
+<p><strong>NOTEARS</strong></p>
+<p>✓ スケーラブル（変数が多くても使える）
+✗ 局所最適に陥ることがある</p>
+<p><strong>共通の注意</strong></p>
+<p>→ 因果探索の結果は仮説（ドメイン知識で必ず確認）
+→ サンプルサイズが小さいと不安定
+→ 測定できない交絡因子は検出できない</p>
 </div>
 <hr />
 <h2 id="_10">確認問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>

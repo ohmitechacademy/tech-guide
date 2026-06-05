@@ -7438,16 +7438,16 @@
 <hr />
 <h2 id="dl">なぜテーブルデータで DL は苦手か<a class="headerlink" href="#dl" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p>画像データ:
-  ・特徴量（ピクセル）が均質で空間的な局所性がある
-  ・CNN が局所パターンを階層的に学習できる
-  ・大量データ（ImageNet: 100万枚以上）が存在する</p>
-<p>テーブルデータの難しさ:
-  ・数値・カテゴリ・バイナリが混在（異種混合特徴量）
-  ・特徴量間の独立性が高い（空間的・時間的な構造が少ない）
-  ・データ量が少ない（数百〜数万行が多い）
-  ・正則化なしでは簡単に過学習する
-  ・MLP は特徴量の順序に不変だが、その学習は難しい</p>
+<p><strong>画像データ</strong></p>
+<p>・特徴量（ピクセル）が均質で空間的な局所性がある
+・CNN が局所パターンを階層的に学習できる
+・大量データ（ImageNet: 100万枚以上）が存在する</p>
+<p><strong>テーブルデータの難しさ</strong></p>
+<p>・数値・カテゴリ・バイナリが混在（異種混合特徴量）
+・特徴量間の独立性が高い（空間的・時間的な構造が少ない）
+・データ量が少ない（数百〜数万行が多い）
+・正則化なしでは簡単に過学習する
+・MLP は特徴量の順序に不変だが、その学習は難しい</p>
 </div>
 <table>
 <thead>
@@ -7588,14 +7588,14 @@
 <p>2021 年に提案された、各特徴量を「トークン」として扱い、Transformer で処理するアーキテクチャです。</p>
 <div class="admonition info">
 <p>各特徴量 → 線形変換（Feature Tokenizer）→ トークンベクトル
-                                              ↓
-                             [CLS] [feat1] [feat2] ... [featN]
-                                              ↓
-                                  Multi-Head Attention
-                                  Feed Forward
-                                  Layer Normalization
-                                              ↓
-                             [CLS] トークンを分類ヘッドへ</p>
+↓
+[CLS] [feat1] [feat2] ... [featN]
+↓
+Multi-Head Attention
+Feed Forward
+Layer Normalization
+↓
+[CLS] トークンを分類ヘッドへ</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 簡略化した FT-Transformer の特徴量トークン化</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FeatureTokenizer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>

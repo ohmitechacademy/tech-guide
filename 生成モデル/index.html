@@ -7428,10 +7428,10 @@
 <hr />
 <h2 id="vs">識別 vs 生成<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p>識別モデル（これまで）:
-  入力: 猫の画像 → モデル → 出力: 「猫」</p>
-<p>生成モデル（このページ）:
-  入力: ランダムなノイズ (z) → モデル → 出力: 猫の画像（本物らしい）</p>
+<p><strong>識別モデル（これまで）</strong></p>
+<p>入力: 猫の画像 → モデル → 出力: 「猫」</p>
+<p><strong>生成モデル（このページ）</strong></p>
+<p>入力: ランダムなノイズ (z) → モデル → 出力: 猫の画像（本物らしい）</p>
 </div>
 <p>生成モデルの目標は「本物のデータの分布 p_data(x)」を学習し、そこからサンプリングすることです。3 つの代表的アプローチは「どうやってその分布を学ぶか」が異なります。</p>
 <hr />
@@ -7546,7 +7546,7 @@
 <p>データを<strong>潜在空間の確率分布</strong>として表現します。GAN と違い、「どんな潜在変数がどんな画像を生成するか」を解釈しやすい構造です。</p>
 <div class="admonition info">
 <p>Encoder: 画像 → 平均μ と 分散σ（潜在空間の分布パラメータ）
-           ↓ μ と σ からサンプリング（再パラメータ化トリック）
+↓ μ と σ からサンプリング（再パラメータ化トリック）
 Decoder: 潜在変数 z → 再構成画像</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">VAE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -7586,11 +7586,11 @@ Decoder: 潜在変数 z → 再構成画像</p>
 <p>現在の画像生成 AI（Stable Diffusion・DALL-E）の主流技術です。</p>
 <p><strong>核心アイデア：「ノイズを少しずつ足していく（拡散）」の逆を学ぶ</strong></p>
 <div class="admonition info">
-<p>Forward process（データ → ノイズ）:
-  猫の画像 → 少しノイズを加える → もっとノイズを加える → ... → 完全なランダムノイズ</p>
-<p>Reverse process（モデルが学習）:
-  ランダムノイズ → 少しノイズを取り除く → ... → 猫の画像
-  ↑ ここを U-Net（ニューラルネット）が予測する</p>
+<p><strong>Forward process（データ → ノイズ）</strong></p>
+<p>猫の画像 → 少しノイズを加える → もっとノイズを加える → ... → 完全なランダムノイズ</p>
+<p><strong>Reverse process（モデルが学習）</strong></p>
+<p>ランダムノイズ → 少しノイズを取り除く → ... → 猫の画像
+↑ ここを U-Net（ニューラルネット）が予測する</p>
 </div>
 <pre class="mermaid"><code>flowchart LR
     IMG[元画像] --&gt;|ノイズを少しずつ追加| NOISE[完全ノイズ]
@@ -7600,7 +7600,7 @@ Decoder: 潜在変数 z → 再構成画像</p>
 <p>Stable Diffusion はここに <strong>テキスト条件付け</strong> を加えます。</p>
 <div class="admonition info">
 <p>「宇宙を旅する猫」 → CLIP テキストエンコーダ → テキスト埋め込みベクトル
-                                                        ↓
+↓
 ランダムノイズ → U-Net（テキストを参照しながらノイズ除去） → 猫の画像</p>
 </div>
 <p><strong>主要コンポーネント：</strong></p>

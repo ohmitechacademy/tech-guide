@@ -7791,14 +7791,15 @@
 <h3 id="_5">基本アイデア<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>4 億組の（テキスト, 画像）ペアを使い、「テキストと対応する画像の埋め込みを近く、対応しない画像は遠く」なるよう学習します。</p>
 <div class="admonition info">
-<p>テキストエンコーダ → t₁ t₂ t₃ t₄  (行ベクトル: N 個のテキスト)
-                     ┌─────────────┐
-イメージエンコーダ → │i₁ i₂ i₃ i₄ │ (列ベクトル: N 個の画像)
-                     └─────────────┘
-コサイン類似度行列:
-   ↑正例（対角成分）を高く
-   ↓負例（非対角）を低く
-→ N² - N 個の負例を使う（大バッチが重要な理由）</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>テキストエンコーダ → t₁ t₂ t₃ t₄  (行ベクトル: N 個のテキスト)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                     ┌─────────────┐
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>イメージエンコーダ → │i₁ i₂ i₃ i₄ │ (列ベクトル: N 個の画像)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                     └─────────────┘
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>コサイン類似度行列:
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   ↑正例（対角成分）を高く
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ↓負例（非対角）を低く
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>→ N² - N 個の負例を使う（大バッチが重要な理由）
+</span></code></pre></div>
 </div>
 <p><strong>損失関数：</strong></p>
 <div class="arithmatex">\[
@@ -7809,10 +7810,10 @@
 <p>CLIP の強力な応用の一つです。分類するラベルを「a photo of a {class}」のようなテンプレートに埋め込み、画像との類似度でクラスを決定します。</p>
 <div class="admonition info">
 <p>クエリ画像: 🐱 の写真</p>
-<p>テキスト候補:
-  "a photo of a cat"    → 類似度: 0.94  ← 最大 = このクラスに分類
-  "a photo of a dog"    → 類似度: 0.12
-  "a photo of a car"    → 類似度: 0.05</p>
+<p><strong>テキスト候補</strong></p>
+<p>"a photo of a cat"    → 類似度: 0.94  ← 最大 = このクラスに分類
+"a photo of a dog"    → 類似度: 0.12
+"a photo of a car"    → 類似度: 0.05</p>
 <p>→ Fine-tuning なしで分類できる（ゼロショット）</p>
 </div>
 <p><strong>ImageNet での精度：</strong> CLIP の ViT-L モデルは教師あり学習なしで ImageNet Top-1 精度 76% を達成（ResNet-50 の監督あり 76% と同等）。</p>
@@ -7821,16 +7822,18 @@
 <p>「画像を見て質問に答える（VQA）」「画像を説明する（Image Captioning）」「OCR」などのタスクを扱います。</p>
 <h3 id="1">アーキテクチャ パターン 1：クロスアテンション融合<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>画像トークン → ビジョンエンコーダ → 視覚特徴 ──→ クロスアテンション
-                                                       ↑
-テキストトークン → 言語モデル ──────────────────────────┘</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>画像トークン → ビジョンエンコーダ → 視覚特徴 ──→ クロスアテンション
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                                       ↑
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>テキストトークン → 言語モデル ──────────────────────────┘
+</span></code></pre></div>
 </div>
 <p>Flamingo（DeepMind）が代表例。言語モデルの中間層に視覚特徴をクロスアテンションで注入します。</p>
 <h3 id="2llava">アーキテクチャ パターン 2：プロジェクション層（LLaVA 型）<a class="headerlink" href="#2llava" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>画像 → ビジョンエンコーダ（CLIP の ViT）→ 視覚トークン列
-                                              ↓ 線形プロジェクション
-テキストトークン ─────────────────────────→ 統合トークン列 → LLM</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>画像 → ビジョンエンコーダ（CLIP の ViT）→ 視覚トークン列
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                                              ↓ 線形プロジェクション
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>テキストトークン ─────────────────────────→ 統合トークン列 → LLM
+</span></code></pre></div>
 </div>
 <p><strong>LLaVA（Large Language and Vision Assistant）：</strong> CLIP の ViT と Vicuna（LLaMA の派生）を線形変換で結合。シンプルな接続ながら強力な性能を示しました。学習は 2 段階：
 1. 視覚-言語アライメント（プロジェクション層のみ学習）
@@ -7861,10 +7864,10 @@
 <h2 id="-_1">音声-テキストモダリティ<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h2>
 <h3 id="whisperopenai">Whisper（OpenAI）<a class="headerlink" href="#whisperopenai" title="Permanent link">&para;</a></h3>
 <p>自己教師あり学習（音声 → テキストの弱教師）で学習した音声認識モデル。68 万時間の多言語音声で学習。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">whisper</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">model</span> <span class="o">=</span> <span class="n">whisper</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transcribe</span><span class="p">(</span><span class="s2">&quot;audio.mp3&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">whisper</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">model</span> <span class="o">=</span> <span class="n">whisper</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transcribe</span><span class="p">(</span><span class="s2">&quot;audio.mp3&quot;</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
 </span></code></pre></div>
 <h3 id="speecht5microsoft">SpeechT5（Microsoft）<a class="headerlink" href="#speecht5microsoft" title="Permanent link">&para;</a></h3>
 <p>テキスト・音声・その他の音声タスク（TTS・ASR・声質変換）を統一したフレームワーク。</p>

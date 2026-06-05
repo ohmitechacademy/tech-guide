@@ -7890,7 +7890,7 @@ w \leftarrow w - \frac{\eta}{\sqrt{\hat{v}_t} + \varepsilon} \hat{m}_t
 <p>原料 x → 機械A → 中間品 g → 機械B → 製品 y</p>
 <p>「原料が 1 kg 増えたとき、製品は何 kg 増える？」</p>
 <p>機械A の変換率（原料→中間品）: 0.8 kg/kg
-  機械B の変換率（中間品→製品）: 0.5 kg/kg</p>
+機械B の変換率（中間品→製品）: 0.5 kg/kg</p>
 <p>全体の変換率 = 0.8 × 0.5 = 0.4 kg/kg</p>
 </div>
 <p>これが連鎖律の本質です。<strong>「影響が連鎖するとき、変化率は掛け算でつながる」</strong></p>
@@ -7902,14 +7902,16 @@ y = f(g(x)) \text{ のとき} \quad \frac{dy}{dx} = \frac{dy}{dg} \times \frac{d
 <h3 id="step-2">STEP 2：手計算で確認する<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h3>
 <p><code>y = (2x + 1)²</code> の <code>x=3</code> での微分を、連鎖律で計算してみましょう。</p>
 <div class="admonition info">
-<p>内側の関数 g(x) = 2x + 1   → g'(x) = 2
-外側の関数 f(g) = g²        → f'(g) = 2g</p>
-<p>x=3 では：
-  g(3) = 2<em>3 + 1 = 7
-  dy/dx = f'(g(3)) × g'(3)
-        = 2</em>7      × 2
-        = 14       × 2
-        = 28</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>内側の関数 g(x) = 2x + 1   → g&#39;(x) = 2
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>外側の関数 f(g) = g²        → f&#39;(g) = 2g
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>x=3 では：
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  g(3) = 2*3 + 1 = 7
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  dy/dx = f&#39;(g(3)) × g&#39;(3)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        = 2*7      × 2
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        = 14       × 2
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        = 28
+</span></code></pre></div>
 </div>
 <p>直接計算で確認：<code>y = (2*3+1)² = 49</code>、<code>(2*3.001+1)² = 49.0280...</code> → 差 ÷ 0.001 ≈ 28 ✓</p>
 <hr />
@@ -7917,53 +7919,59 @@ y = f(g(x)) \text{ のとき} \quad \frac{dy}{dx} = \frac{dy}{dg} \times \frac{d
 <p>1 ニューロンの順伝播と逆伝播を完全に手で追います。</p>
 <div class="admonition info">
 <p>設定：
-  入力 x = 2.0
-  重み w = 0.5
-  バイアス b = 0.1
-  正解 y_true = 1.0</p>
+入力 x = 2.0
+重み w = 0.5
+バイアス b = 0.1
+正解 y_true = 1.0</p>
 </div>
 <p><strong>■ 順伝播（前向き計算）</strong></p>
 <div class="admonition info">
 <p>u    = w * x + b
-     = 0.5 * 2.0 + 0.1
-     = 1.1</p>
+= 0.5 * 2.0 + 0.1
+= 1.1</p>
 <p>out  = sigmoid(u)
-     = 1 / (1 + e^(-1.1))
-     ≈ 0.750</p>
+= 1 / (1 + e^(-1.1))
+≈ 0.750</p>
 <p>損失 L = (out - y_true)²
-       = (0.750 - 1.0)²
-       = (-0.250)²
-       = 0.0625</p>
+= (0.750 - 1.0)²
+= (-0.250)²
+= 0.0625</p>
 </div>
 <p><strong>■ 逆伝播（連鎖律を逆順に）</strong></p>
 <p>求めたいのは「w を少し動かしたら損失 L はどれだけ変わるか（∂L/∂w）」です。経路を逆にたどります。</p>
 <div class="admonition info">
-<p>L → out → u → w  という経路を逆向きに</p>
-<p>∂L/∂out = 2 * (out - y_true)
-         = 2 * (0.750 - 1.0)
-         = -0.500   ← out が増えると損失は 0.5 の速さで変化</p>
-<p>∂out/∂u = sigmoid(u) * (1 - sigmoid(u))
-         = 0.750 * (1 - 0.750)
-         = 0.188    ← sigmoid の微分（u が増えると out がこの速さで変化）</p>
-<p>∂u/∂w   = x = 2.0  ← w が増えると u は 2 倍の速さで増える</p>
-<p>───────────────────────────────────
-∂L/∂w = ∂L/∂out × ∂out/∂u × ∂u/∂w
-       = (-0.500) × 0.188  × 2.0
-       = -0.188</p>
-<p>∂L/∂b = ∂L/∂out × ∂out/∂u × ∂u/∂b
-       = (-0.500) × 0.188  × 1.0
-       = -0.094</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>L → out → u → w  という経路を逆向きに
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>∂L/∂out = 2 * (out - y_true)
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>         = 2 * (0.750 - 1.0)
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>         = -0.500   ← out が増えると損失は 0.5 の速さで変化
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>∂out/∂u = sigmoid(u) * (1 - sigmoid(u))
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>         = 0.750 * (1 - 0.750)
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>         = 0.188    ← sigmoid の微分（u が増えると out がこの速さで変化）
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>∂u/∂w   = x = 2.0  ← w が増えると u は 2 倍の速さで増える
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>───────────────────────────────────
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>∂L/∂w = ∂L/∂out × ∂out/∂u × ∂u/∂w
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>       = (-0.500) × 0.188  × 2.0
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>       = -0.188
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>∂L/∂b = ∂L/∂out × ∂out/∂u × ∂u/∂b
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>       = (-0.500) × 0.188  × 1.0
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>       = -0.094
+</span></code></pre></div>
 </div>
 <p><strong>∂L/∂w = -0.188</strong> が意味すること：「w を少し増やすと損失が減る方向」→ w を増やせば良い。</p>
 <p><strong>■ 重みの更新</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>w_new = w - lr * ∂L/∂w
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      = 0.5 - 0.1 * (-0.188)
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      = 0.5 + 0.019
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      = 0.519
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>b_new = b - lr * ∂L/∂b
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      = 0.1 - 0.1 * (-0.094)
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      = 0.109
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>w_new = w - lr * ∂L/∂w
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>      = 0.5 - 0.1 * (-0.188)
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      = 0.5 + 0.019
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      = 0.519
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>b_new = b - lr * ∂L/∂b
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>      = 0.1 - 0.1 * (-0.094)
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>      = 0.109
 </span></code></pre></div>
 <p>→ 更新後 w=0.519, b=0.109 で同じ入力を流すと、out が 1.0 に少し近づきます。これを何百・何千回と繰り返すのが学習です。</p>
 <p>PyTorch では <code>loss.backward()</code> がこの計算をすべてのパラメータについて自動で行います（自動微分 / autograd）。</p>

@@ -7617,19 +7617,19 @@
 <hr />
 <h2 id="_4">なぜ勾配法だけでは足りないのか<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p>勾配法が使えない・難しい状況:</p>
+<p><strong>勾配法が使えない・難しい状況</strong></p>
 <p>組み合わせ最適化:
-    「20都市を最短経路で巡回する（巡回セールスマン問題）」
-    → 経路の数は 20! = 2.4 × 10^18 通り → 全探索不可能
-    → 連続でないので微分できない</p>
+「20都市を最短経路で巡回する（巡回セールスマン問題）」
+→ 経路の数は 20! = 2.4 × 10^18 通り → 全探索不可能
+→ 連続でないので微分できない</p>
 <p>ブラックボックス最適化:
-    ニューラルネットワークのアーキテクチャ探索
-    「層の数・幅・活性化関数」の組み合わせ
-    → 微分できない離散変数が混在</p>
+ニューラルネットワークのアーキテクチャ探索
+「層の数・幅・活性化関数」の組み合わせ
+→ 微分できない離散変数が混在</p>
 <p>多峰性（局所最適が多数ある）:
-    f(x) = sin(x) + sin(3x) + sin(5x)
-    → 勾配法はたまたま出発した近くの山頂に登るだけ
-    → 本当の最高点を見つけられない可能性が高い</p>
+f(x) = sin(x) + sin(3x) + sin(5x)
+→ 勾配法はたまたま出発した近くの山頂に登るだけ
+→ 本当の最高点を見つけられない可能性が高い</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -7656,13 +7656,13 @@
 <h2 id="ga-genetic-algorithm">遺伝的アルゴリズム（GA: Genetic Algorithm）<a class="headerlink" href="#ga-genetic-algorithm" title="Permanent link">&para;</a></h2>
 <h3 id="_5">自然選択のメタファー<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>自然界の進化:
-  個体群 → 環境で生き残れる個体が繁殖 → 子孫に形質が遺伝
-         → 突然変異で多様性 → 何世代もかけて適応</p>
-<p>遺伝的アルゴリズム:
-  解の集合（個体群） → 良い解ほど次世代に残る（選択）
-  → 2つの解を組み合わせる（交叉） → ランダムに変化（突然変異）
-  → 何世代も繰り返して良い解に収束</p>
+<p><strong>自然界の進化</strong></p>
+<p>個体群 → 環境で生き残れる個体が繁殖 → 子孫に形質が遺伝
+→ 突然変異で多様性 → 何世代もかけて適応</p>
+<p><strong>遺伝的アルゴリズム</strong></p>
+<p>解の集合（個体群） → 良い解ほど次世代に残る（選択）
+→ 2つの解を組み合わせる（交叉） → ランダムに変化（突然変異）
+→ 何世代も繰り返して良い解に収束</p>
 </div>
 <h3 id="ga_1">GA の基本サイクル<a class="headerlink" href="#ga_1" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
@@ -7791,13 +7791,13 @@
 <h2 id="sa-simulated-annealing">焼きなまし法（SA: Simulated Annealing）<a class="headerlink" href="#sa-simulated-annealing" title="Permanent link">&para;</a></h2>
 <h3 id="_7">金属の「焼きなまし」からのアナロジー<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>金属の焼きなまし（物理）:
-  高温: 原子が活発に動き回る → エネルギーが低い安定状態を探す
-  徐々に冷却: 動きが鈍くなる → 最終的に安定な結晶構造に落ち着く</p>
-<p>焼きなまし法:
-  高温（初期）: 悪い解でも受け入れる確率が高い → 局所最適から脱出できる
-  徐々に冷却: 受け入れ確率が下がる → 良い解の周辺で精密に探索
-  低温（最終）: ほぼ改善のみ受け入れる → 収束</p>
+<p><strong>金属の焼きなまし（物理）</strong></p>
+<p>高温: 原子が活発に動き回る → エネルギーが低い安定状態を探す
+徐々に冷却: 動きが鈍くなる → 最終的に安定な結晶構造に落ち着く</p>
+<p><strong>焼きなまし法</strong></p>
+<p>高温（初期）: 悪い解でも受け入れる確率が高い → 局所最適から脱出できる
+徐々に冷却: 受け入れ確率が下がる → 良い解の周辺で精密に探索
+低温（最終）: ほぼ改善のみ受け入れる → 収束</p>
 </div>
 <h3 id="_8">受理確率の数式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>現在の解 <span class="arithmatex">\(x\)</span>、新しい解 <span class="arithmatex">\(x'\)</span>、温度 <span class="arithmatex">\(T\)</span> とします。</p>
@@ -7866,9 +7866,9 @@ P(\text{受理}) =
 <h2 id="pso-particle-swarm-optimization">粒子群最適化（PSO: Particle Swarm Optimization）<a class="headerlink" href="#pso-particle-swarm-optimization" title="Permanent link">&para;</a></h2>
 <h3 id="_9">鳥の群れ・魚の群れからのアナロジー<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>群れの動き:
-  各個体は「自分が今まで見つけた最良の位置」と
-  「群れ全体の最良の位置」の両方に引き寄せられながら飛ぶ</p>
+<p><strong>群れの動き</strong></p>
+<p>各個体は「自分が今まで見つけた最良の位置」と
+「群れ全体の最良の位置」の両方に引き寄せられながら飛ぶ</p>
 </div>
 <div class="arithmatex">\[
 v_i \leftarrow w \cdot v_i + c_1 r_1 (\underbrace{p_i - x_i}_{\text{自分の最良に引き寄せ}}) + c_2 r_2 (\underbrace{g - x_i}_{\text{群れの最良に引き寄せ}})

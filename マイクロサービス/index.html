@@ -7494,16 +7494,16 @@
 <hr />
 <h2 id="_6">いつマイクロサービスを選ぶか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<p>モノリスを選ぶべき場合:
-  ✓ チームが小さい（&lt; 10 人）
-  ✓ 要件がまだ変化しやすい
-  ✓ リリース頻度が低い
-  ✓ まずプロダクトを動かすことが優先</p>
-<p>マイクロサービスを検討する場合:
-  ✓ チームが大きく、サービス間で独立して動きたい
-  ✓ 一部機能だけ高トラフィックでスケールしたい
-  ✓ 機能ごとに異なる技術（Python / Go / Node.js）を使いたい
-  ✓ 機能ごとに異なるリリーススピードがある</p>
+<p><strong>モノリスを選ぶべき場合</strong></p>
+<p>✓ チームが小さい（&lt; 10 人）
+✓ 要件がまだ変化しやすい
+✓ リリース頻度が低い
+✓ まずプロダクトを動かすことが優先</p>
+<p><strong>マイクロサービスを検討する場合</strong></p>
+<p>✓ チームが大きく、サービス間で独立して動きたい
+✓ 一部機能だけ高トラフィックでスケールしたい
+✓ 機能ごとに異なる技術（Python / Go / Node.js）を使いたい
+✓ 機能ごとに異なるリリーススピードがある</p>
 </div>
 <blockquote>
 <p><strong>「最初はモノリスで作り、必要になったらマイクロサービスに分割する」</strong> が現実的なアプローチです。</p>
@@ -7513,8 +7513,8 @@
 <p>クライアントは複数のサービスに直接アクセスする代わりに、<strong>1 つの入口（API Gateway）</strong> にリクエストを送ります。</p>
 <div class="admonition info">
 <p>クライアント → API Gateway → ユーザーサービス  (:8001)
-                           → 注文サービス    (:8002)
-                           → 決済サービス    (:8003)</p>
+→ 注文サービス    (:8002)
+→ 決済サービス    (:8003)</p>
 </div>
 <p>API ゲートウェイが担う機能：</p>
 <table>
@@ -7600,12 +7600,12 @@
 <p>メッセージキュー（RabbitMQ / Kafka）を経由して疎結合にします。</p>
 <div class="admonition info">
 <p>注文サービス → [order.created イベント] → メッセージキュー
-                                              ↓
-                                        決済サービスが受信
-                                              ↓
-                                        [payment.processed イベント] → メッセージキュー
-                                              ↓
-                                        通知サービスが受信 → メール送信</p>
+↓
+決済サービスが受信
+↓
+[payment.processed イベント] → メッセージキュー
+↓
+通知サービスが受信 → メール送信</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># RabbitMQ を使う例（aio-pika）</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># pip install aio-pika</span>
@@ -7639,15 +7639,15 @@
 <h2 id="_9">データの分割<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>マイクロサービスの原則：<strong>各サービスは独自のデータベースを持つ</strong>。</p>
 <div class="admonition info">
-<p>❌ 共有DB（アンチパターン）:
-  サービス A ─┐
-              ├─ 共通DB
-  サービス B ─┘
-  → スキーマ変更が全サービスに影響</p>
-<p>✅ サービスごとにDB:
-  サービス A → UserDB（PostgreSQL）
-  サービス B → OrderDB（PostgreSQL）
-  サービス C → CacheDB（Redis）</p>
+<p><strong>❌ 共有DB（アンチパターン）</strong></p>
+<p>サービス A ─┐
+├─ 共通DB
+サービス B ─┘
+→ スキーマ変更が全サービスに影響</p>
+<p><strong>✅ サービスごとにDB</strong></p>
+<p>サービス A → UserDB（PostgreSQL）
+サービス B → OrderDB（PostgreSQL）
+サービス C → CacheDB（Redis）</p>
 </div>
 <p>サービスをまたぐデータの整合性は <strong>Saga パターン</strong>（分散トランザクション）や<strong>結果整合性</strong>で対処します。</p>
 <hr />

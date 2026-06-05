@@ -7940,10 +7940,11 @@
 \]</div>
 <p>各ピクセルをその周辺ピクセルの<strong>加重平均</strong>に置き換える操作です。カーネルの係数が「どのような重み付けをするか」を決めます。</p>
 <div class="admonition info">
-<p>画像の一部:      ガウシアンカーネル:    出力（中心ピクセル）:
-[100  80  90]   [1 2 1]              100×1 + 80×2 + 90×1
-[ 70 120  85] * [2 4 2] / 16   →    + 70×2 + 120×4 + 85×2
-[ 60  95 110]   [1 2 1]              + ...  ÷ 16 = 平滑化値</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>画像の一部:      ガウシアンカーネル:    出力（中心ピクセル）:
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>[100  80  90]   [1 2 1]              100×1 + 80×2 + 90×1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[ 70 120  85] * [2 4 2] / 16   →    + 70×2 + 120×4 + 85×2
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>[ 60  95 110]   [1 2 1]              + ...  ÷ 16 = 平滑化値
+</span></code></pre></div>
 </div>
 <h3 id="_9">代表的なカーネル<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p><strong>平滑化フィルタ（低域通過）：</strong></p>
@@ -8026,11 +8027,12 @@
 </tbody>
 </table>
 <div class="admonition info">
-<p>元の2値画像:           膨張後:               収縮後:
-█████                █████████            ███
-██ ██  →  膨張  →   █████████  →  収縮  → ███
-█████                █████████            ███
-                  （拡大）              （縮小）</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>元の2値画像:           膨張後:               収縮後:
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>█████                █████████            ███
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>██ ██  →  膨張  →   █████████  →  収縮  → ███
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>█████                █████████            ███
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                  （拡大）              （縮小）
+</span></code></pre></div>
 </div>
 <h3 id="ocr">応用：OCR 前処理<a class="headerlink" href="#ocr" title="Permanent link">&para;</a></h3>
 <p>文字認識では「収縮でノイズ除去 → 膨張で文字を繋げる」といった処理が典型的です。</p>

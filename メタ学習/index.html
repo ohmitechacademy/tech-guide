@@ -7753,13 +7753,13 @@
 <h2 id="few-shot-learning_1">Few-shot Learning の問題設定<a class="headerlink" href="#few-shot-learning_1" title="Permanent link">&para;</a></h2>
 <h3 id="n-way-k-shot">N-way K-shot 分類<a class="headerlink" href="#n-way-k-shot" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>Support set（少量の学習サンプル）:
-  クラス A: [画像1, 画像2]   ← K=2 サンプル
-  クラス B: [画像3, 画像4]
-  クラス C: [画像5, 画像6]
-  N=3 クラス、K=2 サンプル → 3-way 2-shot 問題</p>
-<p>Query set（分類したいサンプル）:
-  ? → クラス A か B か C か？</p>
+<p><strong>Support set（少量の学習サンプル）</strong></p>
+<p>クラス A: [画像1, 画像2]   ← K=2 サンプル
+クラス B: [画像3, 画像4]
+クラス C: [画像5, 画像6]
+N=3 クラス、K=2 サンプル → 3-way 2-shot 問題</p>
+<p><strong>Query set（分類したいサンプル）</strong></p>
+<p>? → クラス A か B か C か？</p>
 </div>
 <ul>
 <li><strong>N-way：</strong> 分類先のクラス数</li>
@@ -7780,14 +7780,14 @@
 <h3 id="_5">基本アイデア<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>「各クラスのサンプルの平均埋め込みをプロトタイプとし、クエリとの距離で分類する」</p>
 <div class="admonition info">
-<p>Support set のサンプルを埋め込み:
-  クラス A: [embed(a₁), embed(a₂)] → 平均 → プロトタイプ cA
-  クラス B: [embed(b₁), embed(b₂)] → 平均 → プロトタイプ cB
-  クラス C: [embed(c₁), embed(c₂)] → 平均 → プロトタイプ cC</p>
-<p>クエリ q の分類:
-  d(embed(q), cA) = 0.3  ← 最小 → クラス A に分類
-  d(embed(q), cB) = 1.2
-  d(embed(q), cC) = 0.9</p>
+<p><strong>Support set のサンプルを埋め込み</strong></p>
+<p>クラス A: [embed(a₁), embed(a₂)] → 平均 → プロトタイプ cA
+クラス B: [embed(b₁), embed(b₂)] → 平均 → プロトタイプ cB
+クラス C: [embed(c₁), embed(c₂)] → 平均 → プロトタイプ cC</p>
+<p><strong>クエリ q の分類</strong></p>
+<p>d(embed(q), cA) = 0.3  ← 最小 → クラス A に分類
+d(embed(q), cB) = 1.2
+d(embed(q), cC) = 0.9</p>
 </div>
 <p><strong>分類確率：</strong></p>
 <div class="arithmatex">\[
@@ -7802,13 +7802,15 @@ P(y = k \mid x) = \frac{\exp(-d(f_\phi(x), c_k))}{\sum_j \exp(-d(f_\phi(x), c_j)
 <h3 id="_7">アイデア<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>「どのタスクでも、数ステップの勾配更新で良い性能を出せる初期値 <span class="arithmatex">\(\theta\)</span> を学習する」</p>
 <div class="admonition info">
-<p>通常の学習: θ → タスク A に最適化 → θ_A
-           θ → タスク B に最適化 → θ_B</p>
-<p>MAML:      θ を探す（メタ学習）
-            ↓数ステップの更新でどのタスクでも良くなる初期値
-           θ + αΔθ_A ≈ タスク A で良い性能
-           θ + αΔθ_B ≈ タスク B で良い性能
-           ...全タスクで良い性能</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>通常の学習: θ → タスク A に最適化 → θ_A
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>           θ → タスク B に最適化 → θ_B
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>MAML:      θ を探す（メタ学習）
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            ↓数ステップの更新でどのタスクでも良くなる初期値
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>           θ + αΔθ_A ≈ タスク A で良い性能
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>           θ + αΔθ_B ≈ タスク B で良い性能
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>           ...全タスクで良い性能
+</span></code></pre></div>
 </div>
 <h3 id="maml">MAML の更新式<a class="headerlink" href="#maml" title="Permanent link">&para;</a></h3>
 <p><strong>内側ループ（タスク適応）：</strong></p>
@@ -7843,13 +7845,13 @@ P(y = k \mid x) = \frac{\exp(-d(f_\phi(x), c_k))}{\sum_j \exp(-d(f_\phi(x), c_j)
 <h2 id="in-context-learningllm">In-Context Learning（LLM とメタ学習）<a class="headerlink" href="#in-context-learningllm" title="Permanent link">&para;</a></h2>
 <h3 id="few-shot">大規模言語モデルのゼロ・Few-shot<a class="headerlink" href="#few-shot" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<p>Few-shot プロンプト（GPT への入力）:
-  Q: 「映画が面白かった」の感情は？
-  A: ポジティブ</p>
+<p><strong>Few-shot プロンプト（GPT への入力）</strong></p>
+<p>Q: 「映画が面白かった」の感情は？
+A: ポジティブ</p>
 <p>Q: 「料理がまずかった」の感情は？
-  A: ネガティブ</p>
+A: ネガティブ</p>
 <p>Q: 「サービスが丁寧でした」の感情は？  ← クエリ
-  A: ← LLM が答える</p>
+A: ← LLM が答える</p>
 </div>
 <p>これは「プロンプトに含まれた例（Support set）から学習する」という Few-shot Learning に他なりません。ただし LLM の重みは更新されない——<strong>推論時の文脈から「動的に」適応</strong>します。</p>
 <p><strong>MAML との接続：</strong> Transformer の Self-Attention は、文脈内の例を「内部メモリ」として使うメタ学習器であるという理論的解釈があります（"Transformers as Meta-Learners"）。</p>

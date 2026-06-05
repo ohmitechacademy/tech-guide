@@ -8055,20 +8055,20 @@ Nginx はリクエストをイベントループで処理します（シング�
 </span></code></pre></div>
 <p><code>ls -la</code> は、隠しファイルを含めて詳細情報を表示します。先頭の <code>-rw-r--r--</code> は、ファイル種別と権限を表しています。権限の読み方が分かると、「なぜこのスクリプトを実行できないのか」「なぜこのファイルに書き込めないのか」を切り分けられます。</p>
 <div class="admonition info">
-<ul>
-<li>rw-  r--  r--
-↑  ↑    ↑    ↑
-│  │    │    └─ その他のユーザー
-│  │    └───── グループ
-│  └────────── 所有者
-└───────────── ファイル種別（-:ファイル, d:ディレクトリ）</li>
-</ul>
-<p>r = 読み取り (4)
-w = 書き込み (2)
-x = 実行    (1)</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>-  rw-  r--  r--
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>↑  ↑    ↑    ↑
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│  │    │    └─ その他のユーザー
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│  │    └───── グループ
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│  └────────── 所有者
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>└───────────── ファイル種別（-:ファイル, d:ディレクトリ）
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>r = 読み取り (4)
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>w = 書き込み (2)
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>x = 実行    (1)
+</span></code></pre></div>
 </div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># rw-r--r--</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>script.sh<span class="w">   </span><span class="c1"># rwxr-xr-x</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># rw-r--r--</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>script.sh<span class="w">   </span><span class="c1"># rwxr-xr-x</span>
 </span></code></pre></div>
 <p><code>chmod 644</code> は、所有者だけが書き込めて、他の人は読める設定です。通常のテキストファイルによく使われます。<code>chmod 755</code> は、所有者が読み書き実行でき、他の人も読み取りと実行ができる設定です。シェルスクリプトをコマンドとして実行したいときに使います。</p>
 <hr />

@@ -7870,14 +7870,17 @@ Av = \lambda v
 <h3 id="_13">ゴムシートで理解する固有値<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>行列による変換を「格子状のゴムシートを引き伸ばす・回転させる」操作として想像してください。</p>
 <div class="admonition info">
-<p>【一般のベクトル】
-変換前:  ↗（右上向き）
-変換後:  ↑（真上向き）  ← 方向が変わった！</p>
-<p>【固有ベクトルの場合】
-変換前:  →（右向き）
-変換後:  ────→（右向きのまま、長さだけ 3 倍）  ← 固有値 λ = 3</p>
-<p>変換前:  ↑（上向き）
-変換後:  ↑↑（上向きのまま、長さだけ 2 倍）   ← 固有値 λ = 2</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>【一般のベクトル】
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>変換前:  ↗（右上向き）
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>変換後:  ↑（真上向き）  ← 方向が変わった！
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>【固有ベクトルの場合】
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>変換前:  →（右向き）
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>変換後:  ────→（右向きのまま、長さだけ 3 倍）  ← 固有値 λ = 3
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>変換前:  ↑（上向き）
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>変換後:  ↑↑（上向きのまま、長さだけ 2 倍）   ← 固有値 λ = 2
+</span></code></pre></div>
 </div>
 <p><strong>なぜ機械学習で重要か：</strong><br />
 PCA（主成分分析）はデータの共分散行列の <strong>固有ベクトル</strong> を「データが最も散らばる方向（主成分）」として使います。固有値が大きいほどその方向に情報が多く、固有値が小さい方向は捨てても情報の損失が少ないため、次元削減に使えます。</p>
@@ -7914,17 +7917,20 @@ A - \lambda I = \begin{bmatrix} 3-\lambda &amp; 0 \\ 0 &amp; 2-\lambda \end{bmat
 <h3 id="pca">応用：主成分分析（PCA）<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h3>
 <p>PCA は、データの共分散行列の固有ベクトルを「分散が最大になる方向（主成分）」として使います。</p>
 <div class="admonition info">
-<p>データが「斜めに伸びた楕円形」に散らばっているとします：</p>
-<div class="language-text highlight"><pre><span></span><code>↑y
-│       ・
-│     ・  ・
-│   ・  ・
-│ ・
-└────────→ x
-</code></pre></div>
-<p>この「長軸の方向」が第1主成分（固有値が大きい方向）
-この「短軸の方向」が第2主成分（固有値が小さい方向）</p>
-<p>第1主成分だけを使う（1次元に圧縮）すると、情報の大半を保持できる</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>データが「斜めに伸びた楕円形」に散らばっているとします：
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    ↑y
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    │       ・
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    │     ・  ・
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    │   ・  ・
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    │ ・
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    └────────→ x
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>この「長軸の方向」が第1主成分（固有値が大きい方向）
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>この「短軸の方向」が第2主成分（固有値が小さい方向）
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>第1主成分だけを使う（1次元に圧縮）すると、情報の大半を保持できる
+</span></code></pre></div>
 </div>
 <p>scikit-learn の <code>PCA(n_components=k).fit_transform(X)</code> で実装できます。<code>explained_variance_ratio_</code> が「各主成分が元データの分散のどれだけを説明しているか」を表します（例：[0.871, 0.129] → 第1主成分で情報の 87% を保持）。</p>
 <table>
@@ -7954,9 +7960,9 @@ A = U \Sigma V^\top
 <blockquote>
 <p><strong>直感：画像圧縮で理解する SVD</strong><br />
 100×100 ピクセルのグレースケール画像を行列 A（100行×100列）と考えます。SVD で分解すると U, Σ, Vᵀ が得られます。特異値（Σ の対角成分）が大きいものだけ k 個残すと、画像の「おおよその輪郭」は保たれます。  </p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>k=100（全成分）→ 完全な元画像  
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>k=20           → 少しぼやけるが輪郭は分かる（圧縮率 80%）  
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>k=5            → 大まかな形しか見えない（圧縮率 95%）  
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>k=100（全成分）→ 完全な元画像  
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>k=20           → 少しぼやけるが輪郭は分かる（圧縮率 80%）  
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>k=5            → 大まかな形しか見えない（圧縮率 95%）  
 </span></code></pre></div>
 <p>つまり、特異値の大きさが「その成分の情報量の重要度」を表します。重要度の低い成分を切り捨てることで、少ないデータで元の情報を近似できます。</p>
 </blockquote>

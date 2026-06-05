@@ -7715,9 +7715,10 @@
 <h3 id="adapter">Adapter<a class="headerlink" href="#adapter" title="Permanent link">&para;</a></h3>
 <p>各 Transformer 層にボトルネック層（小さな MLP）を挿入します。元のパラメータは変更せず、追加した Adapter のみ学習します。</p>
 <div class="admonition info">
-<p>元の層:    x → [FFN] → y
-Adapter追加後: x → [FFN] → [Down-project] → [Up-project] → + x → y
-                              (r 次元)         (d 次元)     ↑残差接続</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>元の層:    x → [FFN] → y
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Adapter追加後: x → [FFN] → [Down-project] → [Up-project] → + x → y
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                              (r 次元)         (d 次元)     ↑残差接続
+</span></code></pre></div>
 </div>
 <h3 id="loralow-rank-adaptation">LoRA（Low-Rank Adaptation）<a class="headerlink" href="#loralow-rank-adaptation" title="Permanent link">&para;</a></h3>
 <p>Adapter がレイテンシを増やす問題を解決した、現在最も広く使われる PEFT 手法です。</p>
@@ -7768,23 +7769,23 @@ LoRA：<span class="arithmatex">\(d \times r + r \times k = r(d+k)\)</span> パ�
 <h3 id="lora">LoRA 適用対象の選択<a class="headerlink" href="#lora" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
 <p>Transformer の重み行列：
-  ・Query (Wq): ✓ 注意機構に直接影響
-  ・Key (Wk):   ✓
-  ・Value (Wv): ✓
-  ・Output (Wo):✓
-  ・FFN 第1層:  △ 必要に応じて
-  ・FFN 第2層:  △ 必要に応じて</p>
+・Query (Wq): ✓ 注意機構に直接影響
+・Key (Wk):   ✓
+・Value (Wv): ✓
+・Output (Wo):✓
+・FFN 第1層:  △ 必要に応じて
+・FFN 第2層:  △ 必要に応じて</p>
 <p>一般的に Wq, Wv のみが最もコスト効率が良い</p>
 </div>
 <hr />
 <h2 id="instruction-tuning">Instruction Tuning<a class="headerlink" href="#instruction-tuning" title="Permanent link">&para;</a></h2>
 <p>LLM を「指示に従う」ようにする教師あり学習です。</p>
 <p><strong>データ形式（Alpaca フォーマット）：</strong></p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;instruction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;以下の文章を要約してください。&quot;</span><span class="p">,</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;人工知能は...(長い文章)...&quot;</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;人工知能は近年急速に発展し...&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;instruction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;以下の文章を要約してください。&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;人工知能は...(長い文章)...&quot;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;人工知能は近年急速に発展し...&quot;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>OpenAI の InstructGPT・Meta の Llama-2-chat はこの手法が出発点です。</p>
 <hr />

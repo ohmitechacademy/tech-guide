@@ -7776,10 +7776,12 @@
 <div class="admonition info">
 <p>K 台のスロットマシン（アーム）: a₁, a₂, ..., aₖ
 各アームの真の期待報酬（未知）: μ₁, μ₂, ..., μₖ</p>
-<p>各ラウンド t で:
-  1. アーム aₜ を選択
-  2. 報酬 rₜ を観測（確率的）
-  3. 次の選択に活かす</p>
+<p><strong>各ラウンド t で</strong></p>
+<ol>
+<li>アーム aₜ を選択</li>
+<li>報酬 rₜ を観測（確率的）</li>
+<li>次の選択に活かす</li>
+</ol>
 <p>目標: T ラウンドの累積報酬を最大化</p>
 </div>
 <h3 id="regret">後悔（Regret）<a class="headerlink" href="#regret" title="Permanent link">&para;</a></h3>
@@ -7888,10 +7890,10 @@ R_T \leq \sum_{a: \mu_a &lt; \mu^*} \frac{8 \ln T}{\Delta_a} + \left(1 + \frac{\
 <h2 id="contextual-bandit">Contextual Bandit<a class="headerlink" href="#contextual-bandit" title="Permanent link">&para;</a></h2>
 <p>各ラウンドに<strong>文脈情報</strong>（コンテキスト <span class="arithmatex">\(x_t\)</span>）が与えられます。ユーザーの特徴量・ページの属性などを考慮した上で最良の行動を選びます。</p>
 <div class="admonition info">
-<p>MAB（文脈なし）:
-  各ラウンド → アームを選択 → 報酬観測</p>
-<p>Contextual Bandit（文脈あり）:
-  ユーザーの特徴 xₜ → モデルがアームを選択 → 報酬観測 → モデル更新</p>
+<p><strong>MAB（文脈なし）</strong></p>
+<p>各ラウンド → アームを選択 → 報酬観測</p>
+<p><strong>Contextual Bandit（文脈あり）</strong></p>
+<p>ユーザーの特徴 xₜ → モデルがアームを選択 → 報酬観測 → モデル更新</p>
 </div>
 <h3 id="linucb">LinUCB<a class="headerlink" href="#linucb" title="Permanent link">&para;</a></h3>
 <p>線形報酬モデル <span class="arithmatex">\(r(x, a) = \theta_a^\top x + \text{noise}\)</span> を仮定した UCB：</p>
@@ -7912,7 +7914,7 @@ a_t = \arg\max_a \left[\theta_a^\top x_t + \alpha \sqrt{x_t^\top A_a^{-1} x_t}\r
 <div class="admonition info">
 <p>通常の A/B テスト:  [A: 50%] [B: 50%] ... (固定)
 MAB A/B テスト:    [A: 50%] [B: 50%] → [A: 40%] [B: 60%] → ...
-                   B の結果が良ければ自動的に配信を増やす</p>
+B の結果が良ければ自動的に配信を増やす</p>
 </div>
 <p><strong>注意：</strong> 統計的有意性を重視する場合は通常の A/B テストの方が適切（MAB は最終的な「勝者」を明確に主張しにくい）。</p>
 <h3 id="_12">推薦システム<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
