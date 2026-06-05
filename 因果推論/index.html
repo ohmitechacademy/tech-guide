@@ -8031,20 +8031,35 @@
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># W_est = notears_linear(data.values, lambda1=0.1)</span>
 </span></code></pre></div>
 <h3 id="_9">因果探索の限界<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>アルゴリズム</th>
+<th>長所</th>
+<th>短所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PC</strong></td>
+<td>仮定が少ない（線形・非線形どちらでも可）</td>
+<td>矢印方向を完全に決定できない場合がある（等価クラス）</td>
+</tr>
+<tr>
+<td><strong>LiNGAM</strong></td>
+<td>方向を完全に決定できる</td>
+<td>線形性・非ガウス性の仮定が必要</td>
+</tr>
+<tr>
+<td><strong>NOTEARS</strong></td>
+<td>スケーラブル（変数が多くても使える）</td>
+<td>局所最適に陥ることがある</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition warning">
-<p><strong>PC アルゴリズム</strong></p>
-<p>✓ 仮定が少ない（線形・非線形どちらでも使える）
-✗ 矢印方向を完全に決定できないことがある（等価クラス）</p>
-<p><strong>LiNGAM</strong></p>
-<p>✓ 方向を完全に決定できる
-✗ 線形性・非ガウス性の仮定が必要</p>
-<p><strong>NOTEARS</strong></p>
-<p>✓ スケーラブル（変数が多くても使える）
-✗ 局所最適に陥ることがある</p>
-<p><strong>共通の注意</strong></p>
-<p>→ 因果探索の結果は仮説（ドメイン知識で必ず確認）
-→ サンプルサイズが小さいと不安定
-→ 測定できない交絡因子は検出できない</p>
+<p class="admonition-title">共通の注意点</p>
+<p>因果探索の結果はあくまで仮説であり、ドメイン知識による確認が必須です。サンプルサイズが小さいと推定が不安定になり、測定できない交絡因子は検出できません。</p>
 </div>
 <hr />
 <h2 id="_10">確認問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>

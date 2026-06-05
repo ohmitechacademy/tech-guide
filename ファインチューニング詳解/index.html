@@ -3903,6 +3903,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#w_qw_v" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        一般的に <span class="arithmatex">\(W_q\)</span>・<span class="arithmatex">\(W_v\)</span> のみへの適用がコスト効率の面で最も優れています。
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#instruction-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -7488,6 +7499,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#w_qw_v" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        一般的に <span class="arithmatex">\(W_q\)</span>・<span class="arithmatex">\(W_v\)</span> のみへの適用がコスト効率の面で最も優れています。
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#instruction-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -7762,17 +7784,48 @@ LoRA：<span class="arithmatex">\(d \times r + r \times k = r(d+k)\)</span> パ�
 </table>
 <p>QLoRA により、コンシューマー GPU（RTX 3090・RTX 4090）でも 7B モデルのファインチューニングが可能になりました。</p>
 <h3 id="lora">LoRA 適用対象の選択<a class="headerlink" href="#lora" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p>Transformer の重み行列：
-・Query (Wq): ✓ 注意機構に直接影響
-・Key (Wk):   ✓
-・Value (Wv): ✓
-・Output (Wo):✓
-・FFN 第1層:  △ 必要に応じて
-・FFN 第2層:  △ 必要に応じて</p>
-<p>一般的に Wq, Wv のみが最もコスト効率が良い</p>
-</div>
-<hr />
+<table>
+<thead>
+<tr>
+<th>重み行列</th>
+<th>LoRA 適用</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query (<span class="arithmatex">\(W_q\)</span>)</td>
+<td>✓ 推奨</td>
+<td>注意機構に直接影響</td>
+</tr>
+<tr>
+<td>Key (<span class="arithmatex">\(W_k\)</span>)</td>
+<td>✓ 推奨</td>
+<td></td>
+</tr>
+<tr>
+<td>Value (<span class="arithmatex">\(W_v\)</span>)</td>
+<td>✓ 推奨</td>
+<td></td>
+</tr>
+<tr>
+<td>Output (<span class="arithmatex">\(W_o\)</span>)</td>
+<td>✓ 推奨</td>
+<td></td>
+</tr>
+<tr>
+<td>FFN 第1層</td>
+<td>△ 任意</td>
+<td>必要に応じて</td>
+</tr>
+<tr>
+<td>FFN 第2層</td>
+<td>△ 任意</td>
+<td>必要に応じて</td>
+</tr>
+</tbody>
+</table>
+<h2 id="w_qw_v">一般的に <span class="arithmatex">\(W_q\)</span>・<span class="arithmatex">\(W_v\)</span> のみへの適用がコスト効率の面で最も優れています。<a class="headerlink" href="#w_qw_v" title="Permanent link">&para;</a></h2>
 <h2 id="instruction-tuning">Instruction Tuning<a class="headerlink" href="#instruction-tuning" title="Permanent link">&para;</a></h2>
 <p>LLM を「指示に従う」ようにする教師あり学習です。</p>
 <p><strong>データ形式（Alpaca フォーマット）：</strong></p>

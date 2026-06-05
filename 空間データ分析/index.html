@@ -7459,16 +7459,35 @@
 <hr />
 <h2 id="_5">地理データの基本<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="crs-coordinate-reference-system">座標系（CRS: Coordinate Reference System）<a class="headerlink" href="#crs-coordinate-reference-system" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>座標系</th>
+<th>EPSG</th>
+<th>用途・特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WGS84</strong></td>
+<td>4326</td>
+<td>世界標準の緯度・経度（GPS）。例: 東京駅 → 35.6812°N, 139.7671°E</td>
+</tr>
+<tr>
+<td><strong>JGD2011</strong></td>
+<td>6668</td>
+<td>日本専用の測量基準（国土地理院）</td>
+</tr>
+<tr>
+<td><strong>Web Mercator</strong></td>
+<td>3857</td>
+<td>Google Maps・OSM で使われる平面座標。距離・面積計算には不向き</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition warning">
-<p>WGS84 (EPSG:4326):
-世界標準の緯度・経度（GPS で使われる）
-例: 東京駅 → 緯度 35.6812, 経度 139.7671</p>
-<p>JGD2011 (EPSG:6668):
-日本の測量基準（国土地理院が定めた日本専用）</p>
-<p>Web Mercator (EPSG:3857):
-Google Maps・OpenStreetMap で使われる平面座標
-距離・面積の計算には不向き</p>
-<p>注意: 距離や面積を計算するときは平面直角座標系（メートル単位）に変換する</p>
+<p class="admonition-title">座標系の注意</p>
+<p>距離・面積を計算するときは平面直角座標系（メートル単位）に変換してから行うこと。Web Mercator のまま計算すると誤差が大きくなります。</p>
 </div>
 <h3 id="_6">主なデータ形式<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
