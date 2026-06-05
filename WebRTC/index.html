@@ -7542,6 +7542,7 @@
 <h2 id="_4">コア概念<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="icestunturn">ICE・STUN・TURN<a class="headerlink" href="#icestunturn" title="Permanent link">&para;</a></h3>
 <p>NAT（ルーターによる IP アドレス変換）により、ブラウザの「本当の IP アドレス」が互いにわかりません。これを解決するのが ICE フレームワークです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>STUN（Session Traversal Utilities for NAT）:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  「自分のパブリック IP アドレスは何？」を教えるサーバー
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → 多くの場合これだけで P2P 接続できる
@@ -7556,8 +7557,10 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  STUN・TURN・ローカルアドレスをすべて試して
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  最適な経路（Candidate）を選ぶフレームワーク
 </span></code></pre></div>
+</div>
 <h3 id="sdpsession-description-protocol">SDP（Session Description Protocol）<a class="headerlink" href="#sdpsession-description-protocol" title="Permanent link">&para;</a></h3>
 <p>接続の「名刺交換」です。コーデック・解像度・通信経路などの情報を記述します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>SDP の中身（抜粋）:
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  v=0
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  o=- 1234567890 2 IN IP4 127.0.0.1
@@ -7566,8 +7569,10 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  m=video 9 UDP/TLS/RTP/SAVPF 96    ← 映像トラック
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  a=rtpmap:96 VP8/90000             ← VP8 コーデック
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_5">接続確立の手順<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ブラウザ A（発信側）              ブラウザ B（受信側）
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>─────────────────────────────────────────────────────
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>① createOffer()
@@ -7586,6 +7591,7 @@
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>⑩ P2P 接続確立 → 音声・映像・データの送受信開始
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_6">実装例：シンプルなビデオ通話<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="nodejs-websocket">シグナリングサーバー（Node.js + WebSocket）<a class="headerlink" href="#nodejs-websocket" title="Permanent link">&para;</a></h3>
@@ -7765,10 +7771,12 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>P2P（1対1）:     A ←→ B
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>SFU（グループ）: A → [SFU] ← B ← [SFU] → C
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                 C → [SFU]
 </span></code></pre></div>
+</div>
 <p>SFU は各参加者のストリームをそのまま転送（N 人なら N-1 本の接続）。MCU は全ストリームを合成して 1 本にする（サーバー負荷大・品質劣化あり）。</p>
 <hr />
 <h2 id="_11">確認問題<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>

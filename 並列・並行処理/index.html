@@ -7561,10 +7561,12 @@ Node.js はシングルスレッドですが、リクエストを受け取った
 <p>このコードは、5つのスレッドがそれぞれ10万回ずつ <code>counter</code> を増やすので、理屈の上では 500000 になるはずです。しかし <code>counter += 1</code> の途中に別スレッドへ切り替わると、更新が失われることがあります。結果が毎回同じとは限らないため、競合状態は再現しづらいバグになります。</p>
 <p><strong>なぜ起きるのか？</strong></p>
 <p><code>counter += 1</code> は一見 1 命令ですが、CPU レベルでは 3 命令です：</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1. counter の値を読み込む（例：100）
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2. 1 を足す（101 を計算する）
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>3. counter に書き戻す（counter = 101）
 </span></code></pre></div>
+</div>
 <p>2 つのスレッドが「1. 読み込み」を同時にしてしまうと、両方が「100 を読んで 101 を書く」という結果になり、カウンタが 1 しか増えません。</p>
 <hr />
 <h2 id="mutex">ミューテックス（Mutex）<a class="headerlink" href="#mutex" title="Permanent link">&para;</a></h2>

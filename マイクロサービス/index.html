@@ -7493,6 +7493,7 @@
 </table>
 <hr />
 <h2 id="_6">いつマイクロサービスを選ぶか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>モノリスを選ぶべき場合:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ✓ チームが小さい（&lt; 10 人）
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ✓ 要件がまだ変化しやすい
@@ -7505,16 +7506,19 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  ✓ 機能ごとに異なる技術（Python / Go / Node.js）を使いたい
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  ✓ 機能ごとに異なるリリーススピードがある
 </span></code></pre></div>
+</div>
 <blockquote>
 <p><strong>「最初はモノリスで作り、必要になったらマイクロサービスに分割する」</strong> が現実的なアプローチです。</p>
 </blockquote>
 <hr />
 <h2 id="api">API ゲートウェイ<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>クライアントは複数のサービスに直接アクセスする代わりに、<strong>1 つの入口（API Gateway）</strong> にリクエストを送ります。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>クライアント → API Gateway → ユーザーサービス  (:8001)
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                           → 注文サービス    (:8002)
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                           → 決済サービス    (:8003)
 </span></code></pre></div>
+</div>
 <p>API ゲートウェイが担う機能：</p>
 <table>
 <thead>
@@ -7597,6 +7601,7 @@
 <p><strong>問題点：</strong> ユーザーサービスが落ちると注文サービスも失敗します（カスケード障害）。</p>
 <h3 id="_8">非同期通信（メッセージキュー）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>メッセージキュー（RabbitMQ / Kafka）を経由して疎結合にします。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>注文サービス → [order.created イベント] → メッセージキュー
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                                              ↓
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                                        決済サービスが受信
@@ -7605,6 +7610,7 @@
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                                              ↓
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                                        通知サービスが受信 → メール送信
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># RabbitMQ を使う例（aio-pika）</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># pip install aio-pika</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
@@ -7636,6 +7642,7 @@
 <hr />
 <h2 id="_9">データの分割<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>マイクロサービスの原則：<strong>各サービスは独自のデータベースを持つ</strong>。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>❌ 共有DB（アンチパターン）:
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  サービス A ─┐
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>              ├─ 共通DB
@@ -7647,6 +7654,7 @@
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>  サービス B → OrderDB（PostgreSQL）
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  サービス C → CacheDB（Redis）
 </span></code></pre></div>
+</div>
 <p>サービスをまたぐデータの整合性は <strong>Saga パターン</strong>（分散トランザクション）や<strong>結果整合性</strong>で対処します。</p>
 <hr />
 <h2 id="docker-compose">docker-compose での構成例<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>

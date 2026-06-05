@@ -7516,6 +7516,7 @@ Node.js はシングルスレッドで動きます（デフォルト）。CPU �
 </tbody>
 </table>
 <p><strong>アクセス速度の目安（レイテンシ）：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CPU キャッシュ（L1） : ~1 ns
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>メモリ（RAM）         : ~100 ns
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>NVMe SSD             : ~20 µs
@@ -7523,6 +7524,7 @@ Node.js はシングルスレッドで動きます（デフォルト）。CPU �
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>HDD                  : ~10 ms   ← SSD の 100 倍遅い
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>ネットワーク（LAN）  : ~1 ms
 </span></code></pre></div>
+</div>
 <p>この差を体感で理解すると、「DB はなぜ遅いのか」「ファイル I/O のボトルネック」を適切に判断できるようになります。</p>
 <hr />
 <h2 id="os">OS（オペレーティングシステム）<a class="headerlink" href="#os" title="Permanent link">&para;</a></h2>
@@ -7590,9 +7592,11 @@ Node.js はシングルスレッドで動きます（デフォルト）。CPU �
 </table>
 <h3 id="floating-point">浮動小数点数（Floating Point）<a class="headerlink" href="#floating-point" title="Permanent link">&para;</a></h3>
 <p>浮動小数点は <strong>IEEE 754</strong> 規格で定められた実数の近似表現です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>64 ビット（float64）: 1 符号 + 11 指数部 + 52 仮数部
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>精度：約 15〜16 桁の有効数字
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 浮動小数点の誤差</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">print</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>          <span class="c1"># → 0.30000000000000004（誤差がある）</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">print</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">==</span> <span class="mf">0.3</span><span class="p">)</span>   <span class="c1"># → False！</span>

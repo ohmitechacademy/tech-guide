@@ -7561,6 +7561,7 @@
 <h3 id="_5">全文検索の課題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>SQL の <code>LIKE '%error%'</code> は全件スキャンで <span class="arithmatex">\(O(N \cdot L)\)</span>（<span class="arithmatex">\(N\)</span>：ドキュメント数、<span class="arithmatex">\(L\)</span>：ドキュメント長）かかります。</p>
 <h3 id="_6">転置インデックスの仕組み<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ドキュメント:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  doc1: &quot;The quick brown fox&quot;
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  doc2: &quot;The fox jumps high&quot;
@@ -7580,6 +7581,7 @@
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  &quot;fox&quot;   → {doc1, doc2}
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  共通 → {doc1}（両方含むドキュメント）
 </span></code></pre></div>
+</div>
 <p>インデックス構築に時間がかかりますが、検索は <span class="arithmatex">\(O(\log N)\)</span> 程度に高速化されます。</p>
 <h3 id="_7">テキスト解析パイプライン<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR

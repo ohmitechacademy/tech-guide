@@ -7695,6 +7695,7 @@
 <p>なぜ「実際の秒数」ではなく「傾向」を使うのでしょうか。秒数はコンピュータの性能に依存するため、別のマシンで測ると別の値が出てしまいます。しかし「データが倍になったとき処理量も倍になる（線形）か、4 倍になる（二乗）か」という傾向はどのマシンでも変わりません。この傾向を一言で表す記法が <strong>Big O 記法</strong> で、<span class="arithmatex">\(O(n)\)</span> のように書きます（n はデータ数）。</p>
 <hr />
 <h3 id="step-1">STEP 1：図書館で本を探す例で理解する<a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>問題：「田中さんが書いた本を探したい」
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>【方法 1：端から全部調べる → O(n)】
@@ -7713,6 +7714,7 @@
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  「田中さんの本は B-42 番」とわかっていれば即取れる
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  本が何冊でも 1 回で見つかる = O(1)
 </span></code></pre></div>
+</div>
 <hr />
 <h3 id="step-2">STEP 2：計算量の早見表<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h3>
 <table>
@@ -7763,11 +7765,13 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>O(1) は 10 倍の奇跡
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>O(log n) は 100 万件でも 20 回
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>O(n) は倍になると倍かかる
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>O(n²) は 10 倍になると 100 倍かかる → 要注意！
 </span></code></pre></div>
+</div>
 <hr />
 <h3 id="step-3">STEP 3：コードで確認する<a class="headerlink" href="#step-3" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -7828,11 +7832,13 @@
 </span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># n= 1,000: 処理回数 =       1,000,000   ← また 10 倍で 100 倍</span>
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># n=10,000: 処理回数 =     100,000,000   ← 1 億回 → 実際には数秒〜数十秒かかる</span>
 </span></code></pre></div>
-<p><strong>実践的な目安：</strong>
+<p><strong>実践的な目安：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Web API の 1 リクエスト中で O(n²) のループ → ユーザーが増えると急激に遅くなる
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>DB の 100 万件データに O(n) の全スキャン → インデックスなしでは非実用的
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>適切なデータ構造（ハッシュ・ソート済み配列）で O(log n) に落とすことを常に意識する
-</span></code></pre></div></p>
+</span></code></pre></div>
+</div>
 <p>Big O 記法は、入力サイズが大きくなったときに、処理時間やメモリ使用量がどのように増えるかを表します。実際の秒数ではなく、増え方の傾向を見るための道具です。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># O(1)：インデックスで直接アクセス</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">value</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>

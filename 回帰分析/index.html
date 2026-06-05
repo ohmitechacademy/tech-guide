@@ -7518,6 +7518,7 @@ y = \beta_0 + \beta_1 x + \varepsilon
 <h3 id="ols">OLS（最小二乗法）の原理<a class="headerlink" href="#ols" title="Permanent link">&para;</a></h3>
 <h4 id="_6">なぜ「二乗和を最小化」するのか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>直線を引くとき、各点との「ズレ（残差）」を小さくしたいのはわかります。では「ズレの合計」ではなく「<strong>ズレの二乗の合計</strong>」を最小化するのはなぜでしょうか？</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>直感的な問題：
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  点 A: 予測値より +3 ずれた（上にある）
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  点 B: 予測値より -3 ずれた（下にある）
@@ -7525,6 +7526,7 @@ y = \beta_0 + \beta_1 x + \varepsilon
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  「ズレの合計」= +3 + (-3) = 0 → ズレが相殺されて「誤差なし」に見えてしまう！
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  「ズレの二乗和」= 3² + (-3)² = 18 → 相殺されない、ズレが大きいほど強く罰する
 </span></code></pre></div>
+</div>
 <p>二乗には 3 つの利点があります：
 1. <strong>正負の相殺を防げる</strong>（絶対値でもよいが微分が難しい）
 2. <strong>大きな誤差をより強く罰する</strong>（外れ値に敏感）
@@ -7599,6 +7601,7 @@ y = \beta_0 + \beta_1 x + \varepsilon
 <p>R² の出発点は「モデルを使わないとどうなるか」という比較です。モデルが何もなければ、最良の予測値は「全員の平均 ȳ」です。このベースラインと比べて、回帰モデルがどれだけ改善したかを割合で表したのが R² です。</p>
 <p>R² は「y の変動（ばらつき）のうち、モデルが説明できる割合」です。0〜1 の値を取り、1 に近いほどモデルの当てはまりが良いです。</p>
 <p><strong>直感的な理解：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>「身長から体重を予測するモデル」の例
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  ベースライン（予測なし）：全員の平均体重を予測値にする
@@ -7613,6 +7616,7 @@ y = \beta_0 + \beta_1 x + \varepsilon
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  R² = 0.8 → 「身長という情報を使って、体重のばらつきの 80% を説明できた」
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  R² = 0.1 → 「身長を使っても、体重のばらつきを 10% しか説明できない」
 </span></code></pre></div>
+</div>
 <div class="arithmatex">\[
 R^2 = 1 - \frac{\text{RSS}}{\text{TSS}} = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}
 \]</div>

@@ -7673,12 +7673,14 @@
 <h2 id="_7">依存関係の管理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">依存関係の方向性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>「上位モジュールが下位モジュールに依存する」のが自然な構造です。問題になるのは循環依存（A → B → A）です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>良い例：
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>views → services → repositories → DB
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>悪い例（循環依存）：
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>module_a → module_b → module_a  ← どちらかを変えると両方壊れます
 </span></code></pre></div>
+</div>
 <p>依存関係の向きは、変更の影響がどちらへ広がるかを決めます。<code>views → services → repositories → DB</code> のように一方向なら、画面側の変更がDB層へ不要に漏れにくくなります。循環依存があると、片方を読み込むためにもう片方が必要になり、テストや初期化の順番も複雑になります。</p>
 <h3 id="dependency-injection">依存性の注入（Dependency Injection）<a class="headerlink" href="#dependency-injection" title="Permanent link">&para;</a></h3>
 <p>依存するオブジェクトを内部で作らず、外から渡します。</p>

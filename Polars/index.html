@@ -7637,6 +7637,7 @@
 <h2 id="_4">なぜ速いのか<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1-apache-arrow">1. Apache Arrow 形式<a class="headerlink" href="#1-apache-arrow" title="Permanent link">&para;</a></h3>
 <p>pandas の内部表現（NumPy）に対し、Polars は <strong>Apache Arrow</strong> の列指向メモリを使います。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pandas（行指向メモリ）:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  行1: [Alice, 30, Tokyo]
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  行2: [Bob,   25, Osaka]
@@ -7647,11 +7648,13 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  年齢列: [30, 25]      ← 集計はこの列だけ読めばいい
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  都市列: [Tokyo, Osaka]
 </span></code></pre></div>
+</div>
 <p>列指向は集計・フィルタリング・変換（データ分析の主要操作）が CPU キャッシュに乗りやすく、高速です。</p>
 <h3 id="2">2. マルチスレッド並列処理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>Polars は自動的に CPU 全コアを使います。pandas は基本的にシングルスレッドです。</p>
 <h3 id="3">3. クエリオプティマイザ（遅延評価）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>Lazy API では実行計画を最適化してから一度に実行します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pandas（即時実行）:
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  df.filter(...)     ← 全データをフィルタ
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  .select(...)       ← フィルタ後の全列を処理
@@ -7661,6 +7664,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  select → filter → groupby の順序を最適化
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  使われない列は最初から読まない（述語プッシュダウン）
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_5">基本操作<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="dataframe">DataFrameの作成と読み込み<a class="headerlink" href="#dataframe" title="Permanent link">&para;</a></h3>

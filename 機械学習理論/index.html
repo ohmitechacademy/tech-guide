@@ -7642,10 +7642,12 @@
 <p><code>gradient(w)</code> は、現在の <code>w</code> における傾きです。<code>w = w - lr * grad</code> は、損失が下がる方向へパラメータを動かす更新式です。</p>
 <h3 id="_9">学習率の重要性<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>学習率は、1 回の更新でどれくらい大きく動くかを決めます。大きすぎても小さすぎても学習はうまく進みません。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>学習率が大きすぎる → 最小値を飛び越えてしまう（発散）
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>学習率が小さすぎる → 収束に時間がかかりすぎる
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>適切な学習率     → 安定して損失が下がる
 </span></code></pre></div>
+</div>
 <blockquote>
 <p><strong>情報工学メモ：ミニバッチ確率的勾配降下法（SGD）</strong><br />
 全データで勾配を計算する「バッチ勾配降下法」は正確ですが、データが多いと 1 ステップが重い。そこで <strong>ランダムに選んだ小さなバッチ（32〜256 サンプル）で勾配を近似</strong> するのがミニバッチ SGD です。計算は荒削りですが速く収束します。Adam・AdaGrad・RMSprop などは学習率を自動調整する SGD の改良版です。</p>
@@ -7655,10 +7657,12 @@
 <h3 id="overfitting">過学習（Overfitting）<a class="headerlink" href="#overfitting" title="Permanent link">&para;</a></h3>
 <p>モデルは訓練データを何度も見続けることで精度を上げますが、行き過ぎると問題が起きます。訓練データ上の「ノイズ（偶然のバラつき）」まで覚えてしまうと、同じパターンが出てこない未知データでは正解できなくなります。これが過学習です。</p>
 <p>過学習を見つけるには、訓練データの性能と検証・テストデータの性能を分けて見ます。訓練だけ良くて検証が悪い場合、モデルは訓練データの細部やノイズまで覚えている可能性があります。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>訓練誤差 ↓↓  テスト誤差 ↑ = 過学習
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>訓練誤差 ↓   テスト誤差 ↓ = 汎化できている
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>訓練誤差 ↑   テスト誤差 ↑ = 未学習（モデルが単純すぎる）
 </span></code></pre></div>
+</div>
 <h3 id="_11">正則化<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>モデルが複雑になりすぎないようにペナルティを加えます。</p>
 <p>なぜ過学習が起きるかを考えると、対策が見えてきます。過学習したモデルは「訓練データに合わせるために係数が極端な値をとっている」状態です。であれば、係数が大きくなりすぎたときにペナルティを課すことで、モデルを「穏やかな係数」に引き戻すことができます。これが正則化の発想です。損失関数に「重みの大きさへのペナルティ項」を加えることで、精度と係数の穏やかさの両方を同時に最小化します。</p>
@@ -7704,17 +7708,20 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;各 fold の精度: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;平均 ± 標準偏差: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>k=5 の場合：
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>分割1 → [fold1_val, fold2_train, fold3_train, fold4_train, fold5_train]
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>分割2 → [fold1_train, fold2_val, fold3_train, ...]
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>...（5 回分を平均）
 </span></code></pre></div>
+</div>
 <p><code>cross_val_score</code> は、<code>train_test_split</code> を k 回行い、毎回異なる fold を検証データにします。標準偏差が大きい場合はモデルが不安定な可能性があります。詳しくは <a href="../モデル評価-チューニング/">モデル評価・チューニング</a> を参照してください。</p>
 <hr />
 <h2 id="_13">バイアス・バリアンストレードオフ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p>モデルがうまく動かないとき、失敗の原因は大きく 2 種類あります。「そもそも正解に近づけていない（高バイアス）」か「訓練データに特化しすぎて応用が利かない（高バリアンス）」か。この区別が次のアクションを決めます。</p>
 <hr />
 <h3 id="_14">直感：テスト勉強のたとえ<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>【高バイアス（未学習）= 丸暗記すら足りない状態】
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  「公式を 3 本しか覚えていない」
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  → 訓練データ（教科書）でも、テスト（本番）でも正解できない
@@ -7729,6 +7736,7 @@
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>  「考え方を理解したうえで練習した」
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>  → 訓練スコアも検証スコアも両方高い
 </span></code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -7762,6 +7770,7 @@
 <hr />
 <h3 id="_15">診断フロー：学習曲線を見る<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>学習曲線は「訓練データ数を増やしていったときに、スコアがどう変化するか」をグラフにしたものです。モデルの問題の種類を視覚的に診断できます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>高バイアスの学習曲線：               高バリアンスの学習曲線：
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>スコア                               スコア
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  |  _ _ _ _ _ _ _  ← 訓練スコア      |  _______ ← 訓練スコア（高止まり）
@@ -7771,6 +7780,7 @@
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>  └──────────────→ データ数          └──────────────→ データ数
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>  （両方低い = 未学習）                （差が大きい = 過学習）
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">learning_curve</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -7815,6 +7825,7 @@
 </span></code></pre></div>
 <hr />
 <h3 id="_16">実践的な対処法<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>高バイアス（未学習）の改善：
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  ✓ モデルを複雑にする（決定木の深さを増やす、DNN の層を増やす）
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  ✓ 特徴量を追加・生成する
@@ -7827,6 +7838,7 @@
 </span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  ✓ Early Stopping を使う
 </span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>  ✓ 特徴量を減らす（重要度の低い特徴量を削除）
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_17">確認問題<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ol>

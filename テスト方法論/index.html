@@ -7595,10 +7595,12 @@
 <h2 id="_5">なぜテストを書くのか<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>テストは、プログラムの使い方をコードとして残す役割も持ちます。関数にどんな入力を渡すと、どんな出力を期待するのかがテストに書かれていれば、あとから読む人は仕様を理解しやすくなります。</p>
 <p>また、テストがあると安心して変更できます。新しい機能を足したり、内部構造を整理したりしたあとにテストを実行すれば、以前の動作を壊していないか確認できます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>「動くと思ってデプロイしたら壊れていた」
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>「直したつもりが別の場所を壊していた」
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>「半年後に自分のコードが何をしているかわからない」
 </span></code></pre></div>
+</div>
 <p>このような問題は、コードを書いた本人の注意力だけでは防ぎきれません。テストは、期待する動作を自動で確認する仕組みとして、変更のたびに同じ確認を繰り返してくれます。</p>
 <p>テストはこれらを防ぐ <strong>安全網</strong> です。</p>
 <table>
@@ -7630,6 +7632,7 @@
 <hr />
 <h2 id="_6">テストの種類（テストピラミッド）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>テストには粒度があります。小さい関数だけを見るテストは速く、大きなユーザー操作を通すテストは現実に近い代わりに遅くなります。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>         /\
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        /E2E\         （少ない・遅い・信頼性高い）
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>       /──────\
@@ -7638,6 +7641,7 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    / ユニットテスト \   （多い・速い）
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>   /────────────────\
 </span></code></pre></div>
+</div>
 <p>テストピラミッドは、速いユニットテストを多く、遅い E2E テストを少なく持つのが基本だ、という考え方です。</p>
 <h3 id="unit-test">ユニットテスト（Unit Test）<a class="headerlink" href="#unit-test" title="Permanent link">&para;</a></h3>
 <p><strong>最小単位の関数・クラスが正しく動くか</strong> を確認します。</p>
@@ -7792,10 +7796,12 @@ E2E テストは信頼性が高い反面、遅くて壊れやすいです。ユ�
 <h2 id="tdd">テスト駆動開発（TDD）<a class="headerlink" href="#tdd" title="Permanent link">&para;</a></h2>
 <p><strong>コードを書く前にテストを書く</strong> 開発スタイルです。</p>
 <p>TDD は、先に「こう動いてほしい」というテストを書き、そのテストを通す最小限の実装を作り、最後に整理する流れです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>RED  → テストを書く（まだコードがないので失敗する）
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>GREEN → テストが通る最小限のコードを書く
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>REFACTOR → テストを通したまま、コードをきれいにする
 </span></code></pre></div>
+</div>
 <p><strong>例：「FizzBuzz 関数を TDD で作る」</strong></p>
 <p>まず、まだ存在しない <code>fizzbuzz</code> 関数に対して期待する動作を書きます。この時点ではテストは失敗します。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># ステップ 1: テストを書く（まだ関数は存在しない）</span>

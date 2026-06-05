@@ -7649,6 +7649,7 @@
 </ul>
 <hr />
 <h2 id="_5">データエンジニアリングとデータサイエンスの違い<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>生データ（ログ・DB・API）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        ↓
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  [データエンジニアリング]
@@ -7662,6 +7663,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  ・分析・可視化・モデリング
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  ・仮説検証・意思決定支援
 </span></code></pre></div>
+</div>
 <p>現場ではデータサイエンティストがデータエンジニアリングも担当するケース（小規模チーム）と、専任チームが分かれているケース（大規模組織）があります。</p>
 <hr />
 <h2 id="etl-elt">ETL と ELT<a class="headerlink" href="#etl-elt" title="Permanent link">&para;</a></h2>
@@ -7686,8 +7688,10 @@
 </span></code></pre></div>
 <h3 id="eltextract-load-transform">ELT（Extract → Load → Transform）<a class="headerlink" href="#eltextract-load-transform" title="Permanent link">&para;</a></h3>
 <p>まず生データを格納し、DWH の中で変換します。BigQuery・Snowflake 時代の主流です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>生データ → DWH（ステージング領域に格納）→ SQL/dbt で変換 → 分析用テーブル
 </span></code></pre></div>
+</div>
 <p>ELT のメリット：
 - DWH の高い計算能力を変換に使える
 - 生データが残るので再変換が可能（やり直しがきく）
@@ -7736,6 +7740,7 @@
 </span></code></pre></div>
 <h3 id="_7">データレイク<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>生データを形式を変えずに大量に蓄積するストレージです（S3、GCS、ADLS）。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>データレイク（生データ）
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  ├── /raw/clickstream/2024/01/01/*.json    ← アプリログ
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  ├── /raw/db_snapshot/users/20240101.csv  ← DB のスナップショット
@@ -7748,8 +7753,10 @@
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  ├── staging.users              ← 型変換済み
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  └── marts.sales_daily          ← 集計済み・分析用
 </span></code></pre></div>
+</div>
 <h3 id="_8">メダリオンアーキテクチャ<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>データレイクを 3 層に分けて管理する現代的な設計パターンです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Bronze（生データ）→ Silver（クレンジング済み）→ Gold（分析用マート）
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Bronze：
@@ -7764,9 +7771,11 @@
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  - ビジネスロジックを適用した集計テーブル
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>  - BIツール・DS・機械学習が直接使う
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="dbtdata-build-tool">dbt（data build tool）<a class="headerlink" href="#dbtdata-build-tool" title="Permanent link">&para;</a></h2>
 <p>データウェアハウス内の変換ロジックを <strong>SQL でバージョン管理</strong> するツールです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>プロジェクト構成：
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  dbt_project/
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  ├── models/
@@ -7779,6 +7788,7 @@
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  │   └── schema.yml               ← データ品質テスト定義
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>  └── dbt_project.yml
 </span></code></pre></div>
+</div>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- models/staging/stg_orders.sql</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">SELECT</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">order_id</span><span class="p">,</span>
@@ -7847,9 +7857,11 @@
 <p>バッチ処理（まとめて処理）に対し、データが発生したリアルタイムで処理します。</p>
 <h3 id="apache-kafka">Apache Kafka<a class="headerlink" href="#apache-kafka" title="Permanent link">&para;</a></h3>
 <p>分散メッセージングシステムです。データの「流れ」をトピックで管理します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[Producer（ログサーバー）] → [Kafka トピック] → [Consumer（集計サービス）]
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>                                                  └→ [Consumer（アラートサービス）]
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">kafka</span><span class="w"> </span><span class="kn">import</span> <span class="n">KafkaProducer</span><span class="p">,</span> <span class="n">KafkaConsumer</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
@@ -7926,6 +7938,7 @@
 </span></code></pre></div>
 <hr />
 <h2 id="2024">モダンデータスタック（2024 年時点）<a class="headerlink" href="#2024" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>収集：Fivetran・Airbyte（SaaS からの自動抽出）
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>格納：BigQuery・Snowflake・Databricks
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>変換：dbt（SQL 変換）
@@ -7933,6 +7946,7 @@
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>品質：Great Expectations・dbt tests
 </span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>可視化：Looker・Tableau・Metabase・Redash
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>

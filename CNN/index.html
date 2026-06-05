@@ -7539,21 +7539,26 @@
 <h2 id="_4">畳み込み層<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">なぜ畳み込みが必要か<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>全結合層（普通のニューラルネットワーク）で 224×224 ピクセルの画像を扱うと：</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>224 × 224 × 3（RGB）= 150,528 個の入力値
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>隠れ層を 1,000 ノードとすると、接続数 = 150,528 × 1,000 = 約 1.5 億パラメータ！
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>問題 1：パラメータが多すぎて計算・学習が現実的でない
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>問題 2：「犬が左上にいる画像」と「犬が右下にいる画像」で全く別の特徴を学習してしまう
 </span></code></pre></div>
+</div>
 <p><strong>CNN の解決策</strong>：「小さなフィルターを全体に滑らせる」</p>
 <p>「犬の耳」は画像のどこに映っていても「犬の耳」です。左上にあっても右下にあっても同じ形をしています。全結合層の場合、左上の「犬の耳パターン」と右下の「犬の耳パターン」はそれぞれ別の重みで学習されますが、CNN では同一のフィルタを全体に適用するため、どこに出ても同じフィルタが検出します。これが<strong>位置不変性</strong>という性質です。さらにパラメータ数も劇的に減ります。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>3×3 フィルタ 1 つのパラメータ = 3×3 = 9 個だけ！
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>同じフィルタを画像全体に適用するので、どこにエッジがあっても同じフィルタが検出できる
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>→ 位置に依らず特徴を認識（位置不変性）
 </span></code></pre></div>
+</div>
 <hr />
 <h3 id="step-1">STEP 1：畳み込みを手計算で理解する<a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h3>
 <p>5×5 の画像に 3×3 フィルタを当てる最も単純な例です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>入力画像（5×5）:           フィルタ（3×3）:
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  1  0  1  0  0              1  0 -1
@@ -7577,6 +7582,7 @@
 </span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>フィルタを 1 つ右にずらして同様に計算 → 出力の (0,1) の値
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>... と繰り返すと 3×3 の出力特徴マップが得られる
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 手計算を Python で確認</span>
@@ -7624,6 +7630,7 @@
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;入力: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">  → 出力: </span><span class="si">{</span><span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="c1"># 入力: torch.Size([8, 3, 224, 224])  → 出力: torch.Size([8, 32, 224, 224])</span>
 </span></code></pre></div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>テンソルの形の読み方：
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  (8, 32, 224, 224)
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   │   │    │    └─ 幅 W
@@ -7631,6 +7638,7 @@
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>   │   └─────────── チャンネル数（フィルタの種類）
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>   └─────────────── バッチサイズ（一度に処理する画像枚数）
 </span></code></pre></div>
+</div>
 <blockquote>
 <p><strong>情報工学メモ：なぜ全結合層より良いか</strong><br />
 224×224×3 = 150,528 次元の入力を全結合すると、第 1 層だけで数億パラメータが必要です。畳み込みは「同じフィルタを画像全体に適用（重み共有）」するため、3×3×3 = 27 パラメータのフィルタ一つで画像全体のエッジを検出できます。これが <strong>位置不変性（Translation Invariance）</strong> です。</p>

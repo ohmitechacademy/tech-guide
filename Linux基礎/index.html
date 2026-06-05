@@ -7735,6 +7735,7 @@ macOS は Linux と同じ UNIX 系 OS のため、ターミナルコマンドの
 <p>サーバー上で作業するときは、自分が今どこにいるかを常に意識します。設定ファイル、ログ、アプリのコード、秘密情報は置かれる場所が違うため、パスを読めることがトラブル対応の第一歩になります。</p>
 <p>Linux のファイル構造は Windows と異なります。すべてが <code>/</code>（ルート）から始まります。</p>
 <p>次の図は、Linux の代表的なディレクトリ構造です。サーバー作業では、設定は <code>/etc</code>、ログは <code>/var/log</code>、ユーザーの作業場所は <code>/home/ユーザー名</code> にあることが多いです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/                    ← ルート（最上位）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── home/            ← ユーザーのホームディレクトリ
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   └── yamada/      ← ユーザー yamada のホーム（~ と同じ）
@@ -7745,6 +7746,7 @@ macOS は Linux と同じ UNIX 系 OS のため、ターミナルコマンドの
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── tmp/             ← 一時ファイル（再起動で消えます）
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── root/            ← root ユーザーのホーム
 </span></code></pre></div>
+</div>
 <p>パスが <code>/</code> から始まる場合は絶対パス、今いる場所から見た位置を書く場合は相対パスです。エラーログや設定ファイルを探すときは、まず絶対パスを読めるようになることが大切です。</p>
 <hr />
 <h2 id="_5">ファイル権限<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -7762,12 +7764,14 @@ Linux（Unix 系 OS）では、すべてのファイルに「所有者（owner�
 </span></code></pre></div>
 <h3 id="_6">権限の読み方<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>権限の 10 文字は、ファイル種別、所有者、グループ、その他のユーザーの権限に分かれます。最初は暗号のように見えますが、3 文字ずつに分けると読めます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>-rw-r--r--
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>│ │││ │││ │└ others（その他のユーザー）: r-- = 読み取りのみ
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>│ │││ └┘└ group（グループ）: r-- = 読み取りのみ
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│ └┘└ owner（所有者）: rw- = 読み取り・書き込み
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>└ ファイル種別（- = ファイル、d = ディレクトリ）
 </span></code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -7962,6 +7966,7 @@ SSH は通信を暗号化してリモートサーバーを安全に操作する�
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># 現在の設定を確認します</span>
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>crontab<span class="w"> </span>-l
 </span></code></pre></div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a># 書式：分 時 日 月 曜日 コマンド
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a># *（アスタリスク）= 「毎」を意味します
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
@@ -7977,6 +7982,7 @@ SSH は通信を暗号化してリモートサーバーを安全に操作する�
 </span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a># 毎月 1 日の 3:00 に実行します
 </span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>0 3 1 * * /home/yamada/monthly.sh
 </span></code></pre></div>
+</div>
 <p><code>*</code> は「毎」を意味します。たとえば <code>30 2 * * *</code> は、毎日 2 時 30 分です。cron では環境変数や作業ディレクトリが普段のターミナルと違うことがあるため、スクリプト内では絶対パスを使うと安全です。</p>
 <h3 id="cron_1">cron のログを確認する<a class="headerlink" href="#cron_1" title="Permanent link">&para;</a></h3>
 <p>定期実行が動かないときは、まず cron のログを確認します。実行されたか、エラーが出ていないかを見るためです。</p>

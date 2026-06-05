@@ -7581,6 +7581,7 @@
 <hr />
 <h2 id="prometheus-grafana">メトリクス：Prometheus + Grafana<a class="headerlink" href="#prometheus-grafana" title="Permanent link">&para;</a></h2>
 <h3 id="_6">構成<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>FastAPIアプリ → /metrics エンドポイント（Prometheus 形式）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        ↑
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Prometheus がスクレイプ（定期収集）
@@ -7589,6 +7590,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ↓
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>アラートルールが閾値を超えたら通知
 </span></code></pre></div>
+</div>
 <h3 id="fastapi">FastAPI にメトリクスを追加<a class="headerlink" href="#fastapi" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>prometheus-fastapi-instrumentator
 </span></code></pre></div>
@@ -7827,6 +7829,7 @@
 </tbody>
 </table>
 <p><strong>アラートすべき vs すべきでないもの：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>✅ アラートすべき（ユーザーへの影響がある）
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  - エラー率 &gt; 1% が 5 分継続
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  - レイテンシ p99 &gt; 2 秒が 5 分継続
@@ -7837,6 +7840,7 @@
 </span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  - CPU 使用率 70%（まだ余裕あり）
 </span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  - 特定の非重要エンドポイントの遅延
 </span></code></pre></div>
+</div>
 <h3 id="prometheus">Prometheus アラートルール例<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># alerts.yml</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">groups</span><span class="p">:</span>

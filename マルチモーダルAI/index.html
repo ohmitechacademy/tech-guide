@@ -7790,6 +7790,7 @@
 <h2 id="clipcontrastive-language-image-pre-training">CLIP（Contrastive Language-Image Pre-training）<a class="headerlink" href="#clipcontrastive-language-image-pre-training" title="Permanent link">&para;</a></h2>
 <h3 id="_5">基本アイデア<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>4 億組の（テキスト, 画像）ペアを使い、「テキストと対応する画像の埋め込みを近く、対応しない画像は遠く」なるよう学習します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>テキストエンコーダ → t₁ t₂ t₃ t₄  (行ベクトル: N 個のテキスト)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                     ┌─────────────┐
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>イメージエンコーダ → │i₁ i₂ i₃ i₄ │ (列ベクトル: N 個の画像)
@@ -7799,6 +7800,7 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ↓負例（非対角）を低く
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>→ N² - N 個の負例を使う（大バッチが重要な理由）
 </span></code></pre></div>
+</div>
 <p><strong>損失関数：</strong></p>
 <div class="arithmatex">\[
 \mathcal{L} = -\frac{1}{N}\sum_i \left[\log \frac{e^{s_{i,i}/\tau}}{\sum_j e^{s_{i,j}/\tau}} + \log \frac{e^{s_{i,i}/\tau}}{\sum_j e^{s_{j,i}/\tau}}\right]
@@ -7806,6 +7808,7 @@
 <p><span class="arithmatex">\(s_{i,j}\)</span>：<span class="arithmatex">\(i\)</span> 番目のテキストと <span class="arithmatex">\(j\)</span> 番目の画像のコサイン類似度。対角（<span class="arithmatex">\(i=j\)</span>）が正例。</p>
 <h3 id="_6">ゼロショット分類<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>CLIP の強力な応用の一つです。分類するラベルを「a photo of a {class}」のようなテンプレートに埋め込み、画像との類似度でクラスを決定します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>クエリ画像: 🐱 の写真
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>テキスト候補:
@@ -7815,27 +7818,34 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>→ Fine-tuning なしで分類できる（ゼロショット）
 </span></code></pre></div>
+</div>
 <p><strong>ImageNet での精度：</strong> CLIP の ViT-L モデルは教師あり学習なしで ImageNet Top-1 精度 76% を達成（ResNet-50 の監督あり 76% と同等）。</p>
 <hr />
 <h2 id="vlm">視覚言語モデル（VLM）<a class="headerlink" href="#vlm" title="Permanent link">&para;</a></h2>
 <p>「画像を見て質問に答える（VQA）」「画像を説明する（Image Captioning）」「OCR」などのタスクを扱います。</p>
 <h3 id="1">アーキテクチャ パターン 1：クロスアテンション融合<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>画像トークン → ビジョンエンコーダ → 視覚特徴 ──→ クロスアテンション
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                                                       ↑
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>テキストトークン → 言語モデル ──────────────────────────┘
 </span></code></pre></div>
+</div>
 <p>Flamingo（DeepMind）が代表例。言語モデルの中間層に視覚特徴をクロスアテンションで注入します。</p>
 <h3 id="2llava">アーキテクチャ パターン 2：プロジェクション層（LLaVA 型）<a class="headerlink" href="#2llava" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>画像 → ビジョンエンコーダ（CLIP の ViT）→ 視覚トークン列
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                                              ↓ 線形プロジェクション
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>テキストトークン ─────────────────────────→ 統合トークン列 → LLM
 </span></code></pre></div>
+</div>
 <p><strong>LLaVA（Large Language and Vision Assistant）：</strong> CLIP の ViT と Vicuna（LLaMA の派生）を線形変換で結合。シンプルな接続ながら強力な性能を示しました。学習は 2 段階：
 1. 視覚-言語アライメント（プロジェクション層のみ学習）
 2. End-to-end 指示チューニング（LLM + プロジェクション層）</p>
 <h3 id="3q-formerblip-2">アーキテクチャ パターン 3：Q-Former（BLIP-2）<a class="headerlink" href="#3q-formerblip-2" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>画像 → 凍結ビジョンエンコーダ → Q-Former（学習可能）→ 凍結 LLM
 </span></code></pre></div>
+</div>
 <p>Q-Former は 32 個の学習可能なクエリトークンを持ち、視覚情報の要点を抽出して LLM に渡す「ボトルネック」として機能します。ビジョンエンコーダと LLM 両方を凍結し、Q-Former だけ学習するため非常に効率的です。</p>
 <h3 id="gpt-4v-claude-3-sonnet">GPT-4V / Claude 3 Sonnet<a class="headerlink" href="#gpt-4v-claude-3-sonnet" title="Permanent link">&para;</a></h3>
 <p>商用 VLM の最高峰。OCR・グラフ読み取り・複雑な視覚推論が可能です。アーキテクチャの詳細は非公開ですが、大規模なマルチモーダルデータでの事前学習 + RLHF/DPO によるアライメントが行われていると推測されます。</p>
@@ -7843,10 +7853,12 @@
 <h2 id="_7">マルチモーダルの応用<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="-">画像-テキスト検索<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
 <p>CLIP の埋め込みを使い、テキストで画像を検索（またはその逆）します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>クエリ: &quot;赤いドレスを着た女性がパリで踊っている&quot;
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>→ 意味的に近い画像を数百万枚の DB から高速検索
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>→ ストック写真サービス・Bing Image Search で活用
 </span></code></pre></div>
+</div>
 <h3 id="vqavisual-question-answering">VQA（Visual Question Answering）<a class="headerlink" href="#vqavisual-question-answering" title="Permanent link">&para;</a></h3>
 <p>画像に関する質問に自然言語で回答します。医療診断・衛星画像解析・製造品質管理に応用されています。</p>
 <h3 id="rag">マルチモーダル RAG<a class="headerlink" href="#rag" title="Permanent link">&para;</a></h3>

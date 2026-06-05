@@ -7653,12 +7653,14 @@
 <h2 id="sql">SQL インジェクション<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <h3 id="_4">「注文書を偽造される」攻撃<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>レストランのオーダーシートで考えてみましょう。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>普通の注文:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  「ハンバーガーを1つ」
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>改ざんされた注文:
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  「ハンバーガーを1つ、それと全テーブルの注文をキャンセルして」
 </span></code></pre></div>
+</div>
 <p>SQL インジェクションはこれと同じことが起きます。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ❌ 危険：ユーザー入力をそのまま SQL に文字列結合</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
@@ -7687,6 +7689,7 @@
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>プレースホルダの仕組み：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>SQL の骨格:  SELECT * FROM users WHERE email = ?
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                                                ↑
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>データ:       &#39;alice@example.com&#39;  ← ここに何を入れても「データ」として扱われる
@@ -7694,10 +7697,12 @@
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>→ &#39; OR &#39;1&#39;=&#39;1 を入れても、「email が &#39; OR &#39;1&#39;=&#39;1 というアドレスの人を探す」
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  という意味になるだけで、SQL の構造が変わらない
 </span></code></pre></div>
+</div>
 <p><strong>覚えるルール：</strong> ユーザー入力を文字列結合で SQL に混ぜない。必ずプレースホルダ。</p>
 <hr />
 <h2 id="xss">XSS（クロスサイトスクリプティング）<a class="headerlink" href="#xss" title="Permanent link">&para;</a></h2>
 <h3 id="_6">「掲示板に罠を仕掛ける」攻撃<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>コメント欄のある掲示板を想像してください。
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>1. 攻撃者がコメントに以下を投稿:
@@ -7712,6 +7717,7 @@
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>5. 攻撃者がそのクッキーでそのユーザーとしてログインできる
 </span></code></pre></div>
+</div>
 <h3 id="_7">✅ 防御：エスケープ<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p><strong>エスケープ</strong>とは、HTML の特殊文字を無害な文字列に変換することです。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">markupsafe</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
@@ -7750,6 +7756,7 @@
 <hr />
 <h2 id="csrf">CSRF（クロスサイトリクエストフォージェリ）<a class="headerlink" href="#csrf" title="Permanent link">&para;</a></h2>
 <h3 id="_8">「ログインしたままの状態を悪用される」攻撃<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>あなたが銀行にログイン中（ブラウザにクッキーあり）
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>攻撃者が以下のページを用意し、あなたに踏ませる:
@@ -7767,6 +7774,7 @@
 </span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>ブラウザは「銀行サイトへのリクエスト」に自動でクッキーを付ける。
 </span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>銀行から見ると「あなた本人が振込した」ように見える。
 </span></code></pre></div>
+</div>
 <p>XSS との違い：
 - <strong>XSS</strong> → 攻撃者のコードがあなたのブラウザで動く
 - <strong>CSRF</strong> → あなたのブラウザが攻撃者の意図したリクエストを送る</p>
@@ -7823,6 +7831,7 @@
 </span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="n">is_valid</span> <span class="o">=</span> <span class="n">pwd_context</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="s2">&quot;user_password&quot;</span><span class="p">,</span> <span class="n">hashed</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>bcrypt が安全な理由：</strong></p>
+<div class="admonition warning">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>MD5（危険）:
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  計算速度: 非常に高速（GPU で 1秒間に数十億回）
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  ソルト: なし → 同じパスワードは同じハッシュ
@@ -7833,15 +7842,18 @@
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  ソルト: 自動でランダムに付与 → 同じパスワードでも毎回違うハッシュ
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  → 1パスワード解読するのに秒単位かかる → 大量解読が実用的でない
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="vs">認証 vs 認可<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <p>混同しやすいので整理します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>認証（Authentication）= 「あなたは誰？」を確認
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  → ログイン（ID・パスワードの確認）
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>認可（Authorization）= 「あなたはこれをしていい？」を確認
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  → アクセス制御（このユーザーはこのページを見ていいか）
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 認証: ログインしているかどうかだけ確認</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/dashboard&quot;</span><span class="p">)</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">dashboard</span><span class="p">(</span><span class="n">current_user</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)):</span>

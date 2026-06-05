@@ -7853,12 +7853,14 @@
 </table>
 <h3 id="spof">単一障害点（SPOF）の排除<a class="headerlink" href="#spof" title="Permanent link">&para;</a></h3>
 <p>1 台が落ちると全体が止まるコンポーネントを「単一障害点（Single Point of Failure）」といいます。冗長化とはこれを排除することです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>単一障害点がある構成：
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>クライアント → Web サーバー（1台）→ DB（1台）
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>冗長化した構成：
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>クライアント → LB → Web サーバー × 3 → DB（Primary + Replica）
 </span></code></pre></div>
+</div>
 <p>単一障害点がある構成では、Webサーバー1台が落ちるだけでサービス全体が止まります。冗長化した構成では、ロードバランサが複数のWebサーバーに振り分け、DBもPrimaryとReplicaに分かれています。どこを冗長化するかは、どの障害を許容したいかによって決まります。</p>
 <h3 id="_14">フェイルオーバーとフェイルバック<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7875,6 +7877,7 @@
 <p>ヘルスチェックは、ロードバランサや監視ツールが「このサーバーにリクエストを送ってよいか」を判断する入口です。単にプロセスが起動しているだけでなく、DB接続や依存サービスが使えるかまで確認する設計にすることもあります。</p>
 <hr />
 <h2 id="_16">障害対応の流れ<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>1. 検知：アラートを受け取ります（監視ツール・ユーザー報告）
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>2. 初動：影響範囲を把握します（何のサービスが・どれくらいの規模で影響しているか）
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>3. 切り戻し：可能なら素早くロールバックまたは古いバージョンに戻します
@@ -7882,6 +7885,7 @@
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>5. 修正：根本原因を修正してデプロイします
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>6. 振り返り（ポストモーテム）：なぜ起きたか・再発防止策をドキュメント化します
 </span></code></pre></div>
+</div>
 <p>障害対応では、最初から根本原因を完璧に当てにいくより、まず影響を止めることが優先です。直前のデプロイが怪しければ切り戻し、アクセス集中なら一時的に制限し、DBが落ちているならフェイルオーバーを確認します。その後、ログとメトリクスを見て原因を深掘りします。</p>
 <p><strong>「誰が悪い」ではなく「なぜ起きたか」を追求することが重要です。</strong> 責任追及より仕組みの改善が再発防止につながります（Blame-free Postmortem）。</p>
 <hr />

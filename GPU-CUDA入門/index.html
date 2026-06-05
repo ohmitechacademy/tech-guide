@@ -7839,6 +7839,7 @@
 <hr />
 <h2 id="cpu-vs-gpu">CPU vs GPU のアーキテクチャ<a class="headerlink" href="#cpu-vs-gpu" title="Permanent link">&para;</a></h2>
 <h3 id="cpu">CPU の設計哲学<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CPU（Intel Core i9）:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>コア: 24 個（最新世代）
@@ -7850,7 +7851,9 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>向いている処理: if/else が多い・複雑なロジック・OS・データベース
 </span></code></pre></div>
+</div>
 <h3 id="gpu">GPU の設計哲学<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>GPU（NVIDIA A100）:
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>CUDA コア: 6,912 個（A100）
@@ -7863,17 +7866,21 @@
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>向いている処理: 同じ計算を大量データに適用（行列積・畳み込み）
 </span></code></pre></div>
+</div>
 <h3 id="gpu_1">なぜ行列積に GPU が向いているか<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(C = A \times B\)</span>（<span class="arithmatex">\(N \times N\)</span> 行列）の場合：</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>C[i][j] = Σ_k A[i][k] × B[k][j]  （N² 個の内積、各 N 回の乗算）
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>CPU: 1コアが順番に計算 → O(N³) の逐次処理
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>GPU: C[i][j] の計算を N² スレッドで同時に実行 → 理論上 O(N) に
 </span></code></pre></div>
+</div>
 <p>1024×1024 の行列積では GPU が CPU の約 100 倍高速です。</p>
 <hr />
 <h2 id="cuda">CUDA の実行モデル<a class="headerlink" href="#cuda" title="Permanent link">&para;</a></h2>
 <h3 id="_4">スレッド階層<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Grid（グリッド）
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>└── Block（ブロック）× 多数
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    └── Thread（スレッド）× 最大 1024
@@ -7885,6 +7892,7 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  Block: 256×256 スレッド（65536 スレッド）
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  → 合計 1,048,576 スレッドで並列処理
 </span></code></pre></div>
+</div>
 <h3 id="cuda_1">CUDA カーネルの例（概念）<a class="headerlink" href="#cuda_1" title="Permanent link">&para;</a></h3>
 <div class="language-c highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// CUDA カーネル（GPU で実行される関数）</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">vector_add</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -7935,6 +7943,7 @@
 <hr />
 <h2 id="_7">メモリ管理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="vramgpu">VRAM（GPU メモリ）の構成<a class="headerlink" href="#vramgpu" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>VRAM 使用量の内訳:
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>モデルパラメータ:   Σ(各層のパラメータ数) × dtype サイズ
@@ -7944,6 +7953,7 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>───────────────────────────────────────────────
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>合計 VRAM 要求量
 </span></code></pre></div>
+</div>
 <h3 id="_8">主なエラーと対処<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>

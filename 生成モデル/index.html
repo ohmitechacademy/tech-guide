@@ -7427,12 +7427,14 @@
 </ul>
 <hr />
 <h2 id="vs">識別 vs 生成<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>識別モデル（これまで）:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  入力: 猫の画像 → モデル → 出力: 「猫」
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>生成モデル（このページ）:
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  入力: ランダムなノイズ (z) → モデル → 出力: 猫の画像（本物らしい）
 </span></code></pre></div>
+</div>
 <p>生成モデルの目標は「本物のデータの分布 p_data(x)」を学習し、そこからサンプリングすることです。3 つの代表的アプローチは「どうやってその分布を学ぶか」が異なります。</p>
 <hr />
 <h2 id="gangenerative-adversarial-network">GAN（Generative Adversarial Network）<a class="headerlink" href="#gangenerative-adversarial-network" title="Permanent link">&para;</a></h2>
@@ -7544,10 +7546,12 @@
 <hr />
 <h2 id="vaevariational-autoencoder">VAE（Variational Autoencoder）<a class="headerlink" href="#vaevariational-autoencoder" title="Permanent link">&para;</a></h2>
 <p>データを<strong>潜在空間の確率分布</strong>として表現します。GAN と違い、「どんな潜在変数がどんな画像を生成するか」を解釈しやすい構造です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Encoder: 画像 → 平均μ と 分散σ（潜在空間の分布パラメータ）
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           ↓ μ と σ からサンプリング（再パラメータ化トリック）
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Decoder: 潜在変数 z → 再構成画像
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">VAE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -7584,6 +7588,7 @@
 <h2 id="diffusion-model">Diffusion Model（拡散モデル）<a class="headerlink" href="#diffusion-model" title="Permanent link">&para;</a></h2>
 <p>現在の画像生成 AI（Stable Diffusion・DALL-E）の主流技術です。</p>
 <p><strong>核心アイデア：「ノイズを少しずつ足していく（拡散）」の逆を学ぶ</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Forward process（データ → ノイズ）:
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  猫の画像 → 少しノイズを加える → もっとノイズを加える → ... → 完全なランダムノイズ
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -7591,16 +7596,19 @@
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  ランダムノイズ → 少しノイズを取り除く → ... → 猫の画像
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  ↑ ここを U-Net（ニューラルネット）が予測する
 </span></code></pre></div>
+</div>
 <pre class="mermaid"><code>flowchart LR
     IMG[元画像] --&gt;|ノイズを少しずつ追加| NOISE[完全ノイズ]
     NOISE --&gt;|U-Netがノイズを予測して除去| RECON[再構成画像]</code></pre>
 <p>学習時は「T ステップ後のノイズ画像」と「追加されたノイズ」を使って、「どれだけノイズが乗っているか」を U-Net に予測させます。</p>
 <h3 id="stable-diffusion">Stable Diffusion の仕組み<a class="headerlink" href="#stable-diffusion" title="Permanent link">&para;</a></h3>
 <p>Stable Diffusion はここに <strong>テキスト条件付け</strong> を加えます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>「宇宙を旅する猫」 → CLIP テキストエンコーダ → テキスト埋め込みベクトル
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                                                        ↓
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ランダムノイズ → U-Net（テキストを参照しながらノイズ除去） → 猫の画像
 </span></code></pre></div>
+</div>
 <p><strong>主要コンポーネント：</strong></p>
 <table>
 <thead>

@@ -7752,13 +7752,16 @@
 <h2 id="_5">ベイズの定理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">なぜベイズ理論が必要か<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>普通の統計（頻度論）では「この実験を無限に繰り返したとき」という仮想的な状況を考えます。一方ベイズでは<strong>「今持っている信念をデータで更新する」</strong>という枠組みです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>頻度論：「このコインを 1 万回投げたとき、表は何回出るか」（繰り返しの概念）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ベイズ論：「このコインが公平である可能性は、今のデータを見てどれくらいか」（信念の更新）
 </span></code></pre></div>
+</div>
 <p>医療診断・スパムフィルタ・推薦システムなど、「過去の知識 + 新しい証拠」を組み合わせたいときにベイズが力を発揮します。</p>
 <hr />
 <h3 id="step-1">STEP 1：日常例でベイズの定理を理解する<a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h3>
 <p><strong>例：新型ウイルスの検査</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>状況：
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ・人口の 1% がウイルスに感染している
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  ・検査の感度（本当に感染している人を陽性と判定する確率）= 95%
@@ -7766,7 +7769,9 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>問い：「検査が陽性だった場合、本当に感染している確率は？」
 </span></code></pre></div>
+</div>
 <p>直感的に「95% くらいじゃないか？」と思いますが、実際は違います。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1000 人でシミュレーション：
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  感染者 10 人 → 検査陽性 = 10 × 0.95 = 9.5 ≈ 9 人
@@ -7777,6 +7782,7 @@
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  → 陽性が出たときに本当に感染している確率 = 9/59 ≈ 15%
 </span></code></pre></div>
+</div>
 <p>これがベイズの定理の本質です。<strong>「検査結果（新しいデータ）」と「事前の知識（感染率 1%）」を組み合わせて正確な確率を出す</strong>。</p>
 <hr />
 <h3 id="step-2">STEP 2：ベイズの定理の式を読む<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h3>
@@ -7995,6 +8001,7 @@ P(\text{クラス } k \mid x_1, x_2, \ldots, x_n) \propto P(\text{クラス } k)
 <hr />
 <h2 id="_11">ベイズ更新の逐次性<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p>ベイズ推論の強力な性質：前回の事後分布を次の事前分布として使い、データが来るたびに更新できます。A/B テストや広告のクリック率推定に使われます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>時刻 0: 事前分布 Beta(1, 1)（均一）
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>観測 1: クリック → Beta(2, 1)
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>観測 2: 非クリック → Beta(2, 2)
@@ -8002,6 +8009,7 @@ P(\text{クラス } k \mid x_1, x_2, \ldots, x_n) \propto P(\text{クラス } k)
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>...
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>200 回の観測後、事後分布が真のクリック率 θ に集中していく
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="mcmc">MCMC（マルコフ連鎖モンテカルロ法）<a class="headerlink" href="#mcmc" title="Permanent link">&para;</a></h2>
 <p>共役事前分布が使えない複雑なモデルでは、事後分布から <strong>サンプリング</strong> して近似します。MCMC はその代表的な手法です。</p>

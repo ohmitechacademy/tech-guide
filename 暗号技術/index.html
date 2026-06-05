@@ -7761,6 +7761,7 @@
 <hr />
 <h2 id="_5">暗号の基本概念<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">平文・暗号文・鍵<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>平文（元のデータ）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  「パスワードは abc123」
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ↓ 暗号化（鍵を使う）
@@ -7770,6 +7771,7 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>平文
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  「パスワードは abc123」
 </span></code></pre></div>
+</div>
 <p><strong>鍵（key）</strong>：暗号化・復号に使うパラメータです。同じアルゴリズムでも鍵が違えば違う暗号文になります。</p>
 <h3 id="_7">暗号技術が達成すること<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
@@ -7807,11 +7809,13 @@
 <h2 id="_8">共通鍵暗号（対称鍵暗号）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="_9">仕組み<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>暗号化と復号に<strong>同じ鍵</strong>を使います。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>送信者                         受信者
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  [平文] → 暗号化(鍵K) → [暗号文] → 復号(鍵K) → [平文]
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>              ↑                              ↑
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>           同じ鍵 K ────────────────────── 同じ鍵 K
 </span></code></pre></div>
+</div>
 <h3 id="_10">代表的なアルゴリズム<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -7860,17 +7864,20 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;復号: </span><span class="si">{</span><span class="n">decrypted</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="_11">共通鍵暗号の弱点：「鍵配送問題」<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>問題:
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  Alice が Bob に暗号化メッセージを送りたい
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  → 事前に鍵 K を Bob に渡さなければならない
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  → でも鍵 K を安全に渡すには暗号化が必要
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  → 暗号化には鍵が必要... (無限ループ)
 </span></code></pre></div>
+</div>
 <p>→ この問題を解決するのが<strong>公開鍵暗号</strong>です。</p>
 <hr />
 <h2 id="_12">公開鍵暗号（非対称鍵暗号）<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <h3 id="_13">仕組み<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p><strong>公開鍵</strong>（誰でも使える）と<strong>秘密鍵</strong>（自分だけが持つ）のペアを使います。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>【暗号化通信の流れ】
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Bob が公開鍵・秘密鍵のペアを生成
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  → 公開鍵は全員に配布（Web サイトに公開してもよい）
@@ -7880,11 +7887,13 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  → 暗号文は Bob の秘密鍵でしか復号できない
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  → 盗聴されても解読不能
 </span></code></pre></div>
+</div>
 <div class="arithmatex">\[
 \text{暗号文} = E(\text{公開鍵}, \text{平文}), \qquad \text{平文} = D(\text{秘密鍵}, \text{暗号文})
 \]</div>
 <h3 id="rsa">RSA の仕組み（概要）<a class="headerlink" href="#rsa" title="Permanent link">&para;</a></h3>
 <p>RSA は「大きな数の素因数分解が難しい」という数学的困難性を利用します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>鍵の生成:
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  1. 大きな素数 p, q を選ぶ（例: 各 2048 bit）
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  2. n = p × q を計算（公開）
@@ -7897,6 +7906,7 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  n を素因数分解して p, q を求めることが
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  現代のコンピュータでは計算上不可能（2048 bit の場合）
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">rsa</span><span class="p">,</span> <span class="n">padding</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">hashes</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
@@ -7928,6 +7938,7 @@
 <hr />
 <h2 id="tlshttps">ハイブリッド暗号（TLS/HTTPS の仕組み）<a class="headerlink" href="#tlshttps" title="Permanent link">&para;</a></h2>
 <p>共通鍵暗号の「速さ」と公開鍵暗号の「鍵配送問題の解決」を組み合わせます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>【TLS ハンドシェイクの流れ（簡略版）】
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>1. Client → Server: &quot;TLS 1.3 使いたい&quot;
@@ -7943,6 +7954,7 @@
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>5. 以降: セッション鍵（AES）で高速に暗号化通信
 </span></code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -8079,6 +8091,7 @@ DB が漏洩したとき、ハッシュ化されていればすぐには解読�
 <h2 id="_20">デジタル署名<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
 <h3 id="_21">仕組み<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>「このデータは確かに私が送った（改ざんされていない）」を証明します。公開鍵暗号を<strong>逆向き</strong>に使います。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>【署名の作成（送信者）】
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1. メッセージのハッシュ値を計算: h = H(メッセージ)
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2. ハッシュ値を秘密鍵で暗号化: 署名 = E(秘密鍵, h)
@@ -8089,6 +8102,7 @@ DB が漏洩したとき、ハッシュ化されていればすぐには解読�
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>2. 受け取ったメッセージのハッシュ: h = H(メッセージ)
 </span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>3. h == h&#39; なら → 正規の送信者・改ざんなし ✓
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">rsa</span><span class="p">,</span> <span class="n">padding</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">hashes</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
@@ -8119,6 +8133,7 @@ DB が漏洩したとき、ハッシュ化されていればすぐには解読�
 <hr />
 <h2 id="ca">公開鍵証明書と認証局（CA）<a class="headerlink" href="#ca" title="Permanent link">&para;</a></h2>
 <p>「公開鍵が本物かどうか」を確認する仕組みが必要です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>問題:
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  攻撃者が「私が google.com の公開鍵です」と偽造できる
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  （中間者攻撃）
@@ -8127,10 +8142,13 @@ DB が漏洩したとき、ハッシュ化されていればすぐには解読�
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  CA（VeriSign など）が公開鍵に署名した「証明書」を発行
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  ブラウザには信頼できる CA のリストが事前インストール済み
 </span></code></pre></div>
+</div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>SSL 証明書の確認（コマンドライン）:
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>$ openssl s_client -connect google.com:443 2&gt;/dev/null \
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  | openssl x509 -noout -subject -issuer -dates
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_22">まとめ：各技術の役割<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart LR

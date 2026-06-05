@@ -7834,11 +7834,13 @@
 <p><strong>課題：</strong> 非同期レプリケーションは遅延があるため、「書いた直後に読むと古い値が返ることがある」（結果整合性）という問題があります。</p>
 <h3 id="_13">シャーディング（水平分割）<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>1 台の DB に収まらなくなったとき、データを複数の DB に分割します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ユーザー ID のハッシュでシャードを決めます：
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  user_id % 4 == 0 → シャード A
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  user_id % 4 == 1 → シャード B
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  ...
 </span></code></pre></div>
+</div>
 <p><strong>課題：</strong> JOIN が難しくなります。シャード間の再配置（リシャーディング）がコスト高です。</p>
 <p>シャーディングは、1台のDBでは保存量や負荷に耐えられないときの水平分割です。<code>user_id % 4</code> のような規則で保存先を分けると、ユーザー単位の読み書きは分散できます。一方で、全ユーザーをまたぐ集計や、複数シャードをまたぐJOINは難しくなります。</p>
 <hr />
@@ -7846,12 +7848,14 @@
 <p>API への過剰なリクエストを制限する仕組みです。DoS 攻撃の緩和・課金プランの実装に使います。</p>
 <h3 id="_14">トークンバケット方式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>バケットにトークン（許可証）が一定レートで補充されます。トークンがあればリクエストを通します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>バケット容量：100 トークン
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>補充レート：10 トークン/秒
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>リクエストが来るたびにトークンを 1 消費します
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>トークンがなければ 429 Too Many Requests を返します
 </span></code></pre></div>
+</div>
 <p><strong>Redis を使った実装：</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_allowed</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rate:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -7916,11 +7920,13 @@
 </span></code></pre></div>
 <p>この例では、長いURLをMD5でハッシュ化し、その数値をbase62で短い文字列にしています。ただし、先頭7文字だけを使うと衝突する可能性があります。実サービスでは、衝突した場合に別のキーを生成する処理、またはDBの連番IDをbase62に変換する方式を組み合わせます。</p>
 <h3 id="_20">リダイレクト<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>GET /abc123 HTTP/1.1
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>→ 301 Moved Permanently（ブラウザがキャッシュ → サーバー負荷↓）
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  or
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>→ 302 Found（毎回サーバーを通す → 統計を正確に取れます）
 </span></code></pre></div>
+</div>
 <p>301は「恒久的に移動した」という意味なので、ブラウザや検索エンジンが結果をキャッシュしやすくなります。302は「一時的に移動した」という意味なので、毎回サーバーに確認しに来る可能性が高く、クリック数などの統計を取りたい場合に向いています。どちらを選ぶかは、負荷削減と計測精度のトレードオフです。</p>
 <hr />
 <h2 id="_21">面接で押さえるキーワード<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>

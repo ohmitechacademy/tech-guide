@@ -7722,10 +7722,12 @@
     S-&gt;&gt;C: FIN-ACK（了解です、こちらも終わります）</code></pre>
 <p><strong>なぜ 3 回（3-way）必要なのか？</strong></p>
 <p>2 回（クライアント → SYN → サーバー → SYN-ACK まで）で止めると、「クライアントがサーバーに到達できる」ことしか確認できません。サーバーからクライアントへの通信が届くかどうかが未確認のままになってしまいます。3 回目の ACK を加えることで、<strong>双方向の疎通</strong>を確認できます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>SYN     → クライアントの送信能力・サーバーの受信能力を確認
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>SYN-ACK → サーバーの送信能力・クライアントの受信能力を確認
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ACK     → クライアントが SYN-ACK を受け取れたことをサーバーが把握
 </span></code></pre></div>
+</div>
 <p>3-wayハンドシェイクは、通信の前に「お互いに送受信できる」ことを確認する手順です。この確認があるため、TCPは信頼性を持てますが、接続開始に往復時間がかかります。大量の短い通信では、この接続確立コストも性能に影響します。</p>
 <h3 id="tcp-vs-udp">TCP vs UDP<a class="headerlink" href="#tcp-vs-udp" title="Permanent link">&para;</a></h3>
 <table>

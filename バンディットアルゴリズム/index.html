@@ -7773,6 +7773,7 @@
 <hr />
 <h2 id="_5">問題設定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="multi-armed-bandit-mab">多腕バンディット（Multi-Armed Bandit, MAB）<a class="headerlink" href="#multi-armed-bandit-mab" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>K 台のスロットマシン（アーム）: a₁, a₂, ..., aₖ
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>各アームの真の期待報酬（未知）: μ₁, μ₂, ..., μₖ
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -7783,6 +7784,7 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>目標: T ラウンドの累積報酬を最大化
 </span></code></pre></div>
+</div>
 <h3 id="regret">後悔（Regret）<a class="headerlink" href="#regret" title="Permanent link">&para;</a></h3>
 <p>最適なアームを常に選び続けた場合と比較した<strong>損失の累積</strong>：</p>
 <div class="arithmatex">\[
@@ -7793,9 +7795,11 @@ R_T = T \cdot \mu^* - \sum_{t=1}^T \mathbb{E}[r_{t}]
 <hr />
 <h2 id="-greedy">ε-greedy<a class="headerlink" href="#-greedy" title="Permanent link">&para;</a></h2>
 <h3 id="_6">アルゴリズム<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>確率 ε: ランダムにアームを選ぶ（探索）
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>確率 1-ε: 現在の最大推定報酬のアームを選ぶ（活用）
 </span></code></pre></div>
+</div>
 <p><strong>パラメータの選択：</strong>
 - <span class="arithmatex">\(\varepsilon = 0.1\)</span>（10% 探索）が一般的な初期値
 - <span class="arithmatex">\(\varepsilon\)</span> を時間とともに減衰させる（<span class="arithmatex">\(\varepsilon_t = 1/\sqrt{t}\)</span> など）と Regret が改善</p>
@@ -7816,9 +7820,11 @@ a_t = \arg\max_{a} \left[\hat{\mu}_a + \sqrt{\frac{2 \ln t}{N_a}}\right]
 <li><span class="arithmatex">\(\sqrt{2 \ln t / N_a}\)</span>：信頼区間の幅（探索ボーナス；試行回数 <span class="arithmatex">\(N_a\)</span> が少ないほど大きい）</li>
 </ul>
 <p><strong>直感：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>よく試したアーム（N_a 大）: ボーナス小 → 推定が確実 → 活用を優先
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>あまり試していないアーム（N_a 小）: ボーナス大 → 推定が不確実 → 探索を優先
 </span></code></pre></div>
+</div>
 <h3 id="_9">理論的保証<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>UCB1 の累積 Regret の上界（Auer et al., 2002）：</p>
 <div class="arithmatex">\[
@@ -7886,12 +7892,14 @@ R_T \leq \sum_{a: \mu_a &lt; \mu^*} \frac{8 \ln T}{\Delta_a} + \left(1 + \frac{\
 <hr />
 <h2 id="contextual-bandit">Contextual Bandit<a class="headerlink" href="#contextual-bandit" title="Permanent link">&para;</a></h2>
 <p>各ラウンドに<strong>文脈情報</strong>（コンテキスト <span class="arithmatex">\(x_t\)</span>）が与えられます。ユーザーの特徴量・ページの属性などを考慮した上で最良の行動を選びます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>MAB（文脈なし）:
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  各ラウンド → アームを選択 → 報酬観測
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Contextual Bandit（文脈あり）:
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  ユーザーの特徴 xₜ → モデルがアームを選択 → 報酬観測 → モデル更新
 </span></code></pre></div>
+</div>
 <h3 id="linucb">LinUCB<a class="headerlink" href="#linucb" title="Permanent link">&para;</a></h3>
 <p>線形報酬モデル <span class="arithmatex">\(r(x, a) = \theta_a^\top x + \text{noise}\)</span> を仮定した UCB：</p>
 <div class="arithmatex">\[
@@ -7908,10 +7916,12 @@ a_t = \arg\max_a \left[\theta_a^\top x_t + \alpha \sqrt{x_t^\top A_a^{-1} x_t}\r
 </ul>
 <h3 id="abmulti-armed-bandit-testing">A/Bテストの改善（Multi-Armed Bandit Testing）<a class="headerlink" href="#abmulti-armed-bandit-testing" title="Permanent link">&para;</a></h3>
 <p>通常の A/B テストはデータ収集終了まで結果を使わないが、MAB は途中から劣った variant の配信を自動的に減らします。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>通常の A/B テスト:  [A: 50%] [B: 50%] ... (固定)
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>MAB A/B テスト:    [A: 50%] [B: 50%] → [A: 40%] [B: 60%] → ...
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                   B の結果が良ければ自動的に配信を増やす
 </span></code></pre></div>
+</div>
 <p><strong>注意：</strong> 統計的有意性を重視する場合は通常の A/B テストの方が適切（MAB は最終的な「勝者」を明確に主張しにくい）。</p>
 <h3 id="_12">推薦システム<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>ユーザーへの記事・商品推薦。ユーザーの過去行動をコンテキストとした Contextual Bandit として定式化できます。</p>

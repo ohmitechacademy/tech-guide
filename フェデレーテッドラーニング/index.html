@@ -7673,6 +7673,7 @@
 <hr />
 <h2 id="_4">集中型学習との対比<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">従来の集中型学習<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>デバイス 1: データ → ┐
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>デバイス 2: データ → ├→ 中央サーバーにデータを集約 → モデル学習
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>デバイス 3: データ → ┘
@@ -7682,13 +7683,16 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  ・データ転送コスト・通信帯域
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  ・規制（GDPR・HIPAA）への対応が困難
 </span></code></pre></div>
+</div>
 <h3 id="_6">フェデレーテッドラーニング<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>デバイス 1: ローカルデータで学習 → 勾配 Δw₁ → ┐
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>デバイス 2: ローカルデータで学習 → 勾配 Δw₂ → ├→ サーバーで集約 → グローバルモデル更新
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>デバイス 3: ローカルデータで学習 → 勾配 Δw₃ → ┘
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>生データはデバイスを離れない
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="fedavgfederated-averaging">FedAvg（Federated Averaging）<a class="headerlink" href="#fedavgfederated-averaging" title="Permanent link">&para;</a></h2>
 <p>FL の標準的なアルゴリズムです（McMahan et al., 2017）。</p>
@@ -7713,6 +7717,7 @@ w^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^t
 <h3 id="iid-vs-non-iid">IID vs Non-IID<a class="headerlink" href="#iid-vs-non-iid" title="Permanent link">&para;</a></h3>
 <p><strong>IID（独立同一分布）：</strong> 各クライアントのデータが全体の分布を代表している（現実には稀）</p>
 <p><strong>Non-IID（実際の FL）：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>クライアント A（糖尿病専門病院）: 糖尿病患者データのみ
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>クライアント B（小児科病院）:     小児疾患データのみ
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>クライアント C（眼科クリニック）: 眼科疾患データのみ
@@ -7720,6 +7725,7 @@ w^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^t
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>→ 各クライアントの最適モデルが大きく異なる
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>→ 平均化すると全員にとって中途半端なモデルになる
 </span></code></pre></div>
+</div>
 <h3 id="non-iid_1">Non-IID への対応手法<a class="headerlink" href="#non-iid_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -7791,10 +7797,12 @@ w^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^t
 <p>FL はプライバシーを改善しますが、新たな脅威が生じます。</p>
 <h3 id="model-poisoning">モデル汚染攻撃（Model Poisoning）<a class="headerlink" href="#model-poisoning" title="Permanent link">&para;</a></h3>
 <p>悪意のあるクライアントが意図的に誤った更新を送信し、グローバルモデルを壊します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>正常クライアント × 99 → 正しい更新
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>悪意クライアント × 1  → モデルが「ストップ標識をスピード標識と分類する」よう操作
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>→ 集約後のモデルに Backdoor が仕込まれる
 </span></code></pre></div>
+</div>
 <p><strong>対策：</strong> Krum・Median・Trimmed Mean などのロバストな集約手法でアウトライアーの更新を除外します。</p>
 <hr />
 <h2 id="_9">実装フレームワーク<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

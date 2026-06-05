@@ -7784,6 +7784,7 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 - 変更の記録が残ります</p>
 <h3 id="pull-request_1">Pull Request の流れ<a class="headerlink" href="#pull-request_1" title="Permanent link">&para;</a></h3>
 <p>次の図は、作業ブランチで変更した内容が、本番サイトへ反映されるまでの流れです。PR は、変更を <code>main</code> へ入れる前に確認するための中間地点です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>① feature ブランチで作業・コミット・プッシュします
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      ↓
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>② GitHub で Pull Request を作成します
@@ -7796,6 +7797,7 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>      ↓
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>⑥ 本番サイト（ohmitechacademy.com）に反映が完了します
 </span></code></pre></div>
+</div>
 <p>PR の本文には、何を変更したか、なぜ変更したか、どこを確認してほしいかを書きます。レビュアーは差分を見て、動作や設計に問題がないか確認します。</p>
 <blockquote>
 <p><strong>「デプロイ」とは：</strong> コードをインターネット上のサーバーに置き、誰でもアクセスできる状態にすることです。このプロジェクトでは <strong>main ブランチへのマージが自動的にデプロイをトリガーします</strong>。手動でサーバーにファイルをアップロードする作業は不要です。詳しくは <a href="../Cloudflare/">Cloudflare</a> ページで解説しています。</p>
@@ -7835,6 +7837,7 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 </tbody>
 </table>
 <h3 id="request-changes">「Request changes」を受けたとき<a class="headerlink" href="#request-changes" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>① レビュアーが修正コメントを付けて「Request changes」します
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>      ↓
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>② 自分のブランチでコードを修正してコミット・プッシュします
@@ -7846,6 +7849,7 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>      ↓
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>⑤ 「Approve」をもらえたらマージします
 </span></code></pre></div>
+</div>
 <p>Request changes は怒られているという意味ではなく、「main に入れる前にここを直そう」という合図です。同じブランチへ追加コミットを push すれば、PR は自動で更新されます。</p>
 <h3 id="_7">レビューコメントへの返信マナー<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7858,12 +7862,14 @@ GitHub はコードやテキストファイルに特化した「Google ドライ
 <h3 id="_9">コンフリクトとは<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>同じファイルの同じ行を、複数の人が別々に編集したときに発生する「衝突」です。Git が自動でマージできず、手動での解決が必要になります。</p>
 <p>次の記号は、Git が「どちらの変更を採用すべきか分からない」と示している部分です。<code>HEAD</code> 側と <code>main</code> 側の変更を見比べ、最終的に残したい内容へ手で直します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD（自分のブランチの変更）
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&lt;h1&gt;近江テック・アカデミー&lt;/h1&gt;
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>=======
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&lt;h1&gt;近江テックアカデミー（公式）&lt;/h1&gt;
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; main（マージ先の変更）
 </span></code></pre></div>
+</div>
 <h3 id="_10">コンフリクトの解決手順<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>コンフリクト解決では、まず <code>main</code> の最新を取り込み、衝突したファイルを編集し、解決済みとしてコミットします。</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 1. main ブランチの最新を取り込みます</span>

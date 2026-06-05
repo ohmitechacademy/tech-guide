@@ -7883,6 +7883,7 @@
 <p>XGBoost は全データを使って各特徴量の全分割点を評価するため、大規模データでは遅い問題がありました。LightGBM は 3 つの工夫で劇的に高速化しています。</p>
 <h3 id="1-gbdthistogram-based-tree-learning">1. ヒストグラムベース GBDT（Histogram-based Tree Learning）<a class="headerlink" href="#1-gbdthistogram-based-tree-learning" title="Permanent link">&para;</a></h3>
 <p>連続値をビン（例：256 ビン）に離散化し、<strong>ヒストグラムを計算してから分割点を評価</strong>します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>通常の分割探索: O(n × d)  （n: サンプル数, d: 特徴量数）
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ヒストグラム法:
@@ -7892,15 +7893,18 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>→ 大規模データで数十倍高速
 </span></code></pre></div>
+</div>
 <p><strong>子ノードのヒストグラム差分：</strong> 親 - 大きい子 = 小さい子 のヒストグラムが得られるため、小さい側の計算をスキップできます。</p>
 <h3 id="2-gossgradient-based-one-side-sampling">2. GOSS（Gradient-based One-Side Sampling）<a class="headerlink" href="#2-gossgradient-based-one-side-sampling" title="Permanent link">&para;</a></h3>
 <p>大きな勾配を持つサンプル（まだうまく学習できていないサンプル）は<strong>全て保持</strong>し、小さな勾配のサンプルはランダムに<strong>間引く</strong>ことで計算量を削減します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>勾配が大きい top_rate% のサンプル → 全て使う
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>勾配が小さい残りのサンプル → other_rate% をランダムサンプリング
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>間引いたサンプルに (1 - top_rate) / other_rate の重みを付けて
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>分布を補正（ヒストグラムの精度を維持）
 </span></code></pre></div>
+</div>
 <h3 id="3-efbexclusive-feature-bundling">3. EFB（Exclusive Feature Bundling）<a class="headerlink" href="#3-efbexclusive-feature-bundling" title="Permanent link">&para;</a></h3>
 <p>相互に排他的な特徴量（同時に 0 でない場合が少ない）を<strong>バンドル化</strong>して特徴量次元を削減します。スパースな特徴量（One-hot 後のカテゴリ変数等）で特に有効です。</p>
 <h3 id="leaf-wise-vs-level-wise">Leaf-wise vs Level-wise<a class="headerlink" href="#leaf-wise-vs-level-wise" title="Permanent link">&para;</a></h3>
@@ -7930,11 +7934,13 @@
 <h3 id="_9">カテゴリ変数の問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>通常の Label Encoding や One-Hot Encoding はカテゴリ変数を数値に変換しますが、目的変数を使った Target Encoding はデータリーケージが起きる可能性があります。</p>
 <h3 id="ordered-boosting-ordered-target-statistics">Ordered Boosting と Ordered Target Statistics<a class="headerlink" href="#ordered-boosting-ordered-target-statistics" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>時系列順（ランダム順）に並べた場合、
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>i 番目のサンプルの Target Statistics を計算するとき
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>→ i 番目のサンプル自体は使わず、1〜i-1 番目のデータのみ使う
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>→ データリーケージを防ぐ
 </span></code></pre></div>
+</div>
 <div class="arithmatex">\[
 \hat{x}_{i, \text{TS}} = \frac{\sum_{j=1}^{i-1} \mathbb{1}[x_j = x_i] \cdot y_j + \alpha \cdot P_0}{\sum_{j=1}^{i-1} \mathbb{1}[x_j = x_i] + \alpha}
 \]</div>

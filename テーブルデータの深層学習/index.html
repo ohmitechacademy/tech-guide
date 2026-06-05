@@ -7437,6 +7437,7 @@
 </ul>
 <hr />
 <h2 id="dl">なぜテーブルデータで DL は苦手か<a class="headerlink" href="#dl" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>画像データ:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ・特徴量（ピクセル）が均質で空間的な局所性がある
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ・CNN が局所パターンを階層的に学習できる
@@ -7449,6 +7450,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  ・正則化なしでは簡単に過学習する
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  ・MLP は特徴量の順序に不変だが、その学習は難しい
 </span></code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -7586,6 +7588,7 @@
 <hr />
 <h2 id="ft-transformerfeature-tokenizer-transformer">FT-Transformer（Feature Tokenizer + Transformer）<a class="headerlink" href="#ft-transformerfeature-tokenizer-transformer" title="Permanent link">&para;</a></h2>
 <p>2021 年に提案された、各特徴量を「トークン」として扱い、Transformer で処理するアーキテクチャです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>各特徴量 → 線形変換（Feature Tokenizer）→ トークンベクトル
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                                              ↓
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                             [CLS] [feat1] [feat2] ... [featN]
@@ -7596,6 +7599,7 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                              ↓
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                             [CLS] トークンを分類ヘッドへ
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 簡略化した FT-Transformer の特徴量トークン化</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FeatureTokenizer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">d_token</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>

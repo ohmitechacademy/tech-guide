@@ -7469,6 +7469,7 @@
 </ul>
 <hr />
 <h2 id="webassembly_1">なぜ WebAssembly が必要か<a class="headerlink" href="#webassembly_1" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>JavaScript の問題:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  - 動的型付け → 実行時に型推論のオーバーヘッド
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  - JIT コンパイル → 初回実行が遅い・最適化に時間がかかる
@@ -7479,6 +7480,7 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  - AOT コンパイル済み → ブラウザが即デコードして実行
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  - 手動メモリ管理（線形メモリ）→ GC ポーズなし
 </span></code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -7625,6 +7627,7 @@
 <hr />
 <h2 id="_5">線形メモリモデル<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>Wasm は<strong>連続したバイト配列</strong>（線形メモリ）を持ち、JS と Wasm がこのメモリを共有します。</p>
+<div class="admonition warning">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Wasm 線形メモリ（ArrayBuffer として JS からも見える）:
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  [0x00][0x01][0x02][0x03]...[0xFF]...
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        ↑                    ↑
@@ -7634,15 +7637,18 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>注意: JS オブジェクト・DOM へのアクセスは Wasm から直接不可
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>     wasm-bindgen がブリッジコードを自動生成してくれる
 </span></code></pre></div>
+</div>
 <p>大量のデータを JS → Wasm に渡す際は、コピーのオーバーヘッドを避けるために <strong>ポインタ渡し</strong>（メモリ上のアドレスを渡す）を使います。</p>
 <hr />
 <h2 id="wasiwebassembly-system-interface">WASI（WebAssembly System Interface）<a class="headerlink" href="#wasiwebassembly-system-interface" title="Permanent link">&para;</a></h2>
 <p>Wasm をブラウザ<strong>外</strong>（サーバー・CLI・エッジコンピューティング）で動かすための標準インターフェースです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>従来:  コード → OS 依存のバイナリ（Windows/Linux/macOS で別々）
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>WASI:  コード → .wasm（OS に関係なく 1 つのバイナリ）
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                ↓
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>       WASI ランタイム（Wasmtime・WasmEdge）が OS 呼び出しをラップ
 </span></code></pre></div>
+</div>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># WASI ランタイムで Wasm を実行（ブラウザなし）</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>cargo<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>wasm32-wasi
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>wasmtime<span class="w"> </span>target/wasm32-wasi/debug/my_program.wasm
@@ -7688,6 +7694,7 @@
 <h2 id="_7">数学的背景<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">スタックマシンの動作原理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>Wasm はレジスタではなく<strong>スタック</strong>ベースの VM です。命令が値をスタックに積んだり取り出したりします。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>add(3, 5) の実行ステップ:
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>命令            スタック（右が頂上）
@@ -7695,6 +7702,7 @@
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>i32.const 5  → [3, 5]
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>i32.add      → [8]        ← 2値を取り出して加算し結果を積む
 </span></code></pre></div>
+</div>
 <p>この設計により、検証（型チェック）がシンプルになります。各命令の実行前後のスタックの型を静的に追跡できるためです。</p>
 <hr />
 <h2 id="_9">確認問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

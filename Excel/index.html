@@ -7699,11 +7699,13 @@
 <hr />
 <h2 id="_4">基本操作の確認<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">セルの参照<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>A1          → A 列 1 行目のセル
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$A$1        → 絶対参照（数式をコピーしても固定）
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>A1:C10      → A1 から C10 の範囲
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Sheet2!A1   → 別シートのセル
 </span></code></pre></div>
+</div>
 <h3 id="_6">よく使うショートカット<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -7796,6 +7798,7 @@
 </tbody>
 </table>
 <h3 id="_9">条件付き集計（重要）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>=COUNTIF(範囲, 条件)
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>=COUNTIF(C2:C100, &quot;東京&quot;)          → 「東京」の件数
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -7809,14 +7812,18 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>=COUNTIFS(C2:C100,&quot;東京&quot;, D2:D100,&quot;&gt;1000000&quot;)
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>→ 「東京」かつ「売上 &gt; 100万」の件数
 </span></code></pre></div>
+</div>
 <h3 id="_10">条件分岐<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>=IF(条件, 真の場合, 偽の場合)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>=IF(B2&gt;=60, &quot;合格&quot;, &quot;不合格&quot;)
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>=IFS(条件1, 値1, 条件2, 値2, ...)   ← 複数条件（Excel 2019以降）
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>=IFS(B2&gt;=90,&quot;優&quot;, B2&gt;=70,&quot;良&quot;, B2&gt;=60,&quot;可&quot;, TRUE,&quot;不可&quot;)
 </span></code></pre></div>
+</div>
 <h3 id="vlookup-xlookup">検索・参照（VLOOKUP / XLOOKUP）<a class="headerlink" href="#vlookup-xlookup" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>=VLOOKUP(検索値, 範囲, 列番号, 完全一致)
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>=VLOOKUP(E2, A2:C100, 2, FALSE)
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>→ E2 の値を A 列で探し、見つかった行の B 列（2列目）の値を返す
@@ -7824,6 +7831,7 @@
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>=XLOOKUP(検索値, 検索範囲, 返却範囲)  ← 新しい関数（推奨）
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>=XLOOKUP(E2, A2:A100, B2:B100)
 </span></code></pre></div>
+</div>
 <p><strong>pandas との対応：</strong>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># VLOOKUP の Python 版</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df_left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
@@ -7837,6 +7845,7 @@
 <li>行・列・値・フィルターにフィールドをドラッグ</li>
 </ol>
 <p><strong>例：販売データを「地域 × 商品カテゴリ」別に売上合計を集計</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>【元データ】
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>日付, 地域, 商品カテゴリ, 売上
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>2024/01/01, 東京, 食品, 15000
@@ -7849,6 +7858,7 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>大阪    38,000  195,000   52,000
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>名古屋  29,000  145,000   41,000
 </span></code></pre></div>
+</div>
 <p><strong>pandas との対応：</strong>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># ピボットテーブルの Python 版</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">pivot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
@@ -7906,6 +7916,7 @@
 <h2 id="_16">データのクレンジング<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <p>分析の前に「汚いデータ」を整えます。</p>
 <h3 id="_17">よくある問題と対処<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>【空白の除去】
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>=TRIM(A2)   → 前後・中間の余分なスペースを削除
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -7922,6 +7933,8 @@
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>【異常値の発見】
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>条件付き書式 → 上位/下位 10% を色付け
 </span></code></pre></div>
+</div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>【日付の書式統一】
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>2024年1月1日 → 2024/1/1 に統一
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>TEXT(A2, &quot;YYYY/MM/DD&quot;)
@@ -7929,6 +7942,7 @@
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>【数値として入力された文字列】
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>&#39;1000 のように &#39; がついている → VALUE(A2) で数値に変換
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="excel-python">Excel から Python への橋渡し<a class="headerlink" href="#excel-python" title="Permanent link">&para;</a></h2>
 <p>Excel でやっている操作がそのまま pandas の操作に対応します。</p>

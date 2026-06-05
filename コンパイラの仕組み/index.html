@@ -7503,14 +7503,18 @@
 <p>プログラムを実行する方法は大きく 2 つに分かれます。</p>
 <p><strong>コンパイラ（Compiler）</strong></p>
 <p>ソースコード全体を先に機械語（実行ファイル）に翻訳し、その後実行します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ソースコード → [コンパイラ] → 実行ファイル → [CPU] → 実行
 </span></code></pre></div>
+</div>
 <p>例：C, C++, Go, Rust</p>
 <p>コンパイラ方式では、実行前に時間をかけて変換する代わりに、実行時にはCPUが直接読める形式に近いコードを動かせます。C言語で <code>gcc main.c -o main</code> のように実行ファイルを作るのは、この方式です。</p>
 <p><strong>インタープリタ（Interpreter）</strong></p>
 <p>ソースコードを 1 行ずつ読みながら即座に実行します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ソースコード → [インタープリタ] → 実行（同時進行）
 </span></code></pre></div>
+</div>
 <p>例：Python（CPython）, Ruby, Bash</p>
 <p>インタープリタ方式では、プログラムを書いてすぐ実行しやすい反面、実行中に読み取りや解釈のコストがかかります。Python が学習やデータ分析で使いやすいのは、コンパイル手順を強く意識せずに試せるからです。</p>
 <p><strong>JIT コンパイラ（Just-In-Time）</strong></p>
@@ -7551,6 +7555,7 @@
 <p>コンパイルは、ソースコードをいきなり機械語へ変換する単純な作業ではありません。字句解析、構文解析、意味解析、最適化、コード生成という複数の段階に分かれています。</p>
 <p>この段階を知ると、エラーの種類を切り分けやすくなります。文字の並びが文法として読めないのか、型や名前の意味が合わないのか、実行時に問題が起きているのかで、調べる場所が変わります。</p>
 <p>C 言語をコンパイルするときの流れです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ソースコード (.c)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    ↓ 1. 字句解析（Lexing）
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>トークン列
@@ -7567,6 +7572,7 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    ↓ 7. リンク（Link）
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>実行ファイル (a.out)
 </span></code></pre></div>
+</div>
 <p>この流れでは、ソースコードは「文字列」から「構造」へ、さらに「機械が実行できる表現」へと段階的に変換されます。各段階で役割が違うため、エラーの出方も変わります。<code>SyntaxError</code> は構文解析付近、型エラーは意味解析付近、リンクエラーは最後の結合段階で起きる、というように見分けられます。</p>
 <hr />
 <h2 id="1-lexing-tokenization">1. 字句解析（Lexing / Tokenization）<a class="headerlink" href="#1-lexing-tokenization" title="Permanent link">&para;</a></h2>
@@ -7578,10 +7584,12 @@
 </span></code></pre></div>
 <p>字句解析では、まだ「足し算の左右が何か」までは深く考えません。<code>int</code> はキーワード、<code>x</code> は識別子、<code>10</code> と <code>20</code> は数値、<code>+</code> は演算子、<code>;</code> は文の終わり、というように文字列を部品へ分けます。</p>
 <p>字句解析器（レキサー）は <strong>正規表現</strong> で書かれたルールで各トークンを識別します（正規表現の重要な応用例です）。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>整数リテラル: [0-9]+
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>識別子:      [a-zA-Z_][a-zA-Z0-9_]*
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>演算子:      +, -, *, /, =, ==, != ...
 </span></code></pre></div>
+</div>
 <p>たとえば <code>[0-9]+</code> は1文字以上の数字列を表します。<code>[a-zA-Z_][a-zA-Z0-9_]*</code> は、最初は英字または <code>_</code>、2文字目以降は英数字または <code>_</code> を許す識別子のルールです。プログラミング言語の「変数名として使える文字」の規則は、この段階で扱われます。</p>
 <hr />
 <h2 id="2-parsing">2. 構文解析（Parsing）<a class="headerlink" href="#2-parsing" title="Permanent link">&para;</a></h2>
@@ -7709,6 +7717,7 @@
 <hr />
 <h2 id="python">Python の実行モデル<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
 <p>Python（CPython）は以下の手順で実行されます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>hello.py
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    ↓ 字句解析・構文解析
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>AST
@@ -7716,6 +7725,7 @@
 </span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>hello.pyc（__pycache__/）
 </span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    ↓ CPython 仮想マシン（PVM）が解釈・実行
 </span></code></pre></div>
+</div>
 <p><strong>バイトコード：</strong><br />
 機械語ではなく、Python 仮想マシンが理解できる中間言語です。直接 CPU では実行できません。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">dis</span>
@@ -7738,6 +7748,7 @@
 <hr />
 <h2 id="javascript-v8">JavaScript の V8 エンジン<a class="headerlink" href="#javascript-v8" title="Permanent link">&para;</a></h2>
 <p>Chrome と Node.js が使う JavaScript エンジンです。JIT コンパイルによって高速実行を実現します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>JS ソース
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    ↓ パース → AST 生成
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    ↓ Ignition（インタープリタ）がバイトコードとして実行
@@ -7745,6 +7756,7 @@
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    ↓ TurboFan（JIT コンパイラ）が機械語に変換
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    ↓ 次回以降は機械語で高速実行
 </span></code></pre></div>
+</div>
 <p><strong>型情報の最適化：</strong></p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>

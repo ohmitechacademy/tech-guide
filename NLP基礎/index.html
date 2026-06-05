@@ -7789,6 +7789,7 @@
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="si">:</span><span class="s2">8</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>文: ソフトバンクグループの孫正義社長が東京都渋谷区で記者会見を開いた。
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  [ORG     ] ソフトバンクグループ
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  [PERSON  ] 孫正義
@@ -7798,6 +7799,7 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  [DATE    ] 2024年3月
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  [ORG     ] 滋賀大学
 </span></code></pre></div>
+</div>
 <p>主なエンティティラベル：<code>PERSON</code>（人名）、<code>ORG</code>（組織）、<code>GPE</code>（地名・国）、<code>DATE</code>（日付）、<code>MONEY</code>（金額）、<code>PRODUCT</code>（製品）</p>
 <p>NER の結果はモデルに依存するため、必ず正しいとは限りません。固有名詞が専門的だったり、新しい名称だったりすると誤認識することがあります。</p>
 <h3 id="_7">係り受け解析<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -7845,6 +7847,7 @@
 <p>現代の NLP モデルのほぼすべては Transformer アーキテクチャに基づいています。Transformer が登場する前は、RNN・LSTM が主流でしたが、長文での情報の「忘れ」と並列計算の困難さが課題でした。</p>
 <p>Transformer はこれを <strong>Self-Attention（自己注意機構）</strong> で解決しました。Self-Attention は「文中のすべての単語が、他のすべての単語にどれだけ注目すべきか」を同時に計算します。</p>
 <h3 id="self-attention">Self-Attention をライブラリのたとえで理解する<a class="headerlink" href="#self-attention" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>文章：「彼女は猫を飼っている。彼女はとても大切にしている。」
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>問い：「大切にしている」の主語は誰か？
@@ -7861,9 +7864,11 @@
 </span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
 </span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>注目度 = Attention 重み（0〜1, 合計 1）
 </span></code></pre></div>
+</div>
 <p><strong>Q/K/V の役割（図書館のたとえ）：</strong></p>
 <p>Self-Attention の式が <span class="arithmatex">\(\text{Attention}(Q,K,V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V\)</span> という形になる理由を、直感から順を追って考えましょう。</p>
 <p>やりたいことは「あるトークンが他のどのトークンと関係が深いかを計算し、関係の深さに応じて情報を集める」ことです。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>図書館で「機械学習の教科書を探したい」とき：
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  Query (Q) = あなたの「検索クエリ」（「機械学習 教科書」）
@@ -7879,6 +7884,7 @@
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>        Softmax が「勝者総取り」になるのを防ぐため
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>  3. 注目度に応じて Value を加重平均 → 「関連性の高い情報の合成」
 </span></code></pre></div>
+</div>
 <div class="arithmatex">\[\text{Attention}(Q,K,V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V\]</div>
 <p>この式は「検索クエリ（Q）と各キー（K）の類似度を計算し、それを重みとして情報（V）を合成する」という意味です。</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>

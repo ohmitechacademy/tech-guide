@@ -7649,10 +7649,12 @@
 <hr />
 <h2 id="_5">埋め込みベクトルとは<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">テキストの意味をベクトルで表す<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>「犬は哺乳類だ」  → [0.21, -0.54, 0.31, ..., 0.08]  (1536 次元)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>「猫も哺乳類だ」  → [0.19, -0.51, 0.28, ..., 0.11]  ← 意味が近い → ベクトルも近い
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>「東京は日本の首都」→ [0.73,  0.12, -0.44, ..., 0.55]  ← 意味が遠い → ベクトルも遠い
 </span></code></pre></div>
+</div>
 <p>埋め込みモデル（text-embedding-3、all-MiniLM など）が文章→ベクトルの変換を担います。</p>
 <h3 id="_7">類似度の測定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
@@ -7692,6 +7694,7 @@
 <h3 id="hnswhierarchical-navigable-small-world">HNSW（Hierarchical Navigable Small World）<a class="headerlink" href="#hnswhierarchical-navigable-small-world" title="Permanent link">&para;</a></h3>
 <p>ベクトルデータベースで最も広く使われるアルゴリズムです。</p>
 <p><strong>構造：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>レイヤー 2（まばら）:  ●         ●         ●
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                      長距離リンク（ハイウェイ）
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>レイヤー 1:     ● ── ● ── ●   ● ── ● ── ●
@@ -7699,6 +7702,7 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>レイヤー 0:  ●─●─●─●─●─●─●─●─●─●─●─●
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>（全ノード）  短距離リンク（精度の高い最終探索）
 </span></code></pre></div>
+</div>
 <p><strong>検索手順：</strong>
 1. 上位レイヤーから「大まかに」近い方向に移動
 2. 下のレイヤーに降りるほど「細かく」探索
@@ -7710,6 +7714,7 @@
 - <code>ef_search</code>：検索時の探索幅</p>
 <h3 id="ivfinverted-file-index">IVF（Inverted File Index）<a class="headerlink" href="#ivfinverted-file-index" title="Permanent link">&para;</a></h3>
 <p>ベクトル空間を「クラスター」に分割し、クエリに近いクラスターのみを探索します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>事前処理（k-means でクラスタリング）:
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  ・全ベクトルを k 個のセントロイドに割り当て
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  ・各セントロイドに「所属ベクトルのリスト」を作成
@@ -7719,6 +7724,7 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  2. そのセントロイドの所属ベクトルのみを全件比較
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  3. 最も近いベクトルを返す
 </span></code></pre></div>
+</div>
 <p><strong>計算量：</strong> <span class="arithmatex">\(O(k + n/k \cdot nprobe)\)</span>（<span class="arithmatex">\(k\)</span>：クラスター数、<span class="arithmatex">\(n\)</span>：全ベクトル数）</p>
 <p><strong>IVF + PQ（Product Quantization）：</strong> ベクトルをサブベクトルに分割してコードブックで量子化し、メモリを 8〜64 倍圧縮します。大規模データセット（1 億件以上）で使われます。</p>
 <hr />
@@ -7821,11 +7827,13 @@
 </table>
 <h3 id="_12">ハイブリッド検索<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>ベクトル検索（意味的類似）+ キーワード検索（BM25）を組み合わせます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>クエリ: &quot;東京の天気予報&quot;
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ベクトル検索: 「気象情報」「降水確率」など意味的に近い文書を取得
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>キーワード検索: &quot;東京&quot; &quot;天気&quot; を含む文書を取得
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>RRF (Reciprocal Rank Fusion): 2 つのランキングを統合
 </span></code></pre></div>
+</div>
 <p>専門用語・固有名詞（製品名・人名）はベクトル検索が苦手なためキーワード検索で補います。</p>
 <hr />
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Chroma によるシンプルな RAG 実装</span>

@@ -7597,20 +7597,24 @@
 <h2 id="_6">セッション認証とトークン認証<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">セッション認証<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>サーバー側がセッション情報を保持し、クライアントには Cookie で ID のみ渡します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1. ログイン → サーバーがセッションをDBに保存 → session_id を Cookie に
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2. リクエスト → Cookie の session_id をサーバーが照合 → 誰かを特定
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>3. ログアウト → サーバーがセッションを削除
 </span></code></pre></div>
+</div>
 <p><strong>特徴：</strong>
 - サーバーが状態を持つ（スケールアウトに工夫が必要）
 - Cookie を使うので CSRF 対策が必要
 - セッションを即座に無効化できる</p>
 <h3 id="jwt">トークン認証（JWT）<a class="headerlink" href="#jwt" title="Permanent link">&para;</a></h3>
 <p>サーバーが状態を持たず、署名付きトークンをクライアントに渡します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. ログイン → サーバーがJWTを発行 → クライアントがローカルに保存
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2. リクエスト → Authorization ヘッダーにJWTを付ける
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>3. サーバーが署名を検証 → 誰かを特定（DBを見ない）
 </span></code></pre></div>
+</div>
 <p><strong>特徴：</strong>
 - サーバーがステートレス（スケールアウトしやすい）
 - API・マイクロサービスとの相性が良い
@@ -7636,11 +7640,13 @@
 </span></code></pre></div>
 <p><code>sub</code>（subject）はユーザー ID、<code>exp</code> は有効期限（Unix タイムスタンプ）です。payload は Base64 エンコードされているだけで<strong>暗号化されていません</strong>。秘密情報（パスワード等）を入れてはいけません。</p>
 <h3 id="signature">signature（署名）<a class="headerlink" href="#signature" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>HMACSHA256(
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  base64(header) + &quot;.&quot; + base64(payload),
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  秘密鍵
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>)
 </span></code></pre></div>
+</div>
 <p>サーバーだけが知る秘密鍵で署名します。これにより、クライアントが payload を改ざんしても署名が一致せず、サーバーが検知できます。</p>
 <hr />
 <h2 id="fastapi-jwt">FastAPI での JWT 実装<a class="headerlink" href="#fastapi-jwt" title="Permanent link">&para;</a></h2>
@@ -7722,6 +7728,7 @@
 <hr />
 <h2 id="oauth2">OAuth2（外部サービスによる認証）<a class="headerlink" href="#oauth2" title="Permanent link">&para;</a></h2>
 <p>「Google / GitHub でログイン」の仕組みです。自前でパスワード管理をせずに済みます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1. ユーザーが「Google でログイン」をクリック
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>2. Google の認証画面にリダイレクト
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>3. ユーザーが Google で認証 → 認可コードが返る
@@ -7729,6 +7736,7 @@
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>5. access_token でユーザー情報（メール等）を取得
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>6. 自前 JWT を発行してログイン完了
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># authlib を使った例（FastAPI + Google OAuth）</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">authlib</span> <span class="n">httpx</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>

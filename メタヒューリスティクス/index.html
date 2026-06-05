@@ -7616,6 +7616,7 @@
 </ul>
 <hr />
 <h2 id="_4">なぜ勾配法だけでは足りないのか<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>勾配法が使えない・難しい状況:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  組み合わせ最適化:
@@ -7633,6 +7634,7 @@
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    → 勾配法はたまたま出発した近くの山頂に登るだけ
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    → 本当の最高点を見つけられない可能性が高い
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -7657,6 +7659,7 @@
 <hr />
 <h2 id="ga-genetic-algorithm">遺伝的アルゴリズム（GA: Genetic Algorithm）<a class="headerlink" href="#ga-genetic-algorithm" title="Permanent link">&para;</a></h2>
 <h3 id="_5">自然選択のメタファー<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>自然界の進化:
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  個体群 → 環境で生き残れる個体が繁殖 → 子孫に形質が遺伝
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>         → 突然変異で多様性 → 何世代もかけて適応
@@ -7666,6 +7669,7 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  → 2つの解を組み合わせる（交叉） → ランダムに変化（突然変異）
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  → 何世代も繰り返して良い解に収束
 </span></code></pre></div>
+</div>
 <h3 id="ga_1">GA の基本サイクル<a class="headerlink" href="#ga_1" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
     A["初期集団\n（ランダムな解を N 個生成）"]
@@ -7792,6 +7796,7 @@
 <hr />
 <h2 id="sa-simulated-annealing">焼きなまし法（SA: Simulated Annealing）<a class="headerlink" href="#sa-simulated-annealing" title="Permanent link">&para;</a></h2>
 <h3 id="_7">金属の「焼きなまし」からのアナロジー<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>金属の焼きなまし（物理）:
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  高温: 原子が活発に動き回る → エネルギーが低い安定状態を探す
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  徐々に冷却: 動きが鈍くなる → 最終的に安定な結晶構造に落ち着く
@@ -7801,6 +7806,7 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  徐々に冷却: 受け入れ確率が下がる → 良い解の周辺で精密に探索
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  低温（最終）: ほぼ改善のみ受け入れる → 収束
 </span></code></pre></div>
+</div>
 <h3 id="_8">受理確率の数式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>現在の解 <span class="arithmatex">\(x\)</span>、新しい解 <span class="arithmatex">\(x'\)</span>、温度 <span class="arithmatex">\(T\)</span> とします。</p>
 <div class="arithmatex">\[
@@ -7867,10 +7873,12 @@ P(\text{受理}) =
 <hr />
 <h2 id="pso-particle-swarm-optimization">粒子群最適化（PSO: Particle Swarm Optimization）<a class="headerlink" href="#pso-particle-swarm-optimization" title="Permanent link">&para;</a></h2>
 <h3 id="_9">鳥の群れ・魚の群れからのアナロジー<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>群れの動き:
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  各個体は「自分が今まで見つけた最良の位置」と
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  「群れ全体の最良の位置」の両方に引き寄せられながら飛ぶ
 </span></code></pre></div>
+</div>
 <div class="arithmatex">\[
 v_i \leftarrow w \cdot v_i + c_1 r_1 (\underbrace{p_i - x_i}_{\text{自分の最良に引き寄せ}}) + c_2 r_2 (\underbrace{g - x_i}_{\text{群れの最良に引き寄せ}})
 \]</div>

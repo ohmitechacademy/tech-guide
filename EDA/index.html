@@ -7571,6 +7571,7 @@
 </ul>
 <hr />
 <h2 id="eda_1">EDA の全体フロー<a class="headerlink" href="#eda_1" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>データ受け取り
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ↓
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>① 形状・型・基本統計量の確認   ← 全体像を把握
@@ -7585,6 +7586,7 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  ↓
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>前処理 → モデリングへ
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="1">① 形状・型・基本統計量の確認<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7608,11 +7610,13 @@
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1"># count / mean / std / min / 25% / 50% / 75% / max が一覧で確認できる</span>
 </span></code></pre></div>
 <p><strong>確認するポイント：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>□ データ件数は期待通りか？（極端に少なくないか）
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>□ 数値型・文字列型・datetime 型が正しく認識されているか
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>□ 平均と中央値（50%）が大きく離れていないか（歪み・外れ値のサイン）
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>□ min / max に異常値がないか（年齢 = -5、気温 = 999 など）
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="2">② 欠損値の確認<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ── 欠損数と割合を一覧表示 ────────────────────────</span>
@@ -7682,10 +7686,12 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Fare の歪度が大きければ対数変換を検討</span>
 </span></code></pre></div>
 <p><strong>確認するポイント：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>□ 正規分布に近いか、大きく歪んでいるか（対数変換が必要か）
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>□ 外れ値（箱ひげ図のひげ外の点）が多くないか
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>□ 単峰性か多峰性か（ラベルの混在のサイン）
 </span></code></pre></div>
+</div>
 <h3 id="_5">カテゴリ変数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># ── 値ごとの頻度確認 ──────────────────────────────</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
@@ -7700,10 +7706,12 @@
 </span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><strong>確認するポイント：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>□ カテゴリの種類数（ユニーク数）は多すぎないか
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>□ 特定のカテゴリに偏りすぎていないか（不均衡）
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>□ 想定外の値・スペルミスがないか
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="4">④ 変数間の関係確認<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <h3 id="_6">相関ヒートマップ<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -7759,6 +7767,7 @@
 <p>1 行でヒストグラム・相関・欠損・外れ値の分析を一括で実行してくれます。素早い概観把握に便利ですが、<strong>自動生成に頼りすぎず自分の目でも確認</strong>することが大切です。</p>
 <hr />
 <h2 id="eda_2">EDA チェックリスト<a class="headerlink" href="#eda_2" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>【基本情報】
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>□ df.shape で行数・列数を確認した
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>□ df.dtypes で型が正しく認識されているか確認した
@@ -7779,6 +7788,7 @@
 </span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>□ 目的変数と各特徴量の関係を可視化した
 </span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>□ 仮説（「この変数が効きそう」）を 3 つ以上書き出した
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_9">確認問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ol>

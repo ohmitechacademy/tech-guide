@@ -7617,11 +7617,13 @@
 </span></code></pre></div>
 <p><code>UNION ALL</code> の上が起点、下が繰り返し部分です。最初に社員 ID 5 の行を取り、その社員の <code>manager_id</code> を使って上司の行を取り、さらにその上司の <code>manager_id</code> を使って上へたどります。</p>
 <p><strong>実行イメージ：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ステップ 1：id=5 の行を取得
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ステップ 2：id=5 の manager_id を使って、その上司の行を取得
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ステップ 3：その上司の manager_id を使って、さらに上の行を取得
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  ... manager_id が NULL になるまで繰り返す
 </span></code></pre></div>
+</div>
 <blockquote>
 <p>無限ループを防ぐため、PostgreSQL は <code>CYCLE</code> 句、MySQL 8.0 は最大再帰回数（デフォルト 1000）で自動停止します。</p>
 </blockquote>

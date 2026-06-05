@@ -7504,6 +7504,7 @@
 <h2 id="_4">法的・倫理的注意点（必読）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="robotstxt">robots.txt を確認する<a class="headerlink" href="#robotstxt" title="Permanent link">&para;</a></h3>
 <p><code>https://example.com/robots.txt</code> にアクセスして、スクレイピングが許可されているか確認します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># robots.txt の例
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>User-agent: *         # すべてのボットに対して
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Disallow: /admin/     # /admin/ 以下は禁止
@@ -7512,6 +7513,7 @@
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Crawl-delay: 10       # 10秒以上間隔を空けること
 </span></code></pre></div>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.robotparser</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_scrape</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_agent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -7527,6 +7529,7 @@
 </span></code></pre></div>
 <h3 id="_5">利用規約を確認する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>robots.txt に加えて、サービスの<strong>利用規約（Terms of Service）</strong>も確認します。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>✗ 禁止の例（利用規約に明記されている場合):
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  「自動化された手段によるデータ収集を禁止します」
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  「スクレイピング・クロールを禁止します」
@@ -7535,7 +7538,9 @@
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  「非営利・学術目的での利用は許可します」
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  「API が提供されている場合、API を優先してください」
 </span></code></pre></div>
+</div>
 <h3 id="_6">守るべきルール<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>□ robots.txt で禁止されているパスにはアクセスしない
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>□ 利用規約を読んでスクレイピング禁止でないか確認する
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>□ アクセス間隔を空ける（最低 1〜2 秒、Crawl-delay に従う）
@@ -7544,6 +7549,7 @@
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>□ 収集したデータを許可なく再配布しない
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>□ API がある場合は API を使う（スクレイピングより公式）
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="requests">基本：requests でページを取得<a class="headerlink" href="#requests" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>

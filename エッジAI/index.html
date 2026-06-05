@@ -7876,6 +7876,7 @@
 </tbody>
 </table>
 <p><strong>用途別の使い分け：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>エッジに適した用途:
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ・ウェイクワード検出（常時起動・低電力）
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ・自動車の衝突回避（超低レイテンシ）
@@ -7887,6 +7888,7 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  ・バッチ処理・学習
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  ・精度最優先のタスク
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_4">エッジデバイスの制約<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">ハードウェアの現実<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -8017,9 +8019,11 @@ x_{\text{int8}} = \text{round}\!\left(\frac{x_{\text{float32}}}{s}\right) + z
 </table>
 <h3 id="3-knowledge-distillation">3. 知識蒸留（Knowledge Distillation）<a class="headerlink" href="#3-knowledge-distillation" title="Permanent link">&para;</a></h3>
 <p>大きな<strong>教師モデル</strong>（Teacher）の「ソフトな出力（確率分布）」を使って、小さな<strong>生徒モデル</strong>（Student）を学習させます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>正解ラベル:    [0, 0, 1, 0, 0]     ← ハードラベル（情報が少ない）
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>教師の出力: [0.01, 0.02, 0.95, 0.01, 0.01]  ← ソフトラベル（クラス間の類似性を含む）
 </span></code></pre></div>
+</div>
 <p><strong>蒸留損失：</strong></p>
 <div class="arithmatex">\[
 \mathcal{L}_{\text{KD}} = (1-\alpha) \mathcal{L}_{\text{CE}}(y, \hat{p}_S) + \alpha T^2 \mathcal{L}_{\text{CE}}(p_T^{(T)}, p_S^{(T)})

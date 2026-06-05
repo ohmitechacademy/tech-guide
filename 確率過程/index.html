@@ -7596,6 +7596,7 @@
 <hr />
 <h2 id="_5">確率過程とは<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>時刻 <span class="arithmatex">\(t\)</span> において確率変数 <span class="arithmatex">\(X_t\)</span> が定まる族 <span class="arithmatex">\(\{X_t\}_{t \geq 0}\)</span>（または <span class="arithmatex">\(\{X_n\}_{n=0,1,2,\ldots}\)</span>）です。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1 つの確率変数:  X ~ N(0, 1)  →  1 つの数値をランダムに引く
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>確率過程:
@@ -7606,6 +7607,7 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  ...
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  各時刻で確率変数がある、その無限次元の列
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_6">ランダムウォーク<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>最もシンプルな確率過程です。各ステップで +1 か -1 に等確率で動きます。</p>
@@ -7642,6 +7644,7 @@ P(X_{n+1} = j \mid X_n = i, X_{n-1}, \ldots, X_0) = P(X_{n+1} = j \mid X_n = i) 
 <p>直接サンプリングが難しい複雑な確率分布から、<strong>マルコフ連鎖を使ってサンプリング</strong>する手法です。ベイズ推論で事後分布 <span class="arithmatex">\(p(\theta | \text{data})\)</span> からのサンプルを得るために使われます。</p>
 <h3 id="_9">メトロポリス・ヘイスティングス法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p><strong>アルゴリズム：</strong></p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1. 初期値 θ₀ を設定
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2. 各ステップで：
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>   a. 提案分布（例：正規分布）から候補 θ&#39; を生成
@@ -7649,6 +7652,7 @@ P(X_{n+1} = j \mid X_n = i, X_{n-1}, \ldots, X_0) = P(X_{n+1} = j \mid X_n = i) 
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>   c. 確率 α で θ&#39; を受理、1-α で棄却（現在の θ を維持）
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>3. 十分なステップ後（バーンイン後）、サンプルの分布が p(θ|data) に収束
 </span></code></pre></div>
+</div>
 <p>この手続きが事後分布に収束することは、詳細つり合い条件によって保証されます（後述）。<code>pymc</code> ライブラリでは NUTS（No-U-Turn Sampler）という高効率版が使われます。</p>
 <p>受理率は通常 20〜80% が目安で、step_size を調整して制御します。最初の数百〜数千サンプルは「バーンイン」として捨てます。</p>
 <hr />

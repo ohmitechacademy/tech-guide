@@ -7837,6 +7837,7 @@
 </table>
 <p>DuckDB はベクトル化実行エンジン + 列指向ストア + 並列処理の組み合わせで高速化しています。</p>
 <h3 id="_8">なぜ速いのか<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>DuckDB の実行パイプライン:
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>クエリ → パーサー → 論理プラン → 最適化（述語プッシュダウン等）
@@ -7846,6 +7847,7 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>→ CPU の SIMD 命令を活用
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>→ 分岐予測のミスを削減
 </span></code></pre></div>
+</div>
 <hr />
 <h2 id="_9">ユースケース<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="_10">ローカル分析パイプライン<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
@@ -7869,9 +7871,11 @@
 </span></code></pre></div>
 <h3 id="duckdb-dbt">DuckDB + dbt<a class="headerlink" href="#duckdb-dbt" title="Permanent link">&para;</a></h3>
 <p>データ変換ツール dbt のバックエンドとして DuckDB を使うと、ローカルでエンタープライズ品質のデータパイプラインを開発できます。</p>
+<div class="admonition info">
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>開発: DuckDB（ローカル・無料・高速）
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>本番: BigQuery / Snowflake（同じ SQL が動く）
 </span></code></pre></div>
+</div>
 <h3 id="jupyter">Jupyter でのインタラクティブ分析<a class="headerlink" href="#jupyter" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># マジックコマンド（duckdb-engine + JupySQL）</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
