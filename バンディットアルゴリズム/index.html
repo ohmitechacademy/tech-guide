@@ -7774,16 +7774,13 @@
 <h2 id="_5">問題設定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="multi-armed-bandit-mab">多腕バンディット（Multi-Armed Bandit, MAB）<a class="headerlink" href="#multi-armed-bandit-mab" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>K 台のスロットマシン（アーム）: a₁, a₂, ..., aₖ
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>各アームの真の期待報酬（未知）: μ₁, μ₂, ..., μₖ
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>各ラウンド t で:
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  1. アーム aₜ を選択
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  2. 報酬 rₜ を観測（確率的）
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  3. 次の選択に活かす
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>目標: T ラウンドの累積報酬を最大化
-</span></code></pre></div>
+<p>K 台のスロットマシン（アーム）: a₁, a₂, ..., aₖ
+各アームの真の期待報酬（未知）: μ₁, μ₂, ..., μₖ</p>
+<p>各ラウンド t で:
+  1. アーム aₜ を選択
+  2. 報酬 rₜ を観測（確率的）
+  3. 次の選択に活かす</p>
+<p>目標: T ラウンドの累積報酬を最大化</p>
 </div>
 <h3 id="regret">後悔（Regret）<a class="headerlink" href="#regret" title="Permanent link">&para;</a></h3>
 <p>最適なアームを常に選び続けた場合と比較した<strong>損失の累積</strong>：</p>
@@ -7796,9 +7793,8 @@ R_T = T \cdot \mu^* - \sum_{t=1}^T \mathbb{E}[r_{t}]
 <h2 id="-greedy">ε-greedy<a class="headerlink" href="#-greedy" title="Permanent link">&para;</a></h2>
 <h3 id="_6">アルゴリズム<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>確率 ε: ランダムにアームを選ぶ（探索）
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>確率 1-ε: 現在の最大推定報酬のアームを選ぶ（活用）
-</span></code></pre></div>
+<p>確率 ε: ランダムにアームを選ぶ（探索）
+確率 1-ε: 現在の最大推定報酬のアームを選ぶ（活用）</p>
 </div>
 <p><strong>パラメータの選択：</strong>
 - <span class="arithmatex">\(\varepsilon = 0.1\)</span>（10% 探索）が一般的な初期値
@@ -7821,9 +7817,8 @@ a_t = \arg\max_{a} \left[\hat{\mu}_a + \sqrt{\frac{2 \ln t}{N_a}}\right]
 </ul>
 <p><strong>直感：</strong></p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>よく試したアーム（N_a 大）: ボーナス小 → 推定が確実 → 活用を優先
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>あまり試していないアーム（N_a 小）: ボーナス大 → 推定が不確実 → 探索を優先
-</span></code></pre></div>
+<p>よく試したアーム（N_a 大）: ボーナス小 → 推定が確実 → 活用を優先
+あまり試していないアーム（N_a 小）: ボーナス大 → 推定が不確実 → 探索を優先</p>
 </div>
 <h3 id="_9">理論的保証<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>UCB1 の累積 Regret の上界（Auer et al., 2002）：</p>
@@ -7836,25 +7831,25 @@ R_T \leq \sum_{a: \mu_a &lt; \mu^*} \frac{8 \ln T}{\Delta_a} + \left(1 + \frac{\
 <h3 id="_10">アイデア<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>各アームの期待報酬についての<strong>事後分布からサンプリング</strong>し、最大値のアームを選びます。</p>
 <p><strong>Beta-Bernoulli バンディット（クリック率の最適化）：</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 各アームの成功回数・失敗回数を初期化</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>   <span class="c1"># 事前分布: Beta(1, 1) = 均一</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">beta_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="c1"># 各アームの報酬をサンプリング</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta_</span><span class="p">)</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="c1"># 最大サンプルのアームを選ぶ</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">arm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="c1"># 報酬を観測してベイズ更新</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">reward</span> <span class="o">=</span> <span class="n">observe_reward</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="n">alpha</span><span class="p">[</span><span class="n">arm</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># 成功 → alpha を増やす</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">beta_</span><span class="p">[</span><span class="n">arm</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># 失敗 → beta を増やす</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 各アームの成功回数・失敗回数を初期化</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>   <span class="c1"># 事前分布: Beta(1, 1) = 均一</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">beta_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="c1"># 各アームの報酬をサンプリング</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta_</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="c1"># 最大サンプルのアームを選ぶ</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">arm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="c1"># 報酬を観測してベイズ更新</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">reward</span> <span class="o">=</span> <span class="n">observe_reward</span><span class="p">(</span><span class="n">arm</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="n">alpha</span><span class="p">[</span><span class="n">arm</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># 成功 → alpha を増やす</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">beta_</span><span class="p">[</span><span class="n">arm</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># 失敗 → beta を増やす</span>
 </span></code></pre></div>
 <p><strong>ベイズ更新の役割：</strong> 試行回数が増えるほど事後分布が狭まり（確信が高まり）、サンプル間のばらつきが小さくなります → 自然に探索から活用へ移行。</p>
 <h3 id="ucb-vs-thompson-sampling">UCB vs Thompson Sampling<a class="headerlink" href="#ucb-vs-thompson-sampling" title="Permanent link">&para;</a></h3>
@@ -7893,12 +7888,10 @@ R_T \leq \sum_{a: \mu_a &lt; \mu^*} \frac{8 \ln T}{\Delta_a} + \left(1 + \frac{\
 <h2 id="contextual-bandit">Contextual Bandit<a class="headerlink" href="#contextual-bandit" title="Permanent link">&para;</a></h2>
 <p>各ラウンドに<strong>文脈情報</strong>（コンテキスト <span class="arithmatex">\(x_t\)</span>）が与えられます。ユーザーの特徴量・ページの属性などを考慮した上で最良の行動を選びます。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>MAB（文脈なし）:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  各ラウンド → アームを選択 → 報酬観測
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Contextual Bandit（文脈あり）:
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  ユーザーの特徴 xₜ → モデルがアームを選択 → 報酬観測 → モデル更新
-</span></code></pre></div>
+<p>MAB（文脈なし）:
+  各ラウンド → アームを選択 → 報酬観測</p>
+<p>Contextual Bandit（文脈あり）:
+  ユーザーの特徴 xₜ → モデルがアームを選択 → 報酬観測 → モデル更新</p>
 </div>
 <h3 id="linucb">LinUCB<a class="headerlink" href="#linucb" title="Permanent link">&para;</a></h3>
 <p>線形報酬モデル <span class="arithmatex">\(r(x, a) = \theta_a^\top x + \text{noise}\)</span> を仮定した UCB：</p>
@@ -7917,10 +7910,9 @@ a_t = \arg\max_a \left[\theta_a^\top x_t + \alpha \sqrt{x_t^\top A_a^{-1} x_t}\r
 <h3 id="abmulti-armed-bandit-testing">A/Bテストの改善（Multi-Armed Bandit Testing）<a class="headerlink" href="#abmulti-armed-bandit-testing" title="Permanent link">&para;</a></h3>
 <p>通常の A/B テストはデータ収集終了まで結果を使わないが、MAB は途中から劣った variant の配信を自動的に減らします。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>通常の A/B テスト:  [A: 50%] [B: 50%] ... (固定)
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>MAB A/B テスト:    [A: 50%] [B: 50%] → [A: 40%] [B: 60%] → ...
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                   B の結果が良ければ自動的に配信を増やす
-</span></code></pre></div>
+<p>通常の A/B テスト:  [A: 50%] [B: 50%] ... (固定)
+MAB A/B テスト:    [A: 50%] [B: 50%] → [A: 40%] [B: 60%] → ...
+                   B の結果が良ければ自動的に配信を増やす</p>
 </div>
 <p><strong>注意：</strong> 統計的有意性を重視する場合は通常の A/B テストの方が適切（MAB は最終的な「勝者」を明確に主張しにくい）。</p>
 <h3 id="_12">推薦システム<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>

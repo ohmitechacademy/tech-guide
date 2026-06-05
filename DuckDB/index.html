@@ -7838,50 +7838,46 @@
 <p>DuckDB はベクトル化実行エンジン + 列指向ストア + 並列処理の組み合わせで高速化しています。</p>
 <h3 id="_8">なぜ速いのか<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>DuckDB の実行パイプライン:
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>クエリ → パーサー → 論理プラン → 最適化（述語プッシュダウン等）
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>       → 物理プラン → ベクトル化実行（SIMD）→ 結果
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>ベクトル化実行: 1行ずつでなく 2048行のチャンクをまとめて処理
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>→ CPU の SIMD 命令を活用
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>→ 分岐予測のミスを削減
-</span></code></pre></div>
+<p>DuckDB の実行パイプライン:</p>
+<p>クエリ → パーサー → 論理プラン → 最適化（述語プッシュダウン等）
+       → 物理プラン → ベクトル化実行（SIMD）→ 結果</p>
+<p>ベクトル化実行: 1行ずつでなく 2048行のチャンクをまとめて処理
+→ CPU の SIMD 命令を活用
+→ 分岐予測のミスを削減</p>
 </div>
 <hr />
 <h2 id="_9">ユースケース<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="_10">ローカル分析パイプライン<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># BigQuery や Redshift を使わずローカルで大規模分析</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="s2">    WITH daily_revenue AS (</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s2">        SELECT</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s2">            DATE_TRUNC(&#39;day&#39;, created_at) AS date,</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s2">            SUM(amount) AS revenue</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="s2">        FROM &#39;transactions/*.parquet&#39;</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s2">        WHERE created_at &gt;= &#39;2024-01-01&#39;</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s2">        GROUP BY 1</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="s2">    )</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="s2">    SELECT</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="s2">        date,</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="s2">        revenue,</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="s2">        SUM(revenue) OVER (ORDER BY date) AS cumulative_revenue</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="s2">    FROM daily_revenue</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="s2">    ORDER BY date</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pl</span><span class="p">()</span>  <span class="c1"># Polars で返す</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># BigQuery や Redshift を使わずローカルで大規模分析</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s2">    WITH daily_revenue AS (</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">        SELECT</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">            DATE_TRUNC(&#39;day&#39;, created_at) AS date,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">            SUM(amount) AS revenue</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s2">        FROM &#39;transactions/*.parquet&#39;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s2">        WHERE created_at &gt;= &#39;2024-01-01&#39;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s2">        GROUP BY 1</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="s2">    )</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="s2">    SELECT</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="s2">        date,</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="s2">        revenue,</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="s2">        SUM(revenue) OVER (ORDER BY date) AS cumulative_revenue</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="s2">    FROM daily_revenue</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="s2">    ORDER BY date</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pl</span><span class="p">()</span>  <span class="c1"># Polars で返す</span>
 </span></code></pre></div>
 <h3 id="duckdb-dbt">DuckDB + dbt<a class="headerlink" href="#duckdb-dbt" title="Permanent link">&para;</a></h3>
 <p>データ変換ツール dbt のバックエンドとして DuckDB を使うと、ローカルでエンタープライズ品質のデータパイプラインを開発できます。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>開発: DuckDB（ローカル・無料・高速）
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>本番: BigQuery / Snowflake（同じ SQL が動く）
-</span></code></pre></div>
+<p>開発: DuckDB（ローカル・無料・高速）
+本番: BigQuery / Snowflake（同じ SQL が動く）</p>
 </div>
 <h3 id="jupyter">Jupyter でのインタラクティブ分析<a class="headerlink" href="#jupyter" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># マジックコマンド（duckdb-engine + JupySQL）</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">%</span><span class="n">sql</span> <span class="n">duckdb</span><span class="p">:</span><span class="o">///</span><span class="p">:</span><span class="n">memory</span><span class="p">:</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="o">%%</span><span class="n">sql</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="s1">&#39;large_file.csv&#39;</span> <span class="n">LIMIT</span> <span class="mi">10</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># マジックコマンド（duckdb-engine + JupySQL）</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="o">%</span><span class="n">sql</span> <span class="n">duckdb</span><span class="p">:</span><span class="o">///</span><span class="p">:</span><span class="n">memory</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">%%</span><span class="n">sql</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="s1">&#39;large_file.csv&#39;</span> <span class="n">LIMIT</span> <span class="mi">10</span>
 </span></code></pre></div>
 <hr />
 <h2 id="pandas-polars-duckdb">pandas / Polars / DuckDB の使い分け<a class="headerlink" href="#pandas-polars-duckdb" title="Permanent link">&para;</a></h2>

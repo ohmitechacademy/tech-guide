@@ -7865,30 +7865,28 @@ A(s, a) = Q(s, a) - V(s)
 \]</div>
 <p><strong>クリッピングの意味：</strong></p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Advantage &gt; 0 の場合（良い行動）:
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → 良い行動への確率を増やしすぎない
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Advantage &lt; 0 の場合（悪い行動）:
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  → 悪い行動への確率を減らしすぎない
-</span></code></pre></div>
+<p>Advantage &gt; 0 の場合（良い行動）:
+  r_t = 1.2 → min(1.2×A, 1.1×A) = 1.1×A で上限クリップ
+  → 良い行動への確率を増やしすぎない</p>
+<p>Advantage &lt; 0 の場合（悪い行動）:
+  r_t = 0.8 → min(0.8×A, 0.9×A) = 0.8×A で下限クリップ
+  → 悪い行動への確率を減らしすぎない</p>
 </div>
 <p><span class="arithmatex">\(\varepsilon = 0.2\)</span> が一般的。更新前後の方策が大きく離れることを防ぎ、学習を安定させます。</p>
 <h3 id="ppo">PPO の学習ループ<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_iterations</span><span class="p">):</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># 1. 現在の方策でデータ収集（On-policy）</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">rollouts</span> <span class="o">=</span> <span class="n">collect_trajectories</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># 2. Advantage 推定（GAE）</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">advantages</span> <span class="o">=</span> <span class="n">compute_gae</span><span class="p">(</span><span class="n">rollouts</span><span class="p">,</span> <span class="n">value_net</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="c1"># 3. 複数エポック（4〜10 回）同じデータで更新</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">for</span> <span class="n">minibatch</span> <span class="ow">in</span> <span class="n">get_minibatches</span><span class="p">(</span><span class="n">rollouts</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">loss</span> <span class="o">=</span> <span class="n">ppo_clip_loss</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">minibatch</span><span class="p">,</span> <span class="n">advantages</span><span class="p">,</span> <span class="n">clip_eps</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="n">loss</span> <span class="o">+=</span> <span class="n">value_loss</span> <span class="o">+</span> <span class="n">entropy_bonus</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_iterations</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># 1. 現在の方策でデータ収集（On-policy）</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">rollouts</span> <span class="o">=</span> <span class="n">collect_trajectories</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># 2. Advantage 推定（GAE）</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">advantages</span> <span class="o">=</span> <span class="n">compute_gae</span><span class="p">(</span><span class="n">rollouts</span><span class="p">,</span> <span class="n">value_net</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="c1"># 3. 複数エポック（4〜10 回）同じデータで更新</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">for</span> <span class="n">minibatch</span> <span class="ow">in</span> <span class="n">get_minibatches</span><span class="p">(</span><span class="n">rollouts</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="n">loss</span> <span class="o">=</span> <span class="n">ppo_clip_loss</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">minibatch</span><span class="p">,</span> <span class="n">advantages</span><span class="p">,</span> <span class="n">clip_eps</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="n">loss</span> <span class="o">+=</span> <span class="n">value_loss</span> <span class="o">+</span> <span class="n">entropy_bonus</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 </span></code></pre></div>
 <p><strong>重要：</strong> On-policy なので集めたデータを数エポックしか使えません（多すぎると古いデータで更新して不安定になる）。</p>
 <hr />
@@ -7943,10 +7941,9 @@ V(s_t) = \mathbb{E}_{a_t \sim \pi}\!\left[Q(s_t, a_t) - \alpha \log \pi(a_t|s_t)
 <p>環境の<strong>遷移モデル</strong> <span class="arithmatex">\(\hat{P}(s_{t+1} | s_t, a_t)\)</span> を学習して、仮想的な経験（rollout）を生成します。</p>
 <h3 id="dyna">Dyna アーキテクチャ<a class="headerlink" href="#dyna" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>実環境   → 少量のデータを収集 → モデルを更新
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           ↓
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>学習済みモデル → 仮想 rollout を大量生成 → 価値関数/方策を更新
-</span></code></pre></div>
+<p>実環境   → 少量のデータを収集 → モデルを更新
+           ↓
+学習済みモデル → 仮想 rollout を大量生成 → 価値関数/方策を更新</p>
 </div>
 <p>実環境のサンプルを増幅できるため<strong>サンプル効率が大幅に向上</strong>します。</p>
 <h3 id="mbpomodel-based-policy-optimization">MBPO（Model-Based Policy Optimization）<a class="headerlink" href="#mbpomodel-based-policy-optimization" title="Permanent link">&para;</a></h3>
@@ -7954,25 +7951,21 @@ V(s_t) = \mathbb{E}_{a_t \sim \pi}\!\left[Q(s_t, a_t) - \alpha \log \pi(a_t|s_t)
 <h3 id="world-modelsdreamer">World Models・Dreamer<a class="headerlink" href="#world-modelsdreamer" title="Permanent link">&para;</a></h3>
 <p>Latent Dynamics Model（潜在空間での遷移モデル）を使って、<strong>夢の中で学習</strong>します。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>実環境 → エンコーダ → 潜在状態 z
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                              ↓ 遷移モデル（RSSM）
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                    潜在状態 z&#39; → デコーダ → 仮想画像
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                              ↓
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                    方策の更新（潜在空間内で完結）
-</span></code></pre></div>
+<p>実環境 → エンコーダ → 潜在状態 z
+                              ↓ 遷移モデル（RSSM）
+                    潜在状態 z' → デコーダ → 仮想画像
+                              ↓
+                    方策の更新（潜在空間内で完結）</p>
 </div>
 <hr />
 <h2 id="rlhfreinforcement-learning-from-human-feedback">RLHF（Reinforcement Learning from Human Feedback）<a class="headerlink" href="#rlhfreinforcement-learning-from-human-feedback" title="Permanent link">&para;</a></h2>
 <p><a href="../ファインチューニング詳解/">ファインチューニング詳解</a> で学んだ RLHF の RL 部分（PPO）をここで接続します。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>報酬モデル rm(x, y):
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  プロンプト x, 応答 y のペアに報酬を付与
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>PPO による最適化:
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ || π_ref)
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  KL ペナルティで元の言語モデルから離れすぎないよう制約
-</span></code></pre></div>
+<p>報酬モデル rm(x, y):
+  プロンプト x, 応答 y のペアに報酬を付与</p>
+<p>PPO による最適化:
+  J(θ) = E_{x,y~π_θ}[rm(x,y)] - β·D_KL(π_θ || π_ref)</p>
+<p>KL ペナルティで元の言語モデルから離れすぎないよう制約</p>
 </div>
 <p><span class="arithmatex">\(\beta\)</span>：KL ペナルティ係数。大きいほど元のモデルに近い応答を保つ。</p>
 <hr />

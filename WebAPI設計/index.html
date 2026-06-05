@@ -7634,20 +7634,18 @@
 <p>この設計では、URL に「取得する」「作る」「削除する」という動作が入っています。最初は分かりやすく見えますが、記事以外のリソースが増えると命名がばらつきやすくなります。また、<code>POST /deleteArticle</code> のように、HTTPメソッドと実際の意味がずれると、クライアントやログを読む人が混乱します。</p>
 <p><strong>良い例（名詞 URL + HTTP メソッド）：</strong></p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>GET    /articles          一覧取得
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>POST   /articles          新規作成
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>GET    /articles/1        1 件取得
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>PUT    /articles/1        完全置換
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>PATCH  /articles/1        部分更新
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>DELETE /articles/1        削除
-</span></code></pre></div>
+<p>GET    /articles          一覧取得
+POST   /articles          新規作成
+GET    /articles/1        1 件取得
+PUT    /articles/1        完全置換
+PATCH  /articles/1        部分更新
+DELETE /articles/1        削除</p>
 </div>
 <p>良い例では、URL は <code>articles</code> というリソースを表し、操作はHTTPメソッドで表しています。<code>GET</code> は取得、<code>POST</code> は作成、<code>PUT</code> や <code>PATCH</code> は更新、<code>DELETE</code> は削除です。この形にすると、ユーザー、商品、注文など他のリソースにも同じルールを適用できます。</p>
 <p>ネストするリソースは親子関係を URL で表現します：</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>GET /users/42/articles     ユーザー 42 の記事一覧
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>POST /users/42/articles    ユーザー 42 の記事を作成
-</span></code></pre></div>
+<p>GET /users/42/articles     ユーザー 42 の記事一覧
+POST /users/42/articles    ユーザー 42 の記事を作成</p>
 </div>
 <p>ただし、URLを深くしすぎると扱いにくくなります。<code>/users/42/articles/10/comments/5/replies</code> のように何段もネストするより、主要なリソースは独立したURLにし、必要な条件をクエリパラメータで表す方が読みやすい場合もあります。</p>
 <hr />
@@ -7747,18 +7745,16 @@
 バイナリデータ（画像・パスワードなどの生データ）を、英数字と記号 <code>A-Za-z0-9+/</code> だけで表現するエンコード方式です。HTTP ヘッダーはテキストしか扱えないため、バイナリを安全に埋め込む手段として使われます。エンコードは暗号化ではなく誰でも元に戻せるため、HTTPS 通信が必須です。</p>
 </blockquote>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Authorization: Basic dXNlcjpwYXNzd29yZA==
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                     ↑ &quot;user:password&quot; を Base64 エンコードした文字列
-</span></code></pre></div>
+<p>Authorization: Basic dXNlcjpwYXNzd29yZA==
+                     ↑ "user:password" を Base64 エンコードした文字列</p>
 </div>
 <p>Basic認証のヘッダーには、ユーザー名とパスワードを <code>user:password</code> の形にして Base64 変換した文字列が入ります。Base64 は暗号化ではないため、通信経路を盗み見られると元に戻せます。したがって、Basic認証を使う場合でも HTTPS は必須です。</p>
 <p>簡単に実装できますが、毎リクエストに認証情報を送る必要があるため、JWT が普及した現在は限定的な用途に留まります。</p>
 <h3 id="jwtjson-web-token">JWT（JSON Web Token）<a class="headerlink" href="#jwtjson-web-token" title="Permanent link">&para;</a></h3>
 <p>ログイン後にサーバーが「トークン」を発行し、以降のリクエストでそのトークンを送る方式です。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ヘッダー.ペイロード.署名
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-</span></code></pre></div>
+<p>ヘッダー.ペイロード.署名
+eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</p>
 </div>
 <p>JWT は、ドットで区切られた3つの部分から成ります。ヘッダーには署名方式、ペイロードにはユーザーIDや有効期限などの情報、署名には改ざん検知のための値が入ります。ペイロードも暗号化されているわけではなく、Base64URLで読める形なので、パスワードや秘密情報を入れてはいけません。</p>
 <pre class="mermaid"><code>sequenceDiagram
@@ -7790,12 +7786,10 @@
 <h3 id="cookie_1">Cookie<a class="headerlink" href="#cookie_1" title="Permanent link">&para;</a></h3>
 <p>サーバーがブラウザに小さなデータを保存させる仕組みです。次のリクエストで自動的に送り返されます。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>サーバー → ブラウザ
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Set-Cookie: session_id=abc123; HttpOnly; Secure; SameSite=Strict
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ブラウザ → サーバー（次回以降）
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Cookie: session_id=abc123
-</span></code></pre></div>
+<p>サーバー → ブラウザ
+Set-Cookie: session_id=abc123; HttpOnly; Secure; SameSite=Strict</p>
+<p>ブラウザ → サーバー（次回以降）
+Cookie: session_id=abc123</p>
 </div>
 <p>Cookie はブラウザが自動的に送るため、ログイン状態の維持に使いやすい仕組みです。一方で、自動で送られる性質はCSRF攻撃の原因にもなります。そのため、<code>SameSite</code> やCSRFトークンなどで「意図しない別サイトからのリクエスト」を防ぐ必要があります。</p>
 <p><strong>Cookie の属性：</strong></p>
@@ -7828,10 +7822,11 @@
 <h3 id="_5">セッション<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>ログイン状態などのユーザー情報をサーバー側で保持する仕組みです。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>1. ユーザーがログインする
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>2. サーバーがセッションを作成し、セッション ID を Cookie にセットする
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>3. 次回リクエストでセッション ID を受け取り、サーバーがユーザー情報を取得する
-</span></code></pre></div>
+<ol>
+<li>ユーザーがログインする</li>
+<li>サーバーがセッションを作成し、セッション ID を Cookie にセットする</li>
+<li>次回リクエストでセッション ID を受け取り、サーバーがユーザー情報を取得する</li>
+</ol>
 </div>
 <p>セッションID自体には、通常ユーザー情報を直接入れません。サーバー側のDBやメモリに「このセッションIDはユーザー1を表す」という対応を保存します。ログアウト時にはその対応を削除すれば、同じCookieが送られても無効にできます。</p>
 <p><strong>セッション vs JWT：</strong></p>
@@ -7866,9 +7861,8 @@
 <p>API を変更するとき、既存のクライアントが壊れないようにする設計です。</p>
 <h3 id="_6">バージョニング<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>/api/v1/articles   ← 旧クライアントは引き続きこちらを使います
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>/api/v2/articles   ← 新クライアントはこちらを使います
-</span></code></pre></div>
+<p>/api/v1/articles   ← 旧クライアントは引き続きこちらを使います
+/api/v2/articles   ← 新クライアントはこちらを使います</p>
 </div>
 <p>APIは一度公開すると、スマホアプリ、外部連携、古いフロントエンドなど、複数のクライアントから使われ続けます。URLにバージョンを含めておくと、大きな仕様変更を入れるときに古いクライアントをすぐ壊さずに済みます。</p>
 <h3 id="_7">互換性を保つルール<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>

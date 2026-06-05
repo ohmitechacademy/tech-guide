@@ -7847,10 +7847,9 @@
 <h3 id="goroutine_1">goroutine のスケーラビリティ<a class="headerlink" href="#goroutine_1" title="Permanent link">&para;</a></h3>
 <p>OS スレッドのスタックサイズは通常 1〜8 MB（固定）ですが、goroutine のスタックは最初 2〜4 KB から始まり必要に応じて拡張されます。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1 GB メモリで:
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  OS スレッド: 1 GB / 2 MB = ~500 スレッドが上限
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  goroutine:  1 GB / 4 KB = ~250,000 goroutine が起動可能
-</span></code></pre></div>
+<p>1 GB メモリで:
+  OS スレッド: 1 GB / 2 MB = ~500 スレッドが上限
+  goroutine:  1 GB / 4 KB = ~250,000 goroutine が起動可能</p>
 </div>
 <p>Go ランタイムの M:N スレッドスケジューラが <span class="arithmatex">\(M\)</span> 個の goroutine を <span class="arithmatex">\(N\)</span> 個の OS スレッドにマッピングし、ブロッキング I/O 時に別の goroutine を同じスレッドで実行します。</p>
 <hr />

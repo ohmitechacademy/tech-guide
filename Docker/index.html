@@ -7636,11 +7636,10 @@
 <p>Docker を使うと：</p>
 <p>次の図は、Docker を使ったときに同じ環境が複数の場所で再現されるイメージです。重要なのは、アプリだけでなく、実行に必要な環境も一緒に扱う点です。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Aさんの Windows でも
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Bさんの Mac でも
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>本番サーバーの Linux でも
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>→ まったく同じ環境で動きます
-</span></code></pre></div>
+<p>Aさんの Windows でも
+Bさんの Mac でも
+本番サーバーの Linux でも
+→ まったく同じ環境で動きます</p>
 </div>
 <p>Docker は「この環境で動かしてください」という手順をイメージとして固定します。そのイメージから起動したコンテナは、どのマシンでも同じ依存関係を持つため、環境差によるトラブルを減らせます。</p>
 <hr />
@@ -7691,11 +7690,11 @@ Docker イメージは <strong>レイヤー（層）</strong> の積み重ねで
 <code>ota_hp</code> フォルダに移動してから、以下のコマンドを実行してください。</p>
 </blockquote>
 <p>コンテナを起動する前に、まずプロジェクトのフォルダへ移動します。<code>docker compose up</code> は、そのフォルダにある <code>docker-compose.yml</code> を読んで、必要なコンテナを起動します。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ota_hp フォルダに移動します</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>ota_hp
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># コンテナを起動します</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>up
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ota_hp フォルダに移動します</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>ota_hp
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># コンテナを起動します</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>up
 </span></code></pre></div>
 <p>このコマンドを実行すると、Docker は設定ファイルを読み、必要なイメージを取得またはビルドし、コンテナを起動します。ログがターミナルに流れ続けるのは、開発サーバーがその中で動いているからです。</p>
 <p>ターミナルに <code>http://localhost:4321</code> と表示されたら、ブラウザでそのアドレスを開いてください。</p>
@@ -7705,35 +7704,35 @@ Docker がイメージをダウンロードしているためです。2 回目�
 </blockquote>
 <h3 id="_7">停止する<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p><code>docker compose up</code> を前面で実行している場合は、ターミナルで <code>Ctrl + C</code> を押すと停止できます。別のターミナルから明示的に止める場合は <code>docker compose down</code> を使います。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ターミナルで Ctrl + C を押します</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># または別のターミナルウィンドウで</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ターミナルで Ctrl + C を押します</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># または別のターミナルウィンドウで</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
 </span></code></pre></div>
 <p><code>down</code> はコンテナを停止し、Compose が作ったコンテナを削除します。ただし、ローカルのソースコードは消えません。</p>
 <h3 id="_8">バックグラウンドで起動する<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>ターミナルを占有したくない場合は <code>-d</code> オプションをつけます。</p>
 <p>バックグラウンド起動では、ログが画面に流れ続けません。別の作業をしながらサーバーを起動しておきたいときに便利です。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># → ターミナルを使いながら開発できます</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># → 止めるときはこちら</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># → ターミナルを使いながら開発できます</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># → 止めるときはこちら</span>
 </span></code></pre></div>
 <p>バックグラウンドで動かした場合、エラーやアクセスログを見たいときは <code>docker compose logs -f</code> を使います。</p>
 <hr />
 <h2 id="_9">よく使うコマンド<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>Docker のコマンドは、最初は「起動」「停止」「ログ確認」「再起動」の 4 種類を覚えれば十分です。Compose を使う場合は、複数コンテナをまとめて操作できます。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w">          </span><span class="c1"># コンテナを起動します（ログをターミナルに表示します）</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w">       </span><span class="c1"># バックグラウンドで起動します</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w">        </span><span class="c1"># コンテナを停止・削除します</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w">     </span><span class="c1"># ログをリアルタイムで確認します（-d で起動中に使います）</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>restart<span class="w">     </span><span class="c1"># コンテナを再起動します</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w">          </span><span class="c1"># コンテナを起動します（ログをターミナルに表示します）</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w">       </span><span class="c1"># バックグラウンドで起動します</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w">        </span><span class="c1"># コンテナを停止・削除します</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w">     </span><span class="c1"># ログをリアルタイムで確認します（-d で起動中に使います）</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>restart<span class="w">     </span><span class="c1"># コンテナを再起動します</span>
 </span></code></pre></div>
 <p><code>logs -f</code> の <code>-f</code> は follow の意味で、新しいログを追いかけて表示します。画面が更新されない、API が返らない、といったときはまずログを見る習慣をつけます。</p>
 <h3 id="_10">コンテナの中に入る<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>何かのコマンドをコンテナ内で直接実行したい場合：</p>
 <p>コンテナの中に入ると、その環境でシェルを操作できます。依存パッケージが入っているか、ファイルがコピーされているか、コマンドが動くかを確認するのに使います。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>sh
 </span></code></pre></div>
 <p><code>/app #</code> のような表示になったらコンテナの中に入れています。<br />
 <code>exit</code> で抜けられます。</p>
@@ -7741,15 +7740,15 @@ Docker がイメージをダウンロードしているためです。2 回目�
 <h2 id="docker-composeyml">docker-compose.yml の読み方<a class="headerlink" href="#docker-composeyml" title="Permanent link">&para;</a></h2>
 <p>プロジェクトのルートにある <code>docker-compose.yml</code> ファイルが、コンテナの設定を定義しています。</p>
 <p>Compose ファイルは、コンテナの設定表です。どのイメージを使うか、どのフォルダを共有するか、どのポートを外に出すか、起動時に何を実行するかを書きます。</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">                         </span><span class="c1"># ← サービス（コンテナ）の名前</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20-alpine</span><span class="w">      </span><span class="c1"># ← 使用するイメージ（Node.js 20 の軽量版）</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span><span class="w">          </span><span class="c1"># ← コンテナ内の作業ディレクトリ</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/app</span><span class="w">                 </span><span class="c1"># ← ローカルのファイルをコンテナと共有します</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;4321:4321&quot;</span><span class="w">            </span><span class="c1"># ← ホスト:コンテナ のポートマッピング</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run dev</span><span class="w">       </span><span class="c1"># ← 起動時に実行するコマンド</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span><span class="w">                         </span><span class="c1"># ← サービス（コンテナ）の名前</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:20-alpine</span><span class="w">      </span><span class="c1"># ← 使用するイメージ（Node.js 20 の軽量版）</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span><span class="w">          </span><span class="c1"># ← コンテナ内の作業ディレクトリ</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/app</span><span class="w">                 </span><span class="c1"># ← ローカルのファイルをコンテナと共有します</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;4321:4321&quot;</span><span class="w">            </span><span class="c1"># ← ホスト:コンテナ のポートマッピング</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run dev</span><span class="w">       </span><span class="c1"># ← 起動時に実行するコマンド</span>
 </span></code></pre></div>
 <p><code>services</code> の下に、起動したいコンテナをサービスとして定義します。この例では <code>web</code> というサービスが 1 つあり、Node.js のイメージを使って開発サーバーを起動します。</p>
 <p><code>ports</code> の <code>"4321:4321"</code> は、左が自分の PC のポート、右がコンテナ内のポートです。ブラウザで <code>localhost:4321</code> を開くと、コンテナ内の 4321 番で動くサーバーへつながります。</p>
@@ -7762,7 +7761,7 @@ Docker がイメージをダウンロードしているためです。2 回目�
 <h2 id="_11">トラブルシューティング<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="_12">ポートが使用中というエラーが出る<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>ポートは、PC 上で動いているアプリへの入口番号です。同じ番号を複数のアプリが同時に使うことはできません。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Error: listen EADDRINUSE: address already in use :::4321
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Error: listen EADDRINUSE: address already in use :::4321
 </span></code></pre></div>
 <p>→ 別のプロセスが同じポートを使っています。<br />
 まず <code>docker compose down</code> してから、もう一度 <code>docker compose up</code> してみてください。</p>
@@ -7772,8 +7771,8 @@ Docker がイメージをダウンロードしているためです。2 回目�
 <h3 id="_14">パッケージを追加した場合<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p><code>package.json</code> に変更があった場合は、コンテナを再ビルドする必要があります。</p>
 <p>依存パッケージが変わったときは、既存のコンテナを起動し直すだけでは足りないことがあります。イメージを作り直して、新しい依存関係をコンテナへ入れ直します。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
 </span></code></pre></div>
 <p><code>--build</code> を付けると、必要に応じてイメージを再ビルドしてから起動します。パッケージを追加したのにコンテナ内で見つからない場合は、この操作を試します。</p>
 <hr />
@@ -7786,8 +7785,8 @@ Docker がイメージをダウンロードしているためです。2 回目�
 <li>インストール確認：</li>
 </ol>
 <p>インストール後は、ターミナルで Docker と Compose のバージョンが表示されるか確認します。バージョンが出れば、コマンドが使える状態です。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>--version
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>version
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>--version
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>version
 </span></code></pre></div>
 <p>バージョンが表示されれば OK です。</p>
 <hr />

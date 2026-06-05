@@ -7591,16 +7591,15 @@
 <p><code>ota_hp</code> を開くと、以下のようなフォルダ構成になっています。</p>
 <p>Astro では、ファイルの置き場所が役割を表します。最初にフォルダ構造を読めるようになると、「ページを直すのか」「部品を直すのか」「記事を追加するのか」を迷いにくくなります。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ota_hp/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── public/          # 画像・フォント・favicon など「そのまま使うファイル」
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── src/
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   ├── components/  # ヘッダー・フッターなど、繰り返し使うパーツ
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── layouts/     # ページ全体の枠組み（共通レイアウト）
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── pages/       # 各ページのファイル（URLと対応する）
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   └── content/     # お知らせ・ブログ記事などのコンテンツ
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── astro.config.mjs # Astroの設定ファイル（基本的に触らない）
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── package.json     # 使用しているパッケージの一覧（基本的に触らない）
-</span></code></pre></div>
+<p>ota_hp/
+├── public/          # 画像・フォント・favicon など「そのまま使うファイル」
+├── src/
+│   ├── components/  # ヘッダー・フッターなど、繰り返し使うパーツ
+│   ├── layouts/     # ページ全体の枠組み（共通レイアウト）
+│   ├── pages/       # 各ページのファイル（URLと対応する）
+│   └── content/     # お知らせ・ブログ記事などのコンテンツ
+├── astro.config.mjs # Astroの設定ファイル（基本的に触らない）
+└── package.json     # 使用しているパッケージの一覧（基本的に触らない）</p>
 </div>
 <p><code>src/pages</code> は URL と対応するページ、<code>src/components</code> は再利用部品、<code>src/layouts</code> はページ全体の枠、<code>src/content</code> は記事データを置く場所です。</p>
 <h3 id="_5">どこを主に触るか<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -7659,8 +7658,8 @@
 <h2 id="_6">開発サーバーを起動する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>コードを編集しながらブラウザでリアルタイムに確認する方法です。</p>
 <p>開発サーバーは、手元の PC だけで動く確認用サーバーです。ファイルを保存するたびに変更を反映してくれるため、編集と確認を素早く繰り返せます。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ota_hp フォルダに移動してから</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>npm<span class="w"> </span>run<span class="w"> </span>dev
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ota_hp フォルダに移動してから</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>npm<span class="w"> </span>run<span class="w"> </span>dev
 </span></code></pre></div>
 <p>ターミナルに <code>http://localhost:4321</code> と表示されたら、ブラウザでそのアドレスを開いてください。<br />
 ファイルを保存するたびに、ブラウザが自動で更新されます。</p>
@@ -7673,22 +7672,22 @@
 <h2 id="astro_2">.astro ファイルの基本構造<a class="headerlink" href="#astro_2" title="Permanent link">&para;</a></h2>
 <p>Astro のページファイルは <code>.astro</code> という拡張子で、大きく 2 つの部分に分かれています。</p>
 <p><code>.astro</code> ファイルでは、上部のフロントマターでデータや JavaScript の処理を用意し、下部のテンプレートで HTML として表示します。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>---
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>// ① フロントマター（JavaScript を書く場所）
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>const title = &quot;会社概要&quot;;
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>const year = new Date().getFullYear();
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>---
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>&lt;!-- ② HTML テンプレート（ページの見た目を書く場所） --&gt;
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>&lt;html lang=&quot;ja&quot;&gt;
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  &lt;head&gt;
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    &lt;title&gt;{title}&lt;/title&gt;
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  &lt;/head&gt;
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  &lt;body&gt;
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    &lt;h1&gt;{title}&lt;/h1&gt;
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    &lt;p&gt;© {year} 近江テック・アカデミー&lt;/p&gt;
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  &lt;/body&gt;
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>&lt;/html&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>---
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>// ① フロントマター（JavaScript を書く場所）
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>const title = &quot;会社概要&quot;;
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>const year = new Date().getFullYear();
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>---
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>&lt;!-- ② HTML テンプレート（ページの見た目を書く場所） --&gt;
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>&lt;html lang=&quot;ja&quot;&gt;
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  &lt;head&gt;
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    &lt;title&gt;{title}&lt;/title&gt;
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  &lt;/head&gt;
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  &lt;body&gt;
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    &lt;h1&gt;{title}&lt;/h1&gt;
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    &lt;p&gt;© {year} 近江テック・アカデミー&lt;/p&gt;
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  &lt;/body&gt;
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>&lt;/html&gt;
 </span></code></pre></div>
 <p><code>---</code> で囲まれた上の部分に JavaScript を書き、下の HTML テンプレートの中で <code>{変数名}</code> として使えます。</p>
 <p>この例では、<code>title</code> と <code>year</code> をフロントマターで作り、HTML 内で <code>{title}</code>、<code>{year}</code> として表示しています。データと見た目を同じファイル内で近くに置けるのが Astro の読みやすさです。</p>
@@ -7699,64 +7698,64 @@
 <p>ヘッダーやフッターなど <strong>複数のページで共通して使うパーツ</strong> は、コンポーネントとして切り出します。<br />
 一箇所を修正するだけで、すべてのページに反映されるので便利です。</p>
 <p>次の例では、<code>Header.astro</code> と <code>Footer.astro</code> を読み込み、ページ内でタグのように使っています。コンポーネントは HTML の部品を自作タグとして扱う感覚です。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>---
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>// 他のファイルからコンポーネントを読み込む
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>import Header from &#39;../components/Header.astro&#39;;
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>import Footer from &#39;../components/Footer.astro&#39;;
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>---
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>&lt;Header /&gt;
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>&lt;main&gt;
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  &lt;h1&gt;ページの内容&lt;/h1&gt;
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>&lt;/main&gt;
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>&lt;Footer /&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>---
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>// 他のファイルからコンポーネントを読み込む
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>import Header from &#39;../components/Header.astro&#39;;
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>import Footer from &#39;../components/Footer.astro&#39;;
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>---
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>&lt;Header /&gt;
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>&lt;main&gt;
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  &lt;h1&gt;ページの内容&lt;/h1&gt;
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>&lt;/main&gt;
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>&lt;Footer /&gt;
 </span></code></pre></div>
 <p><code>import Header from ...</code> は、別ファイルで定義されたコンポーネントを読み込む文です。<code>&lt;Header /&gt;</code> と書いた位置に、そのコンポーネントの内容が差し込まれます。</p>
 <hr />
 <h2 id="_8">レイアウト（共通の枠組み）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>複数のページで同じヘッダー・フッター・<code>&lt;head&gt;</code> タグを使いたい場合は、 <strong>レイアウト</strong> を使います。</p>
 <p>レイアウトは、ページ全体の共通枠です。各ページで毎回 <code>&lt;html&gt;</code>、<code>&lt;head&gt;</code>、ヘッダー、フッターを書く代わりに、共通部分を 1 つのファイルへまとめます。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;!-- src/layouts/BaseLayout.astro --&gt;
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>---
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>interface Props {
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  title: string;
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  description?: string;
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>}
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>const { title, description = &quot;近江テック・アカデミー公式サイト&quot; } = Astro.props;
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>---
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>&lt;html lang=&quot;ja&quot;&gt;
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  &lt;head&gt;
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    &lt;meta name=&quot;description&quot; content={description} /&gt;
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    &lt;title&gt;{title} | 近江テック・アカデミー&lt;/title&gt;
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    &lt;link rel=&quot;stylesheet&quot; href=&quot;/styles/global.css&quot; /&gt;
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>  &lt;/head&gt;
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>  &lt;body&gt;
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    &lt;header&gt;&lt;!-- 共通ヘッダー --&gt;&lt;/header&gt;
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    &lt;main&gt;
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>      &lt;slot /&gt;  &lt;!-- ← ここに各ページの内容が挿入される --&gt;
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    &lt;/main&gt;
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    &lt;footer&gt;&lt;!-- 共通フッター --&gt;&lt;/footer&gt;
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>  &lt;/body&gt;
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>&lt;/html&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;!-- src/layouts/BaseLayout.astro --&gt;
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>---
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>interface Props {
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  title: string;
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  description?: string;
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>}
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>const { title, description = &quot;近江テック・アカデミー公式サイト&quot; } = Astro.props;
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>---
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>&lt;html lang=&quot;ja&quot;&gt;
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  &lt;head&gt;
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    &lt;meta name=&quot;description&quot; content={description} /&gt;
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    &lt;title&gt;{title} | 近江テック・アカデミー&lt;/title&gt;
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    &lt;link rel=&quot;stylesheet&quot; href=&quot;/styles/global.css&quot; /&gt;
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>  &lt;/head&gt;
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>  &lt;body&gt;
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    &lt;header&gt;&lt;!-- 共通ヘッダー --&gt;&lt;/header&gt;
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    &lt;main&gt;
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>      &lt;slot /&gt;  &lt;!-- ← ここに各ページの内容が挿入される --&gt;
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    &lt;/main&gt;
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    &lt;footer&gt;&lt;!-- 共通フッター --&gt;&lt;/footer&gt;
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>  &lt;/body&gt;
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>&lt;/html&gt;
 </span></code></pre></div>
 <p><code>&lt;slot /&gt;</code> は、レイアウトを使うページ側の内容が入る場所です。レイアウトは額縁、ページ固有の本文はその中に入る絵のように考えると分かりやすいです。</p>
 <p>各ページからレイアウトを使う：</p>
 <p>ページ側では、レイアウトコンポーネントで本文を囲みます。<code>title="会社概要"</code> のように、レイアウトへ必要な情報を渡します。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;!-- src/pages/about.astro --&gt;
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>---
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>import BaseLayout from &#39;../layouts/BaseLayout.astro&#39;;
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>---
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>&lt;BaseLayout title=&quot;会社概要&quot;&gt;
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  &lt;h1&gt;会社概要&lt;/h1&gt;
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  &lt;p&gt;近江テック・アカデミーについて...&lt;/p&gt;
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>&lt;/BaseLayout&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;!-- src/pages/about.astro --&gt;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>---
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>import BaseLayout from &#39;../layouts/BaseLayout.astro&#39;;
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>---
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>&lt;BaseLayout title=&quot;会社概要&quot;&gt;
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  &lt;h1&gt;会社概要&lt;/h1&gt;
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  &lt;p&gt;近江テック・アカデミーについて...&lt;/p&gt;
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>&lt;/BaseLayout&gt;
 </span></code></pre></div>
 <p><code>&lt;slot /&gt;</code> の位置にページ固有のコンテンツが差し込まれます。</p>
 <hr />
@@ -7766,11 +7765,10 @@
 <p><strong>slug とは：</strong> URL に使われる記事の識別子です。<code>/news/2024-spring-camp</code> の <code>2024-spring-camp</code> の部分がスラッグです。スペースや日本語を含まず、ハイフン区切りの短い文字列で表現します。</p>
 </blockquote>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>src/pages/news/[slug].astro
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>→ /news/2024-spring-camp
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>→ /news/2024-open-campus
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>など、すべての記事に対応
-</span></code></pre></div>
+<p>src/pages/news/[slug].astro
+→ /news/2024-spring-camp
+→ /news/2024-open-campus
+など、すべての記事に対応</p>
 </div>
 <p><code>[slug].astro</code> は、1 つのファイルで複数の URL を担当するための書き方です。記事が増えても、記事ごとにページファイルを手で作る必要がありません。</p>
 <h3 id="getstaticpaths">getStaticPaths でページを生成する<a class="headerlink" href="#getstaticpaths" title="Permanent link">&para;</a></h3>
@@ -7779,31 +7777,31 @@
 </blockquote>
 <p>静的サイトでは、ビルド時にどの URL のページを生成するかを <code>getStaticPaths</code> で明示します。</p>
 <p>次のコードでは、<code>news</code> コレクションから全記事を取得し、それぞれの <code>slug</code> に対応するページをビルド時に生成しています。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&lt;!-- src/pages/news/[slug].astro --&gt;
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>---
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>import { getCollection } from &#39;astro:content&#39;;
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>import BaseLayout from &#39;../../layouts/BaseLayout.astro&#39;;
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>// ビルド時に呼ばれ、生成するURLの一覧を返す
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>export async function getStaticPaths() {
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  const allNews = await getCollection(&#39;news&#39;);
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>  return allNews.map((item) =&gt; ({
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    params: { slug: item.slug },   // URL の [slug] 部分
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    props: { item },               // ページに渡すデータ
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>  }));
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>}
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>const { item } = Astro.props;
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>const { Content } = await item.render();
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>---
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>&lt;BaseLayout title={item.data.title}&gt;
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>  &lt;article&gt;
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    &lt;h1&gt;{item.data.title}&lt;/h1&gt;
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    &lt;time&gt;{item.data.date}&lt;/time&gt;
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>    &lt;Content /&gt;   &lt;!-- Markdown の本文 --&gt;
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>  &lt;/article&gt;
-</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>&lt;/BaseLayout&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;!-- src/pages/news/[slug].astro --&gt;
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>---
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>import { getCollection } from &#39;astro:content&#39;;
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>import BaseLayout from &#39;../../layouts/BaseLayout.astro&#39;;
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>// ビルド時に呼ばれ、生成するURLの一覧を返す
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>export async function getStaticPaths() {
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  const allNews = await getCollection(&#39;news&#39;);
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  return allNews.map((item) =&gt; ({
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    params: { slug: item.slug },   // URL の [slug] 部分
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    props: { item },               // ページに渡すデータ
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  }));
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>}
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>const { item } = Astro.props;
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>const { Content } = await item.render();
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>---
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>&lt;BaseLayout title={item.data.title}&gt;
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>  &lt;article&gt;
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    &lt;h1&gt;{item.data.title}&lt;/h1&gt;
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    &lt;time&gt;{item.data.date}&lt;/time&gt;
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>    &lt;Content /&gt;   &lt;!-- Markdown の本文 --&gt;
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>  &lt;/article&gt;
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>&lt;/BaseLayout&gt;
 </span></code></pre></div>
 <p><code>params</code> は URL の <code>[slug]</code> 部分、<code>props</code> はページに渡すデータです。<code>item.render()</code> は Markdown 本文を Astro コンポーネントとして描画できる形に変換します。</p>
 <hr />
@@ -7815,21 +7813,20 @@
 このテックガイドサイトも Markdown で書かれています。</p>
 </blockquote>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>src/content/
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>└── news/
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ├── 2024-01-15.md   ← お知らせ記事
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    └── 2024-02-01.md   ← お知らせ記事
-</span></code></pre></div>
+<p>src/content/
+└── news/
+    ├── 2024-01-15.md   ← お知らせ記事
+    └── 2024-02-01.md   ← お知らせ記事</p>
 </div>
 <p><code>src/content/news</code> に Markdown ファイルを追加すると、お知らせ記事として扱えます。ファイルごとに 1 件の記事を表す、と考えると管理しやすくなります。</p>
 <p>各ファイルの先頭に、タイトルや日付などの情報を書きます。</p>
 <p>Markdown ファイルの先頭にある <code>---</code> で囲まれた部分はフロントマターです。記事のタイトルや日付など、本文ではなくメタデータとして使う情報を書きます。</p>
-<div class="language-md highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>---
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>title: &quot;春のオープンキャンパスのお知らせ&quot;
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="gu">date: 2024-03-01</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="gu">---</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>本文をここに書きます。**太字**や[リンク](https://example.com)も使えます。
+<div class="language-md highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>---
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>title: &quot;春のオープンキャンパスのお知らせ&quot;
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="gu">date: 2024-03-01</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="gu">---</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>本文をここに書きます。**太字**や[リンク](https://example.com)も使えます。
 </span></code></pre></div>
 <p>フロントマターは一覧ページや記事ページで使われます。本文は Markdown として書き、ビルド時に HTML へ変換されます。</p>
 <hr />
@@ -7839,10 +7836,10 @@
 <strong>ビルド</strong> とは、人間が書いたソースコード（<code>.astro</code>・<code>.ts</code>・<code>.css</code> など）をブラウザやサーバーが実行できる形式（HTML・JavaScript・CSS）に変換するプロセス全体を指します。Astro の <code>npm run build</code> では、TypeScript のトランスパイル、コンポーネントの展開、Markdown のレンダリング、画像の最適化、ファイルの圧縮（minify）などが一括で行われ、<code>dist/</code> フォルダに配置可能な成果物が出力されます。開発時の <code>npm run dev</code> はファイルを保存するたびに即時変換するため速いですが、最適化は省略されています。本番デプロイ前には必ずビルドが必要です。</p>
 </blockquote>
 <p>次のコマンドは、Astro 開発でよく使う npm script です。<code>dev</code> は開発用、<code>build</code> は本番用、<code>preview</code> は本番用にビルドした結果の確認に使います。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>npm<span class="w"> </span>install<span class="w">        </span><span class="c1"># パッケージをインストール（初回・package.json が変わったとき）</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">        </span><span class="c1"># 開発サーバーを起動（localhost のみ・デプロイなし）</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">      </span><span class="c1"># 本番用にビルド → dist/ フォルダに HTML/CSS/JS を出力</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>npm<span class="w"> </span>run<span class="w"> </span>preview<span class="w">    </span><span class="c1"># ビルド結果をローカルでプレビュー（本番に近い状態を確認）</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>npm<span class="w"> </span>install<span class="w">        </span><span class="c1"># パッケージをインストール（初回・package.json が変わったとき）</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">        </span><span class="c1"># 開発サーバーを起動（localhost のみ・デプロイなし）</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">      </span><span class="c1"># 本番用にビルド → dist/ フォルダに HTML/CSS/JS を出力</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>npm<span class="w"> </span>run<span class="w"> </span>preview<span class="w">    </span><span class="c1"># ビルド結果をローカルでプレビュー（本番に近い状態を確認）</span>
 </span></code></pre></div>
 <h3 id="_12">開発からデプロイまでの流れ<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>Astro では、手元で確認したコードを GitHub に送り、main にマージされたら Cloudflare Pages が自動でビルド・公開します。次の図はその一連の流れです。</p>

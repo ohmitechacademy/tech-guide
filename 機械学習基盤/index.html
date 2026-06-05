@@ -7542,8 +7542,7 @@
 <p>この方式では、精度だけでなく応答時間が重要です。モデルが重すぎるとユーザーを待たせてしまうため、モデルの読み込みを起動時に済ませる、バッチ化する、軽量化するなどの工夫が必要になります。</p>
 <p>リクエストを受け取ったその場でリアルタイムに予測する方式です。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ユーザーが検索 → 即座にレコメンデーションを返します（&lt; 100ms）
-</span></code></pre></div>
+<p>ユーザーが検索 → 即座にレコメンデーションを返します（&lt; 100ms）</p>
 </div>
 <p><strong>バッチ推論との比較：</strong></p>
 <table>
@@ -7583,16 +7582,16 @@
 </tbody>
 </table>
 <p><strong>レイテンシを下げる工夫：</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 重いモデルは起動時に読み込んでキャッシュします</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_model</span><span class="p">():</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">return</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model.pkl&quot;</span><span class="p">)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># 前処理を軽くします（特徴量エンジニアリングのシンプル化）</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># GPU 推論（PyTorch/TensorFlow）</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># ONNX への変換で推論を高速化します</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 重いモデルは起動時に読み込んでキャッシュします</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_model</span><span class="p">():</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model.pkl&quot;</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># 前処理を軽くします（特徴量エンジニアリングのシンプル化）</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># GPU 推論（PyTorch/TensorFlow）</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># ONNX への変換で推論を高速化します</span>
 </span></code></pre></div>
 <p><code>lru_cache(maxsize=1)</code> を付けると、<code>get_model()</code> の戻り値がキャッシュされます。初回だけモデルを読み込み、2回目以降は同じモデルオブジェクトを再利用します。FastAPI では依存関係や起動時イベントと組み合わせて、重い初期化をリクエスト処理から切り離します。</p>
 <hr />
@@ -7667,13 +7666,13 @@
 <p>このパイプラインでは、コードやデータの変化をきっかけに、テスト、学習、評価、デプロイが順番に進みます。通常のWebアプリと違い、MLでは「コードは変わっていないがデータが変わったのでモデルを作り直す」ことがあります。そのため、データ更新もパイプラインの入力として扱います。</p>
 <h3 id="_6">モデル監視<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>本番に出したモデルは継続的に監視します。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 予測ログを記録します</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">({</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="s2">&quot;model_version&quot;</span><span class="p">:</span> <span class="s2">&quot;v1.2.3&quot;</span><span class="p">,</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="n">elapsed</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">})</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 予測ログを記録します</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">({</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;model_version&quot;</span><span class="p">:</span> <span class="s2">&quot;v1.2.3&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="s2">&quot;latency_ms&quot;</span><span class="p">:</span> <span class="n">elapsed</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">})</span>
 </span></code></pre></div>
 <p>このログは、予測に使った入力、予測結果、モデルバージョン、推論時間を記録しています。あとから「どのモデルが、どの入力に、どんな予測をしたか」を追えるようにするためです。障害調査だけでなく、精度低下や再学習データの収集にも使えます。</p>
 <p>監視すべき指標：

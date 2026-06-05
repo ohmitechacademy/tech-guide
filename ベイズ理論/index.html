@@ -7753,35 +7753,28 @@
 <h3 id="_6">なぜベイズ理論が必要か<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>普通の統計（頻度論）では「この実験を無限に繰り返したとき」という仮想的な状況を考えます。一方ベイズでは<strong>「今持っている信念をデータで更新する」</strong>という枠組みです。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>頻度論：「このコインを 1 万回投げたとき、表は何回出るか」（繰り返しの概念）
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ベイズ論：「このコインが公平である可能性は、今のデータを見てどれくらいか」（信念の更新）
-</span></code></pre></div>
+<p>頻度論：「このコインを 1 万回投げたとき、表は何回出るか」（繰り返しの概念）
+ベイズ論：「このコインが公平である可能性は、今のデータを見てどれくらいか」（信念の更新）</p>
 </div>
 <p>医療診断・スパムフィルタ・推薦システムなど、「過去の知識 + 新しい証拠」を組み合わせたいときにベイズが力を発揮します。</p>
 <hr />
 <h3 id="step-1">STEP 1：日常例でベイズの定理を理解する<a class="headerlink" href="#step-1" title="Permanent link">&para;</a></h3>
 <p><strong>例：新型ウイルスの検査</strong></p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>状況：
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ・人口の 1% がウイルスに感染している
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  ・検査の感度（本当に感染している人を陽性と判定する確率）= 95%
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  ・偽陽性率（感染していない人を陽性と判定する確率）= 5%
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>問い：「検査が陽性だった場合、本当に感染している確率は？」
-</span></code></pre></div>
+<p>状況：
+  ・人口の 1% がウイルスに感染している
+  ・検査の感度（本当に感染している人を陽性と判定する確率）= 95%
+  ・偽陽性率（感染していない人を陽性と判定する確率）= 5%</p>
+<p>問い：「検査が陽性だった場合、本当に感染している確率は？」</p>
 </div>
 <p>直感的に「95% くらいじゃないか？」と思いますが、実際は違います。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1000 人でシミュレーション：
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  感染者 10 人 → 検査陽性 = 10 × 0.95 = 9.5 ≈ 9 人
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  非感染者 990 人 → 検査陽性（偽陽性）= 990 × 0.05 = 49.5 ≈ 50 人
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  陽性と判定された人の合計 ≈ 59 人
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  そのうち本当の感染者 ≈ 9 人
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  → 陽性が出たときに本当に感染している確率 = 9/59 ≈ 15%
-</span></code></pre></div>
+<p>1000 人でシミュレーション：</p>
+<p>感染者 10 人 → 検査陽性 = 10 × 0.95 = 9.5 ≈ 9 人
+  非感染者 990 人 → 検査陽性（偽陽性）= 990 × 0.05 = 49.5 ≈ 50 人</p>
+<p>陽性と判定された人の合計 ≈ 59 人
+  そのうち本当の感染者 ≈ 9 人</p>
+<p>→ 陽性が出たときに本当に感染している確率 = 9/59 ≈ 15%</p>
 </div>
 <p>これがベイズの定理の本質です。<strong>「検査結果（新しいデータ）」と「事前の知識（感染率 1%）」を組み合わせて正確な確率を出す</strong>。</p>
 <hr />
@@ -8002,13 +7995,12 @@ P(\text{クラス } k \mid x_1, x_2, \ldots, x_n) \propto P(\text{クラス } k)
 <h2 id="_11">ベイズ更新の逐次性<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p>ベイズ推論の強力な性質：前回の事後分布を次の事前分布として使い、データが来るたびに更新できます。A/B テストや広告のクリック率推定に使われます。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>時刻 0: 事前分布 Beta(1, 1)（均一）
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>観測 1: クリック → Beta(2, 1)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>観測 2: 非クリック → Beta(2, 2)
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>観測 3: クリック → Beta(3, 2)
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>...
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>200 回の観測後、事後分布が真のクリック率 θ に集中していく
-</span></code></pre></div>
+<p>時刻 0: 事前分布 Beta(1, 1)（均一）
+観測 1: クリック → Beta(2, 1)
+観測 2: 非クリック → Beta(2, 2)
+観測 3: クリック → Beta(3, 2)
+...
+200 回の観測後、事後分布が真のクリック率 θ に集中していく</p>
 </div>
 <hr />
 <h2 id="mcmc">MCMC（マルコフ連鎖モンテカルロ法）<a class="headerlink" href="#mcmc" title="Permanent link">&para;</a></h2>
@@ -8024,18 +8016,18 @@ P(\text{クラス } k \mid x_1, x_2, \ldots, x_n) \propto P(\text{クラス } k)
 <hr />
 <h2 id="pymc">PyMC によるベイズモデリング<a class="headerlink" href="#pymc" title="Permanent link">&para;</a></h2>
 <p><code>pymc</code> では、確率分布を積み上げてモデルを記述し、<code>pm.sample()</code> で MCMC を実行します。</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pymc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># A/B テスト：A 群 100 人中 20 クリック、B 群 100 人中 30 クリック</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">():</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">theta_A</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s1">&#39;theta_A&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 事前分布</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">theta_B</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s1">&#39;theta_B&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s1">&#39;obs_A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta_A</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># 尤度</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s1">&#39;obs_B&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta_B</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">delta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="n">theta_B</span> <span class="o">-</span> <span class="n">theta_A</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># trace.posterior[&#39;delta&#39;] &gt; 0 の割合 → P(B &gt; A | データ)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pymc</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># A/B テスト：A 群 100 人中 20 クリック、B 群 100 人中 30 クリック</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">():</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">theta_A</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s1">&#39;theta_A&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 事前分布</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">theta_B</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s1">&#39;theta_B&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s1">&#39;obs_A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta_A</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># 尤度</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s1">&#39;obs_B&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta_B</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">delta</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="n">theta_B</span> <span class="o">-</span> <span class="n">theta_A</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># trace.posterior[&#39;delta&#39;] &gt; 0 の割合 → P(B &gt; A | データ)</span>
 </span></code></pre></div>
 <p>ベイズ線形回帰も同様に、係数に正規事前分布を置いて <code>pm.sample()</code> で事後分布を推論できます。</p>
 <hr />

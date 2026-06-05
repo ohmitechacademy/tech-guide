@@ -7835,11 +7835,10 @@
 <h3 id="_13">シャーディング（水平分割）<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>1 台の DB に収まらなくなったとき、データを複数の DB に分割します。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ユーザー ID のハッシュでシャードを決めます：
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  user_id % 4 == 0 → シャード A
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  user_id % 4 == 1 → シャード B
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  ...
-</span></code></pre></div>
+<p>ユーザー ID のハッシュでシャードを決めます：
+  user_id % 4 == 0 → シャード A
+  user_id % 4 == 1 → シャード B
+  ...</p>
 </div>
 <p><strong>課題：</strong> JOIN が難しくなります。シャード間の再配置（リシャーディング）がコスト高です。</p>
 <p>シャーディングは、1台のDBでは保存量や負荷に耐えられないときの水平分割です。<code>user_id % 4</code> のような規則で保存先を分けると、ユーザー単位の読み書きは分散できます。一方で、全ユーザーをまたぐ集計や、複数シャードをまたぐJOINは難しくなります。</p>
@@ -7849,20 +7848,18 @@
 <h3 id="_14">トークンバケット方式<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>バケットにトークン（許可証）が一定レートで補充されます。トークンがあればリクエストを通します。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>バケット容量：100 トークン
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>補充レート：10 トークン/秒
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>リクエストが来るたびにトークンを 1 消費します
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>トークンがなければ 429 Too Many Requests を返します
-</span></code></pre></div>
+<p>バケット容量：100 トークン
+補充レート：10 トークン/秒</p>
+<p>リクエストが来るたびにトークンを 1 消費します
+トークンがなければ 429 Too Many Requests を返します</p>
 </div>
 <p><strong>Redis を使った実装：</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_allowed</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rate:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">current</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">redis</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># 1 分間のウィンドウ</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">return</span> <span class="n">current</span> <span class="o">&lt;=</span> <span class="n">limit</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_allowed</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rate:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">current</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">redis</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># 1 分間のウィンドウ</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="n">current</span> <span class="o">&lt;=</span> <span class="n">limit</span>
 </span></code></pre></div>
 <p>この実装は、厳密には固定ウィンドウ方式に近い簡易的なレート制限です。ユーザーごとに <code>rate:{user_id}</code> というキーを増やし、最初のリクエスト時に60秒の有効期限を設定します。60秒以内に <code>limit</code> を超えたら <code>False</code> を返します。</p>
 <p>実運用では、境界時刻にリクエストが集中する問題や、複数サーバーから同時に更新される問題を考えます。そのため、Redis のアトミック操作や Lua スクリプト、専用のAPIゲートウェイ機能を使うこともあります。</p>
@@ -7911,21 +7908,20 @@
 <li>UUID（36 文字）は長すぎます → base62 エンコード（a-z, A-Z, 0-9）で 7 文字にします</li>
 <li>7 文字の base62 = 62⁷ ≒ 35 兆通り（10 年分で十分です）</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">base62</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">shorten</span><span class="p">(</span><span class="n">long_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">hash_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">long_url</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">return</span> <span class="n">base62</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">hash_value</span><span class="p">)[:</span><span class="mi">7</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">base62</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">shorten</span><span class="p">(</span><span class="n">long_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">hash_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">long_url</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="n">base62</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">hash_value</span><span class="p">)[:</span><span class="mi">7</span><span class="p">]</span>
 </span></code></pre></div>
 <p>この例では、長いURLをMD5でハッシュ化し、その数値をbase62で短い文字列にしています。ただし、先頭7文字だけを使うと衝突する可能性があります。実サービスでは、衝突した場合に別のキーを生成する処理、またはDBの連番IDをbase62に変換する方式を組み合わせます。</p>
 <h3 id="_20">リダイレクト<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>GET /abc123 HTTP/1.1
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>→ 301 Moved Permanently（ブラウザがキャッシュ → サーバー負荷↓）
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  or
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>→ 302 Found（毎回サーバーを通す → 統計を正確に取れます）
-</span></code></pre></div>
+<p>GET /abc123 HTTP/1.1
+→ 301 Moved Permanently（ブラウザがキャッシュ → サーバー負荷↓）
+  or
+→ 302 Found（毎回サーバーを通す → 統計を正確に取れます）</p>
 </div>
 <p>301は「恒久的に移動した」という意味なので、ブラウザや検索エンジンが結果をキャッシュしやすくなります。302は「一時的に移動した」という意味なので、毎回サーバーに確認しに来る可能性が高く、クリック数などの統計を取りたい場合に向いています。どちらを選ぶかは、負荷削減と計測精度のトレードオフです。</p>
 <hr />

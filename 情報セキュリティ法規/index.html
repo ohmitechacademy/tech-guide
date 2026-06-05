@@ -7533,17 +7533,15 @@
 </table>
 <h4 id="_8">「不正アクセス」とは何か<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>不正アクセスの例（すべて違法）:
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ✗ 他人のID・パスワードを使ってログイン
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  ✗ SQLインジェクションなどでシステムへ侵入
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  ✗ セキュリティホールを突いて管理者権限を取得
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  ✗ 知り合いのSNSアカウントを「借りて」操作する
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>合法（ただし条件あり）:
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  ✓ 自分が所有・管理するシステムへのアクセス
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  ✓ 契約に基づく正規のペネトレーションテスト
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  ✓ バグバウンティプログラムの範囲内のセキュリティ調査
-</span></code></pre></div>
+<p>不正アクセスの例（すべて違法）:
+  ✗ 他人のID・パスワードを使ってログイン
+  ✗ SQLインジェクションなどでシステムへ侵入
+  ✗ セキュリティホールを突いて管理者権限を取得
+  ✗ 知り合いのSNSアカウントを「借りて」操作する</p>
+<p>合法（ただし条件あり）:
+  ✓ 自分が所有・管理するシステムへのアクセス
+  ✓ 契約に基づく正規のペネトレーションテスト
+  ✓ バグバウンティプログラムの範囲内のセキュリティ調査</p>
 </div>
 <p><strong>大学生が注意すること：</strong>
 - 友人のSNSアカウントを「本人の許可なく」操作することも不正アクセスになりえます
@@ -7582,18 +7580,18 @@
 </tr>
 </tbody>
 </table>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 卒業研究でのデータ取り扱い例</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># NG: 氏名・メールアドレスをそのまま分析・公開</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">df_public</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]]</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># OK: 匿名化してから公開</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">df_safe</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">df_safe</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_safe</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">8</span><span class="p">]</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">)</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">df_safe</span> <span class="o">=</span> <span class="n">df_safe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 卒業研究でのデータ取り扱い例</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># NG: 氏名・メールアドレスをそのまま分析・公開</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">df_public</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]]</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># OK: 匿名化してから公開</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">df_safe</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">df_safe</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_safe</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">8</span><span class="p">]</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">df_safe</span> <span class="o">=</span> <span class="n">df_safe</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">])</span>
 </span></code></pre></div>
 <h4 id="gdpreu">GDPR（EU 一般データ保護規則）との比較<a class="headerlink" href="#gdpreu" title="Permanent link">&para;</a></h4>
 <table>
@@ -7631,13 +7629,11 @@
 <h3 id="_11">不正競争防止法（営業秘密の保護）<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>企業の機密情報・営業秘密を不正に取得・使用する行為を禁止します。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>禁止される行為の例:
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  ✗ 退職時に会社のデータを持ち出す
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  ✗ 競合他社の内部文書を不正に入手する
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  ✗ 不正に入手した営業秘密を第三者に提供する
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>罰則: 10年以下の懲役または2000万円以下の罰金
-</span></code></pre></div>
+<p>禁止される行為の例:
+  ✗ 退職時に会社のデータを持ち出す
+  ✗ 競合他社の内部文書を不正に入手する
+  ✗ 不正に入手した営業秘密を第三者に提供する</p>
+<p>罰則: 10年以下の懲役または2000万円以下の罰金</p>
 </div>
 <hr />
 <h3 id="_12">サイバーセキュリティ基本法<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
@@ -7652,25 +7648,22 @@
 <h3 id="isms">ISMS（情報セキュリティマネジメントシステム）<a class="headerlink" href="#isms" title="Permanent link">&para;</a></h3>
 <p>組織全体で情報セキュリティを管理する枠組みです。国際規格 <strong>ISO/IEC 27001</strong> が代表的です。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ISMS の 3 要素:
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  機密性（Confidentiality）: 許可された人だけがアクセスできる
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  完全性（Integrity）: データが正確で改ざんされていない
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  可用性（Availability）: 必要なときに使える
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>PDCA サイクル:
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  Plan（計画） → Do（実施） → Check（評価） → Act（改善）
-</span></code></pre></div>
+<p>ISMS の 3 要素:
+  機密性（Confidentiality）: 許可された人だけがアクセスできる
+  完全性（Integrity）: データが正確で改ざんされていない
+  可用性（Availability）: 必要なときに使える</p>
+<p>PDCA サイクル:
+  Plan（計画） → Do（実施） → Check（評価） → Act（改善）</p>
 </div>
 <h3 id="_14">情報セキュリティポリシー<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>組織がセキュリティをどう管理するかの方針・規則を文書化したものです。</p>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>一般的な内容:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  - パスワードの複雑さの要件
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  - 端末の持ち出し・私物端末の利用ルール
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  - インシデント発生時の報告手順
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  - 定期的なセキュリティ教育の義務
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  - アクセス権限の管理方針
-</span></code></pre></div>
+<p>一般的な内容:
+  - パスワードの複雑さの要件
+  - 端末の持ち出し・私物端末の利用ルール
+  - インシデント発生時の報告手順
+  - 定期的なセキュリティ教育の義務
+  - アクセス権限の管理方針</p>
 </div>
 <h3 id="_15">インシデント対応手順<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
@@ -7719,30 +7712,26 @@
 </tbody>
 </table>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>IPA（独立行政法人 情報処理推進機構）:
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>https://www.ipa.go.jp/security/
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>不審なメール・ファイルの相談・報告ができる
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>「安心相談窓口」「J-CRAT」なども提供
-</span></code></pre></div>
+<p>IPA（独立行政法人 情報処理推進機構）:
+https://www.ipa.go.jp/security/</p>
+<p>不審なメール・ファイルの相談・報告ができる
+「安心相談窓口」「J-CRAT」なども提供</p>
 </div>
 <hr />
 <h2 id="_17">学生として知っておくべき注意点<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <div class="admonition info">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>【やってはいけないこと】
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>✗ 他人のID・パスワードを使ったログイン（不正アクセス禁止法違反）
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>✗ 無許可でサーバーへの侵入テスト
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>✗ 授業・研究で取得した個人情報の目的外利用
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>✗ GitHubにパスワード・APIキーをコミット
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  （公開リポジトリに上げると世界中から使われる）
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>【やるべきこと】
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>✓ 研究データは匿名化して管理する
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>✓ パスワードは強力にして使い回さない
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>✓ 不審なメール・リンクは開く前に確認する
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>✓ PCを共有する場合はログアウトする
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>✓ 学内ネットワークの利用ルールを確認する
-</span></code></pre></div>
+<p>【やってはいけないこと】
+✗ 他人のID・パスワードを使ったログイン（不正アクセス禁止法違反）
+✗ 無許可でサーバーへの侵入テスト
+✗ 授業・研究で取得した個人情報の目的外利用
+✗ GitHubにパスワード・APIキーをコミット
+  （公開リポジトリに上げると世界中から使われる）</p>
+<p>【やるべきこと】
+✓ 研究データは匿名化して管理する
+✓ パスワードは強力にして使い回さない
+✓ 不審なメール・リンクは開く前に確認する
+✓ PCを共有する場合はログアウトする
+✓ 学内ネットワークの利用ルールを確認する</p>
 </div>
 <hr />
 <h2 id="_18">確認問題<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
