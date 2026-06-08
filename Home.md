@@ -118,19 +118,19 @@
 | ページ | 内容 |
 |--------|------|
 | [NumPy / pandas](pandas-sklearn) | ndarray・DataFrame 操作・データ前処理 |
+| [探索的データ分析（EDA）](EDA) | データ概観・欠損・分布・相関の確認ワークフロー |
+| [データ可視化](データ可視化) | matplotlib・seaborn・plotly |
+| [Streamlit](Streamlit) | Python だけで作るインタラクティブ Web アプリ |
+| [時系列分析](時系列分析) | ARIMA・SARIMA・Prophet・定常性・移動平均 |
+| [A/Bテスト・実験設計](ABテスト) | サンプルサイズ計算・多重比較・ベイズ A/Bテスト |
+| [R言語入門](R言語) | ggplot2・tidyverse・統計解析・Python との使い分け |
+| [空間データ分析](空間データ分析) | GeoPandas・Folium・空間結合・Moran's I |
+| [データエンジニアリング](データエンジニアリング) | ETL/ELT・dbt・Spark・Kafka・データ品質 |
+| [データパイプライン](データパイプライン) | sklearn Pipeline・DVC・Airflow |
 | [Polars](Polars) | pandas の高速代替・列指向・Lazy API・Apache Arrow |
 | [DuckDB](DuckDB) | ローカル分析 SQL・Parquet 直読み・pandas/Polars 統合 |
 | [PySpark](PySpark) | 分散データ処理・DataFrame API・MLlib・Structured Streaming |
-| [探索的データ分析（EDA）](EDA) | データ概観・欠損・分布・相関の確認ワークフロー |
-| [R言語入門](R言語) | ggplot2・tidyverse・統計解析・Python との使い分け |
-| [A/Bテスト・実験設計](ABテスト) | サンプルサイズ計算・多重比較・ベイズ A/Bテスト |
-| [空間データ分析](空間データ分析) | GeoPandas・Folium・空間結合・Moran's I |
-| [データ可視化](データ可視化) | matplotlib・seaborn・plotly |
-| [時系列分析](時系列分析) | ARIMA・SARIMA・Prophet・定常性・移動平均 |
 | [時系列の深層学習](時系列の深層学習) | TCN・N-BEATS・TFT・PatchTST・Mamba 系 |
-| [Streamlit](Streamlit) | Python だけで作るインタラクティブ Web アプリ |
-| [データエンジニアリング](データエンジニアリング) | ETL/ELT・dbt・Spark・Kafka・データ品質 |
-| [データパイプライン](データパイプライン) | sklearn Pipeline・DVC・Airflow |
 
 #### 機械学習基礎
 
